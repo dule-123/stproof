@@ -6,46 +6,179 @@
     <title>Tangible Events - STProof Protocol</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
-        :root { --primary: #165DFF; --primary-light: #E8F3FF; --primary-dark: #0E42C1; --dark: #1D2129; --gray: #4E5969; --light-gray: #C9CDD4; --bg: #F7F8FA; --white: #FFFFFF; --shadow: 0 4px 20px rgba(0, 0, 0, 0.08); }
+        :root { 
+            --primary: #165DFF; 
+            --primary-light: #E8F3FF; 
+            --primary-dark: #0E42C1; 
+            --dark: #1D2129; 
+            --gray: #4E5969; 
+            --light-gray: #C9CDD4; 
+            --bg: #F7F8FA; 
+            --white: #FFFFFF; 
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08); 
+        }
         body { background: var(--bg); color: var(--dark); line-height: 1.6; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         a { text-decoration: none; color: inherit; }
-        .btn { display: inline-block; padding: 12px 28px; border-radius: 8px; font-weight: 600; font-size: 16px; transition: all 0.3s ease; cursor: pointer; border: none; }
-        .btn-primary { background: var(--primary); color: var(--white); }
-        .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(22, 93, 255, 0.3); }
-        .btn-secondary { background: var(--white); color: var(--primary); border: 2px solid var(--primary); }
-        .btn-secondary:hover { background: var(--primary-light); transform: translateY(-2px); }
-        header { background: var(--white); box-shadow: var(--shadow); position: fixed; top: 0; left: 0; right: 0; z-index: 999; }
-        .header-container { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; max-width: 1200px; margin: 0 auto; }
-        .logo { font-size: 24px; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+        .btn { 
+            display: inline-block; 
+            padding: 12px 28px; 
+            border-radius: 8px; 
+            font-weight: 600; 
+            font-size: 16px; 
+            transition: all 0.3s ease; 
+            cursor: pointer; 
+            border: none; 
+        }
+        .btn-secondary { 
+            background: var(--white); 
+            color: var(--primary); 
+            border: 2px solid var(--primary); 
+        }
+        .btn-secondary:hover { 
+            background: var(--primary-light); 
+            transform: translateY(-2px); 
+        }
+        header { 
+            background: var(--white); 
+            box-shadow: var(--shadow); 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            z-index: 999; 
+        }
+        .header-container { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 16px 20px; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+        }
+        .logo { 
+            font-size: 24px; 
+            font-weight: 700; 
+            color: var(--primary); 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+        }
         .logo span { color: var(--dark); }
-        .nav { display: flex; gap: 32px; font-size: 16px; font-weight: 500; align-items: center; }
-        .nav a { color: var(--gray); transition: color 0.3s; }
+        .nav { 
+            display: flex; 
+            gap: 32px; 
+            font-size: 16px; 
+            font-weight: 500; 
+            align-items: center; 
+        }
+        .nav a { 
+            color: var(--gray); 
+            transition: color 0.3s; 
+        }
         .nav a:hover { color: var(--primary); }
-        .lang-switch { padding: 6px 12px; border: 1px solid var(--primary); border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: 600; color: var(--primary); transition: all 0.3s; }
-        .lang-switch:hover { background: var(--primary-light); }
-        .back-btn { margin: 120px 0 40px 0; display: inline-block; }
-        .page-title { text-align: center; font-size: 40px; font-weight: 700; margin-bottom: 20px; color: var(--dark); }
-        .page-desc { text-align: center; font-size: 18px; color: var(--gray); max-width: 800px; margin: 0 auto 60px auto; }
-        .event-detail { background: var(--white); padding: 40px; border-radius: 12px; box-shadow: var(--shadow); margin-bottom: 60px; }
-        .detail-title { font-size: 24px; font-weight: 700; color: var(--primary); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--primary-light); }
-        .detail-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
-        .detail-card { padding: 24px; background: var(--primary-light); border-radius: 8px; }
-        .detail-card h3 { font-size: 20px; font-weight: 600; margin-bottom: 16px; color: var(--primary-dark); }
-        .detail-card p { color: var(--gray); line-height: 1.8; }
+        .back-btn { 
+            margin: 120px 0 40px 0; 
+            display: inline-block; 
+        }
+        .page-title { 
+            text-align: center; 
+            font-size: 40px; 
+            font-weight: 700; 
+            margin-bottom: 20px; 
+            color: var(--dark); 
+        }
+        .page-desc { 
+            text-align: center; 
+            font-size: 18px; 
+            color: var(--gray); 
+            max-width: 800px; 
+            margin: 0 auto 60px auto; 
+        }
+        .event-detail { 
+            background: var(--white); 
+            padding: 40px; 
+            border-radius: 12px; 
+            box-shadow: var(--shadow); 
+            margin-bottom: 60px; 
+        }
+        .detail-title { 
+            font-size: 24px; 
+            font-weight: 700; 
+            color: var(--primary); 
+            margin-bottom: 24px; 
+            padding-bottom: 12px; 
+            border-bottom: 1px solid var(--primary-light); 
+        }
+        .detail-content { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 32px; 
+        }
+        .detail-card { 
+            padding: 24px; 
+            background: var(--primary-light); 
+            border-radius: 8px; 
+        }
+        .detail-card h3 { 
+            font-size: 20px; 
+            font-weight: 600; 
+            margin-bottom: 16px; 
+            color: var(--primary-dark); 
+        }
+        .detail-card p { 
+            color: var(--gray); 
+            line-height: 1.8; 
+        }
         .example-list { margin: 40px 0; }
-        .example-list h3 { font-size: 22px; font-weight: 600; margin-bottom: 20px; color: var(--dark); }
-        .example-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .example-item { padding: 20px; background: var(--bg); border-radius: 8px; border-left: 4px solid var(--primary); }
-        .example-item h4 { font-size: 18px; font-weight: 600; margin-bottom: 12px; color: var(--dark); }
-        .example-item p { color: var(--gray); font-size: 14px; }
-        footer { padding: 40px 0; background: #111; color: var(--light-gray); text-align: center; margin-top: 80px; }
-        .footer-container { display: flex; flex-direction: column; gap: 20px; }
-        .footer-logo { font-size: 20px; font-weight: 700; color: var(--primary); }
-        .copyright { font-size: 14px; opacity: 0.7; }
-
-        /* 语言切换控制 */
-        #zh-content, #en-content { display: none; }
+        .example-list h3 { 
+            font-size: 22px; 
+            font-weight: 600; 
+            margin-bottom: 20px; 
+            color: var(--dark); 
+        }
+        .example-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 20px; 
+        }
+        .example-item { 
+            padding: 20px; 
+            background: var(--bg); 
+            border-radius: 8px; 
+            border-left: 4px solid var(--primary); 
+        }
+        .example-item h4 { 
+            font-size: 18px; 
+            font-weight: 600; 
+            margin-bottom: 12px; 
+            color: var(--dark); 
+        }
+        .example-item p { 
+            color: var(--gray); 
+            font-size: 14px; 
+        }
+        footer { 
+            padding: 40px 0; 
+            background: #111; 
+            color: var(--light-gray); 
+            text-align: center; 
+            margin-top: 80px; 
+        }
+        .footer-container { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 20px; 
+        }
+        .footer-logo { 
+            font-size: 20px; 
+            font-weight: 700; 
+            color: var(--primary); 
+        }
+        .copyright { 
+            font-size: 14px; 
+            opacity: 0.7; 
+        }
     </style>
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -54,178 +187,73 @@
     <div class="header-container">
         <div class="logo">STProof <span>Protocol</span></div>
         <nav class="nav">
-            <a href="../index.html#core" class="zh-link">核心理念</a>
-            <a href="../index.html#core" class="en-link">Core Concepts</a>
-            <a href="../index.html#event-types" class="zh-link">事件类型</a>
-            <a href="../index.html#event-types" class="en-link">Event Types</a>
-            <a href="../index.html#case" class="zh-link">首个案例</a>
-            <a href="../index.html#case" class="en-link">First Case</a>
+            <a href="../index.html#core">Core Concepts</a>
+            <a href="../index.html#event-types">Event Types</a>
+            <a href="../index.html#case">First Case</a>
             <a href="https://github.com/dule-123/stproof" target="_blank">GitHub</a>
-            <div class="lang-switch" id="langSwitch">EN / 中</div>
         </nav>
     </div>
 </header>
 
-<!-- 中文内容 -->
-<div id="zh-content">
-    <div class="container">
-        <a href="../index.html#event-types" class="back-btn btn btn-secondary">
-            <i class="fas fa-arrow-left"></i> 返回事件类型
-        </a>
-        <h1 class="page-title">有实物事件</h1>
-        <p class="page-desc">以实物为场景载体的事件，协议对事件本身确权，而非实物资产所有权</p>
+<!-- 纯英文内容，无中文切换 -->
+<div class="container">
+    <a href="../index.html#event-types" class="back-btn btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Back to Event Types
+    </a>
+    <h1 class="page-title">Tangible Events</h1>
+    <p class="page-desc">Events with physical items as scene carriers, the protocol certifies the event itself, not the ownership of physical assets</p>
 
-        <div class="event-detail">
-            <h2 class="detail-title">有实物事件核心特征</h2>
-            <div class="detail-content">
-                <div class="detail-card">
-                    <h3>实物为场景载体</h3>
-                    <p>实物仅作为事件发生的物理场景佐证，如首日封作为「邮寄行为」的载体，而非确权首日封本身。</p>
-                </div>
-                <div class="detail-card">
-                    <h3>多源物理证据</h3>
-                    <p>依托GPS轨迹、现场影像、第三方凭证（如邮政回执）完成物理证据闭环，确保事件真实性。</p>
-                </div>
-                <div class="detail-card">
-                    <h3>链上确权事件</h3>
-                    <p>最终在链上固化的是「事件发生」这一事实，而非实物的所有权，避免实物资产上链的合规与估值问题。</p>
-                </div>
-                <div class="detail-card">
-                    <h3>实物可灭失性</h3>
-                    <p>即使实物损毁/灭失，链上存证的事件事实依然有效，证据效力不依赖实物存续。</p>
-                </div>
+    <div class="event-detail">
+        <h2 class="detail-title">Core Characteristics of Tangible Events</h2>
+        <div class="detail-content">
+            <div class="detail-card">
+                <h3>Physical Items as Scene Carriers</h3>
+                <p>Physical items only serve as physical scene evidence for the occurrence of events, such as first day covers as carriers of "mailing behavior", not the covers themselves.</p>
             </div>
-        </div>
-
-        <div class="example-list">
-            <h3>典型应用场景</h3>
-            <div class="example-grid">
-                <div class="example-item">
-                    <h4>实寄封邮寄</h4>
-                    <p>首日封、纪念封的邮寄行为存证，固化邮寄时间、地点、收件/寄件人等核心事实。</p>
-                </div>
-                <div class="example-item">
-                    <h4>艺术品创作</h4>
-                    <p>艺术品创作过程的存证，通过创作现场影像、物料使用记录证明创作行为的真实性与时间线。</p>
-                </div>
-                <div class="example-item">
-                    <h4>文物出土</h4>
-                    <p>文物出土事件的存证，固定出土时间、地点、现场环境等事实，为文物溯源提供链上证据。</p>
-                </div>
-                <div class="example-item">
-                    <h4>瓷器烧制</h4>
-                    <p>瓷器烧制过程的存证，证明烧制时间、窑口、工艺等核心事实，为工艺溯源提供依据。</p>
-                </div>
+            <div class="detail-card">
+                <h3>Multi-source Physical Evidence</h3>
+                <p>Complete physical evidence closed-loop through GPS tracks, on-site images, and third-party vouchers (such as postal receipts) to ensure event authenticity.</p>
+            </div>
+            <div class="detail-card">
+                <h3>On-chain Event Certification</h3>
+                <p>What is ultimately solidified on-chain is the fact that "the event occurred", not the ownership of physical items, avoiding compliance and valuation issues of physical asset on-chain.</p>
+            </div>
+            <div class="detail-card">
+                <h3>Physical Item Perishability</h3>
+                <p>Even if physical items are damaged/lost, the on-chain proven event facts remain valid, and the evidentiary effect does not depend on the survival of physical items.</p>
             </div>
         </div>
     </div>
 
-    <footer>
-        <div class="container footer-container">
-            <div class="footer-logo">STProof Protocol</div>
-            <div class="copyright">© 2026 STProof Protocol 版权所有 | 凡发生，皆可存；凡存证，皆可信</div>
-        </div>
-    </footer>
-</div>
-
-<!-- 英文内容 -->
-<div id="en-content">
-    <div class="container">
-        <a href="../index.html#event-types" class="back-btn btn btn-secondary">
-            <i class="fas fa-arrow-left"></i> Back to Event Types
-        </a>
-        <h1 class="page-title">Tangible Events</h1>
-        <p class="page-desc">Events with physical items as scene carriers, the protocol certifies the event itself, not the ownership of physical assets</p>
-
-        <div class="event-detail">
-            <h2 class="detail-title">Core Characteristics of Tangible Events</h2>
-            <div class="detail-content">
-                <div class="detail-card">
-                    <h3>Physical Items as Scene Carriers</h3>
-                    <p>Physical items only serve as physical scene evidence for the occurrence of events, such as first day covers as carriers of "mailing behavior", not the covers themselves.</p>
-                </div>
-                <div class="detail-card">
-                    <h3>Multi-source Physical Evidence</h3>
-                    <p>Complete physical evidence closed-loop through GPS tracks, on-site images, and third-party vouchers (such as postal receipts) to ensure event authenticity.</p>
-                </div>
-                <div class="detail-card">
-                    <h3>On-chain Event Certification</h3>
-                    <p>What is ultimately solidified on-chain is the fact that "the event occurred", not the ownership of physical items, avoiding compliance and valuation issues of physical asset on-chain.</p>
-                </div>
-                <div class="detail-card">
-                    <h3>Physical Item Perishability</h3>
-                    <p>Even if physical items are damaged/lost, the on-chain proven event facts remain valid, and the evidentiary effect does not depend on the survival of physical items.</p>
-                </div>
+    <div class="example-list">
+        <h3>Typical Application Scenarios</h3>
+        <div class="example-grid">
+            <div class="example-item">
+                <h4>First Day Cover Mailing</h4>
+                <p>Proof of mailing behavior of first day covers and commemorative covers, solidifying core facts such as mailing time, location, addressee/sender.</p>
             </div>
-        </div>
-
-        <div class="example-list">
-            <h3>Typical Application Scenarios</h3>
-            <div class="example-grid">
-                <div class="example-item">
-                    <h4>First Day Cover Mailing</h4>
-                    <p>Proof of mailing behavior of first day covers and commemorative covers, solidifying core facts such as mailing time, location, addressee/sender.</p>
-                </div>
-                <div class="example-item">
-                    <h4>Art Creation</h4>
-                    <p>Proof of art creation process, proving the authenticity and timeline of creation behavior through on-site creation images and material usage records.</p>
-                </div>
-                <div class="example-item">
-                    <h4>Cultural Relic Excavation</h4>
-                    <p>Proof of cultural relic excavation events, fixing facts such as excavation time, location, and on-site environment to provide on-chain evidence for cultural relic traceability.</p>
-                </div>
-                <div class="example-item">
-                    <h4>Porcelain Firing</h4>
-                    <p>Proof of porcelain firing process, proving core facts such as firing time, kiln, and craftsmanship to provide a basis for craft traceability.</p>
-                </div>
+            <div class="example-item">
+                <h4>Art Creation</h4>
+                <p>Proof of art creation process, proving the authenticity and timeline of creation behavior through on-site creation images and material usage records.</p>
+            </div>
+            <div class="example-item">
+                <h4>Cultural Relic Excavation</h4>
+                <p>Proof of cultural relic excavation events, fixing facts such as excavation time, location, and on-site environment to provide on-chain evidence for cultural relic traceability.</p>
+            </div>
+            <div class="example-item">
+                <h4>Porcelain Firing</h4>
+                <p>Proof of porcelain firing process, proving core facts such as firing time, kiln, and craftsmanship to provide a basis for craft traceability.</p>
             </div>
         </div>
     </div>
-
-    <footer>
-        <div class="container footer-container">
-            <div class="footer-logo">STProof Protocol</div>
-            <div class="copyright">© 2026 STProof Protocol All Rights Reserved | What Happens, Exists; What's Proven, Trusted</div>
-        </div>
-    </footer>
 </div>
 
-<script>
-    const zh = document.getElementById('zh-content');
-    const en = document.getElementById('en-content');
-    const btn = document.getElementById('langSwitch');
+<footer>
+    <div class="container footer-container">
+        <div class="footer-logo">STProof Protocol</div>
+        <div class="copyright">© 2026 STProof Protocol All Rights Reserved | What Happens, Exists; What's Proven, Trusted</div>
+    </div>
+</footer>
 
-    const zhLinks = document.querySelectorAll('.zh-link');
-    const enLinks = document.querySelectorAll('.en-link');
-
-    // 核心修正：强制默认显示英文（解决点击Tangible Events进入后显示中文的问题）
-    let isEn = true;
-    showLang(isEn);
-
-    btn.addEventListener('click', () => {
-        isEn = !isEn;
-        showLang(isEn);
-    });
-
-    function showLang(enMode) {
-        if (enMode) {
-            zh.style.display = 'none';
-            en.style.display = 'block';
-            zhLinks.forEach(x => x.style.display = 'none');
-            enLinks.forEach(x => x.style.display = 'inline');
-            document.documentElement.lang = 'en';
-            document.title = "Tangible Events - STProof Protocol";
-            btn.textContent = "EN / 中";
-        } else {
-            en.style.display = 'none';
-            zh.style.display = 'block';
-            enLinks.forEach(x => x.style.display = 'none');
-            zhLinks.forEach(x => x.style.display = 'inline');
-            document.documentElement.lang = 'zh-CN';
-            document.title = "有实物事件 - STProof Protocol";
-            btn.textContent = "中 / EN";
-        }
-    }
-</script>
 </body>
 </html>
