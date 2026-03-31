@@ -15,7 +15,8 @@
         .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(22, 93, 255, 0.3); }
         .btn-secondary { background: var(--white); color: var(--primary); border: 2px solid var(--primary); }
         .btn-secondary:hover { background: var(--primary-light); transform: translateY(-2px); }
-        .section { padding: 80px 0; }
+        .section { padding: 80px 0; display: none; }
+        .section.active { display: block; }
         .section-title { text-align: center; font-size: 36px; font-weight: 700; margin-bottom: 16px; color: var(--dark); }
         .section-desc { text-align: center; font-size: 18px; color: var(--gray); max-width: 800px; margin: 0 auto 60px auto; }
         /* 头部导航 */
@@ -23,9 +24,11 @@
         .header-container { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; max-width: 1200px; margin: 0 auto; }
         .logo { font-size: 24px; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 8px; }
         .logo span { color: var(--dark); }
-        .nav { display: flex; gap: 32px; font-size: 16px; font-weight: 500; }
+        .nav { display: flex; gap: 32px; font-size: 16px; font-weight: 500; align-items: center; }
         .nav a { color: var(--gray); transition: color 0.3s; }
         .nav a:hover, .nav a.active { color: var(--primary); }
+        .lang-switch { padding: 6px 12px; border: 1px solid var(--primary); border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: 600; color: var(--primary); transition: all 0.3s; }
+        .lang-switch:hover { background: var(--primary-light); }
         .nav-mobile { display: none; }
         /* 英雄区 */
         .hero { padding: 160px 0 120px; background: linear-gradient(135deg, var(--primary-light) 0%, var(--bg) 100%); margin-top: 72px; }
@@ -82,7 +85,9 @@
             .core-grid, .event-grid { gap: 32px; }
         }
         @media (max-width: 768px) {
-            .nav { display: none; }
+            .nav { gap: 16px; }
+            .nav a { display: none; }
+            .lang-switch { font-size: 12px; padding: 4px 8px; }
             .nav-mobile { display: block; font-size: 24px; color: var(--primary); }
             .hero { padding: 120px 0 80px; }
             .hero-slogan { font-size: 28px; }
@@ -99,169 +104,386 @@
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- 头部导航 -->
     <header>
         <div class="header-container">
             <div class="logo">STProof <span>Protocol</span></div>
             <nav class="nav">
-                <a href="#core" class="active">核心理念</a>
-                <a href="#event-types">事件类型</a>
-                <a href="#case">首个案例</a>
-                <a href="#whitepaper">白皮书</a>
+                <a href="#core" class="active zh">核心理念</a>
+                <a href="#core" class="active en" style="display:none;">Core Concepts</a>
+                <a href="#event-types" class="zh">事件类型</a>
+                <a href="#event-types" class="en" style="display:none;">Event Types</a>
+                <a href="#case" class="zh">首个案例</a>
+                <a href="#case" class="en" style="display:none;">First Case</a>
+                <a href="#whitepaper" class="zh">白皮书</a>
+                <a href="#whitepaper" class="en" style="display:none;">Whitepaper</a>
                 <a href="https://github.com/dule-123/stproof" target="_blank">GitHub</a>
+                <div class="lang-switch" id="langSwitch">中 / EN</div>
             </nav>
             <div class="nav-mobile"><i class="fas fa-bars"></i></div>
         </div>
     </header>
 
-    <section class="hero">
-        <div class="container hero-container">
-            <h1 class="hero-slogan">
-                不确权物，只确权事<br>
-                <span>凡发生，皆可存；凡存证，皆可信</span>
-            </h1>
-            <p class="hero-desc">
-                STProof(Spatial-Temporal Proof)是一套面向「事件」的通用链上确权与价值捕获协议。<br>
-                打破实物映射的传统思维，通过多源证据交叉验证、可信时间戳、去中心化存储，将客观历史事件转化为数字世界不可篡改的永久记录。<br>
-                有物可证，无物亦可证，让事实记录无资金门槛，价值源于被相信、被使用。
-            </p>
-            <div class="hero-btns">
-                <a href="/STProof_Whitepaper_v1.3.1.pdf" target="_blank" class="btn btn-primary" id="whitepaper">
-                    <i class="fas fa-file-pdf"></i> 查看白皮书 v1.3
-                </a>
-                <a href="#core" class="btn btn-secondary">
-                    <i class="fas fa-chevron-down"></i> 了解核心机制
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section class="core section" id="core">
-        <div class="container">
-            <h2 class="section-title">协议核心理念</h2>
-            <p class="section-desc">以平权为核心，重新定义链上确权，让事实成为数字世界的可信基础设施</p>
-            <div class="core-grid">
-                <div class="core-card">
-                    <h3><i class="fas fa-compass-drafting"></i> 确权对象：唯事件</h3>
-                    <p>统一以「客观发生的历史事件」为确权核心，非实体资产或数字内容。实物仅为事件现场载体，无实物事件直接存证，彻底摒弃RWA，从底层规避监管风险。</p>
-                </div>
-                <div class="core-card">
-                    <h3><i class="fas fa-balance-scale"></i> 核心理念：平权存证</h3>
-                    <p>事实记录无资金门槛，任何人只需支付Gas费即可铸造Event NFT，无需额外费用。技术不制造新的不平等，人人都有权为真实事件建立永久链上凭证。</p>
-                </div>
-                <div class="core-card">
-                    <h3><i class="fas fa-sack-dollar"></i> 价值机制：引用税</h3>
-                    <p>事件价值不依赖少数人炒作，而是由被相信、被使用的次数决定。每一次链上引用都是对真实的投票，引用费为发起人带来持续收益，让价值回归影响力。</p>
-                </div>
-                <div class="core-card">
-                    <h3><i class="fas fa-layer-group"></i> 生态定位：重型事实层</h3>
-                    <p>不与轻量级协议竞争，专注「高价值重型事实」锚定，需多源证据、物理验证、终极仲裁的事件皆可适配，与轻量级协议互补，构建多层级数字可信体系。</p>
+    <!-- 中文版本 -->
+    <div id="zh-content">
+        <!-- 英雄区 -->
+        <section class="hero active">
+            <div class="container hero-container">
+                <h1 class="hero-slogan">
+                    不确权物，只确权事<br>
+                    <span>凡发生，皆可存；凡存证，皆可信</span>
+                </h1>
+                <p class="hero-desc">
+                    STProof(Spatial-Temporal Proof)是一套面向「事件」的通用链上确权与价值捕获协议。<br>
+                    打破实物映射的传统思维，通过多源证据交叉验证、可信时间戳、去中心化存储，将客观历史事件转化为数字世界不可篡改的永久记录。<br>
+                    有物可证，无物亦可证，让事实记录无资金门槛，价值源于被相信、被使用。
+                </p>
+                <div class="hero-btns">
+                    <a href="/STProof_Whitepaper_v1.3.1.pdf" target="_blank" class="btn btn-primary" id="whitepaper">
+                        <i class="fas fa-file-pdf"></i> 查看白皮书 v1.3
+                    </a>
+                    <a href="#core" class="btn btn-secondary">
+                        <i class="fas fa-chevron-down"></i> 了解核心机制
+                    </a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="event-types section" id="event-types">
-        <div class="container">
-            <h2 class="section-title">全场景事件类型</h2>
-            <p class="section-desc">覆盖有实物、无实物、混合三类事件，协议具备无限扩展性，社区可自定义事件模板</p>
-            <div class="event-grid">
-                <div class="event-card">
-                    <h3>有实物事件</h3>
-                    <p class="example">示例：实寄封邮寄、艺术品创作、文物出土、瓷器烧制</p>
-                    <p>实物仅作为事件发生的现场载体，协议对「实物相关的客观事件」确权，而非实物本身。实物可选择保留或销毁，与链上NFT无权属、价值绑定关系。</p>
-                </div>
-                <div class="event-card">
-                    <h3>无实物事件</h3>
-                    <p class="example">示例：线上发布、链上投票、观点声明、学术发表</p>
-                    <p>纯数字/行为类事件，无伴随实物，协议直接对事件本身进行多源证据采集、存证与确权。依托链上时间戳、数字签名、第三方存档完成证据闭环。</p>
-                </div>
-                <div class="event-card">
-                    <h3>混合事件</h3>
-                    <p class="example">示例：新闻现场、演出活动、法律存证、线下会议</p>
-                    <p>有实物但非核心，或实物与数字并存的事件。融合有实物/无实物事件的证据验证规则，兼顾物理现场与数字记录，实现全维度事实存证。</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="case section" id="case">
-        <div class="container case-container">
-            <h2 class="section-title">首个落地案例</h2>
-            <p class="section-desc">首日封实寄事件确权，验证协议全流程可行性，打造可复制的证据采集模板</p>
-            <div class="case-card">
-                <h3>2026香港天水围邮局首日封实寄事件</h3>
-                <div class="case-info">
-                    <div class="info-item">
-                        <div class="label">事件时间</div>
-                        <div class="value">2026-03-24 11:24</div>
+        <!-- 核心理念板块 -->
+        <section class="core section active" id="core">
+            <div class="container">
+                <h2 class="section-title">协议核心理念</h2>
+                <p class="section-desc">以平权为核心，重新定义链上确权，让事实成为数字世界的可信基础设施</p>
+                <div class="core-grid">
+                    <div class="core-card">
+                        <h3><i class="fas fa-compass-drafting"></i> 确权对象：唯事件</h3>
+                        <p>统一以「客观发生的历史事件」为确权核心，非实体资产或数字内容。实物仅为事件现场载体，无实物事件直接存证，彻底摒弃RWA，从底层规避监管风险。</p>
                     </div>
-                    <div class="info-item">
-                        <div class="label">事件地点</div>
-                        <div class="value">香港天水围邮局</div>
+                    <div class="core-card">
+                        <h3><i class="fas fa-balance-scale"></i> 核心理念：平权存证</h3>
+                        <p>事实记录无资金门槛，任何人只需支付Gas费即可铸造Event NFT，无需额外费用。技术不制造新的不平等，人人都有权为真实事件建立永久链上凭证。</p>
                     </div>
-                    <div class="info-item">
-                        <div class="label">追踪编号</div>
-                        <div class="value">RE176993145HK</div>
+                    <div class="core-card">
+                        <h3><i class="fas fa-sack-dollar"></i> 价值机制：引用税</h3>
+                        <p>事件价值不依赖少数人炒作，而是由被相信、被使用的次数决定。每一次链上引用都是对真实的投票，引用费为发起人带来持续收益，让价值回归影响力。</p>
                     </div>
-                    <div class="info-item">
-                        <div class="label">时间戳证书</div>
-                        <div class="value">TSA-01-20260324896637266</div>
+                    <div class="core-card">
+                        <h3><i class="fas fa-layer-group"></i> 生态定位：重型事实层</h3>
+                        <p>不与轻量级协议竞争，专注「高价值重型事实」锚定，需多源证据、物理验证、终极仲裁的事件皆可适配，与轻量级协议互补，构建多层级数字可信体系。</p>
                     </div>
                 </div>
-                <div class="case-desc">
-                    完成全生命周期证据采集：GPS轨迹（34个路点，精度小数点后8位）、邮政收据、全程影像、官方物流记录，实现多源证据闭环。<br>
-                    采用IPFS分层存储，公开包隐藏个人信息，私有包留存原始材料，为后续所有事件类型提供可复制的范式。
+            </div>
+        </section>
+
+        <!-- 事件类型板块 -->
+        <section class="event-types section active" id="event-types">
+            <div class="container">
+                <h2 class="section-title">全场景事件类型</h2>
+                <p class="section-desc">覆盖有实物、无实物、混合三类事件，协议具备无限扩展性，社区可自定义事件模板</p>
+                <div class="event-grid">
+                    <div class="event-card">
+                        <h3>有实物事件</h3>
+                        <p class="example">示例：实寄封邮寄、艺术品创作、文物出土、瓷器烧制</p>
+                        <p>实物仅作为事件发生的现场载体，协议对「实物相关的客观事件」确权，而非实物本身。实物可选择保留或销毁，与链上NFT无权属、价值绑定关系。</p>
+                    </div>
+                    <div class="event-card">
+                        <h3>无实物事件</h3>
+                        <p class="example">示例：线上发布、链上投票、观点声明、学术发表</p>
+                        <p>纯数字/行为类事件，无伴随实物，协议直接对事件本身进行多源证据采集、存证与确权。依托链上时间戳、数字签名、第三方存档完成证据闭环。</p>
+                    </div>
+                    <div class="event-card">
+                        <h3>混合事件</h3>
+                        <p class="example">示例：新闻现场、演出活动、法律存证、线下会议</p>
+                        <p>有实物但非核心，或实物与数字并存的事件。融合有实物/无实物事件的证据验证规则，兼顾物理现场与数字记录，实现全维度事实存证。</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="links section">
-        <div class="container">
-            <h2 class="section-title">快速入口</h2>
-            <p class="section-desc">一站式访问协议核心内容、代码仓库与社区生态</p>
-            <div class="links-grid">
-                <a href="/STProof_Whitepaper_v1.3.1.pdf" target="_blank" class="link-card">
-                    <i class="fas fa-file-pdf" style="font-size: 32px; color: var(--primary); margin-bottom: 16px;"></i>
-                    <h3>白皮书完整版</h3>
-                    <p>查看v1.3版白皮书，了解协议架构、经济模型、生态路线</p>
-                </a>
-                <a href="https://github.com/dule-123/stproof" target="_blank" class="link-card">
-                    <i class="fab fa-github" style="font-size: 32px; color: var(--primary); margin-bottom: 16px;"></i>
-                    <h3>GitHub代码库</h3>
-                    <p>协议智能合约、验证工具、部署文档开源地址</p>
-                </a>
-                <a href="#event-types" class="link-card">
-                    <i class="fas fa-list-alt" style="font-size: 32px; color: var(--primary); margin-bottom: 16px;"></i>
-                    <h3>事件模板库</h3>
-                    <p>有实物/无实物/混合事件模板，社区可提案自定义</p>
-                </a>
-                <a href="#core" class="link-card">
-                    <i class="fas fa-circle-nodes" style="font-size: 32px; color: var(--primary); margin-bottom: 16px;"></i>
-                    <h3>经济模型</h3>
-                    <p>版税、引用税、付费访问，三层并行价值捕获机制</p>
-                </a>
+        <!-- 首个落地案例板块 -->
+        <section class="case section active" id="case">
+            <div class="container case-container">
+                <h2 class="section-title">首个落地案例</h2>
+                <p class="section-desc">首日封实寄事件确权，验证协议全流程可行性，打造可复制的证据采集模板（3.24实验第一阶段采用TSA时间戳，后续阶段将全面采用IPFS CID存证）</p>
+                <div class="case-card">
+                    <h3>2026香港天水围邮局首日封实寄事件</h3>
+                    <div class="case-info">
+                        <div class="info-item">
+                            <div class="label">事件时间</div>
+                            <div class="value">2026-03-24 11:24</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="label">事件地点</div>
+                            <div class="value">香港天水围邮局</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="label">追踪编号</div>
+                            <div class="value">RE176993145HK</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="label">TSA时间戳证书（首期）</div>
+                            <div class="value">TSA-01-20260324896637266</div>
+                        </div>
+                        <!-- 预留CID位置，后续替换即可 -->
+                        <div class="info-item" style="display:none;">
+                            <div class="label">IPFS CID（二期及以后）</div>
+                            <div class="value">QmXYZ...（替换为你的真实CID）</div>
+                        </div>
+                    </div>
+                    <div class="case-desc">
+                        完成全生命周期证据采集：GPS轨迹（34个路点，精度小数点后8位）、邮政收据、全程影像、官方物流记录，实现多源证据闭环。<br>
+                        首期采用TSA时间戳固化证据，3.24实验第二阶段起，证据链将全部上传至IPFS（脱敏数据），后续事件存证将全面使用IPFS CID，替代传统时间戳方案。
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <footer>
-        <div class="container footer-container">
-            <div class="footer-logo">STProof Protocol</div>
-            <nav class="footer-nav">
-                <a href="#core">核心理念</a>
-                <a href="#event-types">事件类型</a>
-                <a href="#case">首个案例</a>
-                <a href="/STProof_Whitepaper_v1.3.1.pdf" target="_blank">白皮书</a>
-                <a href="https://github.com/dule-123/stproof" target="_blank">GitHub</a>
-            </nav>
-            <div class="copyright">
-                © 2026 STProof Protocol 版权所有 | 凡发生，皆可存；凡存证，皆可信
+        <!-- 快速入口板块 -->
+        <section class="links section active">
+            <div class="container">
+                <h2 class="section-title">快速入口</h2>
+                <p class="section-desc">一站式访问协议核心内容、代码仓库与社区生态</p>
+                <div class="links-grid">
+                    <a href="/STProof_Whitepaper_v1.3.1.pdf" target="_blank" class="link-card">
+                        <i class="fas fa-file-pdf" style="font-size: 32px; color: var(--primary); margin-bottom: 16px;"></i>
+                        <h3>白皮书完整版</h3>
+                        <p>查看v1.3版白皮书，了解协议架构、经济模型、生态路线</p>
+                    </a>
+                    <a href="https://github.com/dule-123/stproof" target="_blank" class="link-card">
+                        <i class="fab fa-github" style="font-size: 32px; color: var(--primary); margin-bottom: 16px;"></i>
+                        <h3>GitHub代码库</h3>
+                        <p>协议智能合约、验证工具、部署文档开源地址</p>
+                    </a>
+                    <a href="#event-types" class="link-card">
+                        <i class="fas fa-list-alt" style="font-size: 32px; color: var(--primary); margin-bottom: 16px;"></i>
+                        <h3>事件模板库</h3>
+                        <p>有实物/无实物/混合事件模板，社区可提案自定义</p>
+                    </a>
+                    <a href="#core" class="link-card">
+                        <i class="fas fa-circle-nodes" style="font-size: 32px; color: var(--primary); margin-bottom: 16px;"></i>
+                        <h3>经济模型</h3>
+                        <p>版税、引用税、付费访问，三层并行价值捕获机制</p>
+                    </a>
+                </div>
             </div>
-        </div>
-    </footer>
+        </section>
+
+        <!-- 页脚 -->
+        <footer>
+            <div class="container footer-container">
+                <div class="footer-logo">STProof Protocol</div>
+                <nav class="footer-nav">
+                    <a href="#core">核心理念</a>
+                    <a href="#event-types">事件类型</a>
+                    <a href="#case">首个案例</a>
+                    <a href="/STProof_Whitepaper_v1.3.1.pdf" target="_blank">白皮书</a>
+                    <a href="https://github.com/dule-123/stproof" target="_blank">GitHub</a>
+                </nav>
+                <div class="copyright">
+                    © 2026 STProof Protocol 版权所有 | 凡发生，皆可存；凡存证，皆可信
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 英文版本 -->
+    <div id="en-content" style="display:none;">
+        <!-- Hero Section -->
+        <section class="hero active">
+            <div class="container hero-container">
+                <h1 class="hero-slogan">
+                    Not Proof of Asset, But Proof of Event<br>
+                    <span>What Happens, Exists; What's Proven, Trusted</span>
+                </h1>
+                <p class="hero-desc">
+                    STProof (Spatial-Temporal Proof) is a universal on-chain event proof and value capture protocol.<br>
+                    Breaking the traditional asset-mapping mindset, it transforms objective historical events into immutable permanent records in the digital world through multi-source evidence cross-verification, trusted timestamps, and decentralized storage.<br>
+                    Proof for tangible and intangible events alike, zero financial barrier for fact recording, value derived from trust and usage.
+                </p>
+                <div class="hero-btns">
+                    <a href="/STProof_whitepaper_EN_v1.3.1.pdf" target="_blank" class="btn btn-primary" id="whitepaper-en">
+                        <i class="fas fa-file-pdf"></i> View Whitepaper v1.3
+                    </a>
+                    <a href="#core-en" class="btn btn-secondary">
+                        <i class="fas fa-chevron-down"></i> Learn Core Mechanism
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Concepts Section -->
+        <section class="core section active" id="core-en">
+            <div class="container">
+                <h2 class="section-title">Core Concepts</h2>
+                <p class="section-desc">Equity-centered, redefining on-chain proof, making facts the trusted infrastructure of the digital world</p>
+                <div class="core-grid">
+                    <div class="core-card">
+                        <h3><i class="fas fa-compass-drafting"></i> Proof Object: Event Only</h3>
+                        <p>Unifiedly takes "objective historical events" as the core of proof, not physical assets or digital content. Physical items are only event carriers; intangible events are directly proven, completely abandoning RWA to avoid regulatory risks at the bottom layer.</p>
+                    </div>
+                    <div class="core-card">
+                        <h3><i class="fas fa-balance-scale"></i> Core Philosophy: Equitable Proof</h3>
+                        <p>Zero financial barrier for fact recording. Anyone can mint Event NFTs by only paying Gas fees, no extra costs. Technology creates no new inequality; everyone has the right to establish permanent on-chain credentials for real events.</p>
+                    </div>
+                    <div class="core-card">
+                        <h3><i class="fas fa-sack-dollar"></i> Value Mechanism: Citation Royalty</h3>
+                        <p>Event value does not depend on hype by a few, but on the number of times it is trusted and used. Every on-chain citation is a vote for truth, and citation fees bring continuous revenue to the initiator, returning value to influence.</p>
+                    </div>
+                    <div class="core-card">
+                        <h3><i class="fas fa-layer-group"></i> Ecosystem Position: Heavy Fact Layer</h3>
+                        <p>Not competing with lightweight protocols, focusing on anchoring "high-value heavy facts". Events requiring multi-source evidence, physical verification, and ultimate arbitration are all adaptable, complementing lightweight protocols to build a multi-level digital trust system.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Event Types Section -->
+        <section class="event-types section active" id="event-types-en">
+            <div class="container">
+                <h2 class="section-title">Full-Scenario Event Types</h2>
+                <p class="section-desc">Covering tangible, intangible, and hybrid events, the protocol has unlimited scalability, and the community can customize event templates</p>
+                <div class="event-grid">
+                    <div class="event-card">
+                        <h3>Tangible Events</h3>
+                        <p class="example">Example: First Day Cover Mailing, Art Creation, Cultural Relic Excavation, Porcelain Firing</p>
+                        <p>Physical items are only carriers of the event. The protocol proves "objective events related to physical items", not the items themselves. Items can be retained or destroyed, with no ownership or value binding to on-chain NFTs.</p>
+                    </div>
+                    <div class="event-card">
+                        <h3>Intangible Events</h3>
+                        <p class="example">Example: Online Release, On-Chain Voting, Opinion Statement, Academic Publication</p>
+                        <p>Pure digital/behavioral events with no accompanying physical items. The protocol directly collects, proves, and certifies the event itself, completing the evidence closed-loop through on-chain timestamps, digital signatures, and third-party archiving.</p>
+                    </div>
+                    <div class="event-card">
+                        <h3>Hybrid Events</h3>
+                        <p class="example">Example: News Scene, Live Performance, Legal Proof, Offline Conference</p>
+                        <p>Events with physical items but not core, or coexisting physical and digital elements. Integrating evidence verification rules for tangible/intangible events, balancing physical scenes and digital records to achieve full-dimensional fact proof.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- First Case Section -->
+        <section class="case section active" id="case-en">
+            <div class="container case-container">
+                <h2 class="section-title">First Launch Case</h2>
+                <p class="section-desc">First Day Cover Mailing Event Proof, verifying the feasibility of the full protocol process, creating a replicable evidence collection template (Phase 1 of 3.24 Experiment uses TSA Timestamp; IPFS CID will be fully adopted for subsequent phases)</p>
+                <div class="case-card">
+                    <h3>2026 Tin Shui Wai Post Office Hong Kong First Day Cover Mailing Event</h3>
+                    <div class="case-info">
+                        <div class="info-item">
+                            <div class="label">Event Time</div>
+                            <div class="value">2026-03-24 11:24</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="label">Event Location</div>
+                            <div class="value">Tin Shui Wai Post Office, Hong Kong</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="label">Tracking No.</div>
+                            <div class="value">RE176993145HK</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="label">TSA Timestamp Cert (Phase 1)</div>
+                            <div class="value">TSA-01-20260324896637266</div>
+                        </div>
+                        <!-- Reserved CID field, replace later -->
+                        <div class="info-item" style="display:none;">
+                            <div class="label">IPFS CID (Phase 2+)</div>
+                            <div class="value">QmXYZ...（Replace with your real CID）</div>
+                        </div>
+                    </div>
+                    <div class="case-desc">
+                        Completed full-lifecycle evidence collection: GPS track (34 waypoints, 8 decimal places precision), postal receipt, full-process video, official logistics records, achieving multi-source evidence closed-loop.<br>
+                        TSA Timestamp is used for evidence solidification in Phase 1. Starting from Phase 2 of the 3.24 Experiment, the evidence chain will be fully uploaded to IPFS (desensitized data), and IPFS CID will replace traditional timestamp solutions for all subsequent event proofs.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Links Section -->
+        <section class="links section active">
+            <div class="container">
+                <h2 class="section-title">Quick Links</h2>
+                <p class="section-desc">One-stop access to protocol core content, code repository and community ecosystem</p>
+                <div class="links-grid">
+                    <a href="/STProof_whitepaper_EN_v1.3.1.pdf" target="_blank" class="link-card">
+                        <i class="fas fa-file-pdf" style="font-size: 32px; color: var(--primary); margin-bottom: 16px;"></i>
+                        <h3>Full Whitepaper</h3>
+                        <p>View v1.3 whitepaper for protocol architecture, economic model, ecosystem roadmap</p>
+                    </a>
+                    <a href="https://github.com/dule-123/stproof" target="_blank" class="link-card">
+                        <i class="fab fa-github" style="font-size: 32px; color: var(--primary); margin-bottom: 16px;"></i>
+                        <h3>GitHub Repo</h3>
+                        <p>Open-source address for protocol smart contracts, verification tools, deployment docs</p>
+                    </a>
+                    <a href="#event-types-en" class="link-card">
+                        <i class="fas fa-list-alt" style="font-size: 32px; color: var(--primary); margin-bottom: 16px;"></i>
+                        <h3>Event Template Library</h3>
+                        <p>Tangible/intangible/hybrid event templates, community can propose customizations</p>
+                    </a>
+                    <a href="#core-en" class="link-card">
+                        <i class="fas fa-circle-nodes" style="font-size: 32px; color: var(--primary); margin-bottom: 16px;"></i>
+                        <h3>Economic Model</h3>
+                        <p>Royalty, Citation Royalty, Paid Access, three-layer parallel value capture mechanism</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container footer-container">
+                <div class="footer-logo">STProof Protocol</div>
+                <nav class="footer-nav">
+                    <a href="#core-en">Core Concepts</a>
+                    <a href="#event-types-en">Event Types</a>
+                    <a href="#case-en">First Case</a>
+                    <a href="/STProof_whitepaper_EN_v1.3.1.pdf" target="_blank">Whitepaper</a>
+                    <a href="https://github.com/dule-123/stproof" target="_blank">GitHub</a>
+                </nav>
+                <div class="copyright">
+                    © 2026 STProof Protocol All Rights Reserved | What Happens, Exists; What's Proven, Trusted
+                </div>
+            </div>
+        </footer>
+    </div>
 
     <script>
+        // 语言切换逻辑
+        const langSwitch = document.getElementById('langSwitch');
+        const zhContent = document.getElementById('zh-content');
+        const enContent = document.getElementById('en-content');
+        const zhNav = document.querySelectorAll('.zh');
+        const enNav = document.querySelectorAll('.en');
+        let isEn = false;
+
+        langSwitch.addEventListener('click', () => {
+            isEn = !isEn;
+            if (isEn) {
+                // 切换到英文
+                zhContent.style.display = 'none';
+                enContent.style.display = 'block';
+                zhNav.forEach(el => el.style.display = 'none');
+                enNav.forEach(el => el.style.display = 'inline');
+                document.documentElement.lang = 'en';
+                document.title = 'STProof Protocol - Universal On-Chain Event Proof & Value Capture Protocol';
+                langSwitch.textContent = 'EN / 中';
+            } else {
+                // 切换到中文
+                zhContent.style.display = 'block';
+                enContent.style.display = 'none';
+                zhNav.forEach(el => el.style.display = 'inline');
+                enNav.forEach(el => el.style.display = 'none');
+                document.documentElement.lang = 'zh-CN';
+                document.title = 'STProof Protocol - 通用事件链上确权与价值捕获协议';
+                langSwitch.textContent = '中 / EN';
+            }
+            // 重置导航高亮
+            document.querySelectorAll('.nav a').forEach(link => link.classList.remove('active'));
+            document.querySelector('.nav a.active').classList.add('active');
+        });
+
+        // 平滑滚动
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -275,6 +497,8 @@
                 }
             });
         });
+
+        // 导航滚动高亮
         window.addEventListener('scroll', function() {
             const sections = document.querySelectorAll('.section');
             const navLinks = document.querySelectorAll('.nav a');
