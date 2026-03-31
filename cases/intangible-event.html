@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intangible Events - STProof Protocol</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+        :root { --primary: #165DFF; --primary-light: #E8F3FF; --primary-dark: #0E42C1; --dark: #1D2129; --gray: #4E5969; --light-gray: #C9CDD4; --bg: #F7F8FA; --white: #FFFFFF; --shadow: 0 4px 20px rgba(0, 0, 0, 0.08); }
+        body { background: var(--bg); color: var(--dark); line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        a { text-decoration: none; color: inherit; }
+        .btn { display: inline-block; padding: 12px 28px; border-radius: 8px; font-weight: 600; font-size: 16px; transition: all 0.3s ease; cursor: pointer; border: none; }
+        .btn-primary { background: var(--primary); color: var(--white); }
+        .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(22, 93, 255, 0.3); }
+        .btn-secondary { background: var(--white); color: var(--primary); border: 2px solid var(--primary); }
+        .btn-secondary:hover { background: var(--primary-light); transform: translateY(-2px); }
+        header { background: var(--white); box-shadow: var(--shadow); position: fixed; top: 0; left: 0; right: 0; z-index: 999; }
+        .header-container { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; max-width: 1200px; margin: 0 auto; }
+        .logo { font-size: 24px; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+        .logo span { color: var(--dark); }
+        .nav { display: flex; gap: 32px; font-size: 16px; font-weight: 500; align-items: center; }
+        .nav a { color: var(--gray); transition: color 0.3s; }
+        .nav a:hover { color: var(--primary); }
+        .lang-switch { padding: 6px 12px; border: 1px solid var(--primary); border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: 600; color: var(--primary); transition: all 0.3s; }
+        .lang-switch:hover { background: var(--primary-light); }
+        .back-btn { margin: 120px 0 40px 0; display: inline-block; }
+        .page-title { text-align: center; font-size: 40px; font-weight: 700; margin-bottom: 20px; color: var(--dark); }
+        .page-desc { text-align: center; font-size: 18px; color: var(--gray); max-width: 800px; margin: 0 auto 60px auto; }
+        .event-detail { background: var(--white); padding: 40px; border-radius: 12px; box-shadow: var(--shadow); margin-bottom: 60px; }
+        .detail-title { font-size: 24px; font-weight: 700; color: var(--primary); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--primary-light); }
+        .detail-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
+        .detail-card { padding: 24px; background: var(--primary-light); border-radius: 8px; }
+        .detail-card h3 { font-size: 20px; font-weight: 600; margin-bottom: 16px; color: var(--primary-dark); }
+        .detail-card p { color: var(--gray); line-height: 1.8; }
+        .example-list { margin: 40px 0; }
+        .example-list h3 { font-size: 22px; font-weight: 600; margin-bottom: 20px; color: var(--dark); }
+        .example-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .example-item { padding: 20px; background: var(--bg); border-radius: 8px; border-left: 4px solid var(--primary); }
+        .example-item h4 { font-size: 18px; font-weight: 600; margin-bottom: 12px; color: var(--dark); }
+        .example-item p { color: var(--gray); font-size: 14px; }
+        footer { padding: 40px 0; background: #111; color: var(--light-gray); text-align: center; margin-top: 80px; }
+        .footer-container { display: flex; flex-direction: column; gap: 20px; }
+        .footer-logo { font-size: 20px; font-weight: 700; color: var(--primary); }
+        .copyright { font-size: 14px; opacity: 0.7; }
+
+        /* 语言切换控制 */
+        #zh-content, #en-content { display: none; }
+    </style>
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<header>
+    <div class="header-container">
+        <div class="logo">STProof <span>Protocol</span></div>
+        <nav class="nav">
+            <a href="../index.html#core" class="zh-link">核心理念</a>
+            <a href="../index.html#core" class="en-link">Core Concepts</a>
+            <a href="../index.html#event-types" class="zh-link">事件类型</a>
+            <a href="../index.html#event-types" class="en-link">Event Types</a>
+            <a href="../index.html#case" class="zh-link">首个案例</a>
+            <a href="../index.html#case" class="en-link">First Case</a>
+            <a href="https://github.com/dule-123/stproof" target="_blank">GitHub</a>
+            <div class="lang-switch" id="langSwitch">EN / 中</div>
+        </nav>
+    </div>
+</header>
+
+<!-- 中文内容 -->
+<div id="zh-content">
+    <div class="container">
+        <a href="../index.html#event-types" class="back-btn btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> 返回事件类型
+        </a>
+        <h1 class="page-title">无实物事件</h1>
+        <p class="page-desc">纯数字/行为类事件，无伴随实物，协议直接对事件本身进行多源证据采集、存证与确权</p>
+
+        <div class="event-detail">
+            <h2 class="detail-title">无实物事件核心特征</h2>
+            <div class="detail-content">
+                <div class="detail-card">
+                    <h3>无物理载体</h3>
+                    <p>事件发生全程无实物参与，仅以数字形式、行为形式存在，如线上发言、链上操作、观点发布等。</p>
+                </div>
+                <div class="detail-card">
+                    <h3>多源数字证据</h3>
+                    <p>依托链上时间戳、数字签名、第三方平台存档、IPFS去中心化存储完成证据闭环，确保事件真实性。</p>
+                </div>
+                <div class="detail-card">
+                    <h3>低成本存证</h3>
+                    <p>无需物理证据采集、运输、存储成本，仅需完成数字证据的链上固化，存证门槛更低。</p>
+                </div>
+                <div class="detail-card">
+                    <h3>即时确权</h3>
+                    <p>事件发生后可立即完成多源证据采集与链上存证，无需等待实物验证周期，确权效率更高。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="example-list">
+            <h3>典型应用场景</h3>
+            <div class="example-grid">
+                <div class="example-item">
+                    <h4>线上发布</h4>
+                    <p>文章、视频、代码、创意方案等数字内容的首次发布时间与内容确权，防止抄袭与篡改。</p>
+                </div>
+                <div class="example-item">
+                    <h4>链上投票</h4>
+                    <p>DAO提案投票、社区决策等链上行为的过程与结果存证，确保投票行为不可篡改、可追溯。</p>
+                </div>
+                <div class="example-item">
+                    <h4>观点声明</h4>
+                    <p>个人/机构对特定事件的观点、立场声明存证，固定声明时间与内容，避免事后抵赖。</p>
+                </div>
+                <div class="example-item">
+                    <h4>学术发表</h4>
+                    <p>学术论文、研究成果的预发布存证，证明创作时间线，解决学术成果归属争议。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-logo">STProof Protocol</div>
+            <div class="copyright">© 2026 STProof Protocol 版权所有 | 凡发生，皆可存；凡存证，皆可信</div>
+        </div>
+    </footer>
+</div>
+
+<!-- 英文内容 -->
+<div id="en-content">
+    <div class="container">
+        <a href="../index.html#event-types" class="back-btn btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Back to Event Types
+        </a>
+        <h1 class="page-title">Intangible Events</h1>
+        <p class="page-desc">Pure digital/behavioral events with no accompanying physical items, the protocol directly collects, proves and certifies the event itself with multi-source evidence</p>
+
+        <div class="event-detail">
+            <h2 class="detail-title">Core Characteristics of Intangible Events</h2>
+            <div class="detail-content">
+                <div class="detail-card">
+                    <h3>No Physical Carrier</h3>
+                    <p>Events occur entirely without physical participation, existing only in digital or behavioral forms, such as online speeches, on-chain operations, opinion releases, etc.</p>
+                </div>
+                <div class="detail-card">
+                    <h3>Multi-source Digital Evidence</h3>
+                    <p>Complete evidence closed-loop through on-chain timestamps, digital signatures, third-party platform archiving, and IPFS decentralized storage to ensure event authenticity.</p>
+                </div>
+                <div class="detail-card">
+                    <h3>Low-cost Proof</h3>
+                    <p>No costs for physical evidence collection, transportation, and storage, only need to complete on-chain solidification of digital evidence, with lower proof thresholds.</p>
+                </div>
+                <div class="detail-card">
+                    <h3>Instant Certification</h3>
+                    <p>Multi-source evidence collection and on-chain proof can be completed immediately after the event occurs, no need to wait for physical verification cycles, with higher certification efficiency.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="example-list">
+            <h3>Typical Application Scenarios</h3>
+            <div class="example-grid">
+                <div class="example-item">
+                    <h4>Online Release</h4>
+                    <p>Certification of the first release time and content of digital content such as articles, videos, code, and creative plans to prevent plagiarism and tampering.</p>
+                </div>
+                <div class="example-item">
+                    <h4>On-Chain Voting</h4>
+                    <p>Proof of the process and results of on-chain behaviors such as DAO proposal voting and community decision-making to ensure voting behaviors are immutable and traceable.</p>
+                </div>
+                <div class="example-item">
+                    <h4>Opinion Statement</h4>
+                    <p>Proof of personal/institutional opinions and position statements on specific events, fixing the statement time and content to avoid repudiation afterwards.</p>
+                </div>
+                <div class="example-item">
+                    <h4>Academic Publication</h4>
+                    <p>Pre-release proof of academic papers and research results to prove the creation timeline and resolve disputes over the ownership of academic achievements.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-logo">STProof Protocol</div>
+            <div class="copyright">© 2026 STProof Protocol All Rights Reserved | What Happens, Exists; What's Proven, Trusted</div>
+        </div>
+    </footer>
+</div>
+
+<script>
+    const zh = document.getElementById('zh-content');
+    const en = document.getElementById('en-content');
+    const btn = document.getElementById('langSwitch');
+
+    const zhLinks = document.querySelectorAll('.zh-link');
+    const enLinks = document.querySelectorAll('.en-link');
+
+    // 默认英文
+    let isEn = true;
+    showLang(isEn);
+
+    btn.addEventListener('click', () => {
+        isEn = !isEn;
+        showLang(isEn);
+    });
+
+    function showLang(enMode) {
+        if (enMode) {
+            zh.style.display = 'none';
+            en.style.display = 'block';
+            zhLinks.forEach(x => x.style.display = 'none');
+            enLinks.forEach(x => x.style.display = 'inline');
+            document.documentElement.lang = 'en';
+            document.title = "Intangible Events - STProof Protocol";
+            btn.textContent = "EN / 中";
+        } else {
+            en.style.display = 'none';
+            zh.style.display = 'block';
+            enLinks.forEach(x => x.style.display = 'none');
+            zhLinks.forEach(x => x.style.display = 'inline');
+            document.documentElement.lang = 'zh-CN';
+            document.title = "无实物事件 - STProof Protocol";
+            btn.textContent = "中 / EN";
+        }
+    }
+</script>
+</body>
+</html>
