@@ -42,7 +42,8 @@
         .core-card p { color: var(--gray); font-size: 16px; }
         .event-types { background: var(--primary-light); }
         .event-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 32px; }
-        .event-card { background: var(--white); padding: 36px; border-radius: 12px; box-shadow: var(--shadow); }
+        .event-card { background: var(--white); padding: 36px; border-radius: 12px; box-shadow: var(--shadow); transition: all 0.3s; }
+        .event-card:hover { transform: translateY(-5px); box-shadow: 0 6px 24px rgba(22, 93, 255, 0.12); }
         .event-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 20px; color: var(--dark); border-left: 4px solid var(--primary); padding-left: 12px; }
         .event-card .example { color: var(--primary); font-weight: 600; margin-bottom: 12px; }
         .event-card p { color: var(--gray); }
@@ -145,6 +146,7 @@
             <h2 class="section-title">全场景事件类型</h2>
             <p class="section-desc">覆盖有实物、无实物、混合三类事件</p>
             <div class="event-grid">
+                <!-- 有实物事件 -->
                 <a href="cases/first-day-cover.html" style="text-decoration:none;color:inherit;">
                     <div class="event-card">
                         <h3>有实物事件</h3>
@@ -152,16 +154,22 @@
                         <p>实物仅作为事件发生的现场载体，协议对「事件」确权，而非实物本身。</p>
                     </div>
                 </a>
-                <div class="event-card">
-                    <h3>无实物事件</h3>
-                    <p class="example">示例：线上发布、链上投票、观点声明、学术发表</p>
-                    <p>纯数字/行为类事件，无伴随实物，协议直接对事件进行多源存证与确权。</p>
-                </div>
-                <div class="event-card">
-                    <h3>混合事件</h3>
-                    <p class="example">示例：新闻现场、演出活动、法律存证、线下会议</p>
-                    <p>融合物理现场与数字记录，实现全维度事实存证。</p>
-                </div>
+                <!-- 无实物事件 -->
+                <a href="cases/intangible-event.html" style="text-decoration:none;color:inherit;">
+                    <div class="event-card">
+                        <h3>无实物事件</h3>
+                        <p class="example">示例：线上发布、链上投票、观点声明、学术发表</p>
+                        <p>纯数字/行为类事件，无伴随实物，协议直接对事件进行多源存证与确权。</p>
+                    </div>
+                </a>
+                <!-- 混合事件 -->
+                <a href="cases/hybrid-event.html" style="text-decoration:none;color:inherit;">
+                    <div class="event-card">
+                        <h3>混合事件</h3>
+                        <p class="example">示例：新闻现场、演出活动、法律存证、线下会议</p>
+                        <p>融合物理现场与数字记录，实现全维度事实存证。</p>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
@@ -252,6 +260,7 @@
             <h2 class="section-title">Event Types</h2>
             <p class="section-desc">Covers tangible, intangible and hybrid events</p>
             <div class="event-grid">
+                <!-- Tangible Events -->
                 <a href="cases/first-day-cover.html" style="text-decoration:none;color:inherit;">
                     <div class="event-card">
                         <h3>Tangible Events</h3>
@@ -259,16 +268,22 @@
                         <p>Physical items are only carriers. The protocol proves the event, not the item itself.</p>
                     </div>
                 </a>
-                <div class="event-card">
-                    <h3>Intangible Events</h3>
-                    <p class="example">Online Release, On-Chain Voting, Statement, Publication</p>
-                    <p>Pure digital or behavioral events with no physical form, directly proven on-chain.</p>
-                </div>
-                <div class="event-card">
-                    <h3>Hybrid Events</h3>
-                    <p class="example">Live News, Performance, Legal Proof, Offline Conference</p>
-                    <p>Combining physical scenes and digital records for full-dimensional fact proof.</p>
-                </div>
+                <!-- Intangible Events -->
+                <a href="cases/intangible-event.html" style="text-decoration:none;color:inherit;">
+                    <div class="event-card">
+                        <h3>Intangible Events</h3>
+                        <p class="example">Online Release, On-Chain Voting, Statement, Publication</p>
+                        <p>Pure digital or behavioral events with no physical form, directly proven on-chain.</p>
+                    </div>
+                </a>
+                <!-- Hybrid Events -->
+                <a href="cases/hybrid-event.html" style="text-decoration:none;color:inherit;">
+                    <div class="event-card">
+                        <h3>Hybrid Events</h3>
+                        <p class="example">Live News, Performance, Legal Proof, Offline Conference</p>
+                        <p>Combining physical scenes and digital records for full-dimensional fact proof.</p>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
