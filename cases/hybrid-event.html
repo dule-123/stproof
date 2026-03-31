@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hybrid Events - STProof Protocol</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+        :root { --primary: #165DFF; --primary-light: #E8F3FF; --primary-dark: #0E42C1; --dark: #1D2129; --gray: #4E5969; --light-gray: #C9CDD4; --bg: #F7F8FA; --white: #FFFFFF; --shadow: 0 4px 20px rgba(0, 0, 0, 0.08); }
+        body { background: var(--bg); color: var(--dark); line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        a { text-decoration: none; color: inherit; }
+        .btn { display: inline-block; padding: 12px 28px; border-radius: 8px; font-weight: 600; font-size: 16px; transition: all 0.3s ease; cursor: pointer; border: none; }
+        .btn-primary { background: var(--primary); color: var(--white); }
+        .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(22, 93, 255, 0.3); }
+        .btn-secondary { background: var(--white); color: var(--primary); border: 2px solid var(--primary); }
+        .btn-secondary:hover { background: var(--primary-light); transform: translateY(-2px); }
+        header { background: var(--white); box-shadow: var(--shadow); position: fixed; top: 0; left: 0; right: 0; z-index: 999; }
+        .header-container { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; max-width: 1200px; margin: 0 auto; }
+        .logo { font-size: 24px; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+        .logo span { color: var(--dark); }
+        .nav { display: flex; gap: 32px; font-size: 16px; font-weight: 500; align-items: center; }
+        .nav a { color: var(--gray); transition: color 0.3s; }
+        .nav a:hover { color: var(--primary); }
+        .lang-switch { padding: 6px 12px; border: 1px solid var(--primary); border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: 600; color: var(--primary); transition: all 0.3s; }
+        .lang-switch:hover { background: var(--primary-light); }
+        .back-btn { margin: 120px 0 40px 0; display: inline-block; }
+        .page-title { text-align: center; font-size: 40px; font-weight: 700; margin-bottom: 20px; color: var(--dark); }
+        .page-desc { text-align: center; font-size: 18px; color: var(--gray); max-width: 800px; margin: 0 auto 60px auto; }
+        .event-detail { background: var(--white); padding: 40px; border-radius: 12px; box-shadow: var(--shadow); margin-bottom: 60px; }
+        .detail-title { font-size: 24px; font-weight: 700; color: var(--primary); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--primary-light); }
+        .detail-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
+        .detail-card { padding: 24px; background: var(--primary-light); border-radius: 8px; }
+        .detail-card h3 { font-size: 20px; font-weight: 600; margin-bottom: 16px; color: var(--primary-dark); }
+        .detail-card p { color: var(--gray); line-height: 1.8; }
+        .example-list { margin: 40px 0; }
+        .example-list h3 { font-size: 22px; font-weight: 600; margin-bottom: 20px; color: var(--dark); }
+        .example-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .example-item { padding: 20px; background: var(--bg); border-radius: 8px; border-left: 4px solid var(--primary); }
+        .example-item h4 { font-size: 18px; font-weight: 600; margin-bottom: 12px; color: var(--dark); }
+        .example-item p { color: var(--gray); font-size: 14px; }
+        footer { padding: 40px 0; background: #111; color: var(--light-gray); text-align: center; margin-top: 80px; }
+        .footer-container { display: flex; flex-direction: column; gap: 20px; }
+        .footer-logo { font-size: 20px; font-weight: 700; color: var(--primary); }
+        .copyright { font-size: 14px; opacity: 0.7; }
+
+        /* 语言切换控制 */
+        #zh-content, #en-content { display: none; }
+    </style>
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<header>
+    <div class="header-container">
+        <div class="logo">STProof <span>Protocol</span></div>
+        <nav class="nav">
+            <a href="../index.html#core" class="zh-link">核心理念</a>
+            <a href="../index.html#core" class="en-link">Core Concepts</a>
+            <a href="../index.html#event-types" class="zh-link">事件类型</a>
+            <a href="../index.html#event-types" class="en-link">Event Types</a>
+            <a href="../index.html#case" class="zh-link">首个案例</a>
+            <a href="../index.html#case" class="en-link">First Case</a>
+            <a href="https://github.com/dule-123/stproof" target="_blank">GitHub</a>
+            <div class="lang-switch" id="langSwitch">EN / 中</div>
+        </nav>
+    </div>
+</header>
+
+<!-- 中文内容 -->
+<div id="zh-content">
+    <div class="container">
+        <a href="../index.html#event-types" class="back-btn btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> 返回事件类型
+        </a>
+        <h1 class="page-title">混合事件</h1>
+        <p class="page-desc">有实物但非核心，或实物与数字并存的事件，融合物理现场与数字记录实现全维度事实存证</p>
+
+        <div class="event-detail">
+            <h2 class="detail-title">混合事件核心特征</h2>
+            <div class="detail-content">
+                <div class="detail-card">
+                    <h3>实物+数字双维度</h3>
+                    <p>事件既包含物理现场的实物元素，也包含数字记录/数字行为，二者共同构成完整事件事实。</p>
+                </div>
+                <div class="detail-card">
+                    <h3>多模态证据验证</h3>
+                    <p>融合有实物事件的物理证据（现场影像、GPS、实物凭证）和无实物事件的数字证据（时间戳、签名），验证维度更全面。</p>
+                </div>
+                <div class="detail-card">
+                    <h3>实物非核心载体</h3>
+                    <p>实物仅作为事件发生的场景佐证，而非确权核心，即使实物灭失也不影响事件本身的链上存证有效性。</p>
+                </div>
+                <div class="detail-card">
+                    <h3>场景适配性强</h3>
+                    <p>覆盖绝大多数现实场景的事件类型，是STProof协议应用最广泛的事件类别。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="example-list">
+            <h3>典型应用场景</h3>
+            <div class="example-grid">
+                <div class="example-item">
+                    <h4>新闻现场</h4>
+                    <p>记者在新闻现场的采访行为存证，包含现场影像（物理）+ 发布记录（数字），证明采访行为的真实性与时间线。</p>
+                </div>
+                <div class="example-item">
+                    <h4>演出活动</h4>
+                    <p>线下演出的举办事实存证，包含现场门票/物料（物理）+ 直播记录/购票数据（数字），固定演出举办的完整证据链。</p>
+                </div>
+                <div class="example-item">
+                    <h4>法律存证</h4>
+                    <p>线下签约、取证等法律行为存证，包含纸质文件（物理）+ 电子签名/时间戳（数字），满足法律证据的完整性要求。</p>
+                </div>
+                <div class="example-item">
+                    <h4>线下会议</h4>
+                    <p>线下会议的举办与决议存证，包含会议现场（物理）+ 签到记录/决议文件（数字），证明会议过程与结果的真实性。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-logo">STProof Protocol</div>
+            <div class="copyright">© 2026 STProof Protocol 版权所有 | 凡发生，皆可存；凡存证，皆可信</div>
+        </div>
+    </footer>
+</div>
+
+<!-- 英文内容 -->
+<div id="en-content">
+    <div class="container">
+        <a href="../index.html#event-types" class="back-btn btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Back to Event Types
+        </a>
+        <h1 class="page-title">Hybrid Events</h1>
+        <p class="page-desc">Events with physical items but not core, or coexisting physical and digital elements, integrating physical scenes and digital records to achieve full-dimensional fact proof</p>
+
+        <div class="event-detail">
+            <h2 class="detail-title">Core Characteristics of Hybrid Events</h2>
+            <div class="detail-content">
+                <div class="detail-card">
+                    <h3>Dual Dimensions: Physical + Digital</h3>
+                    <p>Events include both physical elements of the on-site scene and digital records/digital behaviors, which together form the complete event facts.</p>
+                </div>
+                <div class="detail-card">
+                    <h3>Multi-modal Evidence Verification</h3>
+                    <p>Integrate physical evidence (on-site images, GPS, physical vouchers) of tangible events and digital evidence (timestamps, signatures) of intangible events for more comprehensive verification.</p>
+                </div>
+                <div class="detail-card">
+                    <h3>Physical Items as Non-core Carriers</h3>
+                    <p>Physical items only serve as scene evidence for the occurrence of events, not the core of proof. Even if physical items are lost, it does not affect the validity of on-chain proof of the event itself.</p>
+                </div>
+                <div class="detail-card">
+                    <h3>Strong Scene Adaptability</h3>
+                    <p>Covers most event types in real-world scenarios, and is the most widely used event category of the STProof protocol.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="example-list">
+            <h3>Typical Application Scenarios</h3>
+            <div class="example-grid">
+                <div class="example-item">
+                    <h4>News Scene</h4>
+                    <p>Proof of journalists' interview behavior at news scenes, including on-site images (physical) + release records (digital), to prove the authenticity and timeline of interview behavior.</p>
+                </div>
+                <div class="example-item">
+                    <h4>Performance Events</h4>
+                    <p>Proof of the holding fact of offline performances, including on-site tickets/materials (physical) + live broadcast records/ticketing data (digital), to fix the complete evidence chain of performance holding.</p>
+                </div>
+                <div class="example-item">
+                    <h4>Legal Proof</h4>
+                    <p>Proof of legal behaviors such as offline signing and evidence collection, including paper documents (physical) + electronic signatures/timestamps (digital), meeting the integrity requirements of legal evidence.</p>
+                </div>
+                <div class="example-item">
+                    <h4>Offline Meetings</h4>
+                    <p>Proof of the holding and resolutions of offline meetings, including meeting scenes (physical) + check-in records/resolution documents (digital), to prove the authenticity of meeting processes and results.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-logo">STProof Protocol</div>
+            <div class="copyright">© 2026 STProof Protocol All Rights Reserved | What Happens, Exists; What's Proven, Trusted</div>
+        </div>
+    </footer>
+</div>
+
+<script>
+    const zh = document.getElementById('zh-content');
+    const en = document.getElementById('en-content');
+    const btn = document.getElementById('langSwitch');
+
+    const zhLinks = document.querySelectorAll('.zh-link');
+    const enLinks = document.querySelectorAll('.en-link');
+
+    // 默认英文
+    let isEn = true;
+    showLang(isEn);
+
+    btn.addEventListener('click', () => {
+        isEn = !isEn;
+        showLang(isEn);
+    });
+
+    function showLang(enMode) {
+        if (enMode) {
+            zh.style.display = 'none';
+            en.style.display = 'block';
+            zhLinks.forEach(x => x.style.display = 'none');
+            enLinks.forEach(x => x.style.display = 'inline');
+            document.documentElement.lang = 'en';
+            document.title = "Hybrid Events - STProof Protocol";
+            btn.textContent = "EN / 中";
+        } else {
+            en.style.display = 'none';
+            zh.style.display = 'block';
+            enLinks.forEach(x => x.style.display = 'none');
+            zhLinks.forEach(x => x.style.display = 'inline');
+            document.documentElement.lang = 'zh-CN';
+            document.title = "混合事件 - STProof Protocol";
+            btn.textContent = "中 / EN";
+        }
+    }
+</script>
+</body>
+</html>
