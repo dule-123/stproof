@@ -26,9 +26,10 @@ STProof (Spatial-Temporal Proof) is the first universal protocol dedicated to **
 ## 📄 Documents & Resources
 - **📄 Whitepaper (CN v4.2 Final)**: [STProof_Whitepaper_v4.2.md](https://github.com/dule-123/stproof/blob/main/STProof_Whitepaper_v4.2.md)
 - **📄 Whitepaper (EN v4.2 Final)**: [STProof_Whitepaper_EN_v4.2.md](https://github.com/dule-123/stproof/blob/main/STProof_Whitepaper_EN_v4.2.md)
-- **📥 PDF Download**: [Releases Page](https://github.com/dule-123/stproof/releases)
+- **📥 PDF Download (CN)**: [STProof_Whitepaper_v4.2_CN.pdf](https://github.com/dule-123/stproof/releases/download/v4.2/STProof_Whitepaper_v4.2_CN.pdf)
+- **📥 PDF Download (EN)**: [STProof_Whitepaper_v4.2_EN.pdf](https://github.com/dule-123/stproof/releases/download/v4.2/STProof_Whitepaper_v4.2_EN.pdf)
 - **🌐 Official Website**: [stproof.org](https://stproof.org/)
-- **💻 Open Source Code**: [GitHub Repository](https://github.com/dule-123/stproof)
+- **🖥️ Open Source Code**: [GitHub Repository](https://github.com/dule-123/stproof)
 
 ---
 
