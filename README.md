@@ -23,13 +23,13 @@ STProof（时空证明）是首个面向事件的通用确权协议。
 - 完全去中心化与开源：基于以太坊构建，全部代码与文档开源
 
 文档与资源
-白皮书（中文版 v5.2）：whitepaper/zh/STProof_Whitepaper_v5.2.md
-Whitepaper (EN v5.2)：whitepaper/en/STProof_Whitepaper_v5.2.md
-IPFS 创世存证 CID：ipfs/IPFS_CID.txt
-OTS 时间戳存证：ipfs/OTS_Attestation.txt
-官方网站：https://stproof.org
-测试网合约（Sepolia）：0x037eb54EF9dae9A2Ae33bFB9ba170F1067B925CB
-开源协议：MIT License
+ 白皮书（中文版 v5.2）：whitepaper/zh/STProof_Whitepaper_v5.2.md
+ Whitepaper (EN v5.2)：whitepaper/en/STProof_Whitepaper_v5.2.md
+ IPFS 创世存证 CID：ipfs/IPFS_CID.txt
+ OTS 时间戳存证：ipfs/OTS_Attestation.txt
+ 官方网站：https://stproof.org
+ 测试网合约（Sepolia）：0x037eb54EF9dae9A2Ae33bFB9ba170F1067B925CB
+ 开源协议：MIT License
 
 ⚖️ 重要声明（专利与合规）
 本项目所有技术方案、白皮书、代码、文档已完全公开上线。
