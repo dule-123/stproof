@@ -23,6 +23,7 @@ STProof（时空证明）是首个面向事件的通用确权协议。
 - 完全去中心化与开源：基于以太坊构建，全部代码与文档开源
 
 文档与资源
+
  白皮书（中文版 v5.2）：whitepaper/zh/STProof_Whitepaper_v5.2.md  
  
  Whitepaper (EN v5.2)：whitepaper/en/STProof_Whitepaper_v5.2.md
