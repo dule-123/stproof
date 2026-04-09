@@ -28,7 +28,7 @@ STProof（时空证明）是首个面向事件的通用确权协议。
 🔗 IPFS 创世存证 CID：ipfs/IPFS_CID.txt
 🔗 OTS 时间戳存证：ipfs/OTS_Attestation.txt
 🌐 官方网站：https://stproof.org
-💻 测试网合约（Sepolia）：0x037eb54EF9dae9A2Ae33bFB9ba170F1067B925CB
+🖥️ 测试网合约（Sepolia）：0x037eb54EF9dae9A2Ae33bFB9ba170F1067B925CB
 ⚖️ 开源协议：MIT License
 
 ⚖️ 重要声明（专利与合规）
