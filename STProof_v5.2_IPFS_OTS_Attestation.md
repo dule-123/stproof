@@ -1,6 +1,6 @@
 # STProof Self-Referential Experiment IPFS Certification
 
-IPFS CID (Genesis Evidence Package): [bafybeial45ll7mvqfvnbuk4ddgezajmhzzzoub7bdjwnx3wa65hox4maii] 
+IPFS CID: [bafybeial45ll7mvqfvnbuk4ddgezajmhzzzoub7bdjwnx3wa65hox4maii] 
 
 Certification Date: 2026-04-09 
 
@@ -19,11 +19,11 @@ OTS Purpose: As the core evidence of the STProof self-referential experiment, it
 OTS Core Information:
 
 - Timestamp: 2026-04-09
-- 
+  
 - Document Hash: fc5c26a2bf812e5f9458d07f7857abc367a5903c53581c1cdada4f587acf0779
-- 
+  
 - Verification Authority: Trusted timestamp service agency
-- 
+  
 Verification Instructions:
 1. The OTS file is included in the IPFS evidence package, which can be downloaded through the IPFS CID
 2. Use the official timestamp verification tool to query the validity of the OTS file and the consistency of the hash value
