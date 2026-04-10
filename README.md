@@ -37,7 +37,7 @@ and on-chain hash anchoring, STProof achieves a complete, self-referential, and 
 
 🌐 Official Website：https://stproof.org
 
-💻 Smart Contract (Sepolia)：0x037eb54EF9dae9A2Ae33bFB9ba170F1067B925CB
+💻 Smart Contract (Sepolia)：https://sepolia.etherscan.io/address/0x037eb54EF9dae9A2Ae33bFB9ba170F1067B925CB
 
 ⚖️ License：MIT License
 
