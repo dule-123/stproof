@@ -4,5 +4,11 @@
     "STProof": "0x037eb54EF9dae9A2Ae33bFB9ba170F1067B925CB",
     "explorer": "https://sepolia.etherscan.io/address/0x037eb54EF9dae9A2Ae33bFB9ba170F1067B925CB",
     "deployedAt": "2026-04-10"
+  },
+  "mainnet": {
+    "chain": "Ethereum",
+    "STProof": "0x...",
+    "explorer": "https://etherscan.io/address/0x...",
+    "deployedAt": "2026-XX-XX"
   }
 }
