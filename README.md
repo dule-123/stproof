@@ -35,7 +35,9 @@ and on-chain hash anchoring, STProof achieves a complete, self-referential, and 
 
 🔗 OTS Timestamp Attestation：ipfs/OTS_Attestation.txt
 
-🌐 Official Website：https://stproof.org
+🌐 Official Website：https://stproof.org 
+
+🌐 Discord: https://discord.gg/stproof_prtocol
 
 💻 Smart Contract (Sepolia)：https://sepolia.etherscan.io/address/0x037eb54EF9dae9A2Ae33bFB9ba170F1067B925CB
 
