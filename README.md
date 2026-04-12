@@ -1,49 +1,52 @@
 # STProof Protocol
-Event Verification Protocol: We Verify Events, Not Assets.
+Universal On-Chain Event Proof & Value Capture Protocol
 
-🎯 Core Philosophy
-We certify events, not assets.
-Proof exists with or without physical form.
-What happens can be recorded; what is recorded can be trusted.
+## Overview
+STProof is a universal on-chain event attestation and value capture protocol, focusing on **Proof of Event, not Proof of Asset**. It is committed to breaking the limitation of traditional on-chain authentication centered on "assets" and returning to the "facts" themselves, enabling every objectively occurring event to achieve low-cost, tamper-proof, and cross-verifiable on-chain certification, and becoming the "Heavy Fact Layer" infrastructure in the Web3 world.
 
-Physical objects belong to the physical world.
-Events belong to the blockchain world.
-NFTs lock only events, not objects.
+## Core Concepts
+1.  Proof Object: Event Only — Focus on objectively occurring historical events as the core of certification, rather than traditional assets/tokens, returning to the intrinsic value of facts themselves.
+2.  Core Philosophy: Equitable Proof — No financial barriers for fact recording. Anyone can mint Event NFTs by paying only gas fees, making everyone a witness of facts.
+3.  Value Mechanism: Citation Royalty — Event value does not rely on speculation, but on the number of times it is trusted and used — the more citations, the higher the value.
+4.  Ecosystem Position: Heavy Fact Layer — Focus on anchoring high-value heavy facts requiring multi-source evidence and physical verification, becoming the "fact infrastructure" of the Web3 world.
 
-📖 Protocol Overview
-STProof (Spatial-Temporal Proof) is the first universal event-based verification protocol.
-It solves the long-standing pain point of verifying real-world facts in the digital era,
-building an anti-AI-forgery, tamper-proof trust layer for historical events.
+### Supplementary Notes
+- Core Slogan: Not Proof of Asset, But Proof of Event; What Happens, Exists; What's Proven, Trusted.
+- Technical Support: OTS timestamp + IPFS dual-chain anchoring to achieve zero-knowledge ideological certification and permanent storage.
 
-Through multi-source cross-verification, trusted timestamps, IPFS decentralized storage,
-and on-chain hash anchoring, STProof achieves a complete, self-referential, and traceable verification system.
+## Genesis NFT (Polygon Chain)
+- Contract Address: `0x3d36ef7fdec04e2d53822052f5271b27d7b472b0`
+- OpenSea Collection: https://opensea.io/collection/stproof-genesis-event
+- Standard: ERC721
+- Total Supply: 100
+- Minted: 2
+- Description: This is the genesis NFT collection of the STProof ecosystem. Each piece is a digital artifact forged with cyberpunk aesthetics and blockchain-level integrity, representing the user's early rights and interests in the STProof universe.
 
-✨ Core Features
-- Event-centric verification: Focus on objective historical events, fully eliminating RWA regulatory risks
-- Zero-barrier certification: Anyone can mint an Event NFT with only gas fees
-- Citation Tax mechanism: Event value comes from citation and trust, not speculation
-- Zero-Knowledge Ideological Verification: No privacy or IP exposure, using only public evidence
-- Fully decentralized & open-source: Built on Ethereum, with all code and documents open to the community
+## Experiments & CIDs
+All experimental evidence has been anchored on IPFS for permanent verification and immutability. The complete list of CIDs can be found in the project directory `/genesis-nft/cids.json`. Core experiments include:
+1.  Self-Referential Proof (Core Experiment of STProof v5.2)
+2.  Hong Kong 3.24 First Day Cover Experiment
+3.  Real Person Cross-Border Experiment
 
-📄 Documentation & Resources
+## Project Structure
+- `/` — Official Website & Main Page (including Genesis NFT Section)
+- `/genesis-nft/` — Genesis NFT Contract Information, Metadata, Experimental CID Storage
+- `/cases/` — Details of Various Experimental Cases (Tangible, Intangible, Hybrid Events)
+- `/docs/` — Whitepaper v5.2 (English Version)
 
-📄 Whitepaper (Chinese v5.2)：whitepaper/zh/STProof_Whitepaper_v5.2.md
+## Official Links
+- Website: https://stproof.org
+- GitHub: https://github.com/dule-123/stproof
+- Whitepaper v5.2 (English): See `/docs/` Directory
+- OpenSea Genesis NFT Collection: https://opensea.io/collection/stproof-genesis-event
 
-📄 Whitepaper (English v5.2)：whitepaper/en/STProof_Whitepaper_v5.2.md
+## License
+MIT License (See `LICENSE` File in the Root Directory of the Project)
 
-🔗 Genesis IPFS CID：ipfs/IPFS_CID.txt
+## Contributing
+We welcome contributions from developers, researchers, and community members. For specific contribution methods and rules, please refer to the `CONTRIBUTING.md` file in the root directory of the project.
 
-🔗 OTS Timestamp Attestation：ipfs/OTS_Attestation.txt
-
-🌐 Official Website：https://stproof.org 
-
-🌐 Discord: https://discord.gg/stproof_prtocol
-
-💻 Smart Contract (Sepolia)：https://sepolia.etherscan.io/address/0x037eb54EF9dae9A2Ae33bFB9ba170F1067B925CB
-
-⚖️ License：MIT License
-
-⚖️ Important Notice (Patent & Compliance)
+## Important Notice (Patent & Compliance)
 All technical designs, whitepapers, code, and documents of this project are fully public.
 Any technical solution based on STProof is no longer novel and cannot be patented.
 The inventor voluntarily waives all related patent rights.
