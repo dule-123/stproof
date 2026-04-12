@@ -14,6 +14,10 @@ STProof（时空确权）是一套面向「事件」的通用链上确权与价�
 - 核心口号：不确权物，只确权事；凡发生，皆可存；凡存证，皆可信。
 - 技术支撑：OTS时间戳 + IPFS双链锚定，实现零知识思想确权与永久存证。
 
+##智能合约（Sepolia 测试网）
+合约地址：0x037eb54EF9dae9A2Ae33bFB9ba170F1067B925CB
+浏览器：https://sepolia.etherscan.io/address/0x037eb54EF9dae9A2Ae33bFB9ba170F1067B925CB
+
 ## 创世 NFT（Polygon 链）
 - 合约地址：`0x3d36ef7fdec04e2d53822052f5271b27d7b472b0`
 - OpenSea 合集: https://opensea.io/collection/stproof-genesis-event
