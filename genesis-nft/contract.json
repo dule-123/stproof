@@ -1,0 +1,12 @@
+{
+  "name": "STProof Genesis Event",
+  "symbol": "STPROOF",
+  "chain": "Polygon",
+  "chainId": 137,
+  "contractAddress": "0x3d36ef7fdec04e2d53822052f5271b27d7b472b0",
+  "type": "ERC721",
+  "totalSupply": 100,
+  "minted": 2,
+  "deployTime": "2026-04-11",
+  "opensea": "https://opensea.io/collection/stproof-genesis-event"
+}
