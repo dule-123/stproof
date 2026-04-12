@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self-Referential Proof Experiment | STProof Protocol</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+        :root { --primary: #165DFF; --primary-light: #E8F3FF; --primary-dark: #0E42C1; --dark: #1D2129; --gray: #4E5969; --light-gray: #C9CDD4; --bg: #F7F8FA; --white: #FFFFFF; --shadow: 0 4px 20px rgba(0, 0, 0, 0.08); }
+        body { background: var(--bg); color: var(--dark); line-height: 1.7; }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+        a { text-decoration: none; color: inherit; }
+        .btn { display: inline-block; padding: 12px 28px; border-radius: 8px; font-weight: 600; font-size: 16px; transition: all 0.3s ease; cursor: pointer; border: none; }
+        .btn-primary { background: var(--primary); color: var(--white); }
+        .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(22, 93, 255, 0.3); }
+        header { background: var(--white); box-shadow: var(--shadow); position: fixed; top: 0; left: 0; right: 0; z-index: 999; }
+        .header-container { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; max-width: 1200px; margin: 0 auto; }
+        .logo { font-size: 24px; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+        .logo span { color: var(--dark); }
+        .nav { display: flex; gap: 32px; font-size: 16px; font-weight: 500; align-items: center; }
+        .nav a { color: var(--gray); transition: color 0.3s; }
+        .nav a:hover, .nav a.active { color: var(--primary); }
+        .lang-switch { padding: 6px 12px; border: 1px solid var(--primary); border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: 600; color: var(--primary); transition: all 0.3s; }
+        .lang-switch:hover { background: var(--primary-light); }
+        .hero { padding: 160px 0 60px; background: linear-gradient(135deg, var(--primary-light) 0%, var(--bg) 100%); margin-top: 72px; }
+        .hero h1 { font-size: 36px; font-weight: 700; color: var(--dark); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+        .hero p { font-size: 18px; color: var(--gray); max-width: 800px; line-height: 1.8; }
+        .section { padding: 60px 0; }
+        .section-title { font-size: 28px; font-weight: 700; color: var(--dark); margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+        .card { background: var(--white); padding: 32px; border-radius: 12px; box-shadow: var(--shadow); margin-bottom: 32px; }
+        .card h3 { font-size: 22px; font-weight: 700; color: var(--primary); margin-bottom: 20px; }
+        .list-item { margin-bottom: 16px; font-size: 18px; color: var(--dark); }
+        .list-item strong { color: var(--dark); }
+        .cid-value {
+            font-family: monospace;
+            font-size: 16px;
+            color: #111;
+            background: #eef2f7;
+            padding: 10px 12px;
+            border-radius: 6px;
+            word-break: break-all;
+            display: inline-block;
+            margin: 8px 0;
+        }
+        .link-text { color: var(--primary); font-weight: 600; }
+        .link-text:hover { text-decoration: underline; }
+        footer { padding: 40px 0; background: #111; color: var(--light-gray); text-align: center; margin-top: 60px; }
+        .footer-container { display: flex; flex-direction: column; gap: 20px; }
+        .footer-logo { font-size: 20px; font-weight: 700; color: var(--primary); }
+        .copyright { font-size: 14px; opacity: 0.7; }
+        #zh-content, #en-content { display: none; }
+    </style>
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<header>
+    <div class="header-container">
+        <div class="logo">STProof <span>Protocol</span></div>
+        <nav class="nav">
+            <a href="/index.html" class="en-link">Back to Home</a>
+            <a href="/index.html" class="zh-link">返回首页</a>
+            <div class="lang-switch" id="langSwitch">EN / 中</div>
+        </nav>
+    </div>
+</header>
+
+<!-- 英文内容 -->
+<div id="en-content">
+    <section class="hero">
+        <div class="container">
+            <h1><i class="fas fa-microscope"></i> Self-Referential Proof Experiment</h1>
+            <p>This is the core technical foundation of STProof Protocol, demonstrating the recursive verification mechanism that powers the entire ecosystem.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="card">
+                <h3><i class="fas fa-file-alt"></i> Experiment Document</h3>
+                <div class="list-item">
+                    <strong>IPFS CID:</strong>
+                    <div class="cid-value">bafybeial45ll7mvqfvnbuk4ddgezajmhzzzoub7bdjwnx3wa65hox4maii</div>
+                    <span style="color: var(--gray); font-size: 14px;">(Immutable, permanently verifiable)</span>
+                </div>
+                <div class="list-item">
+                    <strong>Description:</strong> This document contains the mathematical formulation, code implementation, and full technical details of the STProof v5.2 self-referential proof system.
+                </div>
+                <div class="list-item">
+                    <strong>View on IPFS:</strong>
+                    <a href="https://ipfs.io/ipfs/bafybeial45ll7mvqfvnbuk4ddgezajmhzzzoub7bdjwnx3wa65hox4maii" target="_blank" class="link-text">
+                        https://ipfs.io/ipfs/bafybeial45ll7mvqfvnbuk4ddgezajmhzzzoub7bdjwnx3wa65hox4maii ↗
+                    </a>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-shield-alt"></i> Verification Mechanism</h3>
+                <p style="font-size: 18px; color: var(--gray); line-height: 1.8;">
+                    The integrity of this experiment is anchored to the STProof Genesis NFT metadata.
+                    Holders can verify the consistency between the on-chain reference and this document,
+                    ensuring the authenticity and immutability of the self-referential proof system.
+                </p>
+                <p style="font-size: 18px; color: var(--gray); line-height: 1.8; margin-top: 16px;">
+                    This experiment serves as the genesis event of the STProof ecosystem, marking the birth of digital sovereignty
+                    and the foundation of all subsequent event proofs.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-logo">STProof Protocol</div>
+            <div class="copyright">© 2026 STProof Protocol All Rights Reserved</div>
+        </div>
+    </footer>
+</div>
+
+<!-- 中文内容 -->
+<div id="zh-content">
+    <section class="hero">
+        <div class="container">
+            <h1><i class="fas fa-microscope"></i> 自指证明实验</h1>
+            <p>这是 STProof 协议的核心技术基石，展示了支撑整个生态系统的递归验证机制。</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="card">
+                <h3><i class="fas fa-file-alt"></i> 实验文档</h3>
+                <div class="list-item">
+                    <strong>IPFS CID：</strong>
+                    <div class="cid-value">bafybeial45ll7mvqfvnbuk4ddgezajmhzzzoub7bdjwnx3wa65hox4maii</div>
+                    <span style="color: var(--gray); font-size: 14px;">（不可篡改，永久可验证）</span>
+                </div>
+                <div class="list-item">
+                    <strong>描述：</strong> 本文档包含 STProof v5.2 自指证明系统的数学公式、代码实现和完整技术细节。
+                </div>
+                <div class="list-item">
+                    <strong>IPFS 查看：</strong>
+                    <a href="https://ipfs.io/ipfs/bafybeial45ll7mvqfvnbuk4ddgezajmhzzzoub7bdjwnx3wa65hox4maii" target="_blank" class="link-text">
+                        https://ipfs.io/ipfs/bafybeial45ll7mvqfvnbuk4ddgezajmhzzzoub7bdjwnx3wa65hox4maii ↗
+                    </a>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-shield-alt"></i> 验证机制</h3>
+                <p style="font-size: 18px; color: var(--gray); line-height: 1.8;">
+                    本实验的完整性锚定在 STProof 创世 NFT 元数据中。持有者可验证链上引用与本文档的一致性，
+                    确保自指证明系统的真实性与不可篡改性。
+                </p>
+                <p style="font-size: 18px; color: var(--gray); line-height: 1.8; margin-top: 16px;">
+                    本实验是 STProof 生态的创世事件，标志着数字主权的诞生，是所有后续事件证明的基础。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-logo">STProof Protocol</div>
+            <div class="copyright">© 2026 STProof Protocol 版权所有 | 凡发生，皆可存；凡存证，皆可信</div>
+        </div>
+    </footer>
+</div>
+
+<script>
+    const zh = document.getElementById('zh-content');
+    const en = document.getElementById('en-content');
+    const btn = document.getElementById('langSwitch');
+    const zhLinks = document.querySelectorAll('.zh-link');
+    const enLinks = document.querySelectorAll('.en-link');
+    let isEn = true;
+    showLang(isEn);
+
+    btn.addEventListener('click', () => { isEn = !isEn; showLang(isEn); });
+
+    function showLang(enMode) {
+        if (enMode) {
+            zh.style.display = 'none'; en.style.display = 'block';
+            zhLinks.forEach(x => x.style.display = 'none'); enLinks.forEach(x => x.style.display = 'inline');
+            document.documentElement.lang = 'en';
+            document.title = "Self-Referential Proof Experiment | STProof Protocol";
+            btn.textContent = "EN / 中";
+        } else {
+            en.style.display = 'none'; zh.style.display = 'block';
+            enLinks.forEach(x => x.style.display = 'none'); zhLinks.forEach(x => x.style.display = 'inline');
+            document.documentElement.lang = 'zh-CN';
+            document.title = "自指证明实验 | STProof Protocol";
+            btn.textContent = "中 / EN";
+        }
+    }
+</script>
+</body>
+</html>
