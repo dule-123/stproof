@@ -14,6 +14,10 @@ STProof is a universal on-chain event attestation and value capture protocol, fo
 - Core Slogan: Not Proof of Asset, But Proof of Event; What Happens, Exists; What's Proven, Trusted.
 - Technical Support: OTS timestamp + IPFS dual-chain anchoring to achieve zero-knowledge ideological certification and permanent storage.
 
+## Smart Contract (Sepolia Testnet)
+- Contract Address: `0x037eb54EF9dae9A2Ae33bFB9ba170F1067B925CB`
+- Etherscan: https://sepolia.etherscan.io/address/0x037eb54EF9dae9A2Ae33bFB9ba170F1067B925CB
+
 ## Genesis NFT (Polygon Chain)
 - Contract Address: `0x3d36ef7fdec04e2d53822052f5271b27d7b472b0`
 - OpenSea Collection: https://opensea.io/collection/stproof-genesis-event
@@ -51,3 +55,5 @@ All technical designs, whitepapers, code, and documents of this project are full
 Any technical solution based on STProof is no longer novel and cannot be patented.
 The inventor voluntarily waives all related patent rights.
 This project is permanently open for the community to use, modify, and distribute freely.
+
+---
