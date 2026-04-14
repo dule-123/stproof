@@ -3,6 +3,5 @@ description: Universal On-Chain Event Proof
 theme: minima
 markdown: kramdown
 permalink: pretty
-# 新增：禁用顶部导航
 show_downloads: false
 header_pages: []
