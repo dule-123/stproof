@@ -29,8 +29,7 @@ STProof is a universal on-chain event attestation and value capture protocol, fo
 ## Experiments & CIDs
 All experimental evidence has been anchored on IPFS for permanent verification and immutability. The complete list of CIDs can be found in the project directory `/genesis-nft/cids.json`. Core experiments include:
 1.  Self-Referential Proof (Core Experiment of STProof v5.2)
-2.  Hong Kong 3.24 First Day Cover Experiment
-3.  Real Person Cross-Border Experiment
+2.  Real Person Cross-Border Experiment
 
 ## Project Structure
 - `/` — Official Website & Main Page (including Genesis NFT Section)
