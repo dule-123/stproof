@@ -1,3 +1,7 @@
+---
+layout: page
+title: STProof Protocol Whitepaper v5.2
+---
 # STProof Protocol Whitepaper
 **Version v5.2 | April 2026**
 **Core Position: The Fact Layer of Digital Civilization | Event-Based Verification Protocol**
