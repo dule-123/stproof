@@ -1,6 +1,7 @@
 ---
 layout: page
 title: STProof Protocol Whitepaper v5.2
+hide: true
 ---
 # STProof Protocol Whitepaper
 **Version v5.2 | April 2026**
