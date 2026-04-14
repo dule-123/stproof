@@ -27,7 +27,7 @@
             font-size: 16px; 
             transition: all 0.3s; 
             cursor: pointer; 
-            border: none; 
+            border: none;
         }
         .btn-primary { 
             background: var(--primary); 
@@ -44,7 +44,7 @@
             box-shadow: var(--shadow); 
             position: fixed; 
             top: 0; left: 0; right: 0; 
-            z-index: 999; 
+            z-index: 999;
         }
         .header-container { 
             display: flex; 
@@ -365,7 +365,6 @@
             margin-top: 10px;
         }
 
-        /* 双语切换隐藏 */
         #zh-content, #en-content { display: none; }
     </style>
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -388,8 +387,8 @@
             <a class="nav-item en-link" data-target="genesis-nft">Genesis NFT</a>
             <a class="nav-item zh-link" data-target="genesis-nft">创世NFT</a>
 
-            <a class="nav-item en-link" data-target="cid-section">Experiment CIDs</a>
-            <a class="nav-item zh-link" data-target="cid-section">实验CID</a>
+            <a class="nav-item en-link" data-target="cid-section">CIDs</a>
+            <a class="nav-item zh-link" data-target="cid-section">CID清单</a>
 
             <a href="https://github.com/dule-123/stproof" target="_blank">GitHub</a>
             <div class="lang-switch" id="langSwitch">EN / 中</div>
@@ -397,15 +396,15 @@
     </div>
 </header>
 
-<!-- ====================== 中文 ====================== -->
+<!-- 中文 -->
 <div id="zh-content">
     <section class="hero" id="hero">
         <div class="container">
             <h1 class="hero-slogan">不确权物，只确权事<br><span>凡发生，皆可存；凡存证，皆可信</span></h1>
-            <p class="hero-desc">STProof（时空确权）是一套面向「事件」的通用链上确权与价值捕获协议，以多源证据交叉验证为核心，重新定义链上事实存证的底层逻辑。</p>
+            <p class="hero-desc">STProof（时空确权）是一套面向「事件」的通用链上确权与价值捕获协议，以多源证据交叉验证为核心，以<b>元数据标准化</b>为DNA，以<b>零知识思想确权</b>为底层方法论，重新定义事实存证的底层逻辑。</p>
             <div class="hero-btns">
                 <a href="/docs/STProof_Protocol_Whitepaper_v5.2_CN" target="_blank" class="btn btn-primary">
-                    <i class="fas fa-file-alt"></i> 查看白皮书 v5.2
+                    <i class="fas fa-file-alt"></i> 白皮书 v5.2
                 </a>
                 <a href="https://opensea.io/collection/stproof-genesis-event" target="_blank" class="btn btn-primary">
                     <i class="fas fa-external-link-alt"></i> 创世NFT
@@ -417,11 +416,11 @@
     <section class="core section" id="core">
         <div class="container">
             <h2 class="section-title">协议核心理念</h2>
-            <p class="section-desc">以平权为核心，以多源交叉验证为技术根基，重新定义链上确权，让事实成为数字世界的可信基础设施</p>
+            <p class="section-desc">以平权为核心，以多源交叉验证为技术根基，以元数据标准化为通用表达层，让事实成为数字世界的可信基础设施</p>
             <div class="core-grid">
                 <div class="core-card">
                     <h3><i class="fas fa-compass-drafting"></i> 确权对象：唯事件</h3>
-                    <p>统一以「客观发生的历史事件」为确权核心，而非传统的资产/代币，回归事实本身的价值。</p>
+                    <p>统一以「客观发生的历史事件」为确权核心，而非传统资产/代币，实物归实物世界，事件归区块链世界。</p>
                 </div>
                 <div class="core-card">
                     <h3><i class="fas fa-balance-scale"></i> 核心理念：平权存证</h3>
@@ -429,18 +428,18 @@
                 </div>
                 <div class="core-card">
                     <h3><i class="fas fa-link"></i> 技术核心：多源证据交叉验证</h3>
-                    <p>通过物理证据、链上证据、第三方证据的多源交叉印证，真正实现「事件真实发生」的可信确权，而非单纯文件存证。</p>
+                    <p>通过物理证据、链上证据、第三方证据的多源交叉印证，真正实现「事件真实发生」的可信确权。</p>
+                </div>
+                <div class="core-card">
+                    <h3><i class="fas fa-code"></i> 核心DNA：元数据标准化</h3>
+                    <p>STProof Metadata Standard 让事件NFT可编程、可组合、可解析，成为数字文明的事实标准单元。</p>
                 </div>
                 <div class="core-card">
                     <h3><i class="fas fa-sack-dollar"></i> 价值机制：引用税</h3>
                     <p>事件价值不依赖炒作，而是由被相信、被使用的次数决定，引用越多，价值越高。</p>
                 </div>
                 <div class="core-card">
-                    <h3><i class="fas fa-layer-group"></i> 生态定位：重型事实层</h3>
-                    <p>专注高价值重型事实锚定，需多源证据、物理验证，成为Web3世界的「事实基础设施」。</p>
-                </div>
-                <div class="core-card">
-                    <h3><i class="fas fa-shield-alt"></i> 技术支撑：零知识思想确权</h3>
+                    <h3><i class="fas fa-shield-alt"></i> 底层方法论：零知识思想确权</h3>
                     <p>基于OTS时间戳+IPFS双链锚定，实现无需隐私泄露的思想确权，永久存证、不可篡改。</p>
                 </div>
             </div>
@@ -451,11 +450,11 @@
         <div class="container">
             <h2 class="section-title">全场景事件类型</h2>
             <div class="event-grid">
-                <a href="cases/first-day-cover.html" style="text-decoration:none;">
+                <a href="cases/physical-event.html" style="text-decoration:none;">
                     <div class="event-card">
                         <h3>有实物事件</h3>
                         <p class="example">典型场景</p>
-                        <p>实寄封邮寄、艺术品创作、文物出土、瓷器烧制等需要物理验证的事件，通过多源证据交叉锚定真实发生。</p>
+                        <p>实寄邮寄、艺术品创作、文物出土、瓷器烧制等需要物理验证的事件，通过多源证据交叉锚定真实发生。</p>
                     </div>
                 </a>
                 <a href="cases/intangible-event.html" style="text-decoration:none;">
@@ -469,7 +468,7 @@
                     <div class="event-card">
                         <h3>混合事件</h3>
                         <p class="example">典型场景</p>
-                        <p>新闻现场、演出活动、法律存证、线下会议等结合物理与数字形态的事件，通过虚实多源证据交叉确权。</p>
+                        <p>新闻现场、演出活动、法律存证、线下会议等结合物理与数字形态的事件。</p>
                     </div>
                 </a>
             </div>
@@ -479,12 +478,10 @@
     <section class="case section" id="case">
         <div class="container case-container">
             <h2 class="section-title">核心实验：STProof v5.2 自指实验</h2>
-
             <div class="genesis-note">
                 STProof Genesis Event — 数字主权的诞生<br>
                 这是 STProof 生态的创世实验，通过多源证据交叉验证锚定创世事件，象征链上身份、安全与去中心化信任的新纪元开端。
             </div>
-
             <a href="/cases/self-referential-proof.html" style="text-decoration:none;">
                 <div class="case-card">
                     <h3>STProof v5.2 自指证明实验</h3>
@@ -512,12 +509,10 @@
         </div>
     </section>
 
-    <!-- 创世NFT板块 -->
     <section class="genesis-nft-section section" id="genesis-nft">
         <div class="container">
             <h2 class="section-title">STProof 创世NFT</h2>
             <p class="section-desc">数字主权的诞生 · STProof生态创世符号</p>
-
             <div class="nft-card">
                 <h3>STProof Genesis Event</h3>
                 <div class="nft-desc">
@@ -531,7 +526,6 @@
                     <br>
                     <em>「证明不是被给予的，而是被赢得的。现在，它属于你。」</em>
                 </div>
-
                 <div class="nft-meta">
                     <div class="meta-item">
                         <strong>OpenSea 合集</strong>
@@ -564,7 +558,6 @@
                         <div class="value">2/100</div>
                     </div>
                 </div>
-
                 <a href="https://opensea.io/collection/stproof-genesis-event" target="_blank" class="btn btn-primary">
                     <i class="fas fa-external-link-alt"></i> 前往OpenSea Mint
                 </a>
@@ -572,7 +565,6 @@
         </div>
     </section>
 
-    <!-- CID板块（已删除香港3.24首日封CID） -->
     <section class="cid-section section" id="cid-section">
         <div class="container">
             <h2 class="section-title">实验 CID 清单</h2>
@@ -611,12 +603,12 @@
     </footer>
 </div>
 
-<!-- ====================== 英文 ====================== -->
+<!-- 英文 -->
 <div id="en-content">
     <section class="hero" id="hero">
         <div class="container">
             <h1 class="hero-slogan">Not Proof of Asset, But Proof of Event<br><span>What Happens, Exists; What's Proven, Trusted</span></h1>
-            <p class="hero-desc">STProof (Spatial-Temporal Proof) is a universal on-chain event proof and value capture protocol, with multi-source evidence cross-validation as its core, redefining the underlying logic of on-chain fact certification.</p>
+            <p class="hero-desc">STProof is a universal on-chain event proof & value capture protocol. Core: Multi-Source Evidence Cross-Validation. DNA: Metadata Standard. Methodology: Zero-Knowledge Ideology Proof.</p>
             <div class="hero-btns">
                 <a href="/docs/STProof_Protocol_Whitepaper_v5.2_EN" target="_blank" class="btn btn-primary">
                     <i class="fas fa-file-alt"></i> Whitepaper v5.2
@@ -631,31 +623,31 @@
     <section class="core section" id="core">
         <div class="container">
             <h2 class="section-title">Core Concepts</h2>
-            <p class="section-desc">Equity-centered, with multi-source cross-validation as its technical foundation, redefining on-chain proof, making facts the trusted infrastructure of the digital world</p>
+            <p class="section-desc">Equity-centered, multi-source cross-validation, metadata standard, making facts the trusted infrastructure of the digital world</p>
             <div class="core-grid">
                 <div class="core-card">
                     <h3><i class="fas fa-compass-drafting"></i> Proof Object: Event Only</h3>
-                    <p>Focus on objectively occurring historical events as the core of proof, rather than traditional assets/tokens, returning to the intrinsic value of facts themselves.</p>
+                    <p>Focus on objectively occurred historical events. Physical belongs to physical world. Events belong to blockchain.</p>
                 </div>
                 <div class="core-card">
-                    <h3><i class="fas fa-balance-scale"></i> Core Philosophy: Equitable Proof</h3>
-                    <p>Zero financial barriers for fact recording. Anyone can mint Event NFTs by paying only gas fees, making everyone a witness of facts.</p>
+                    <h3><i class="fas fa-balance-scale"></i> Philosophy: Equitable Proof</h3>
+                    <p>Zero financial barriers. Anyone can mint Event NFT with gas only. Everyone is a witness of truth.</p>
                 </div>
                 <div class="core-card">
-                    <h3><i class="fas fa-link"></i> Technical Core: Multi-Source Evidence Cross-Validation</h3>
-                    <p>Through cross-verification of physical evidence, on-chain evidence, and third-party evidence, truly realize the trusted proof of "event actually occurred", not just file storage.</p>
+                    <h3><i class="fas fa-link"></i> Tech Core: Multi-Source Evidence</h3>
+                    <p>Cross-validation of physical, on-chain & third-party evidence to verify real event occurrence.</p>
                 </div>
                 <div class="core-card">
-                    <h3><i class="fas fa-sack-dollar"></i> Value Mechanism: Citation Royalty</h3>
-                    <p>Event value does not rely on speculation, but on the number of times it is trusted and used — the more citations, the higher the value.</p>
+                    <h3><i class="fas fa-code"></i> Core DNA: Metadata Standard</h3>
+                    <p>STProof Metadata Standard makes Event NFT programmable, composable, and machine-readable.</p>
                 </div>
                 <div class="core-card">
-                    <h3><i class="fas fa-layer-group"></i> Ecosystem Position: Heavy Fact Layer</h3>
-                    <p>Focus on anchoring high-value heavy facts requiring multi-source evidence and physical verification, becoming the "fact infrastructure" of the Web3 world.</p>
+                    <h3><i class="fas fa-sack-dollar"></i> Value: Citation Royalty</h3>
+                    <p>Event value comes from being trusted & used, not speculation. More citations = higher value.</p>
                 </div>
                 <div class="core-card">
-                    <h3><i class="fas fa-shield-alt"></i> Technical Support: Zero-Knowledge Ideological Proof</h3>
-                    <p>Anchored by OTS timestamp + IPFS dual-chain, realize ideological proof without privacy leakage, permanent storage and immutability.</p>
+                    <h3><i class="fas fa-shield-alt"></i> Methodology: ZK Ideology Proof</h3>
+                    <p>OTS + IPFS dual-chain anchoring. Permanent, immutable proof without privacy leakage.</p>
                 </div>
             </div>
         </div>
@@ -665,25 +657,25 @@
         <div class="container">
             <h2 class="section-title">Event Types</h2>
             <div class="event-grid">
-                <a href="cases/first-day-cover.html" style="text-decoration:none;">
+                <a href="cases/physical-event.html" style="text-decoration:none;">
                     <div class="event-card">
                         <h3>Tangible Events</h3>
                         <p class="example">Typical Scenarios</p>
-                        <p>First day cover mailing, art creation, cultural relic excavation, porcelain firing and other events requiring physical verification, anchored by multi-source evidence cross-validation.</p>
+                        <p>Mail, art creation, excavation, production. Anchored by physical multi-source evidence.</p>
                     </div>
                 </a>
                 <a href="cases/intangible-event.html" style="text-decoration:none;">
                     <div class="event-card">
                         <h3>Intangible Events</h3>
                         <p class="example">Typical Scenarios</p>
-                        <p>Online releases, on-chain voting, opinion statements, academic publications and other purely digital events, verified by on-chain multi-source data cross-validation.</p>
+                        <p>Online publishing, voting, statements, academic releases. Verified by on-chain data.</p>
                     </div>
                 </a>
                 <a href="cases/hybrid-event.html" style="text-decoration:none;">
                     <div class="event-card">
                         <h3>Hybrid Events</h3>
                         <p class="example">Typical Scenarios</p>
-                        <p>News scenes, performances, legal evidence preservation, offline meetings and other hybrid events, certified by virtual-real multi-source evidence cross-validation.</p>
+                        <p>News, performances, legal deposits, meetings. Verified by virtual & physical evidence.</p>
                     </div>
                 </a>
             </div>
@@ -692,60 +684,55 @@
 
     <section class="case section" id="case">
         <div class="container case-container">
-            <h2 class="section-title">Core Experiment: STProof v5.2 Self-Referential Experiment</h2>
-
+            <h2 class="section-title">Core Experiment: STProof v5.2 Self-Referential</h2>
             <div class="genesis-note">
                 STProof Genesis Event — The Birth of Digital Sovereignty<br>
-                This is the genesis experiment of the STProof ecosystem, anchoring the genesis event through multi-source evidence cross-validation, marking the dawn of a new era for on-chain identity, security, and decentralized trust.
+                This is the genesis experiment anchoring the birth of STProof via multi-source evidence cross-validation.
             </div>
-
             <a href="/cases/self-referential-proof.html" style="text-decoration:none;">
                 <div class="case-card">
                     <h3>STProof v5.2 Self-Referential Proof Experiment</h3>
                     <div class="case-info">
                         <div class="info-item">
-                            <div class="label">Protocol Version</div>
+                            <div class="label">Version</div>
                             <div class="value">STProof v5.2</div>
                         </div>
                         <div class="info-item">
-                            <div class="label">Experiment Type</div>
-                            <div class="value">Self-Referential Proof / Multi-Source Cross-Validation</div>
+                            <div class="label">Type</div>
+                            <div class="value">Self-Referential / Cross-Validation</div>
                         </div>
                         <div class="info-item">
-                            <div class="label">Trusted Timestamp</div>
+                            <div class="label">Trusted Time</div>
                             <div class="value">2026-04-09</div>
                         </div>
                         <div class="info-item">
-                            <div class="label">OTS Timestamp File</div>
+                            <div class="label">OTS File</div>
                             <div class="value">STProof_Genesis.zip.ots</div>
                         </div>
                     </div>
-                    <div class="case-desc">This experiment realizes zero-knowledge ideological proof and fully verifies the authenticity of the genesis event through OTS timestamp, IPFS dual-chain anchoring and multi-source evidence cross-validation.</div>
+                    <div class="case-desc">ZK ideology proof via OTS + IPFS dual-chain anchoring & multi-source cross-validation.</div>
                 </div>
             </a>
         </div>
     </section>
 
-    <!-- Genesis NFT Section -->
     <section class="genesis-nft-section section" id="genesis-nft">
         <div class="container">
             <h2 class="section-title">STProof Genesis NFT</h2>
-            <p class="section-desc">The Birth of Digital Sovereignty · STProof Ecosystem Genesis Symbol</p>
-
+            <p class="section-desc">The Birth of Digital Sovereignty · Genesis Symbol</p>
             <div class="nft-card">
                 <h3>STProof Genesis Event</h3>
                 <div class="nft-desc">
                     <strong>🛡️ The Birth of Digital Sovereignty</strong><br>
-                    This is the Genesis Event of the STProof ecosystem — a symbolic NFT collection that marks the dawn of a new era in on-chain identity, security, and decentralized trust.<br>
-                    Each piece is a digital artifact forged with cyberpunk aesthetics and blockchain-level integrity, anchoring the genesis event through multi-source evidence cross-validation, representing your early stake in the STProof universe.
+                    This is the genesis event of STProof ecosystem — a landmark NFT series for on-chain identity, security & decentralized trust.<br>
+                    Each is a digital artifact forged with cyberpunk & blockchain integrity.
                     <br><br>
                     🔗 Own a piece of history<br>
-                    🎨 AI-assisted design, curated by STProof Studio<br>
-                    🌐 Built on Polygon — low gas, high future potential<br>
+                    🎨 AI-assisted, built by STProof Studio<br>
+                    🌐 Polygon — low gas, high potential<br>
                     <br>
-                    <em>"Proof isn’t given — it’s earned. And now, it’s yours."</em>
+                    <em>"Proof isn’t given. It’s earned. And now, it’s yours."</em>
                 </div>
-
                 <div class="nft-meta">
                     <div class="meta-item">
                         <strong>OpenSea Collection</strong>
@@ -756,13 +743,13 @@
                         </div>
                     </div>
                     <div class="meta-item">
-                        <strong>Polygon Contract Address</strong>
+                        <strong>Polygon Contract</strong>
                         <div class="value">
                             0x3d36ef7fdec04e2d53822052f5271b27d7b472b0
                         </div>
                     </div>
                     <div class="meta-item">
-                        <strong>Sepolia Testnet Contract</strong>
+                        <strong>Sepolia Testnet</strong>
                         <div class="value">
                             <a href="https://sepolia.etherscan.io/address/0x037eb54EF9dae9A2Ae33bFB9ba170F1067B925CB" target="_blank">
                                 0x037eb54EF9dae9A2Ae33bFB9ba170F1067B925CB
@@ -774,11 +761,10 @@
                         <div class="value">100</div>
                     </div>
                     <div class="meta-item">
-                        <strong>Minted So Far</strong>
+                        <strong>Minted</strong>
                         <div class="value">2/100</div>
                     </div>
                 </div>
-
                 <a href="https://opensea.io/collection/stproof-genesis-event" target="_blank" class="btn btn-primary">
                     <i class="fas fa-external-link-alt"></i> Mint on OpenSea
                 </a>
@@ -786,11 +772,10 @@
         </div>
     </section>
 
-    <!-- CID Section (Hong Kong 3.24 First Day Cover removed) -->
     <section class="cid-section section" id="cid-section">
         <div class="container">
             <h2 class="section-title">Experiment CIDs</h2>
-            <p class="section-desc">All experiment evidence is stored on IPFS, anchored by multi-source cross-validation, and can be permanently verified and immutable via CID</p>
+            <p class="section-desc">All evidence stored on IPFS, anchored by cross-validation, permanent & immutable</p>
             <div class="cid-card">
                 <h3>Completed Experiment CIDs</h3>
                 <div class="cid-grid">
@@ -799,7 +784,7 @@
                         <div class="cid-value">bafybeial45ll7mvqfvnbuk4ddgezajmhzzzoub7bdjwnx3wa65hox4maii</div>
                         <div class="cid-desc">
                             <a href="https://ipfs.io/ipfs/bafybeial45ll7mvqfvnbuk4ddgezajmhzzzoub7bdjwnx3wa65hox4maii" target="_blank">
-                                View on IPFS Gateway ↗
+                                View on IPFS ↗
                             </a>
                         </div>
                     </div>
@@ -808,7 +793,7 @@
                         <div class="cid-value">bafybeiahbfntsssvhtzwrokp3nojjan3tmscrhbcrzq74jw24sybjp7oo4</div>
                         <div class="cid-desc">
                             <a href="https://ipfs.io/ipfs/bafybeiahbfntsssvhtzwrokp3nojjan3tmscrhbcrzq74jw24sybjp7oo4" target="_blank">
-                                View on IPFS Gateway ↗
+                                View on IPFS ↗
                             </a>
                         </div>
                     </div>
@@ -825,25 +810,20 @@
     </footer>
 </div>
 
-<!-- 核心JS：导航滚动 + 双语切换 -->
 <script>
-    // 初始化变量
     const zhContent = document.getElementById('zh-content');
     const enContent = document.getElementById('en-content');
     const langSwitchBtn = document.getElementById('langSwitch');
     const navItems = document.querySelectorAll('.nav-item');
     let isEnglish = true;
 
-    // 初始显示英文
     showLanguage(isEnglish);
 
-    // 双语切换逻辑
     langSwitchBtn.addEventListener('click', () => {
         isEnglish = !isEnglish;
         showLanguage(isEnglish);
     });
 
-    // 显示对应语言
     function showLanguage(showEn) {
         if (showEn) {
             zhContent.style.display = 'none';
@@ -851,37 +831,26 @@
             document.querySelectorAll('.zh-link').forEach(el => el.style.display = 'none');
             document.querySelectorAll('.en-link').forEach(el => el.style.display = 'inline');
             langSwitchBtn.textContent = 'EN / 中';
-            document.documentElement.lang = 'en';
         } else {
             enContent.style.display = 'none';
             zhContent.style.display = 'block';
             document.querySelectorAll('.en-link').forEach(el => el.style.display = 'none');
             document.querySelectorAll('.zh-link').forEach(el => el.style.display = 'inline');
             langSwitchBtn.textContent = '中 / EN';
-            document.documentElement.lang = 'zh-CN';
         }
     }
 
-    // 导航滚动逻辑
     navItems.forEach(item => {
         item.addEventListener('click', () => {
-            // 移除所有active类
             navItems.forEach(el => el.classList.remove('active'));
-            // 给当前点击的加active
             item.classList.add('active');
-            
-            // 滚动到对应板块
             const targetId = item.getAttribute('data-target');
             const targetSection = document.getElementById(targetId);
             if (targetSection) {
-                window.scrollTo({
-                    top: targetSection.offsetTop - 80, // 偏移80px避开导航栏
-                    behavior: 'smooth'
-                });
+                window.scrollTo({ top: targetSection.offsetTop - 80, behavior: 'smooth' });
             }
         });
     });
 </script>
-
 </body>
 </html>
