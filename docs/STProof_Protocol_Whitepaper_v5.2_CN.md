@@ -1,3 +1,7 @@
+---
+layout: page
+title: STProof Protocol Whitepaper v5.2 (中文)
+---
 # STProof 协议白皮书（完整正式版）
 **版本 v5.2 | 2026年4月**
 **核心定位：数字文明事实层 | 事件确权基础协议**
