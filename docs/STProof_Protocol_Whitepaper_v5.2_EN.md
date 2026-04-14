@@ -3,324 +3,482 @@ layout: page
 title: STProof Protocol Whitepaper v5.2
 hide: true
 ---
-# STProof Protocol Whitepaper
+
+# STProof Protocol Whitepaper 
+
 **Version v5.2 | April 2026**
-**Core Position: The Fact Layer of Digital Civilization | Event-Based Verification Protocol**
-**Genesis Event: STProof Self-Referential Experiment (Meta-Event)**
-**Core Methodology: Zero-Knowledge Ideological Verification**
+
+**Core Positioning: Digital Civilization Fact Layer | Event Certification Infrastructure Protocol**
+
+**Genesis Event: STProof Self-Referential Experiment (Meta Event)**
+
+**Core Methodology: Zero-Knowledge Thought Attestation**
+
+**Core DNA: Metadata Standardization**
 
 ---
 
 ## Title Page
-**STProof: We Verify Events, Not Assets.**
 
-Proof exists with or without physical form.
-What happens can be recorded; what is recorded can be trusted.
+**STProof: Certify events, not assets.**
 
-**Core Manifesto**
-Physical objects belong to the physical world.
-Events belong to the blockchain world.
-NFTs lock only events, not objects.
-Fact recording must be barrier-free. Technology shall not create inequality.
+Proof exists with physical objects, and even without.
+
+All that happens shall be stored; all stored proofs shall be trusted.
+
+**Core Declaration**
+
+Physical objects belong to the physical world; events belong to the blockchain world.
+
+NFTs lock only **events**, not objects.
+
+Recording facts should have no financial barrier. Technology should not create new inequality.
 
 **Genesis Anchor**
-The first verified event of this protocol is the birth of STProof itself.
-We use STProof to verify STProof, completing the self-referential loop of digital civilization.
+
+The first certified event of this protocol is the birth of STProof itself.
+
+Using STProof to certify STProof completes the self-referential loop of digital civilization.
 
 ---
 
 ## Abstract
-STProof (Spatial-Temporal Proof) is a universal on-chain verification and value-capture protocol for **objective historical events**. Through multi-source cross-verification, trusted timestamping, decentralized storage, and on-chain anchoring, it converts real-world occurrences into immutable permanent records in the digital world.
 
-The protocol uniformly verifies **events themselves**, not physical assets or rights, fully eliminating RWA risks. For physical events (e.g., first-day covers, artwork creation), physical objects serve only as on-site carriers. For non-physical events (e.g., online publication, on-chain voting, protocol creation), the protocol directly certifies digital actions.
+STProof (Spatial-Temporal Proof) is a universal on-chain certification and value-capture protocol for **objective historical events**. Through multi-source evidence cross-verification, trusted timestamps, decentralized storage, and on-chain anchoring, it transforms real events into permanent, immutable digital records.
 
-The protocol is built on **Zero-Knowledge Ideological Verification**: without disclosing sensitive information, exposing IP, or revealing private content, it proves an event occurred using only public, authoritative facts and multi-source cross-verification, minting it into a freely tradable digital-native credential.
+The protocol certifies **events themselves** — not physical assets, not digital content, not any form of real-world asset mapping — completely eliminating RWA risks.
 
-The economic model prioritizes **equity**: anyone can mint an Event NFT by paying only gas fees, with no additional barriers. Event value comes from **being cited, used, and trusted**, not secondary-market speculation. Each on-chain citation is a vote for truth.
+The protocol adopts **Zero-Knowledge Thought Attestation** as its underlying methodology and **Metadata Standardization** as its core DNA, making every event NFT a **programmable, composable, and parseable** digital fact unit.
 
-To ensure long-term iteration, technical maintenance, and ecological security, the **protocol creator holds a permanent, transparent, on-chain 2% entitlement**, entirely derived from citation fees, access fees, and incentive fees within the ecosystem, without diluting event initiators’ core revenue.
+The economic model adheres to **equality-first** principles: anyone can mint an Event NFT by paying only gas fees, with no additional barriers. Event value comes from **being cited, used, and trusted**.
 
-The protocol’s first use case has been upgraded from a physical scenario to the **STProof Self-Referential Experiment (Meta-Event)**, proving that STProof can operate entirely independently of the physical world as the fact-layer infrastructure of digital civilization.
+To ensure long-term protocol iteration, technical maintenance, and ecosystem security, the **Protocol Creator enjoys a permanent, transparent, on-chain verifiable 2% equity**.
 
 ---
 
 ## Table of Contents
+
 1. Introduction: The Challenge of Recording Facts in the Physical World
-2. STProof: The Event Verification Protocol
-    2.1 Definition
-    2.2 Core Elements
-    2.3 Event Templates: The Extensible Foundation
-    2.4 Evidence Collection and Verification Standards
-    2.5 Physical Retention Mechanism (Optional Module)
-    2.6 Minting and Moderation: Balancing Openness and Order
-    2.7 Core Methodology: Zero-Knowledge Ideological Verification
-3. The Relationship Between Physical Objects and NFTs: The Event Verification Model
+2. STProof: The Event Certification Protocol
+   - 2.1 Definition
+   - 2.2 Core Elements
+   - 2.3 Event Templates: The Extensible Foundation
+   - 2.4 Evidence Collection and Verification Standards
+   - 2.5 Physical Object Retention Mechanism (Optional)
+   - 2.6 Minting and Moderation: Balancing Openness and Order
+   - 2.7 Core Methodology: Zero-Knowledge Thought Attestation
+3. The Relationship Between Physical Objects and NFTs: The Event Certification Model
 4. Protocol Architecture
-5. Economic Model: Equity-First Incentive Mechanism
-    5.1 Roles and Revenue Sources
-    5.2 Minting and Verification Mechanisms
-    5.3 Resale Royalties
-    5.4 On-Chain Citation: Fact Value Comes from Usage
-    5.5 Dual-Tier Access and Paid Access
-    5.6 Multidimensional Extension of Event Value
-    5.7 Summary of the Three-Tier Value Capture Model
-    5.8 Protocol Treasury Management
-    5.9 Economic Model Advantages
-    5.10 Creator Entitlements
-6. Compliance and Legal Considerations
-7. Smart Contract Implementation
-8. First Use Case: STProof Self-Referential Experiment (Meta-Event)
-9. Future Outlook: Event Template Roadmap and Ecosystem Development
-10. Ecosystem Launch Path and Roadmap
-11. Protocol Boundaries
-12. Conclusion
+5. **Metadata Standardization: The Universal Expression Layer of Event DNA**
+   - 5.1 Why Metadata Standardization?
+   - 5.2 Design Principles
+   - 5.3 STProof Metadata Standard v1
+   - 5.4 Event Type Schema Registry
+   - 5.5 Smart Contract Enhancements (v6 Direction)
+   - 5.6 Indexers and Cross-Protocol Composability
+   - 5.7 Value Delivered by Metadata Standardization
+6. Economic Model: Equality-First Incentive Mechanism
+   - 6.1 Roles and Revenue Sources
+   - 6.2 Minting and Verification Mechanisms
+   - 6.3 Resale Royalties
+   - 6.4 On-Chain Citation: Value Comes from Use
+   - 6.5 Dual-Layer Mechanism and Paid Access
+   - 6.6 Multi-Dimensional Extension of Event Value
+   - 6.7 Summary of the Three-Tier Value Capture Model
+   - 6.8 Protocol Treasury Management
+   - 6.9 Economic Model Advantages
+   - 6.10 Creator Equity
+7. Compliance and Legal Considerations
+8. Smart Contract Implementation
+9. First Use Case: STProof Self-Referential Experiment (Meta Event)
+10. Future Outlook: Event Template Roadmap and Ecosystem Development
+11. Ecosystem Launch Path and Roadmap
+12. Protocol Boundaries
+13. Conclusion
 
 ---
 
-# 1. Introduction: The Challenge of Recording Facts in the Physical World
-Human civilization depends on recording “facts.” From stone carvings and parchment to digital archives, we have always sought more reliable ways to preserve history. Yet today, amid information explosion and AI forgery, the **authenticity of facts** faces unprecedented threats.
+## 1. Introduction: The Challenge of Recording Facts in the Physical World
 
-- Traditional systems rely on centralized authorities (notaries, archives, experts) but suffer from high costs, tampering risks, and cross-border verification barriers.
-- Blockchain and NFTs offer decentralized, immutable storage, but most NFTs only anchor digital files, lacking rigid connections to real-world facts.
-- Oracles feed off-chain data (prices, weather) on-chain but only handle API-friendly standardized data, not unique, subjective non-standard events.
+Human civilization depends on recording "facts." From stone carvings and parchment to digital archives, we have always sought more reliable ways to preserve history. Yet today, amid the explosion of information and AI forgery technologies, the **authenticity of facts** faces unprecedented challenges.
 
-Did a stamp get mailed on its first day? Was a painting made by a certain artist? Did an artifact come from a specific site? Was an article first published at a certain time?
-These questions cannot be answered by APIs, yet they form the essence of human history and digital civilization.
+- Traditional recording relies on centralized institutions (notaries, archives, experts), which suffer from high costs, vulnerability to tampering, and difficulty in cross-border verification.
+- Blockchain and NFTs provide decentralized, tamper-proof carriers, but most NFTs only anchor "digital files" and lack rigid connections to real-world events.
+- Oracles feed off-chain data (prices, weather) on-chain but only handle API-standardized data, not unique, non-standard events requiring human judgment.
+
+Was a stamp really mailed on its first day? Was a painting really made by a certain artist? Was a cultural relic really unearthed at a certain site? Was an article really first published at a specific time?
+
+These questions cannot be answered by APIs, yet they form an essential part of human history and digital civilization.
 
 The STProof protocol was created to fill this gap.
 
 ---
 
-# 2. STProof: The Event Verification Protocol
+## 2. STProof: The Event Certification Protocol
 
-## 2.1 Definition
-STProof is a universal on-chain verification and value-capture protocol for **events**. It verifies objectively occurred historical events—not physical assets or digital content—enabling a consistent, cross-format trust mechanism for all scenarios.
+### 2.1 Definition
 
-Three categories of events are included:
-- **Physical Events**: Physical objects serve as carriers (e.g., mailing, artwork, archaeology).
-- **Non-Physical Events**: Purely digital or behavioral (e.g., online publication, voting, statements).
-- **Hybrid Events**: Physical exists but is non-core (e.g., news scenes, performances, legal evidence).
+STProof is a universal on-chain certification and value-capture protocol for **events**. It certifies **objective historical events** — not physical assets or digital content — enabling a consistent, trusted mechanism across all scenarios and forms.
 
-Core Philosophy:
-Physical objects belong to the physical world.
-Events belong to the blockchain world.
-NFTs lock only events, not objects. This eliminates RWA entirely.
+Three categories of events are supported:
 
-Fact recording must be financially accessible. Rich or poor, everyone deserves permanent on-chain proof of their real experiences.
+| Event Type | Definition | Examples |
+|------------|------------|----------|
+| Physical Event | Physical object serves as the on-site carrier | First-day cover mailing, artwork creation, porcelain firing, relic excavation |
+| Non-Physical Event | Pure digital or behavioral events with no physical form | Online publication, on-chain voting, opinion statement, academic release |
+| Hybrid Event | Physical elements exist but are non-core, or coexist with digital | News scene (with footage), performance (with ticket), legal deposit (with document) |
 
-Event value comes from usage. The citation tax links value to influence, not speculation.
+**Core Philosophy**:
 
-## 2.2 Core Elements
-Every event verification includes five core elements:
-1. **Time**: Actual timestamp of the event.
-2. **Space**: Actual location or on-chain coordinates.
-3. **Subject**: Participants in the event.
-4. **Fact**: Specific content of what occurred.
-5. **Evidence**: Multi-source materials supporting the fact.
+- Physical objects belong to the physical world; events belong to the blockchain world. NFTs lock only events, not objects — **completely eliminating RWA risks**.
+- Recording facts should have **no financial barrier**. Everyone, rich or poor, deserves the right to create permanent on-chain proof of real experiences.
+- The value of an event comes from **being used**. The citation tax links value to influence, not speculation.
 
-## 2.3 Event Templates: The Extensible Foundation
-The protocol does not predefine rules for all events. Instead, it provides a template layer where the community defines verification standards for different event types.
+### 2.2 Core Elements
 
-Templates include:
+Every event certification includes five core elements:
+
+| Element | Description | Physical Example | Non-Physical Example |
+|---------|-------------|------------------|----------------------|
+| Time | Exact real timestamp | 2026-03-24 11:24 | 2026-03-24 15:30 UTC |
+| Location | Real geographic or digital location | Tin Shui Wai Post Office, Hong Kong | URL, on-chain address, venue |
+| Subject | Participants in the event | Sender, recipient | Author, platform, witness |
+| Fact | Specific content of the event | First-day cover sent by registered mail | Article "XXX" first published |
+| Evidence | Multi-source supporting materials | GPS, postal receipt, footage | On-chain timestamp, digital signature, archive snapshot |
+
+### 2.3 Event Templates: The Extensible Foundation
+
+The protocol does not predefine evidence rules for all events. Instead, it provides a **template layer** — the community can define verification standards for different event types.
+
+Templates define:
+
 - Evidence requirements
-- Validator profiles
-- Citation scenarios
+- Qualified verifiers
+- Expected citation scenarios
 - Optional modules (physical retention, physical verification)
 
-Template Governance:
+**Template Governance**:
+
 - Any community member may propose a new template
-- Templates pass via validator or DAO vote
-- Template creators earn usage fees
+- Templates pass via validator network or DAO vote
+- Template creators earn a share of usage fees
 
-This design enables infinite scalability. The first-day cover was an early physical template; the STProof Self-Referential Experiment is the genesis template for digital-native events.
+### 2.4 Evidence Collection and Verification Standards
 
-## 2.4 Evidence Collection and Verification Standards
-Across all event types, the protocol follows universal principles:
-- **Multi-source Independence**: Evidence from ≥2 independent sources.
-- **Cross-Verification**: Shared unique identifiers form a closed loop.
-- **Trusted Timestamping**: Legally recognized timestamp to prove existence.
-- **Decentralized Storage**: IPFS/Arweave for immutability.
-- **Tiered Disclosure**: Public package and private package.
+All events follow these universal principles:
 
-Specific rules are defined per event template.
+- **Multi-source independence**: Evidence from at least two independent sources
+- **Cross-verification**: Shared unique identifiers form a closed loop
+- **Trusted timestamp**: Evidence sealed by an officially recognized timestamp authority
+- **Decentralized storage**: Evidence stored on IPFS/Arweave with a content-addressed CID
+- **Layered disclosure**: Public package for display; private package for targeted verification
 
-## 2.5 Physical Retention Mechanism (Optional Module)
-Only for events with physical objects.
-The initiator chooses:
-- **Destroy the physical**: NFT becomes the sole on-chain representation.
-- **Keep the physical**: Retain as ultimate arbitration evidence, possibly via third-party custody.
+### 2.5 Physical Object Retention Mechanism (Optional)
 
-The physical object is only historical proof. It does not represent ownership, rights, or value binding to the NFT. The protocol strictly separates events and physicals.
+Only for events with physical objects. The initiator may:
 
-## 2.6 Minting and Moderation: Balancing Openness and Order
-The protocol upholds “mint with gas only” equity. To ensure authenticity and legality, soft governance rules apply:
-- **Post-mint verification**: Unverified events are marked “doubtful.”
-- **Dispute arbitration**: Community challenge and ruling.
-- **Template guidance**: Encourage valuable public records, not trivial private logs.
+- **Destroy the object**: Make the NFT the sole on-chain representation
+- **Retain the object**: Keep the original as ultimate arbitration evidence (may escrow with a trusted third party)
 
-This model balances openness, authenticity, and order.
+Physical objects act only as historical proof of the event. They do **not** represent ownership, rights, or value mapping to the NFT.
 
-## 2.7 Core Methodology: Zero-Knowledge Ideological Verification
-STProof’s foundational methodology is **Zero-Knowledge Ideological Verification**, distinct from cryptographic zero-knowledge proofs. It is a practical system based on social consensus, logic, and multi-source validation.
+### 2.6 Minting and Moderation: Balancing Openness and Order
 
-Three Principles:
-1. **Completeness**: A real event can always form a verifiable evidence chain.
-2. **Soundness**: A fake event cannot pass verification.
-3. **Zero-Knowledge**: The verifier only knows “the event is true” and gains no sensitive data, IP, or private content.
+The protocol follows the equal-rights principle: **anyone can mint by paying gas only**. To ensure authenticity and legality, it uses a soft moderation system:
 
-This methodology is the theoretical foundation of “verify events, not assets” and enables compliant verification in digital collectibles, IP, and cross-border collaboration.
+- **Post-mint verification**: Unverified events are marked "dubious"
+- **Dispute arbitration**: Community challenges resolved by validators/DAO
+- **Template guidance**: Encourage high-public-value events, not trivial private records
+
+### 2.7 Core Methodology: Zero-Knowledge Thought Attestation
+
+STProof's underlying methodology is **Zero-Knowledge Thought Attestation** — not cryptographic zero-knowledge proofs, but a practical attestation system based on social consensus, logical reasoning, and multi-source verification.
+
+**Three Principles**:
+
+1. **Completeness**: A real event can always construct a verifiable evidence chain.
+2. **Soundness**: A fake event cannot pass the evidence verification.
+3. **Zero-Knowledge**: Verifiers only learn that "the event is true," without accessing sensitive information, original images/IP, trade secrets, or private content.
 
 ---
 
-# 3. The Relationship Between Physical Objects and NFTs: The Event Verification Model
-STProof verifies **objectively occurred historical events**, not physical assets or digital content.
+## 3. The Relationship Between Physical Objects and NFTs: The Event Certification Model
 
-For physical events: the object is only a carrier. No ownership, usage, disposal, revenue, or RWA mapping is attached.
+STProof certifies **events**, not assets. Physical objects are only carriers; they have no ownership, value, or collateral binding to on-chain certificates.
 
-For non-physical events: the protocol verifies the event directly—pure, clean, and unbound.
+**Physical objects belong to the physical world; events belong to the blockchain world.**
 
-**Physical objects belong to the physical world. Events belong to the blockchain world.**
 **NFTs lock only events, not objects.**
 
-The NFT records only the historical event: creation, issuance, mailing, discovery, restoration, destruction.
-The physical retains independent ownership and market value.
-They are linked only by history—fully separated in rights, assets, and finance.
+NFTs do **not** represent:
 
-This structure eliminates dual-rights conflicts, duplicate verification, and RWA regulatory risk at the lowest level.
+- Ownership of physical assets
+- Usage, disposal, or revenue rights
+- RWA-linked value
 
----
+They only record key historical events:
 
-# 4. Protocol Architecture
-STProof consists of five layers:
-1. **Event Template Layer**: Community-defined verification rules.
-2. **Validator Network Layer**: Multi-sig validation by institutional and community validators.
-3. **Evidence Storage Layer**: IPFS/Arweave + trusted timestamps.
-4. **NFT Asset Layer**: ERC-721 dynamic NFT with updatable metadata.
-5. **Economic Model Layer**: Automated distribution of fees via smart contracts.
+- Creation / production
+- Issuance / circulation / mailing
+- Completion / excavation / restoration / destruction
 
 ---
 
-# 5. Economic Model: Equity-First Incentive Mechanism
-STProof’s core belief: fact recording must be barrier-free. Technology should not create new inequality.
+## 4. Protocol Architecture
 
-Traditional NFT value depends on reselling—a speculative logic. Event NFT value should come from social trust and citation breadth.
+| Layer | Function | Implementation |
+|-------|----------|----------------|
+| Event Template Layer | Defines verification rules | Community proposals + smart contract templates |
+| Validator Network | Multi-sig event verification | Institutional + community validators |
+| Evidence Storage Layer | Stores multi-source evidence | IPFS/Arweave + trusted timestamps |
+| NFT Asset Layer | Anchors events on-chain | ERC-721 dynamic NFT |
+| Economic Model Layer | Distributes fees and royalties | Smart contract auto-distribution |
 
-STProof pioneers the **citation tax**: value comes from being used. Each citation publicly endorses truth, driving organic value discovery.
+---
 
-The protocol supports three parallel value-capture mechanisms for equal participation and sustainable creator rewards.
+## 5. Metadata Standardization: The Universal Expression Layer of Event DNA
 
-## 5.1 Roles and Revenue Sources
+### 5.1 Why Metadata Standardization?
+
+The core value of an event NFT lies not only in "whether it is verified" but also in **"what event it is, how it is understood, and how it is reused."**
+
+In the current NFT ecosystem, metadata is often unstructured strings or arbitrarily defined JSON. This leads to:
+
+| Problem | Description |
+|---------|-------------|
+| ❌ Type unrecognizable | Third-party apps cannot automatically identify event types |
+| ❌ Cross-protocol composability difficult | DeFi/insurance protocols cannot directly read "citation count" |
+| ❌ Indexing difficult | Search engines and marketplaces cannot filter by event attributes |
+| ❌ Expression inconsistent | Different event types cannot be expressed under the same framework |
+
+STProof proposes **Metadata Standardization** as the core DNA of the protocol.
+
+### 5.2 Design Principles
+
+| Principle | Description |
+|-----------|-------------|
+| **On-chain + Off-chain synergy** | On-chain stores proof state; off-chain stores large metadata |
+| **Compatible with existing standards** | Fully compatible with ERC-721 Metadata Extension |
+| **Extensible event types** | Supports any event type via `schemaId` |
+| **Verifiability** | On-chain CID ensures metadata immutability |
+| **Standardized querying** | Supports subgraphs, oracles, and indexers |
+
+### 5.3 STProof Metadata Standard v1
+
+**Off-chain JSON Schema (IPFS Storage)**:
+
+```json
+{
+  "name": "Event Name",
+  "description": "Event Description",
+  "image": "ipfs://...",
+  "external_url": "https://stproof.org/event/...",
+  "attributes": [
+    { "trait_type": "event_type", "value": "physical_mail" },
+    { "trait_type": "verification_status", "value": "verified" },
+    { "trait_type": "citation_count", "value": 12 },
+    { "trait_type": "citation_revenue_eth", "value": "0.0012" },
+    { "trait_type": "validators_count", "value": 3 }
+  ],
+  "stproof": {
+    "version": "1",
+    "schemaId": 1,
+    "eventId": "contractAddress-tokenId",
+    "eventName": "First Day Cover - Tin Shui Wai",
+    "cid": "ipfs://...",
+    "creator": "0x...",
+    "createTime": 1744185600,
+    "verified": true,
+    "citations": 12,
+    "revenue": "0.0012",
+    "validators": ["0x..."],
+    "evidence": {
+      "publicPackage": "ipfs://...",
+      "privatePackage": "ipfs://..."
+    },
+    "template": { "id": 1, "name": "Physical Mail Template" }
+  }
+}
+```
+
+**On-chain Core State**:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `eventName` | string | Event name |
+| `cid` | string | IPFS evidence package root CID |
+| `creator` | address | Event initiator |
+| `createTime` | uint256 | Minting timestamp |
+| `verified` | bool | Verification status |
+| `citations` | uint256 | Citation count |
+| `revenue` | uint256 | Accumulated citation revenue |
+| `validators` | address[] | List of validator addresses |
+
+### 5.4 Event Type Schema Registry
+
+| schemaId | Type | Required Fields | Example Scenario |
+|----------|------|-----------------|------------------|
+| 1 | Physical Mail | `from`, `to`, `trackingNumber`, `gps` | First-day cover, registered mail |
+| 2 | Art Creation | `artist`, `medium`, `creationDate` | Painting, sculpture |
+| 3 | Online Publication | `platform`, `url`, `publishTx` | Article, social media |
+| 4 | Academic Publication | `doi`, `journal`, `authors` | Paper, preprint |
+| 5 | On-chain Vote | `proposalId`, `voteOption`, `votingPower` | DAO governance |
+| 6 | News Scene | `journalist`, `location`, `timestamp` | Breaking news |
+| 7 | Legal Deposit | `caseId`, `court`, `witness` | Judicial evidence |
+
+### 5.5 Smart Contract Enhancements (v6 Direction)
+
+```solidity
+// Metadata Registry
+mapping(uint256 => string) public metadataSchemas;
+function registerSchema(uint256 schemaId, string calldata schemaURI) external onlyOwner;
+
+// Enhanced tokenURI
+function tokenURI(uint256 tokenId) public view override returns (string memory);
+
+// Mint with schema binding
+function mintWithSchema(address to, uint256 schemaId, string memory eventName, string memory cid) external returns (uint256);
+```
+
+### 5.6 Indexers and Cross-Protocol Composability
+
+| Component | Use Case |
+|-----------|----------|
+| The Graph Subgraph | Automatic indexing, complex queries |
+| Oracles | Read citation counts and verification status |
+| EAS / Other Protocols | Reference STProof events as trusted fact sources |
+
+### 5.7 Value Delivered by Metadata Standardization
+
+| Value Dimension | Description |
+|-----------------|-------------|
+| **Composability** | DeFi, DAO, insurance protocols can directly call event state |
+| **Discoverability** | Marketplaces and explorers can filter by event type/attributes |
+| **Long-term readability** | Standardized JSON remains parseable even if frontend disappears |
+| **Cross-chain interoperability** | Metadata standards extendable to multiple chains |
+| **AI / Automation** | Structured data can be understood and used by AI agents |
+
+---
+
+## 6. Economic Model: Equality-First Incentive Mechanism
+
+### 6.1 Roles and Revenue Sources
+
 | Role | Contribution | Revenue Source |
-|---|---|---|
+|------|--------------|----------------|
 | Event Initiator | Collects evidence, mints NFT | Royalties, citation fees, access fees |
-| Volunteer Validator | Validates events | Reputation, recognition |
-| Incentive Validator | Validates events | Validation fees (ETH) |
-| Template Creator | Designs verification rules | Template fees (ETH) |
-| Protocol Treasury | Ecosystem support | 30% of citations, 30% of validation fees |
+| Volunteer Validator | Verifies events | Reputation points, community recognition |
+| Incentivized Validator | Verifies events | Validation fees (ETH) |
+| Template Creator | Designs event rules | Template usage fees |
+| Protocol Treasury | Protocol development & maintenance | 28% of citation fees; 30% of validation fees |
 
-## 5.2 Minting and Verification Mechanisms
-Anyone can mint with gas only. Two validation modes:
+### 6.2 Minting and Verification
+
+Anyone can mint an Event NFT by paying gas only — no extra minting fee.
+
 | Mode | Cost | Speed | Use Case |
-|---|---|---|---|
-| Community Volunteer | Free | Slow | Personal memories, non-urgent |
-| Incentive | Optional payment | Fast | Commercial, urgent |
+|------|------|-------|----------|
+| Community Volunteer Verification | Free | Slow | Personal memories, family records |
+| Incentivized Verification | Initiator pays | Fast | Commercial, urgent certification |
 
-## 5.3 Resale Royalties
-5% of resale price (EIP-2981), 100% to event initiator.
+### 6.3 Resale Royalties
 
-## 5.4 On-Chain Citation: Fact Value Comes from Usage
-Citation is the core value driver of Event NFTs.
-Any user or contract may call the `cite` function for a small fee, automatically split:
-- 70% to initiator
-- 30% to treasury
+5% of resale price (EIP-2981 compliant) — **100% to event initiator**.
 
-Citations are permanently logged, boosting credibility and value.
+### 6.4 On-Chain Citation: Value Comes from Use
 
-## 5.5 Dual-Tier Access and Paid Access
-| Tier | Content | Access | Fee |
-|---|---|---|---|
-| Public Package | Summary, low-res media | IPFS public | Free |
-| Full Package | High-res, receipts, GPS, timestamps | Paid gateway | Per-use / subscription |
+Any user or contract may call the `cite` function and pay a small fee. The fee is automatically distributed:
 
-## 5.6 Multidimensional Extension of Event Value
-Beyond citations: scarcity, timeliness, evidence strength, social resonance, utility, combinatorial narrative.
-Citations form the base cash flow; other dimensions amplify value.
+- **70%** to event initiator
+- **28%** to protocol treasury
+- **2%** permanently to protocol creator
 
-## 5.7 Summary of the Three-Tier Value Capture Model
-| Income | Trigger | Rate | Distribution |
-|---|---|---|---|
-| Royalty | Resale | 5% | 100% initiator |
-| Citation Fee | On-chain cite | Fixed | 70% initiator, 30% treasury |
-| Access Fee | Full-package download | Per-use/sub | 70% initiator, 30% treasury |
+### 6.5 Dual-Layer Mechanism and Paid Access
 
-- Royalties capture scarcity
-- Citations capture influence
-- Access captures knowledge dissemination
+| Layer | Content | Access | Fee Model |
+|-------|---------|--------|-----------|
+| Public Package | Thumbnails, key summaries, low-res footage | Public IPFS gateway | Free |
+| Full Package | High-res footage, raw receipts, full GPS, timestamp certificates | Protocol paid gateway | Per-use / subscription |
 
-## 5.8 Protocol Treasury Management
-- Income: 30% citations, 30% validation fees
-- Managed by 2/3 multi-sig: founder, core contributors, community
-- Uses: template development, audits, hackathons, rewards, gas subsidies
-- All flows public on-chain
+### 6.6 Multi-Dimensional Extension of Event Value
 
-## 5.9 Economic Model Advantages
-- Zero-barrier participation
+- Scarcity & uniqueness
+- Timeliness & historical significance
+- Evidence strength
+- Social resonance & emotional value
+- Utility & application value
+- Composite value & narrative chains
+
+### 6.7 Summary of the Three-Tier Value Capture Model
+
+| Income Source | Trigger | Rate | Distribution |
+|---------------|---------|------|--------------|
+| Royalty | NFT resale | 5% of sale price | 100% to initiator |
+| Citation Fee | On-chain `cite` call | 0.0001 ETH | 70% initiator / 28% treasury / 2% creator |
+| Access Fee | Full-package download | 0.001 ETH | 70% initiator / 28% treasury / 2% creator |
+
+### 6.8 Protocol Treasury Management
+
+- Income: 28% of citation fees; 30% of validation fees
+- Governance: Initial **2/3 multi-sig** (founder, core contributors, community reps)
+- Uses: Template development, audits, hackathons, community rewards, gas subsidies
+
+### 6.9 Economic Model Advantages
+
+- Zero-threshold participation
 - Voluntary payments
 - Multi-layer value capture
+- Multi-dimensional value extension
 - Sustainable cash flow
 - No regulatory risk (no token, no security)
 
-## 5.10 Creator Entitlements
-To ensure long-term iteration, security, and maintenance, the STProof creator holds transparent, on-chain, immutable entitlements:
+### 6.10 Creator Equity
 
-1. **Permanent Protocol Reward**
-2% of **all** citation fees, access fees, and validation fees, forever.
+To ensure long-term protocol iteration, technical maintenance, and ecosystem security, the STProof Protocol Creator enjoys the following transparent, on-chain verifiable rights:
 
-2. **Genesis Template Revenue**
-3% of fees from official core templates designed by the creator.
-
-3. **Governance & Security Privilege**
-Permanent multi-sig seat in the treasury; proposal and voting rights over critical security parameters.
-
-4. **Execution**
-All rewards auto-distributed by contract, legally verifiable, on-chain, immutable.
+1. **Permanent Protocol Service Reward**: 2% of all on-chain citation fees, paid access fees, and incentivized validation fees permanently belongs to the Protocol Creator.
+2. **Genesis Template Exclusive Revenue**: When official core templates designed by the Creator are used, the Creator earns 3% of template usage fees.
+3. **Governance and Security Privileges**: Permanently retains a multi-sig seat in the Protocol Treasury, with proposal rights for core parameters.
+4. **Revenue Execution**: All rewards are automatically distributed by smart contract directly to the Creator's wallet, on-chain verifiable.
 
 ---
 
-# 6. Compliance and Legal Considerations
-STProof is designed for global regulatory compliance.
+## 7. Compliance and Legal Considerations
 
-## 6.1 Protocol Position: Non-Financial Infrastructure
-Fact verification, not financial transactions.
+### 7.1 Protocol Positioning: Non-Financial Infrastructure
+
+The protocol's core is fact proofing, not financial transactions. It clearly avoids:
+
 - Not RWA
-- Not cryptocurrency
-- Not securities
+- Not virtual currency
+- Not a security
 
-## 6.2 Judicial Recognition
-Blockchain evidence is legally enforceable in major jurisdictions. STProof’s multi-source + timestamp + IPFS structure meets judicial evidence standards.
+### 7.2 Judicial Recognition
 
-## 6.3 Risk Isolation & Compliance
-- De-financialization of narrative
+STProof's multi-source evidence + trusted timestamp + IPFS model meets legal standards for electronic evidence in major jurisdictions.
+
+### 7.3 Risk Mitigation
+
+- De-financialize narrative
 - Content moderation
-- Cross-border separation
+- Onshore/offshore operational separation
 - Data privacy compliance
-- Qualification filing where required
-
-## 6.4 Future Outlook
-STProof aims to become global fact-verification infrastructure, advancing legal acceptance of on-chain records.
 
 ---
 
-# 7. Smart Contract Implementation
-## 7.1 Contract Standards
+## 8. Smart Contract Implementation
+
+### 8.1 Standards
+
 - ERC-721
 - EIP-2981 Royalties
-- Dynamic Metadata
-- Dual-Tier Validation
-- On-Chain Citation
-- Template Management
+- Dynamic metadata
+- Dual-track verification
+- On-chain citation
+- Template management
 
-## 7.2 Core Interface
+### 8.2 Core Interface
+
 ```solidity
 interface ISTProof {
     function mint(address to, uint256 templateId, string memory uri) external;
@@ -335,77 +493,94 @@ interface ISTProof {
 
 ---
 
-# 8. First Use Case: STProof Self-Referential Experiment (Meta-Event)
+## 9. First Use Case: STProof Self-Referential Experiment (Meta Event)
 
-## 8.1 Event Background
-- Name: STProof Protocol Whitepaper v5.2 Official Release & Genesis Anchoring
-- Type: Non-physical digital-native event (Self-Referential)
-- Goal: Use STProof to verify its own birth, completing the genesis loop of digital civilization.
+### 9.1 Event Background
 
-## 8.2 Evidence Collection
-- Time: Release timestamp, GitHub commit, block time
-- Space: Block height, contract address, document hash
-- Action: Version history, logs, announcements
-- Official: IPFS CID, multi-sig, timestamp certificate
-- Unique ID: Full document hash, version, genesis transaction
+- Event Name: STProof Protocol Whitepaper v5.2 Official Release & Genesis Anchor
+- Event Type: Non-physical digital native event (self-referential experiment)
+- Core Goal: Certify the birth of STProof itself, completing a digital civilization-level self-referential loop
 
-## 8.3 Evidence Immobilization & Storage
-- Trusted timestamp
-- IPFS public + full package
-- On-chain hash anchor
+### 9.2 Evidence Collection
 
-## 8.4 Case Significance
-1. Proves STProof operates independently of the physical world
-2. Validates purity and generality of Zero-Knowledge Ideological Verification
-3. Forms the protocol’s genesis trust root
-4. Provides a standard template for all digital-native events
+- Time evidence: Whitepaper timestamp, GitHub commit time, on-chain block time
+- Location evidence: Ethereum mainnet block height, contract address, document hash coordinates
+- Behavioral evidence: Document version history, commit logs, community announcements
+- Official evidence: IPFS hash, multi-sig signatures, timestamp certificates
+
+### 9.3 Significance
+
+1. Proves STProof can operate completely independently of the physical world
+2. Validates the purity and generality of Zero-Knowledge Thought Attestation
+3. Establishes the protocol's genesis root of trust
+4. Provides a standard template for all digital native events
 
 ---
 
-# 9. Future Outlook: Event Template Roadmap and Ecosystem Development
-Physical, non-physical, and hybrid templates; AI-assisted verification; physical verification trigger; judicial recognition; Web3 infrastructure; complementary positioning with lightweight protocols.
+## 10. Future Outlook: Event Template Roadmap and Ecosystem Development
+
+Including physical event templates, non-physical event templates, hybrid event templates, AI-assisted verification, physical verification trigger mechanism, judicial recognition, becoming Web3 infrastructure, and complementary positioning with lightweight protocols.
 
 ---
 
-# 10. Ecosystem Launch Path and Roadmap
-Phase 1: Genesis Anchoring (Self-Referential Experiment)
-Phase 2: Institutional Citation & Value Validation
-Phase 3: Community Governance & Ecosystem Scale
-Long-term: Become the Fact Layer of Digital Civilization
+## 11. Ecosystem Launch Path and Roadmap
+
+- **Phase 1**: Genesis Anchor (Self-Referential Experiment)
+- **Phase 2**: Institutional Citations & Value Demonstration
+- **Phase 3**: Community Governance & Ecosystem Expansion
+- **Long-term Vision**: Digital Civilization Fact Layer
 
 ---
 
-# 11. Protocol Boundaries
-- Not for purely subjective events
-- Not for unverifiable private events
-- Does not guarantee physical authenticity
-- No physical custody or insurance
-- No promise of citation-based returns
-- No legal advice
+## 12. Protocol Boundaries
+
+STProof does NOT apply to:
+
+- Purely subjective events
+- Unverifiable private events
+- Guarantee of physical authenticity of objects
+- Provision of custody or insurance
+- Promise of commercial returns from citation fees
+- Provision of legal advice
 
 ---
 
-# 12. Conclusion
-STProof is built on one core principle: **Verify Events, Not Assets**.
-With Zero-Knowledge Ideological Verification, multi-source evidence, trusted timestamps, decentralized storage, and dynamic NFTs, it establishes the Fact Layer of digital civilization.
+## 13. Conclusion
 
-Physical objects belong to the physical world.
-Events belong to the blockchain world.
-NFTs lock only events, not objects.
+STProof began with a simple question: *How to prove a first-day cover was really mailed on its first day?*
 
-Fact recording is barrier-free. Value comes from citation.
+Using GPS, postal records, multi-source footage, trusted timestamps, IPFS, and dynamic NFTs, we built a verifiable, immutable event-recording framework.
+
+- **Physical objects belong to the physical world; events belong to the blockchain world.**
+- **NFTs lock only events, not objects.**
+- **Recording facts has no financial barrier. Value comes from use.**
+- **Metadata standardization makes event NFTs programmable, composable, and parseable.**
+
 Every citation is a vote for truth.
 
-In an era of AI forgery and eroding trust, STProof does not only record history—it defines the standard for memory in digital civilization.
+In an era of rampant AI forgery, STProof provides a path to resist unreality and anchor truth.
 
-The protocol is open-source. We invite everyone who believes “facts deserve to be preserved” to join this experiment.
+The protocol is open source. We invite everyone who believes that "facts need to be permanently recorded" to join this experiment.
 
 ---
 
-**Version History**
-- v1.3: Initial framework
-- v4.2: Economic model and structure finalized, production-ready
-- v5.1: Added Zero-Knowledge Ideological Verification, Self-Referential Experiment, permanent creator entitlements
-- **v5.2: Final integrated version | Full v4.2 economic model + complete v5.1 system**
+## Appendix
 
-The final interpretation right of this whitepaper belongs to the STProof community.
+- Self-referential case public evidence package CID: bafybeial45ll7mvqfvnbuk4ddgezajmhzzzoub7bdjwnx3wa65hox4maii
+- Smart contract code: https://sepolia.etherscan.io/address/0x037eb54EF9dae9A2Ae33bFB9ba170F1067B925CB
+- Protocol website: https://stproof.org
+
+---
+
+## Version History
+
+- **v1.3**: Initial framework
+- **v4.2**: Economic model finalized, production-ready
+- **v5.1**: Added Zero-Knowledge Thought Attestation, self-referential experiment, permanent creator equity
+- **v5.2**: Comprehensive final edition | Full economic model + Zero-Knowledge Thought Attestation + **Metadata Standardization DNA**
+
+Final interpretation rights belong to the STProof community.
+
+---
+
+**This is the complete STProof Protocol Whitepaper v5.2 (English Edition), ready to copy and replace the old version.**
