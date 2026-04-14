@@ -72,5 +72,4 @@ The community/third parties can complete zero-knowledge verification in the foll
 
 ---
 **Associated Document**: STProof Protocol v5.2 Whitepaper
-**Contract Address**: 0x037eb54EF9dae9A2Ae33bFB9ba170F1067B925CB
 **Official Note**: This template is the first scenario-based application template of the STProof Protocol. The community can freely use and promote it based on these specifications.
