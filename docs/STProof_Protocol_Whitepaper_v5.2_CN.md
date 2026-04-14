@@ -1,6 +1,7 @@
 ---
 layout: page
 title: STProof Protocol Whitepaper v5.2 (中文)
+hide: true
 ---
 # STProof 协议白皮书（完整正式版）
 **版本 v5.2 | 2026年4月**
