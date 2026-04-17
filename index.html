@@ -21,10 +21,10 @@
         .header-container { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; max-width: 1200px; margin: 0 auto; }
         .logo { font-size: 24px; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 8px; }
         .logo span { color: var(--dark); }
-        .nav { display: flex; gap: 24px; font-size: 15px; font-weight: 500; align-items: center; flex-wrap: wrap; }
+        .nav { display: flex; gap: 32px; font-size: 15px; font-weight: 500; align-items: center; }
         .nav a { color: var(--gray); transition: color 0.3s; cursor: pointer; }
-        .nav a:hover, .nav a.active { color: var(--primary); }
-        .lang-switch { padding: 6px 12px; border: 1px solid var(--primary); border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: 600; color: var(--primary); background: white; }
+        .nav a:hover { color: var(--primary); }
+        .lang-switch { padding: 6px 12px; border: 1px solid var(--primary); border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: 600; color: var(--primary); background: white; margin-left: 16px; }
         .lang-switch:hover { background: var(--primary-light); }
 
         .hero { padding: 140px 0 80px; background: linear-gradient(135deg, var(--primary-light) 0%, var(--bg) 100%); margin-top: 70px; }
@@ -64,7 +64,7 @@
         @media (max-width: 700px) {
             .hero-slogan { font-size: 28px; }
             .section-title { font-size: 24px; }
-            .nav { gap: 12px; }
+            .nav { gap: 16px; }
         }
     </style>
 </head>
@@ -73,22 +73,14 @@
 <header>
     <div class="header-container">
         <div class="logo">STProof <span>Protocol</span></div>
-        <nav class="nav" id="navMenu">
-            <!-- 中文导航（默认显示） -->
-            <div id="zhNav">
-                <a class="nav-link" data-target="core">核心理念</a>
-                <a class="nav-link" data-target="event-types">事件类型</a>
-                <a class="nav-link" data-target="genesis-nft">创世NFT</a>
-                <a class="nav-link" data-target="cid-section">CID清单</a>
+        <nav class="nav">
+            <!-- 中文导航 -->
+            <div id="zhNav" style="display: flex; gap: 32px; align-items: center;">
                 <a href="/metaverse.html">🌐 事实元宇宙</a>
                 <a href="https://github.com/dule-123/stproof" target="_blank">GitHub</a>
             </div>
-            <!-- 英文导航（默认隐藏） -->
-            <div id="enNav" style="display:none;">
-                <a class="nav-link" data-target="core">Core Concepts</a>
-                <a class="nav-link" data-target="event-types">Event Types</a>
-                <a class="nav-link" data-target="genesis-nft">Genesis NFT</a>
-                <a class="nav-link" data-target="cid-section">CIDs</a>
+            <!-- 英文导航 -->
+            <div id="enNav" style="display: none; gap: 32px; align-items: center;">
                 <a href="/metaverse.html">🌐 Fact Metaverse</a>
                 <a href="https://github.com/dule-123/stproof" target="_blank">GitHub</a>
             </div>
@@ -232,7 +224,8 @@
 <footer>
     <div class="container">
         <div class="footer-logo">STProof Protocol</div>
-        <div class="copyright">© 2026 STProof Protocol | 凡发生，皆可存；凡存证，皆可信</div>
+        <div id="zhFooter" class="copyright">© 2026 STProof Protocol | 凡发生，皆可存；凡存证，皆可信</div>
+        <div id="enFooter" class="copyright" style="display:none;">© 2026 STProof Protocol | What Happens, Exists; What's Proven, Trusted</div>
     </div>
 </footer>
 
@@ -241,17 +234,19 @@
     const enDiv = document.getElementById('enContent');
     const zhNav = document.getElementById('zhNav');
     const enNav = document.getElementById('enNav');
+    const zhFooter = document.getElementById('zhFooter');
+    const enFooter = document.getElementById('enFooter');
     const langBtn = document.getElementById('langSwitch');
     let isEnglish = false;
 
     function updateLanguage() {
         if (isEnglish) {
-            // 内容
             zhDiv.style.display = 'none';
             enDiv.style.display = 'block';
-            // 导航
             zhNav.style.display = 'none';
             enNav.style.display = 'flex';
+            zhFooter.style.display = 'none';
+            enFooter.style.display = 'block';
             langBtn.textContent = '中 / EN';
             document.title = 'STProof Protocol | Event Proof · Fact Metaverse';
         } else {
@@ -259,6 +254,8 @@
             zhDiv.style.display = 'block';
             enNav.style.display = 'none';
             zhNav.style.display = 'flex';
+            enFooter.style.display = 'none';
+            zhFooter.style.display = 'block';
             langBtn.textContent = 'EN / 中';
             document.title = 'STProof Protocol | 事件确权 · 事实元宇宙';
         }
@@ -267,20 +264,6 @@
     langBtn.addEventListener('click', () => {
         isEnglish = !isEnglish;
         updateLanguage();
-    });
-
-    // 平滑滚动导航
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', (e) => {
-            const targetId = link.getAttribute('data-target');
-            if (targetId) {
-                e.preventDefault();
-                const targetElement = document.getElementById(targetId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            }
-        });
     });
 </script>
 </body>
