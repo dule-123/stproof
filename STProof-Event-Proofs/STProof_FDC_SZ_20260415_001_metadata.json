@@ -61,7 +61,7 @@
         "description": "邮局外部视频记录",
         "type": "video/mp4",
         "cid": "bafybeih7xf4klvgziy5dc2dvakzrxneooq7hktz4xysdf3dhx5tib4px5i",
-        "timestamp_proof_cid": "bafkreia7tcgsrrs6ybqkvauzktikle5qikk6tvitnv极63vk7pli73iewce"
+        "timestamp_proof_cid": "bafkreia7tcgsrrs6ybqkvauzktikle5qikk6tvitnv63vk7pli73iewce"
       },
       {
         "name": "GPS_20260415_080707_NYPOST.gpx",
@@ -89,7 +89,7 @@
         "description": "挂号信编码",
         "type": "image/jpeg",
         "cid": "bafybeib57xurh2qwuosf4bpq44vqv7mbb223356b3cq4wlunvoroytyvwe",
-        "timestamp_proof_cid": "bafkreidr25qicpd5lkxk7cchjksrtujjjp极upcseujphgwo2ddtcd2kxipy"
+        "timestamp_proof_cid": "bafkreidr25qicpd5lkxk7cchjksrtujjjpupcseujphgwo2ddtcd2kxipy"
       },
       {
         "name": "IMG_20260415_103305.jpg",
@@ -110,7 +110,7 @@
         "description": "中国邮政已接收邮路信息",
         "type": "image/jpeg",
         "cid": "bafybeibb2pu5c2wvmgga6zfg7amk6rheyw2ebzjgndwdgwztyfrx37go5i",
-        "timestamp_proof_cid": "bafkreihkjqu44uq47nphpqp5pc极xx3s极4zsw4vfua5eccuuwaruwva7qwziu"
+        "timestamp_proof_cid": "bafkreihkjqu44uq47nphpqp5pcxx3s4zsw4vfua5eccuuwaruwva7qwziu"
       },
       {
         "name": "20260416_001.jpg",
@@ -130,8 +130,8 @@
         "name": "20260415_114043339.mp4",
         "description": "园博会开幕央视新闻录屏",
         "type": "video/mp4",
-        "cid": "bafybeic23tn5极f2nyuxodc5rf462sfstkrqqquwblqlpounkqyvkeb7bxya",
-        "timestamp_proof_cid": "bafkreic极5z337vsomtqcjqayqnl2qif4vl4emcxmu6h2exk2xjffmkwwd54"
+        "cid": "bafybeic23tn5f2nyuxodc5rf462sfstkrqqquwblqlpounkqyvkeb7bxya",
+        "timestamp_proof_cid": "bafkreic5z337vsomtqcjqayqnl2qif4vl4emcxmu6h2exk2xjffmkwwd54"
       }
     ],
     "restricted_asset_declarations": [
@@ -150,7 +150,7 @@
       {
         "name": "IMG_20260415_091748.jpg",
         "description": "贴票完成照片（含邮票特写）",
-        "declaration_txt_cid": "bafkreih35wiqre7zp3h533uhzcu5xg6t5rs极6dpgp5bn5hlorrdj4vndtki",
+        "declaration_txt_cid": "bafkreih35wiqre7zp3h533uhzcu5xg6t5rs6dpgp5bn5hlorrdj4vndtki",
         "verification_note": "此文件哈希已由Opentimestamp锚定。持有者可联系创作者获取原始文件进行哈希比对验证。"
       },
       {
