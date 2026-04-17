@@ -3,14 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <meta name="description" content="STProof Protocol - 通用链上事件确权协议">
-    <title>STProof Protocol | 事件确权 · 事实元宇宙</title>
+    <meta name="description" content="STProof Protocol - Universal on-chain event proof protocol">
+    <title>STProof Protocol | Event Proof · Fact Metaverse</title>
     
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/ethers@6.9.0/dist/ethers.umd.min.js"></script>
-    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
         :root { --primary: #165DFF; --primary-light: #E8F3FF; --dark: #1D2129; --gray: #4E5969; --bg: #F7F8FA; --white: #fff; --shadow: 0 4px 20px rgba(0,0,0,0.08); }
@@ -78,12 +74,24 @@
     <div class="header-container">
         <div class="logo">STProof <span>Protocol</span></div>
         <nav class="nav" id="navMenu">
-            <a class="nav-link" data-target="core">核心理念</a>
-            <a class="nav-link" data-target="event-types">事件类型</a>
-            <a class="nav-link" data-target="genesis-nft">创世NFT</a>
-            <a class="nav-link" data-target="cid-section">CID清单</a>
-            <a href="/metaverse.html">🌐 事实元宇宙</a>
-            <a href="https://github.com/dule-123/stproof" target="_blank">GitHub</a>
+            <!-- 中文导航（默认显示） -->
+            <div id="zhNav">
+                <a class="nav-link" data-target="core">核心理念</a>
+                <a class="nav-link" data-target="event-types">事件类型</a>
+                <a class="nav-link" data-target="genesis-nft">创世NFT</a>
+                <a class="nav-link" data-target="cid-section">CID清单</a>
+                <a href="/metaverse.html">🌐 事实元宇宙</a>
+                <a href="https://github.com/dule-123/stproof" target="_blank">GitHub</a>
+            </div>
+            <!-- 英文导航（默认隐藏） -->
+            <div id="enNav" style="display:none;">
+                <a class="nav-link" data-target="core">Core Concepts</a>
+                <a class="nav-link" data-target="event-types">Event Types</a>
+                <a class="nav-link" data-target="genesis-nft">Genesis NFT</a>
+                <a class="nav-link" data-target="cid-section">CIDs</a>
+                <a href="/metaverse.html">🌐 Fact Metaverse</a>
+                <a href="https://github.com/dule-123/stproof" target="_blank">GitHub</a>
+            </div>
             <div class="lang-switch" id="langSwitch">EN / 中</div>
         </nav>
     </div>
@@ -231,18 +239,26 @@
 <script>
     const zhDiv = document.getElementById('zhContent');
     const enDiv = document.getElementById('enContent');
+    const zhNav = document.getElementById('zhNav');
+    const enNav = document.getElementById('enNav');
     const langBtn = document.getElementById('langSwitch');
     let isEnglish = false;
 
     function updateLanguage() {
         if (isEnglish) {
+            // 内容
             zhDiv.style.display = 'none';
             enDiv.style.display = 'block';
+            // 导航
+            zhNav.style.display = 'none';
+            enNav.style.display = 'flex';
             langBtn.textContent = '中 / EN';
             document.title = 'STProof Protocol | Event Proof · Fact Metaverse';
         } else {
             enDiv.style.display = 'none';
             zhDiv.style.display = 'block';
+            enNav.style.display = 'none';
+            zhNav.style.display = 'flex';
             langBtn.textContent = 'EN / 中';
             document.title = 'STProof Protocol | 事件确权 · 事实元宇宙';
         }
