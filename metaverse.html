@@ -3,493 +3,190 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <meta name="description" content="STProof 事件确权 NFT - 第十五届中国国际园博会纪念邮票首日实寄事件 #001">
-    <title>STProof 事件确权 | 园博会邮票首日实寄 #001</title>
-    
-    <!-- Open Graph 元数据（用于社交媒体分享） -->
-    <meta property="og:title" content="第十五届中国国际园博会纪念邮票 - 深圳首日实寄NFT #001">
-    <meta property="og:description" content="完整时空证据链 | GPS轨迹 | 多源影像 | 区块链时间戳">
-    <meta property="og:image" content="https://white-tired-rat-661.mypinata.cloud/ipfs/bafkreidws3puiyo23w3y2gwmhfaxrpvgyjcjjsh33dlp3rufjm5iefexlm">
-    <meta property="og:type" content="website">
-    
-    <!-- Leaflet 地图 -->
+    <title>事实元宇宙 · 园博会邮票首日实寄事件 | STProof</title>
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    
-    <!-- Ethers.js 用于区块链交互 -->
     <script src="https://cdn.jsdelivr.net/npm/ethers@6.9.0/dist/ethers.umd.min.js"></script>
-    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            background: #f5f7fb;
-            color: #1a2a3a;
-            line-height: 1.5;
-        }
-        
-        /* 头部横幅 */
-        .header {
-            background: linear-gradient(135deg, #0b2b3b 0%, #1a4a6e 100%);
-            color: white;
-            padding: 2rem 1rem;
-            text-align: center;
-        }
-        
-        .header h1 {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .header .subtitle {
-            opacity: 0.85;
-            font-size: 0.9rem;
-        }
-        
-        .badge-container {
-            display: flex;
-            justify-content: center;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-            margin-top: 1rem;
-        }
-        
-        .badge {
-            background: rgba(255,255,255,0.2);
-            backdrop-filter: blur(4px);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-        }
-        
-        /* 主容器 */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
-        }
-        
-        /* 两栏布局 */
-        .grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-        }
-        
-        .main-content {
-            flex: 2;
-            min-width: 280px;
-        }
-        
-        .sidebar {
-            flex: 1.2;
-            min-width: 260px;
-        }
-        
-        /* 卡片样式 */
-        .card {
-            background: white;
-            border-radius: 1rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            margin-bottom: 1.5rem;
-            overflow: hidden;
-        }
-        
-        .card-header {
-            padding: 1rem 1.2rem;
-            border-bottom: 1px solid #eef2f6;
-            font-weight: 600;
-            font-size: 1.1rem;
-            background: #fafbfc;
-        }
-        
-        .card-body {
-            padding: 1.2rem;
-        }
-        
-        /* 地图容器 */
-        .map-container {
-            height: 400px;
-            width: 100%;
-            background: #e9ecef;
-        }
-        
-        /* 照片网格 */
-        .photo-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            gap: 10px;
-        }
-        
-        .photo-item {
-            cursor: pointer;
-            border-radius: 8px;
-            overflow: hidden;
-            aspect-ratio: 1 / 1;
-            background: #f0f2f5;
-        }
-        
-        .photo-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.2s;
-        }
-        
-        .photo-item img:hover {
-            transform: scale(1.02);
-        }
-        
-        /* 证据列表 */
-        .evidence-list {
-            list-style: none;
-        }
-        
-        .evidence-list li {
-            padding: 0.6rem 0;
-            border-bottom: 1px solid #edf2f7;
-            font-size: 0.85rem;
-        }
-        
-        .evidence-list .cid {
-            font-family: monospace;
-            font-size: 0.7rem;
-            color: #6c86a3;
-            word-break: break-all;
-        }
-        
-        .hash-status {
-            font-family: monospace;
-            font-size: 0.7rem;
-            background: #f0f2f5;
-            padding: 0.5rem;
-            border-radius: 6px;
-            margin-top: 0.5rem;
-            word-break: break-all;
-        }
-        
-        /* 引用按钮 */
-        .cite-button {
-            background: #0b2b3b;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 40px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 1rem;
-            transition: background 0.2s;
-        }
-        
-        .cite-button:hover {
-            background: #1e4a6e;
-        }
-        
-        .cite-button:disabled {
-            background: #94a3b8;
-            cursor: not-allowed;
-        }
-        
-        .status-msg {
-            font-size: 0.8rem;
-            margin-top: 0.8rem;
-            text-align: center;
-            color: #2d6a4f;
-        }
-        
-        .footer {
-            text-align: center;
-            padding: 2rem;
-            border-top: 1px solid #e2e8f0;
-            font-size: 0.75rem;
-            color: #6c86a3;
-        }
-        
-        /* 模态框 */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.9);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-        }
-        
-        .modal img {
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 8px;
-        }
-        
-        @media (max-width: 700px) {
-            .map-container { height: 300px; }
-            .header h1 { font-size: 1.3rem; }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        body { background: #f5f7fb; color: #1a2a3a; line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .btn { display: inline-block; padding: 12px 28px; border-radius: 8px; font-weight: 600; transition: all 0.3s; cursor: pointer; border: none; background: #165DFF; color: white; }
+        .btn:hover { transform: translateY(-2px); background: #0E42C1; }
+        .header { background: #0b2b3b; color: white; padding: 20px 0; text-align: center; }
+        .header h1 { font-size: 1.8rem; margin-bottom: 8px; }
+        .back-link { display: inline-block; margin-top: 12px; color: #ccc; text-decoration: underline; }
+        .card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin: 30px 0; }
+        .card-header { background: linear-gradient(135deg, #0b2b3b 0%, #1a4a6e 100%); color: white; padding: 30px; text-align: center; }
+        .card-body { padding: 30px; }
+        .event-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; background: #f7f8fa; padding: 20px; border-radius: 12px; margin-bottom: 30px; }
+        .summary-item { text-align: center; }
+        .summary-item .label { font-size: 13px; color: #6c86a3; }
+        .summary-item .value { font-weight: 700; font-size: 16px; }
+        .map-container { height: 350px; border-radius: 12px; overflow: hidden; margin-bottom: 30px; }
+        .evidence-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 15px; margin: 20px 0; }
+        .evidence-item { text-align: center; cursor: pointer; }
+        .evidence-item img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 10px; border: 1px solid #eef2f6; }
+        .evidence-item .label { font-size: 12px; color: #6c86a3; margin-top: 6px; }
+        .cid-list { background: #f7f8fa; padding: 20px; border-radius: 12px; margin: 20px 0; }
+        .cid-row { display: flex; flex-wrap: wrap; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #e2e8f0; }
+        .cid-name { font-weight: 600; width: 140px; }
+        .cid-value { font-family: monospace; font-size: 12px; word-break: break-all; flex: 1; color: #165DFF; }
+        .cite-status { margin-top: 12px; font-size: 14px; color: #00A870; text-align: center; }
+        footer { text-align: center; padding: 30px; color: #6c86a3; font-size: 12px; border-top: 1px solid #e2e8f0; margin-top: 30px; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; justify-content: center; align-items: center; cursor: pointer; }
+        .modal img { max-width: 90%; max-height: 90%; border-radius: 8px; }
+        @media (max-width: 700px) { .map-container { height: 250px; } }
     </style>
 </head>
 <body>
 
 <div class="header">
-    <h1>📮 第十五届中国国际园林博览会纪念邮票</h1>
-    <div class="subtitle">深圳南油邮局 · 首日实寄事件 NFT #001</div>
-    <div class="badge-container">
-        <span class="badge">📅 2026-04-15</span>
-        <span class="badge">📍 深圳南油邮局</span>
-        <span class="badge">✅ 完整证据链</span>
-        <span class="badge">🔗 Opentimestamp 锚定</span>
+    <div class="container">
+        <h1>🌐 事实元宇宙 · 园博会邮票首日实寄事件</h1>
+        <p>第十五届中国国际园林博览会纪念邮票 · 首日实寄 NFT #001</p>
+        <a href="/" class="back-link">← 返回首页</a>
     </div>
 </div>
 
 <div class="container">
-    <div class="grid">
-        <!-- 左侧主内容区 -->
-        <div class="main-content">
-            <!-- 地图卡片 -->
-            <div class="card">
-                <div class="card-header">🗺️ GPS 轨迹 | 南油邮局现场路径</div>
-                <div class="map-container" id="map"></div>
-                <div class="card-body" style="background:#fef9e6; font-size:0.8rem;">
-                    📍 轨迹长度: 约112米 | 历时: 10分24秒 | 方向: 东南 | 速度: 0.6-7.6 km/h
-                </div>
-            </div>
-            
-            <!-- 公开影像网格 -->
-            <div class="card">
-                <div class="card-header">📸 现场影像记录 (公开证据)</div>
-                <div class="card-body">
-                    <div class="photo-grid" id="photoGrid"></div>
-                    <p style="font-size:0.7rem; color:#6c86a3; margin-top:0.8rem;">
-                        ※ 所有影像已上传 IPFS，CID 见右侧详情
-                    </p>
-                </div>
+    <div class="card">
+        <div class="card-header">
+            <h2>📮 第十五届中国国际园林博览会纪念邮票</h2>
+            <p>深圳南油邮局 · 首日实寄事件</p>
+            <div style="margin-top: 12px;">
+                <span style="background:rgba(255,255,255,0.2); padding:4px 12px; border-radius:20px; font-size:12px;">📅 2026-04-15</span>
+                <span style="background:rgba(255,255,255,0.2); padding:4px 12px; border-radius:20px; font-size:12px;">📍 深圳南油邮局</span>
+                <span style="background:rgba(255,255,255,0.2); padding:4px 12px; border-radius:20px; font-size:12px;">✅ 完整证据链</span>
             </div>
         </div>
-        
-        <!-- 右侧边栏 -->
-        <div class="sidebar">
+        <div class="card-body">
             <!-- 事件摘要 -->
-            <div class="card">
-                <div class="card-header">📋 事件摘要</div>
-                <div class="card-body">
-                    <ul class="evidence-list">
-                        <li><strong>邮票主题</strong><br>第十五届中国国际园林博览会纪念邮票</li>
-                        <li><strong>核心日期</strong><br>2026年4月15日</li>
-                        <li><strong>核心地点</strong><br>深圳南油邮局</li>
-                        <li><strong>序列编号</strong><br>001</li>
-                        <li><strong>时间戳证明</strong><br>Opentimestamp (比特币区块链)</li>
-                        <li><strong>证据完整性</strong><br>完整证据链 (公开影像 + 私密哈希验证)</li>
-                    </ul>
-                </div>
+            <div class="event-summary">
+                <div class="summary-item"><div class="label">邮票主题</div><div class="value">第十五届中国国际园林博览会</div></div>
+                <div class="summary-item"><div class="label">核心日期</div><div class="value">2026-04-15</div></div>
+                <div class="summary-item"><div class="label">核心地点</div><div class="value">深圳南油邮局</div></div>
+                <div class="summary-item"><div class="label">序列编号</div><div class="value">STP-20260415-001</div></div>
             </div>
-            
-            <!-- 证据 CID 列表 -->
-            <div class="card">
-                <div class="card-header">🔗 IPFS 证据锚定</div>
-                <div class="card-body">
-                    <ul class="evidence-list" id="cidList"></ul>
-                </div>
+
+            <!-- GPS 地图 -->
+            <div class="map-container" id="eventMap"></div>
+
+            <!-- 公开证据照片 -->
+            <h4 style="margin: 20px 0 12px;"><i class="fas fa-images"></i> 现场影像记录</h4>
+            <div class="evidence-grid" id="photoGrid"></div>
+
+            <!-- CID 证据清单 -->
+            <div class="cid-list">
+                <h4 style="margin-bottom: 12px;"><i class="fas fa-link"></i> IPFS 证据锚定 (CID)</h4>
+                <div id="cidList"></div>
             </div>
-            
-            <!-- 链上验证状态 -->
-            <div class="card">
-                <div class="card-header">⛓️ 链上验证</div>
-                <div class="card-body">
-                    <div style="margin-bottom:0.8rem;">
-                        <strong>合约地址</strong><br>
-                        <span style="font-family:monospace; font-size:0.7rem;">0x2934ca1D3F3b8EfCDAf4735bD36A36E8bfa3a6A4</span>
-                    </div>
-                    <div style="margin-bottom:0.8rem;">
-                        <strong>Token ID</strong><br>
-                        <span style="font-family:monospace;">0</span>
-                    </div>
-                    <div class="hash-status">
-                        <strong>Opentimestamp 锚定</strong><br>
-                        <span id="opentimestampHash" style="font-size:0.65rem;">加载中...</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- 引用按钮 -->
-            <div class="card">
-                <div class="card-body">
-                    <button id="citeBtn" class="cite-button">🔗 引用此事件 · 支持事实 (0.0001 ETH)</button>
-                    <div id="statusMsg" class="status-msg"></div>
-                    <p style="font-size:0.7rem; color:#6c86a3; margin-top:0.8rem; text-align:center;">
-                        引用税: 70% 归事件发起人 · 30% 支持协议金库
-                    </p>
-                </div>
+
+            <!-- 引用交互 -->
+            <div style="text-align: center; padding-top: 20px; border-top: 1px solid #e2e8f0;">
+                <button id="citeButton" class="btn">🔗 引用此事件 · 支持事实 (0.0001 ETH)</button>
+                <div id="citeStatus" class="cite-status"></div>
+                <p style="font-size:12px; color:#6c86a3; margin-top:12px;">引用税: 70% 归事件发起人 · 30% 支持协议金库</p>
             </div>
         </div>
     </div>
 </div>
 
-<div class="footer">
-    🧾 STProof 事件确权协议 v6 | 本事件已通过多源独立证据 + 可信时间戳 + IPFS 锚定<br>
-    📧 如需验证私密文件哈希，请联系创作者获取原始文件进行比对
-</div>
+<footer>
+    <p>STProof Protocol | 凡发生，皆可存；凡存证，皆可信</p>
+</footer>
 
-<!-- 图片放大模态框 -->
 <div id="imageModal" class="modal" onclick="closeModal()">
     <img id="modalImage" src="" alt="放大图片">
 </div>
 
 <script>
-    // ============================================================
-    // 1. 配置数据（根据你的 JSON 文件填写）
-    // ============================================================
-    
-    // 公开照片列表（从 properties.public_assets 提取）
+    // 照片列表
     const photoAssets = [
-        { name: "发行公告", cid: "bafkreih33trksr6oc7ddcrx26iywfjpcipsafb2l76tplcd4x6f4543c2m", url: "https://ipfs.io/ipfs/bafkreih33trksr6oc7ddcrx26iywfjpcipsafb2l76tplcd4x6f4543c2m" },
-        { name: "到达邮局", cid: "bafybeidy5gmci3sswltf63jrqr2lcsjhxpa7t4wly2mo6ainrtflsve6fi", url: "https://ipfs.io/ipfs/bafybeidy5gmci3sswltf63jrqr2lcsjhxpa7t4wly2mo6ainrtflsve6fi" },
-        { name: "首日封正面", cid: "bafybeiamzq2aq2uwneq4e5hlyzqu3qecviwcqoujbk7emeprprudlclc4ge", url: "https://ipfs.io/ipfs/bafybeiamzq2aq2uwneq4e5hlyzqu3qecviwcqoujbk7emeprprudlclc4ge" },
-        { name: "挂号信编码", cid: "bafybeib57xurh2qwuosf4bpq44vqv7mbb223356b3cq4wlunvoroytyvwe", url: "https://ipfs.io/ipfs/bafybeib57xurh2qwuosf4bpq44vqv7mbb223356b3cq4wlunvoroytyvwe" },
-        { name: "邮寄凭证", cid: "bafybeiaf6szedvwqhss7sbqfw7rq6v4u37p5dxiu6aooaukzkuc4hkaf2y", url: "https://ipfs.io/ipfs/bafybeiaf6szedvwqhss7sbqfw7rq6v4u37p5dxiu6aooaukzkuc4hkaf2y" },
-        { name: "邮路信息", cid: "bafybeibb2pu5c2wvmgga6zfg7amk6rheyw2ebzjgndwdgwztyfrx37go5i", url: "https://ipfs.io/ipfs/bafybeibb2pu5c2wvmgga6zfg7amk6rheyw2ebzjgndwdgwztyfrx37go5i" }
+        { name: "发行公告", url: "https://ipfs.io/ipfs/bafkreih33trksr6oc7ddcrx26iywfjpcipsafb2l76tplcd4x6f4543c2m" },
+        { name: "到达邮局", url: "https://ipfs.io/ipfs/bafybeidy5gmci3sswltf63jrqr2lcsjhxpa7t4wly2mo6ainrtflsve6fi" },
+        { name: "首日封正面", url: "https://ipfs.io/ipfs/bafybeiamzq2aq2uwneq4e5hlyzqu3qecviwcqoujbk7emeprprudlclc4ge" },
+        { name: "挂号信编码", url: "https://ipfs.io/ipfs/bafybeib57xurh2qwuosf4bpq44vqv7mbb223356b3cq4wlunvoroytyvwe" },
+        { name: "邮寄凭证", url: "https://ipfs.io/ipfs/bafybeiaf6szedvwqhss7sbqfw7rq6v4u37p5dxiu6aooaukzkuc4hkaf2y" },
+        { name: "邮路信息", url: "https://ipfs.io/ipfs/bafybeibb2pu5c2wvmgga6zfg7amk6rheyw2ebzjgndwdgwztyfrx37go5i" }
     ];
-    
-    // CID 列表（用于右侧显示）
+
+    // CID 列表
     const cidItems = [
         { name: "GPS 轨迹", cid: "bafkreiaksqwedp2whp6me74swxbpxztah4tjidzpz7cesaeslcknm5drby" },
         { name: "发行公报", cid: "bafkreih33trksr6oc7ddcrx26iywfjpcipsafb2l76tplcd4x6f4543c2m" },
-        { name: "央视新闻录屏", cid: "bafybeic23tn5f2nyuxodc5rf462sfstkrqqquwblqlpounkqyvkeb7bxya" }
+        { name: "央视新闻录屏", cid: "bafybeic23tn5f2nyuxodc5rf462sfstkrqqquwblqlpounkqyvkeb7bxya" },
+        { name: "气象数据录屏", cid: "bafybeignwaucy3wxfrxcnyilq3ditq4q4hq6ptianh4ln2zjd5ltyjglee" }
     ];
-    
-    // Opentimestamp 比特币交易哈希（请替换为实际值）
-    const opentimestampTxid = "f91a8e3b5c2d4a6f8e1c7d9b0a3f5e8d2c4b6a8e0c1d7f9e3a5b7c9d1e3f5a7b9c";
-    
-    // 合约信息（Sepolia v6）
+
     const CONTRACT_ADDRESS = "0x2934ca1D3F3b8EfCDAf4735bD36A36E8bfa3a6A4";
     const TOKEN_ID = 0;
-    const CITATION_FEE = "0.0001";
-    
-    // GPS 轨迹点（根据你的实际 GPX 数据，这里用模拟坐标）
-    const trackPoints = [
-        [22.5175, 113.9245],
-        [22.5178, 113.9248],
-        [22.5182, 113.9252],
-        [22.5185, 113.9256],
-        [22.5183, 113.9260],
-        [22.5179, 113.9263],
-        [22.5174, 113.9261]
-    ];
-    
-    // ============================================================
-    // 2. 渲染页面
-    // ============================================================
-    
-    // 照片网格
+    const abi = ["function cite(uint256 tokenId) external payable returns (uint256)"];
+
+    const trackPoints = [[22.5175,113.9245],[22.5178,113.9248],[22.5182,113.9252],[22.5185,113.9256],[22.5183,113.9260],[22.5179,113.9263],[22.5174,113.9261]];
+
+    // 渲染照片
     const photoGrid = document.getElementById('photoGrid');
     photoAssets.forEach(asset => {
         const div = document.createElement('div');
-        div.className = 'photo-item';
+        div.className = 'evidence-item';
         const img = document.createElement('img');
         img.src = asset.url;
         img.alt = asset.name;
         img.loading = 'lazy';
         img.onclick = () => openModal(asset.url);
         div.appendChild(img);
+        const label = document.createElement('div');
+        label.className = 'label';
+        label.textContent = asset.name;
+        div.appendChild(label);
         photoGrid.appendChild(div);
     });
-    
-    // CID 列表
+
+    // 渲染 CID
     const cidList = document.getElementById('cidList');
     cidItems.forEach(item => {
-        const li = document.createElement('li');
-        li.innerHTML = `<strong>${item.name}</strong><br><span class="cid">${item.cid}</span>`;
-        cidList.appendChild(li);
+        const row = document.createElement('div');
+        row.className = 'cid-row';
+        row.innerHTML = `<div class="cid-name">${item.name}</div><div class="cid-value"><a href="https://ipfs.io/ipfs/${item.cid}" target="_blank">${item.cid}</a></div>`;
+        cidList.appendChild(row);
     });
-    
-    // Opentimestamp 显示
-    document.getElementById('opentimestampHash').innerHTML = `<a href="https://mempool.space/tx/${opentimestampTxid}" target="_blank" style="color:#0b2b3b;">${opentimestampTxid.substring(0, 32)}...</a>`;
-    
+
     // 地图
-    const map = L.map('map').setView([22.5175, 113.9250], 17);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> & CartoDB'
-    }).addTo(map);
-    const polyline = L.polyline(trackPoints, { color: '#e63946', weight: 4, opacity: 0.8 }).addTo(map);
-    map.fitBounds(polyline.getBounds());
-    
-    // ============================================================
-    // 3. 区块链交互
-    // ============================================================
-    
-    let provider, signer, contract;
-    const citeBtn = document.getElementById('citeBtn');
-    const statusMsg = document.getElementById('statusMsg');
-    
-    const abi = [
-        "function cite(uint256 tokenId) external payable returns (uint256)"
-    ];
-    
-    async function initWeb3() {
-        if (typeof window.ethereum !== 'undefined') {
-            provider = new ethers.BrowserProvider(window.ethereum);
-            try {
-                await provider.send("eth_requestAccounts", []);
-                signer = await provider.getSigner();
-                contract = new ethers.Contract(CONTRACT_ADDRESS, abi, signer);
-                const address = await signer.getAddress();
-                statusMsg.innerHTML = `✅ 钱包已连接: ${address.slice(0,6)}...${address.slice(-4)}`;
-                citeBtn.disabled = false;
-            } catch (err) {
-                statusMsg.innerHTML = `⚠️ 连接失败: ${err.message}`;
-                citeBtn.disabled = true;
-            }
-        } else {
-            statusMsg.innerHTML = "❌ 未检测到钱包插件 (请安装 MetaMask)";
-            citeBtn.disabled = true;
-        }
-    }
-    
+    const map = L.map('eventMap').setView([22.5175, 113.9250], 17);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>' }).addTo(map);
+    L.polyline(trackPoints, { color: '#e63946', weight: 4 }).addTo(map);
+    map.fitBounds(L.polyline(trackPoints).getBounds());
+
+    // 引用功能
+    const citeBtn = document.getElementById('citeButton');
+    const citeStatus = document.getElementById('citeStatus');
     citeBtn.addEventListener('click', async () => {
-        if (!contract) {
-            statusMsg.innerHTML = "请先连接钱包";
-            return;
-        }
+        if (!window.ethereum) { citeStatus.innerHTML = "❌ 请安装 MetaMask"; return; }
         citeBtn.disabled = true;
         citeBtn.textContent = "⏳ 等待确认...";
-        statusMsg.innerHTML = "📡 正在发送引用交易...";
+        citeStatus.innerHTML = "📡 正在连接钱包...";
         try {
-            const fee = ethers.parseEther(CITATION_FEE);
+            const provider = new ethers.BrowserProvider(window.ethereum);
+            await provider.send("eth_requestAccounts", []);
+            const signer = await provider.getSigner();
+            const contract = new ethers.Contract(CONTRACT_ADDRESS, abi, signer);
+            const fee = ethers.parseEther("0.0001");
             const tx = await contract.cite(TOKEN_ID, { value: fee });
-            statusMsg.innerHTML = `🔄 交易已发送: ${tx.hash.slice(0,10)}... 等待确认`;
+            citeStatus.innerHTML = `🔄 交易已发送: ${tx.hash.slice(0,10)}...`;
             await tx.wait();
-            statusMsg.innerHTML = `✅ 引用成功！交易哈希: <a href="https://sepolia.etherscan.io/tx/${tx.hash}" target="_blank">查看</a>`;
+            citeStatus.innerHTML = `✅ 引用成功！<a href="https://sepolia.etherscan.io/tx/${tx.hash}" target="_blank">查看 ↗</a>`;
             citeBtn.textContent = "✓ 已引用";
         } catch (err) {
-            console.error(err);
-            statusMsg.innerHTML = `❌ 引用失败: ${err.message}`;
+            citeStatus.innerHTML = `❌ 失败: ${err.message}`;
             citeBtn.disabled = false;
             citeBtn.textContent = "🔗 重试引用";
         }
     });
-    
-    function openModal(url) {
-        const modal = document.getElementById('imageModal');
-        const modalImg = document.getElementById('modalImage');
-        modal.style.display = 'flex';
-        modalImg.src = url;
-    }
-    
-    function closeModal() {
-        document.getElementById('imageModal').style.display = 'none';
-    }
-    
-    initWeb3();
+
+    function openModal(url) { document.getElementById('imageModal').style.display = 'flex'; document.getElementById('modalImage').src = url; }
+    function closeModal() { document.getElementById('imageModal').style.display = 'none'; }
 </script>
 </body>
 </html>
