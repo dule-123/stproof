@@ -26,6 +26,9 @@
         .summary-item { text-align: center; }
         .summary-item .label { font-size: 13px; color: #6c86a3; }
         .summary-item .value { font-weight: 700; font-size: 16px; }
+        .nft-info-card { background: linear-gradient(135deg, #0b2b3b 0%, #1a4a6e 100%); border-radius: 16px; padding: 20px; margin-bottom: 30px; color: white; }
+        .nft-info-card a { color: white; background: rgba(255,255,255,0.2); border-radius: 8px; padding: 8px 16px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: background 0.2s; }
+        .nft-info-card a:hover { background: rgba(255,255,255,0.3); }
         .map-container { height: 350px; border-radius: 12px; overflow: hidden; margin-bottom: 30px; }
         .evidence-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 15px; margin: 20px 0; }
         .evidence-item { text-align: center; cursor: pointer; }
@@ -46,13 +49,11 @@
 
 <div class="header">
     <div class="container">
-        <!-- 中文标题 -->
         <div id="zhHeader">
             <h1>🌐 事实元宇宙 · 园博会邮票首日实寄事件</h1>
             <p>第十五届中国国际园林博览会纪念邮票 · 首日实寄 NFT #001</p>
             <a href="/" class="back-link">← 返回首页</a>
         </div>
-        <!-- 英文标题 -->
         <div id="enHeader" style="display:none;">
             <h1>🌐 Fact Metaverse · Garden Expo Stamp First-Day Cover Event</h1>
             <p>15th China International Garden Expo Commemorative Stamp · First-Day Cover NFT #001</p>
@@ -64,7 +65,6 @@
 
 <div class="container">
     <div class="card">
-        <!-- 中文卡片头 -->
         <div id="zhCardHeader" class="card-header">
             <h2>📮 第十五届中国国际园林博览会纪念邮票</h2>
             <p>深圳南油邮局 · 首日实寄事件</p>
@@ -74,7 +74,6 @@
                 <span style="background:rgba(255,255,255,0.2); padding:4px 12px; border-radius:20px; font-size:12px;">✅ 完整证据链</span>
             </div>
         </div>
-        <!-- 英文卡片头 -->
         <div id="enCardHeader" class="card-header" style="display:none;">
             <h2>📮 15th China International Garden Expo Commemorative Stamp</h2>
             <p>Shenzhen Nanyou Post Office · First-Day Cover Event</p>
@@ -85,14 +84,13 @@
             </div>
         </div>
         <div class="card-body">
-            <!-- 中文摘要 -->
+            <!-- 中英文摘要 -->
             <div id="zhSummary" class="event-summary">
                 <div class="summary-item"><div class="label">邮票主题</div><div class="value">第十五届中国国际园林博览会</div></div>
                 <div class="summary-item"><div class="label">核心日期</div><div class="value">2026-04-15</div></div>
                 <div class="summary-item"><div class="label">核心地点</div><div class="value">深圳南油邮局</div></div>
                 <div class="summary-item"><div class="label">序列编号</div><div class="value">STP-20260415-001</div></div>
             </div>
-            <!-- 英文摘要 -->
             <div id="enSummary" class="event-summary" style="display:none;">
                 <div class="summary-item"><div class="label">Stamp Theme</div><div class="value">15th China International Garden Expo</div></div>
                 <div class="summary-item"><div class="label">Core Date</div><div class="value">2026-04-15</div></div>
@@ -100,28 +98,41 @@
                 <div class="summary-item"><div class="label">Serial Number</div><div class="value">STP-20260415-001</div></div>
             </div>
 
+            <!-- NFT 信息卡（中英文共用，内容动态切换） -->
+            <div id="nftInfoCard" class="nft-info-card">
+                <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px;">
+                    <div>
+                        <div id="zhNftLabel" style="font-size: 14px; opacity: 0.8;">📌 本次事件 NFT</div>
+                        <div id="enNftLabel" style="font-size: 14px; opacity: 0.8; display: none;">📌 Event NFT</div>
+                        <div id="zhNftTitle" style="font-size: 20px; font-weight: 700; margin-top: 4px;">第十五届中国国际园博会纪念邮票 · 首日实寄 #001</div>
+                        <div id="enNftTitle" style="font-size: 20px; font-weight: 700; margin-top: 4px; display: none;">15th China Garden Expo Stamp · First-Day Cover #001</div>
+                        <div id="zhNftMeta" style="font-size: 12px; opacity: 0.7; margin-top: 8px; font-family: monospace;">Token ID: 0 | 合约: Sepolia</div>
+                        <div id="enNftMeta" style="font-size: 12px; opacity: 0.7; margin-top: 8px; font-family: monospace; display: none;">Token ID: 0 | Contract: Sepolia</div>
+                    </div>
+                    <a href="https://sepolia.etherscan.io/token/0x2934ca1D3F3b8EfCDAf4735bD36A36E8bfa3a6A4?a=0" target="_blank" class="btn" style="background: white; color: #0b2b3b; padding: 10px 24px;">
+                        <i class="fas fa-external-link-alt"></i> <span id="zhViewLink">在 Etherscan 查看 NFT</span><span id="enViewLink" style="display: none;">View NFT on Etherscan</span>
+                    </a>
+                </div>
+            </div>
+
             <!-- GPS 地图 -->
             <div class="map-container" id="eventMap"></div>
 
-            <!-- 中文照片标题 -->
             <h4 id="zhPhotoTitle" style="margin: 20px 0 12px;"><i class="fas fa-images"></i> 现场影像记录</h4>
             <h4 id="enPhotoTitle" style="margin: 20px 0 12px; display:none;"><i class="fas fa-images"></i> On-Site Evidence</h4>
             <div class="evidence-grid" id="photoGrid"></div>
 
-            <!-- 中文 CID 标题 -->
             <div class="cid-list">
                 <h4 id="zhCidTitle" style="margin-bottom: 12px;"><i class="fas fa-link"></i> IPFS 证据锚定 (CID)</h4>
                 <h4 id="enCidTitle" style="margin-bottom: 12px; display:none;"><i class="fas fa-link"></i> IPFS Evidence Anchoring (CID)</h4>
                 <div id="cidList"></div>
             </div>
 
-            <!-- 中文引用区 -->
             <div id="zhCite" style="text-align: center; padding-top: 20px; border-top: 1px solid #e2e8f0;">
                 <button id="citeButton" class="btn">🔗 引用此事件 · 支持事实 (0.0001 ETH)</button>
                 <div id="citeStatus" class="cite-status"></div>
                 <p style="font-size:12px; color:#6c86a3; margin-top:12px;">引用税: 70% 归事件发起人 · 30% 支持协议金库</p>
             </div>
-            <!-- 英文引用区 -->
             <div id="enCite" style="text-align: center; padding-top: 20px; border-top: 1px solid #e2e8f0; display:none;">
                 <button id="citeButtonEn" class="btn">🔗 Cite This Event · Support Truth (0.0001 ETH)</button>
                 <div id="citeStatusEn" class="cite-status"></div>
@@ -167,7 +178,6 @@
     let isEnglish = false;
     let photoGrid, cidList;
 
-    // 渲染照片
     function renderPhotos() {
         photoGrid = document.getElementById('photoGrid');
         photoGrid.innerHTML = '';
@@ -188,7 +198,6 @@
         });
     }
 
-    // 渲染 CID
     function renderCids() {
         cidList = document.getElementById('cidList');
         cidList.innerHTML = '';
@@ -200,13 +209,11 @@
         });
     }
 
-    // 地图
     const map = L.map('eventMap').setView([22.5175, 113.9250], 17);
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>' }).addTo(map);
     L.polyline(trackPoints, { color: '#e63946', weight: 4 }).addTo(map);
     map.fitBounds(L.polyline(trackPoints).getBounds());
 
-    // 引用功能（中文）
     const citeBtn = document.getElementById('citeButton');
     const citeStatus = document.getElementById('citeStatus');
     citeBtn.addEventListener('click', async () => {
@@ -232,7 +239,6 @@
         }
     });
 
-    // 引用功能（英文）
     const citeBtnEn = document.getElementById('citeButtonEn');
     const citeStatusEn = document.getElementById('citeStatusEn');
     if (citeBtnEn) {
@@ -271,30 +277,34 @@
         // 头部
         document.getElementById('zhHeader').style.display = isEnglish ? 'none' : 'block';
         document.getElementById('enHeader').style.display = isEnglish ? 'block' : 'none';
-        
         // 卡片头
         document.getElementById('zhCardHeader').style.display = isEnglish ? 'none' : 'block';
         document.getElementById('enCardHeader').style.display = isEnglish ? 'block' : 'none';
-        
         // 摘要
         document.getElementById('zhSummary').style.display = isEnglish ? 'none' : 'grid';
         document.getElementById('enSummary').style.display = isEnglish ? 'grid' : 'none';
-        
-        // 标题
+        // NFT 信息卡内文字
+        document.getElementById('zhNftLabel').style.display = isEnglish ? 'none' : 'block';
+        document.getElementById('enNftLabel').style.display = isEnglish ? 'block' : 'none';
+        document.getElementById('zhNftTitle').style.display = isEnglish ? 'none' : 'block';
+        document.getElementById('enNftTitle').style.display = isEnglish ? 'block' : 'none';
+        document.getElementById('zhNftMeta').style.display = isEnglish ? 'none' : 'block';
+        document.getElementById('enNftMeta').style.display = isEnglish ? 'block' : 'none';
+        document.getElementById('zhViewLink').style.display = isEnglish ? 'none' : 'inline';
+        document.getElementById('enViewLink').style.display = isEnglish ? 'inline' : 'none';
+        // 照片标题
         document.getElementById('zhPhotoTitle').style.display = isEnglish ? 'none' : 'block';
         document.getElementById('enPhotoTitle').style.display = isEnglish ? 'block' : 'none';
+        // CID 标题
         document.getElementById('zhCidTitle').style.display = isEnglish ? 'none' : 'block';
         document.getElementById('enCidTitle').style.display = isEnglish ? 'block' : 'none';
-        
         // 引用区
         document.getElementById('zhCite').style.display = isEnglish ? 'none' : 'block';
         document.getElementById('enCite').style.display = isEnglish ? 'block' : 'none';
-        
         // 页脚
         document.getElementById('zhFooter').style.display = isEnglish ? 'none' : 'block';
         document.getElementById('enFooter').style.display = isEnglish ? 'block' : 'none';
         
-        // 重新渲染照片和 CID
         renderPhotos();
         renderCids();
         
@@ -304,7 +314,6 @@
 
     langSwitch.addEventListener('click', updateLanguage);
     
-    // 初始渲染
     renderPhotos();
     renderCids();
 </script>
