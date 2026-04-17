@@ -67,7 +67,7 @@
         "name": "GPS_20260415_080707_NYPOST.gpx",
         "description": "当日前往邮局GPS轨迹",
         "type": "application/gpx+xml",
-极       "cid": "bafkreiaksqwedp2whp6me74swxbpxztah4tjidzpz7cesaeslcknm5drby",
+        "cid": "bafkreiaksqwedp2whp6me74swxbpxztah4tjidzpz7cesaeslcknm5drby",
         "timestamp_proof_cid": "bafkreidffm2pl4qayej2iggg6r4cl4iaipes3fxlwgiuks4enx5pvycsou"
       },
       {
@@ -101,7 +101,7 @@
       {
         "name": "IMG_20260415_103711.jpg",
         "description": "邮寄完成凭证",
-       极"type": "image/jpeg",
+        "type": "image/jpeg",
         "cid": "极bafybeiaf6szedvwqhss7sbqfw7rq6v4u37p5dxiu6aooaukzkuc4hkaf2y",
         "timestamp_proof_cid": "bafkreieihpr5n4y3quoxsf2q4cipedwpdvbjtpwovujzdrlfbmwmb66osy"
       },
@@ -162,7 +162,7 @@
       {
         "name": "IMG_20260415_092635.jpg",
         "description": "信封称重照片",
-        "declaration_txt_cid": "bafkreifvdciyft3pt4kfftc6dqrwwcstxgerwo2weew56drdhc5r5极ujk4e",
+        "declaration_txt_cid": "bafkreifvdciyft3pt4kfftc6dqrwwcstxgerwo2weew56drdhc5r5ujk4e",
         "verification_note": "此文件哈希已由Opentimestamp锚定。持有者可极联系创作者获取原始文件进行哈希比对验证。"
       },
       {
@@ -216,7 +216,7 @@
       {
         "name": "20260416_001_CHPOST.jpg",
         "description": "中国邮政邮路凭证（原始）",
-        "declaration_txt_cid": "bafkreid4xfsow4opav2c3rp6m2r6admegqkztatzk5elwwhutmmtelpzk极4",
+        "declaration_txt_cid": "bafkreid4xfsow4opav2c3rp6m2r6admegqkztatzk5elwwhutmmtelpzk4",
         "verification_note": "此文件哈希已由Opentimestamp锚定。持有者可联系创作者获取原始文件进行哈希比对验证。"
       }
     ],
