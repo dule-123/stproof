@@ -1,9 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STProof Protocol | Universal On-Chain Event Proof</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="description" content="STProof Protocol - 通用链上事件确权协议 | 第十五届中国国际园林博览会纪念邮票首日实寄事件 #001">
+    <title>STProof Protocol | 事件确权 · 事实元宇宙</title>
+    
+    <!-- Open Graph (用于社交媒体分享) -->
+    <meta property="og:title" content="STProof Protocol - 事件确权 · 事实元宇宙">
+    <meta property="og:description" content="第十五届中国国际园林博览会纪念邮票 · 首日实寄事件 #001 | 完整证据链 | GPS轨迹 | 多源影像 | 区块链时间戳">
+    <meta property="og:image" content="https://white-tired-rat-661.mypinata.cloud/ipfs/bafkreidws3puiyo23w3y2gwmhfaxrpvgyjcjjsh33dlp3rufjm5iefexlm">
+    <meta property="og:type" content="website">
+    
+    <!-- 字体 & 图标 -->
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Leaflet 地图 -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Ethers.js -->
+    <script src="https://cdn.jsdelivr.net/npm/ethers@6.9.0/dist/ethers.umd.min.js"></script>
+    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
         :root { 
@@ -14,6 +30,8 @@
             --bg: #F7F8FA; 
             --white: #fff; 
             --shadow: 0 4px 20px rgba(0,0,0,0.08); 
+            --green: #00A870;
+            --orange: #FF7D00;
         }
         body { background: var(--bg); color: var(--dark); line-height: 1.6; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
@@ -38,7 +56,16 @@
             background: #0E42C1; 
             box-shadow: 0 4px 12px rgba(22,93,255,0.3);
         }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        .btn-outline:hover {
+            background: var(--primary-light);
+        }
 
+        /* 头部导航 */
         header { 
             background: var(--white); 
             box-shadow: var(--shadow); 
@@ -63,7 +90,6 @@
             gap: 8px;
         }
         .logo span { color: var(--dark); }
-
         .nav { 
             display: flex; 
             gap: 24px; 
@@ -78,7 +104,6 @@
             cursor: pointer; 
         }
         .nav a:hover, .nav a.active { color: var(--primary); }
-
         .lang-switch { 
             padding: 6px 12px; 
             border: 1px solid var(--primary); 
@@ -90,8 +115,9 @@
         }
         .lang-switch:hover { background: var(--primary-light); }
 
+        /* 首屏 */
         .hero { 
-            padding: 150px 0 80px; 
+            padding: 140px 0 80px; 
             background: linear-gradient(135deg, var(--primary-light) 0%, var(--bg) 100%); 
             margin-top: 70px; 
         }
@@ -163,7 +189,7 @@
         .event-types { background: var(--primary-light); }
         .event-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
             gap: 25px; 
         }
         .event-card { 
@@ -187,68 +213,125 @@
             font-weight: 600; 
             margin-bottom: 8px;
         }
-        .event-card p { color: var(--gray); line-height: 1.7; }
 
-        .case { background: var(--white); }
-        .case-container { 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            gap: 30px;
+        /* 事实元宇宙模块 */
+        .metaverse-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-top: 30px;
         }
-        .case-card { 
-            background: var(--bg); 
-            padding: 30px; 
-            border-radius: 12px; 
-            width: 100%;
-            max-width: 900px; 
-            box-shadow: var(--shadow); 
-            cursor: pointer; 
-            transition: all 0.3s;
+        .metaverse-header {
+            background: linear-gradient(135deg, #0b2b3b 0%, #1a4a6e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
         }
-        .case-card:hover { background: var(--primary-light); }
-        .case-card h3 { 
-            font-size: 22px; 
-            font-weight: 700;
-            text-align: center; 
-            margin-bottom: 20px; 
-            color: var(--dark);
+        .metaverse-header h2 {
+            font-size: 28px;
+            margin-bottom: 8px;
         }
-        .case-info { 
-            display: grid; 
-            grid-template-columns: repeat(2, 1fr); 
-            gap: 15px; 
-            margin-bottom: 20px; 
+        .metaverse-header p {
+            opacity: 0.85;
         }
-        .info-item { text-align: center; }
-        .info-item .label { 
-            color: var(--gray); 
-            font-size: 14px; 
+        .metaverse-body {
+            padding: 30px;
+        }
+        .event-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+            background: var(--bg);
+            padding: 20px;
+            border-radius: 12px;
+        }
+        .summary-item {
+            text-align: center;
+        }
+        .summary-item .label {
+            font-size: 13px;
+            color: var(--gray);
             margin-bottom: 4px;
         }
-        .info-item .value { 
-            font-weight: 600; 
-            font-size: 16px; 
+        .summary-item .value {
+            font-weight: 700;
+            font-size: 16px;
             color: var(--dark);
         }
-        .case-desc { 
-            color: var(--gray); 
-            text-align: center; 
-            font-size: 16px; 
-            margin-top: 10px;
-            line-height: 1.7;
+        .map-container {
+            height: 350px;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 30px;
         }
-
-        .genesis-note {
+        .evidence-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .evidence-item {
             text-align: center;
-            max-width: 850px;
-            margin: -20px auto 40px;
-            font-size: 16px;
+            cursor: pointer;
+        }
+        .evidence-item img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.2s;
+            border: 1px solid #eef2f6;
+        }
+        .evidence-item img:hover {
+            transform: scale(1.02);
+        }
+        .evidence-item .label {
+            font-size: 12px;
             color: var(--gray);
-            line-height: 1.8;
+            margin-top: 6px;
+        }
+        .cid-list {
+            background: var(--bg);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+        .cid-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .cid-name {
+            font-weight: 600;
+            width: 140px;
+        }
+        .cid-value {
+            font-family: monospace;
+            font-size: 12px;
+            word-break: break-all;
+            flex: 1;
+            color: var(--primary);
+        }
+        .cid-value a {
+            text-decoration: underline;
+        }
+        .cite-section {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 20px;
+        }
+        .cite-status {
+            margin-top: 12px;
+            font-size: 14px;
+            color: var(--green);
         }
 
-        .genesis-nft-section { background: var(--white); padding: 80px 0; }
         .nft-card { 
             max-width: 900px; 
             margin: 0 auto; 
@@ -258,22 +341,9 @@
             box-shadow: var(--shadow); 
             text-align: center;
         }
-        .nft-card h3 { 
-            font-size: 28px; 
-            font-weight: 700;
-            color: var(--primary); 
-            margin-bottom: 20px; 
-        }
-        .nft-desc { 
-            font-size: 17px; 
-            color: var(--gray); 
-            line-height: 1.8; 
-            margin-bottom: 30px; 
-            text-align: left;
-        }
         .nft-meta { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
             gap: 20px; 
             margin: 30px 0; 
             text-align: left;
@@ -283,91 +353,61 @@
             background: var(--white); 
             border-radius: 8px; 
         }
-        .meta-item strong { 
-            color: var(--dark); 
-            font-size: 16px; 
-        }
+        .meta-item strong { color: var(--dark); }
         .meta-item .value { 
             color: var(--primary); 
             font-family: monospace; 
             word-break: break-all; 
             margin-top: 4px;
         }
-        .meta-item a { color: var(--primary); text-decoration: underline; }
 
-        .cid-section { background: var(--primary-light); padding: 80px 0; }
+        .cid-section { background: var(--primary-light); }
         .cid-card { 
             background: var(--white); 
             padding: 30px; 
             border-radius: 12px; 
             max-width: 900px; 
             margin: 0 auto; 
-            box-shadow: var(--shadow); 
-        }
-        .cid-card h3 { 
-            font-size: 22px; 
-            font-weight: 700;
-            text-align: center; 
-            margin-bottom: 20px; 
-            color: var(--dark);
         }
         .cid-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
             gap: 20px; 
         }
-        .cid-item { 
-            padding: 16px; 
-            background: var(--bg); 
-            border-radius: 8px; 
-        }
-        .cid-item h4 { 
-            font-size: 17px; 
-            color: var(--primary); 
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .cid-value {
-            font-family: monospace;
-            font-size: 15px;
-            background: #eef2f7;
-            padding: 8px 10px;
-            border-radius: 6px;
-            word-break: break-all;
-            margin-top: 6px;
-            display: inline-block;
-            width: 100%;
-        }
-        .cid-desc { 
-            font-size: 14px; 
-            color: var(--gray); 
-            margin-top: 6px; 
-        }
-        .cid-item a { color: var(--primary); }
 
         footer { 
             padding: 40px 0; 
             background: #111; 
             color: #ccc; 
             text-align: center; 
-            margin-top: 40px;
-        }
-        .footer-logo { 
-            font-size: 20px; 
-            font-weight: 700; 
-            color: var(--primary); 
-        }
-        .copyright { 
-            font-size: 14px; 
-            opacity: 0.8; 
-            margin-top: 10px;
         }
 
-        #zh-content, #en-content { display: none; }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 700px) {
+            .hero-slogan { font-size: 28px; }
+            .section-title { font-size: 24px; }
+            .map-container { height: 250px; }
+            .nav { gap: 12px; }
+        }
     </style>
-    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
@@ -375,35 +415,24 @@
     <div class="header-container">
         <div class="logo">STProof <span>Protocol</span></div>
         <nav class="nav">
-            <a class="nav-item en-link active" data-target="core">Core Concepts</a>
-            <a class="nav-item zh-link active" data-target="core">核心理念</a>
-
-            <a class="nav-item en-link" data-target="event-types">Event Types</a>
-            <a class="nav-item zh-link" data-target="event-types">事件类型</a>
-
-            <a class="nav-item en-link" data-target="case">Experiment</a>
-            <a class="nav-item zh-link" data-target="case">实验</a>
-
-            <a class="nav-item en-link" data-target="genesis-nft">Genesis NFT</a>
-            <a class="nav-item zh-link" data-target="genesis-nft">创世NFT</a>
-
-            <a class="nav-item en-link" data-target="cid-section">CIDs</a>
-            <a class="nav-item zh-link" data-target="cid-section">CID清单</a>
-
+            <a class="nav-item" data-target="core">核心理念</a>
+            <a class="nav-item" data-target="event-types">事件类型</a>
+            <a class="nav-item" data-target="metaverse">事实元宇宙</a>
+            <a class="nav-item" data-target="genesis-nft">创世NFT</a>
+            <a class="nav-item" data-target="cid-section">CID清单</a>
             <a href="https://github.com/dule-123/stproof" target="_blank">GitHub</a>
-            <div class="lang-switch" id="langSwitch">EN / 中</div>
         </nav>
     </div>
 </header>
 
-<!-- 中文 -->
-<div id="zh-content">
-    <section class="hero" id="hero">
+<main>
+    <!-- 首屏 -->
+    <section class="hero">
         <div class="container">
             <h1 class="hero-slogan">不确权物，只确权事<br><span>凡发生，皆可存；凡存证，皆可信</span></h1>
-            <p class="hero-desc">STProof（时空确权）是一套面向「事件」的通用链上确权与价值捕获协议，以多源证据交叉验证为核心，以<b>元数据标准化</b>为DNA，以<b>零知识思想确权</b>为底层方法论，重新定义事实存证的底层逻辑。</p>
+            <p class="hero-desc">STProof（时空确权）是一套面向「事件」的通用链上确权与价值捕获协议，以多源证据交叉验证为核心，以<b>元数据标准化</b>为DNA，以<b>零知识思想确权</b>为底层方法论。</p>
             <div class="hero-btns">
-                <a href="/docs/STProof_Protocol_Whitepaper_v5.2_CN" target="_blank" class="btn btn-primary">
+                <a href="/docs/whitepaper.pdf" class="btn btn-primary">
                     <i class="fas fa-file-alt"></i> 白皮书 v5.2
                 </a>
                 <a href="https://opensea.io/collection/stproof-genesis-event" target="_blank" class="btn btn-primary">
@@ -413,441 +442,319 @@
         </div>
     </section>
 
-    <section class="core section" id="core">
+    <!-- 核心理念 -->
+    <section class="section" id="core">
         <div class="container">
             <h2 class="section-title">协议核心理念</h2>
-            <p class="section-desc">以平权为核心，以多源交叉验证为技术根基，以元数据标准化为通用表达层，让事实成为数字世界的可信基础设施</p>
+            <p class="section-desc">以平权为核心，以多源交叉验证为技术根基，以元数据标准化为通用表达层</p>
             <div class="core-grid">
                 <div class="core-card">
                     <h3><i class="fas fa-compass-drafting"></i> 确权对象：唯事件</h3>
-                    <p>统一以「客观发生的历史事件」为确权核心，而非传统资产/代币，实物归实物世界，事件归区块链世界。</p>
+                    <p>统一以「客观发生的历史事件」为确权核心，实物归实物世界，事件归区块链世界。</p>
                 </div>
                 <div class="core-card">
                     <h3><i class="fas fa-balance-scale"></i> 核心理念：平权存证</h3>
-                    <p>事实记录无资金门槛，任何人只需支付Gas费即可铸造Event NFT，人人都能成为事实的见证者。</p>
+                    <p>事实记录无资金门槛，任何人只需支付Gas费即可铸造Event NFT。</p>
                 </div>
                 <div class="core-card">
-                    <h3><i class="fas fa-link"></i> 技术核心：多源证据交叉验证</h3>
-                    <p>通过物理证据、链上证据、第三方证据的多源交叉印证，真正实现「事件真实发生」的可信确权。</p>
+                    <h3><i class="fas fa-link"></i> 多源证据交叉验证</h3>
+                    <p>物理证据、链上证据、第三方证据多源交叉印证，实现可信确权。</p>
                 </div>
                 <div class="core-card">
-                    <h3><i class="fas fa-code"></i> 核心DNA：元数据标准化</h3>
-                    <p>STProof Metadata Standard 让事件NFT可编程、可组合、可解析，成为数字文明的事实标准单元。</p>
+                    <h3><i class="fas fa-code"></i> 元数据标准化</h3>
+                    <p>STProof Metadata Standard 让事件NFT可编程、可组合、可解析。</p>
                 </div>
                 <div class="core-card">
-                    <h3><i class="fas fa-sack-dollar"></i> 价值机制：引用税</h3>
-                    <p>事件价值不依赖炒作，而是由被相信、被使用的次数决定，引用越多，价值越高。</p>
+                    <h3><i class="fas fa-sack-dollar"></i> 引用税机制</h3>
+                    <p>事件价值由被相信、被使用的次数决定，引用越多，价值越高。</p>
                 </div>
                 <div class="core-card">
-                    <h3><i class="fas fa-shield-alt"></i> 底层方法论：零知识思想确权</h3>
-                    <p>基于OTS时间戳+IPFS双链锚定，实现无需隐私泄露的思想确权，永久存证、不可篡改。</p>
+                    <h3><i class="fas fa-shield-alt"></i> 零知识思想确权</h3>
+                    <p>OTS时间戳 + IPFS双链锚定，实现无需隐私泄露的思想确权。</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- 事件类型 -->
     <section class="event-types section" id="event-types">
         <div class="container">
             <h2 class="section-title">全场景事件类型</h2>
             <div class="event-grid">
-                <a href="cases/physical-event.html" style="text-decoration:none;">
-                    <div class="event-card">
-                        <h3>有实物事件</h3>
-                        <p class="example">典型场景</p>
-                        <p>实寄邮寄、艺术品创作、文物出土、瓷器烧制等需要物理验证的事件，通过多源证据交叉锚定真实发生。</p>
-                    </div>
-                </a>
-                <a href="cases/intangible-event.html" style="text-decoration:none;">
-                    <div class="event-card">
-                        <h3>无实物事件</h3>
-                        <p class="example">典型场景</p>
-                        <p>线上发布、链上投票、观点声明、学术发表等纯数字形态的事件，通过链上多源数据交叉验证真实性。</p>
-                    </div>
-                </a>
-                <a href="cases/hybrid-event.html" style="text-decoration:none;">
-                    <div class="event-card">
-                        <h3>混合事件</h3>
-                        <p class="example">典型场景</p>
-                        <p>新闻现场、演出活动、法律存证、线下会议等结合物理与数字形态的事件。</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section class="case section" id="case">
-        <div class="container case-container">
-            <h2 class="section-title">核心实验：STProof v5.2 自指实验</h2>
-            <div class="genesis-note">
-                STProof Genesis Event — 数字主权的诞生<br>
-                这是 STProof 生态的创世实验，通过多源证据交叉验证锚定创世事件，象征链上身份、安全与去中心化信任的新纪元开端。
-            </div>
-            <a href="/cases/self-referential-proof.html" style="text-decoration:none;">
-                <div class="case-card">
-                    <h3>STProof v5.2 自指证明实验</h3>
-                    <div class="case-info">
-                        <div class="info-item">
-                            <div class="label">协议版本</div>
-                            <div class="value">STProof v5.2</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="label">实验类型</div>
-                            <div class="value">自指证明 / 多源交叉验证</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="label">可信时间</div>
-                            <div class="value">2026-04-09</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="label">OTS 时间戳文件</div>
-                            <div class="value">STProof_Genesis.zip.ots</div>
-                        </div>
-                    </div>
-                    <div class="case-desc">本实验通过 OTS 时间戳、IPFS 双链锚定与多源证据交叉验证，实现零知识思想确权，完整验证创世事件的真实性。</div>
+                <div class="event-card">
+                    <h3>有实物事件</h3>
+                    <p class="example">📮 实寄邮寄 · 艺术品创作 · 文物出土</p>
+                    <p>通过多源证据交叉锚定真实发生，实物作为现场载体，NFT只锁事件。</p>
                 </div>
-            </a>
+                <div class="event-card">
+                    <h3>无实物事件</h3>
+                    <p class="example">📄 线上发布 · 链上投票 · 学术发表</p>
+                    <p>纯数字形态的事件，通过链上多源数据交叉验证真实性。</p>
+                </div>
+                <div class="event-card">
+                    <h3>混合事件</h3>
+                    <p class="example">📺 新闻现场 · 演出活动 · 法律存证</p>
+                    <p>结合物理与数字形态的事件，多维度交叉验证。</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section class="genesis-nft-section section" id="genesis-nft">
+    <!-- 事实元宇宙：园博会邮票首日实寄事件 -->
+    <section class="section" id="metaverse">
+        <div class="container">
+            <h2 class="section-title">🌐 事实元宇宙 · 园博会邮票首日实寄事件</h2>
+            <p class="section-desc">第十五届中国国际园林博览会纪念邮票 · 首日实寄 #001 | 完整证据链 | 多源交叉验证</p>
+            
+            <div class="metaverse-card">
+                <div class="metaverse-header">
+                    <h2>📮 第十五届中国国际园林博览会纪念邮票</h2>
+                    <p>深圳南油邮局 · 首日实寄事件 NFT #001</p>
+                    <div class="badge-container" style="margin-top: 12px;">
+                        <span style="background:rgba(255,255,255,0.2); padding:4px 12px; border-radius:20px; font-size:12px;">📅 2026-04-15</span>
+                        <span style="background:rgba(255,255,255,0.2); padding:4px 12px; border-radius:20px; font-size:12px;">📍 深圳南油邮局</span>
+                        <span style="background:rgba(255,255,255,0.2); padding:4px 12px; border-radius:20px; font-size:12px;">✅ 完整证据链</span>
+                    </div>
+                </div>
+                <div class="metaverse-body">
+                    <!-- 事件摘要 -->
+                    <div class="event-summary">
+                        <div class="summary-item"><div class="label">邮票主题</div><div class="value">第十五届中国国际园林博览会</div></div>
+                        <div class="summary-item"><div class="label">核心日期</div><div class="value">2026-04-15</div></div>
+                        <div class="summary-item"><div class="label">核心地点</div><div class="value">深圳南油邮局</div></div>
+                        <div class="summary-item"><div class="label">序列编号</div><div class="value">STP-20260415-001</div></div>
+                    </div>
+                    
+                    <!-- GPS 地图 -->
+                    <div class="map-container" id="eventMap"></div>
+                    
+                    <!-- 公开证据照片 -->
+                    <h4 style="margin: 20px 0 12px;"><i class="fas fa-images"></i> 现场影像记录</h4>
+                    <div class="evidence-grid" id="photoGrid"></div>
+                    
+                    <!-- CID 证据清单 -->
+                    <div class="cid-list">
+                        <h4 style="margin-bottom: 12px;"><i class="fas fa-link"></i> IPFS 证据锚定 (CID)</h4>
+                        <div id="cidList"></div>
+                    </div>
+                    
+                    <!-- 引用交互 -->
+                    <div class="cite-section">
+                        <button id="citeButton" class="btn btn-primary">🔗 引用此事件 · 支持事实 (0.0001 ETH)</button>
+                        <div id="citeStatus" class="cite-status"></div>
+                        <p style="font-size:12px; color:#6c86a3; margin-top:12px;">引用税: 70% 归事件发起人 · 30% 支持协议金库</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 创世NFT -->
+    <section class="section" id="genesis-nft">
         <div class="container">
             <h2 class="section-title">STProof 创世NFT</h2>
             <p class="section-desc">数字主权的诞生 · STProof生态创世符号</p>
             <div class="nft-card">
                 <h3>STProof Genesis Event</h3>
-                <div class="nft-desc">
-                    <strong>🛡️ 数字主权的诞生</strong><br>
-                    这是 STProof 生态的创世事件，是链上身份、安全与去中心化信任新纪元的标志性NFT系列。<br>
-                    每一枚都是由赛博朋克美学与区块链级完整性共同铸造的数字文物，通过多源证据交叉验证锚定创世事件，代表你在 STProof 宇宙中的早期权益。
-                    <br><br>
-                    🔗 拥有一段历史<br>
-                    🎨 AI辅助设计，STProof Studio精心打造<br>
-                    🌐 基于Polygon铸造——低Gas费，高未来潜力<br>
-                    <br>
-                    <em>「证明不是被给予的，而是被赢得的。现在，它属于你。」</em>
-                </div>
                 <div class="nft-meta">
                     <div class="meta-item">
                         <strong>OpenSea 合集</strong>
-                        <div class="value">
-                            <a href="https://opensea.io/collection/stproof-genesis-event" target="_blank">
-                                stproof-genesis-event
-                            </a>
-                        </div>
+                        <div class="value"><a href="https://opensea.io/collection/stproof-genesis-event" target="_blank">stproof-genesis-event</a></div>
                     </div>
                     <div class="meta-item">
                         <strong>Polygon 合约地址</strong>
-                        <div class="value">
-                            0x3d36ef7fdec04e2d53822052f5271b27d7b472b0
-                        </div>
+                        <div class="value">0x3d36ef7fdec04e2d53822052f5271b27d7b472b0</div>
                     </div>
                     <div class="meta-item">
                         <strong>Sepolia 测试网合约</strong>
-                        <div class="value">
-                            <a href="https://sepolia.etherscan.io/address/0x2934ca1D3F3b8EfCDAf4735bD36A36E8bfa3a6A4" target="_blank">
-                                0x2934ca1D3F3b8EfCDAf4735bD36A36E8bfa3a6A4
-                            </a>
-                        </div>
+                        <div class="value"><a href="https://sepolia.etherscan.io/address/0x2934ca1D3F3b8EfCDAf4735bD36A36E8bfa3a6A4" target="_blank">0x2934ca1D3F3b8EfCDAf4735bD36A36E8bfa3a6A4</a></div>
                     </div>
                     <div class="meta-item">
                         <strong>铸造总量</strong>
                         <div class="value">100</div>
                     </div>
-                    <div class="meta-item">
-                        <strong>当前铸造</strong>
-                        <div class="value">2/100</div>
-                    </div>
                 </div>
                 <a href="https://opensea.io/collection/stproof-genesis-event" target="_blank" class="btn btn-primary">
-                    <i class="fas fa-external-link-alt"></i> 前往OpenSea Mint
+                    <i class="fas fa-external-link-alt"></i> 前往 OpenSea Mint
                 </a>
             </div>
         </div>
     </section>
 
+    <!-- CID 清单 -->
     <section class="cid-section section" id="cid-section">
         <div class="container">
             <h2 class="section-title">实验 CID 清单</h2>
-            <p class="section-desc">所有实验证据已上链 IPFS，通过多源交叉验证锚定，可通过 CID 永久验证、不可篡改</p>
+            <p class="section-desc">所有实验证据已上链 IPFS，可通过 CID 永久验证、不可篡改</p>
             <div class="cid-card">
                 <h3>已完成实验 CID</h3>
                 <div class="cid-grid">
                     <div class="cid-item">
                         <h4><i class="fas fa-fingerprint"></i> 自指证明实验 CID</h4>
                         <div class="cid-value">bafybeial45ll7mvqfvnbuk4ddgezajmhzzzoub7bdjwnx3wa65hox4maii</div>
-                        <div class="cid-desc">
-                            <a href="https://ipfs.io/ipfs/bafybeial45ll7mvqfvnbuk4ddgezajmhzzzoub7bdjwnx3wa65hox4maii" target="_blank">
-                                打开 IPFS 网关查看 ↗
-                            </a>
-                        </div>
+                        <div class="cid-desc"><a href="https://ipfs.io/ipfs/bafybeial45ll7mvqfvnbuk4ddgezajmhzzzoub7bdjwnx3wa65hox4maii" target="_blank">打开 IPFS 网关 ↗</a></div>
                     </div>
                     <div class="cid-item">
                         <h4><i class="fas fa-person"></i> 真人跨境实验 CID</h4>
                         <div class="cid-value">bafybeiahbfntsssvhtzwrokp3nojjan3tmscrhbcrzq74jw24sybjp7oo4</div>
-                        <div class="cid-desc">
-                            <a href="https://ipfs.io/ipfs/bafybeiahbfntsssvhtzwrokp3nojjan3tmscrhbcrzq74jw24sybjp7oo4" target="_blank">
-                                打开 IPFS 网关查看 ↗
-                            </a>
-                        </div>
+                        <div class="cid-desc"><a href="https://ipfs.io/ipfs/bafybeiahbfntsssvhtzwrokp3nojjan3tmscrhbcrzq74jw24sybjp7oo4" target="_blank">打开 IPFS 网关 ↗</a></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+</main>
 
-    <footer>
-        <div class="container">
-            <div class="footer-logo">STProof Protocol</div>
-            <div class="copyright">© 2026 STProof Protocol 版权所有 | 凡发生，皆可存；凡存证，皆可信</div>
-        </div>
-    </footer>
-</div>
+<footer>
+    <div class="container">
+        <div class="footer-logo">STProof Protocol</div>
+        <div class="copyright">© 2026 STProof Protocol 版权所有 | 凡发生，皆可存；凡存证，皆可信</div>
+    </div>
+</footer>
 
-<!-- 英文 -->
-<div id="en-content">
-    <section class="hero" id="hero">
-        <div class="container">
-            <h1 class="hero-slogan">Not Proof of Asset, But Proof of Event<br><span>What Happens, Exists; What's Proven, Trusted</span></h1>
-            <p class="hero-desc">STProof is a universal on-chain event proof & value capture protocol. Core: Multi-Source Evidence Cross-Validation. DNA: Metadata Standard. Methodology: Zero-Knowledge Ideology Proof.</p>
-            <div class="hero-btns">
-                <a href="/docs/STProof_Protocol_Whitepaper_v5.2_EN" target="_blank" class="btn btn-primary">
-                    <i class="fas fa-file-alt"></i> Whitepaper v5.2
-                </a>
-                <a href="https://opensea.io/collection/stproof-genesis-event" target="_blank" class="btn btn-primary">
-                    <i class="fas fa-external-link-alt"></i> Genesis NFT
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section class="core section" id="core">
-        <div class="container">
-            <h2 class="section-title">Core Concepts</h2>
-            <p class="section-desc">Equity-centered, multi-source cross-validation, metadata standard, making facts the trusted infrastructure of the digital world</p>
-            <div class="core-grid">
-                <div class="core-card">
-                    <h3><i class="fas fa-compass-drafting"></i> Proof Object: Event Only</h3>
-                    <p>Focus on objectively occurred historical events. Physical belongs to physical world. Events belong to blockchain.</p>
-                </div>
-                <div class="core-card">
-                    <h3><i class="fas fa-balance-scale"></i> Philosophy: Equitable Proof</h3>
-                    <p>Zero financial barriers. Anyone can mint Event NFT with gas only. Everyone is a witness of truth.</p>
-                </div>
-                <div class="core-card">
-                    <h3><i class="fas fa-link"></i> Tech Core: Multi-Source Evidence</h3>
-                    <p>Cross-validation of physical, on-chain & third-party evidence to verify real event occurrence.</p>
-                </div>
-                <div class="core-card">
-                    <h3><i class="fas fa-code"></i> Core DNA: Metadata Standard</h3>
-                    <p>STProof Metadata Standard makes Event NFT programmable, composable, and machine-readable.</p>
-                </div>
-                <div class="core-card">
-                    <h3><i class="fas fa-sack-dollar"></i> Value: Citation Royalty</h3>
-                    <p>Event value comes from being trusted & used, not speculation. More citations = higher value.</p>
-                </div>
-                <div class="core-card">
-                    <h3><i class="fas fa-shield-alt"></i> Methodology: ZK Ideology Proof</h3>
-                    <p>OTS + IPFS dual-chain anchoring. Permanent, immutable proof without privacy leakage.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="event-types section" id="event-types">
-        <div class="container">
-            <h2 class="section-title">Event Types</h2>
-            <div class="event-grid">
-                <a href="cases/physical-event.html" style="text-decoration:none;">
-                    <div class="event-card">
-                        <h3>Tangible Events</h3>
-                        <p class="example">Typical Scenarios</p>
-                        <p>Mail, art creation, excavation, production. Anchored by physical multi-source evidence.</p>
-                    </div>
-                </a>
-                <a href="cases/intangible-event.html" style="text-decoration:none;">
-                    <div class="event-card">
-                        <h3>Intangible Events</h3>
-                        <p class="example">Typical Scenarios</p>
-                        <p>Online publishing, voting, statements, academic releases. Verified by on-chain data.</p>
-                    </div>
-                </a>
-                <a href="cases/hybrid-event.html" style="text-decoration:none;">
-                    <div class="event-card">
-                        <h3>Hybrid Events</h3>
-                        <p class="example">Typical Scenarios</p>
-                        <p>News, performances, legal deposits, meetings. Verified by virtual & physical evidence.</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section class="case section" id="case">
-        <div class="container case-container">
-            <h2 class="section-title">Core Experiment: STProof v5.2 Self-Referential</h2>
-            <div class="genesis-note">
-                STProof Genesis Event — The Birth of Digital Sovereignty<br>
-                This is the genesis experiment anchoring the birth of STProof via multi-source evidence cross-validation.
-            </div>
-            <a href="/cases/self-referential-proof.html" style="text-decoration:none;">
-                <div class="case-card">
-                    <h3>STProof v5.2 Self-Referential Proof Experiment</h3>
-                    <div class="case-info">
-                        <div class="info-item">
-                            <div class="label">Version</div>
-                            <div class="value">STProof v5.2</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="label">Type</div>
-                            <div class="value">Self-Referential / Cross-Validation</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="label">Trusted Time</div>
-                            <div class="value">2026-04-09</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="label">OTS File</div>
-                            <div class="value">STProof_Genesis.zip.ots</div>
-                        </div>
-                    </div>
-                    <div class="case-desc">ZK ideology proof via OTS + IPFS dual-chain anchoring & multi-source cross-validation.</div>
-                </div>
-            </a>
-        </div>
-    </section>
-
-    <section class="genesis-nft-section section" id="genesis-nft">
-        <div class="container">
-            <h2 class="section-title">STProof Genesis NFT</h2>
-            <p class="section-desc">The Birth of Digital Sovereignty · Genesis Symbol</p>
-            <div class="nft-card">
-                <h3>STProof Genesis Event</h3>
-                <div class="nft-desc">
-                    <strong>🛡️ The Birth of Digital Sovereignty</strong><br>
-                    This is the genesis event of STProof ecosystem — a landmark NFT series for on-chain identity, security & decentralized trust.<br>
-                    Each is a digital artifact forged with cyberpunk & blockchain integrity.
-                    <br><br>
-                    🔗 Own a piece of history<br>
-                    🎨 AI-assisted, built by STProof Studio<br>
-                    🌐 Polygon — low gas, high potential<br>
-                    <br>
-                    <em>"Proof isn’t given. It’s earned. And now, it’s yours."</em>
-                </div>
-                <div class="nft-meta">
-                    <div class="meta-item">
-                        <strong>OpenSea Collection</strong>
-                        <div class="value">
-                            <a href="https://opensea.io/collection/stproof-genesis-event" target="_blank">
-                                stproof-genesis-event
-                            </a>
-                        </div>
-                    </div>
-                    <div class="meta-item">
-                        <strong>Polygon Contract</strong>
-                        <div class="value">
-                            0x3d36ef7fdec04e2d53822052f5271b27d7b472b0
-                        </div>
-                    </div>
-                    <div class="meta-item">
-                        <strong>Sepolia Testnet</strong>
-                        <div class="value">
-                            <a href="https://sepolia.etherscan.io/address/0x2934ca1D3F3b8EfCDAf4735bD36A36E8bfa3a6A4" target="_blank">
-                                0x2934ca1D3F3b8EfCDAf4735bD36A36E8bfa3a6A4
-                            </a>
-                        </div>
-                    </div>
-                    <div class="meta-item">
-                        <strong>Total Supply</strong>
-                        <div class="value">100</div>
-                    </div>
-                    <div class="meta-item">
-                        <strong>Minted</strong>
-                        <div class="value">2/100</div>
-                    </div>
-                </div>
-                <a href="https://opensea.io/collection/stproof-genesis-event" target="_blank" class="btn btn-primary">
-                    <i class="fas fa-external-link-alt"></i> Mint on OpenSea
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section class="cid-section section" id="cid-section">
-        <div class="container">
-            <h2 class="section-title">Experiment CIDs</h2>
-            <p class="section-desc">All evidence stored on IPFS, anchored by cross-validation, permanent & immutable</p>
-            <div class="cid-card">
-                <h3>Completed Experiment CIDs</h3>
-                <div class="cid-grid">
-                    <div class="cid-item">
-                        <h4><i class="fas fa-fingerprint"></i> Self-Referential Proof CID</h4>
-                        <div class="cid-value">bafybeial45ll7mvqfvnbuk4ddgezajmhzzzoub7bdjwnx3wa65hox4maii</div>
-                        <div class="cid-desc">
-                            <a href="https://ipfs.io/ipfs/bafybeial45ll7mvqfvnbuk4ddgezajmhzzzoub7bdjwnx3wa65hox4maii" target="_blank">
-                                View on IPFS ↗
-                            </a>
-                        </div>
-                    </div>
-                    <div class="cid-item">
-                        <h4><i class="fas fa-person"></i> Real Person Cross-Border CID</h4>
-                        <div class="cid-value">bafybeiahbfntsssvhtzwrokp3nojjan3tmscrhbcrzq74jw24sybjp7oo4</div>
-                        <div class="cid-desc">
-                            <a href="https://ipfs.io/ipfs/bafybeiahbfntsssvhtzwrokp3nojjan3tmscrhbcrzq74jw24sybjp7oo4" target="_blank">
-                                View on IPFS ↗
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <div class="footer-logo">STProof Protocol</div>
-            <div class="copyright">© 2026 STProof Protocol All Rights Reserved</div>
-        </div>
-    </footer>
+<!-- 图片放大模态框 -->
+<div id="imageModal" class="modal" onclick="closeModal()">
+    <img id="modalImage" src="" alt="放大图片">
 </div>
 
 <script>
-    const zhContent = document.getElementById('zh-content');
-    const enContent = document.getElementById('en-content');
-    const langSwitchBtn = document.getElementById('langSwitch');
-    const navItems = document.querySelectorAll('.nav-item');
-    let isEnglish = true;
-
-    showLanguage(isEnglish);
-
-    langSwitchBtn.addEventListener('click', () => {
-        isEnglish = !isEnglish;
-        showLanguage(isEnglish);
+    // ============================================================
+    // 1. 配置数据
+    // ============================================================
+    
+    // 公开照片列表
+    const photoAssets = [
+        { name: "发行公告", url: "https://ipfs.io/ipfs/bafkreih33trksr6oc7ddcrx26iywfjpcipsafb2l76tplcd4x6f4543c2m" },
+        { name: "到达邮局", url: "https://ipfs.io/ipfs/bafybeidy5gmci3sswltf63jrqr2lcsjhxpa7t4wly2mo6ainrtflsve6fi" },
+        { name: "首日封正面", url: "https://ipfs.io/ipfs/bafybeiamzq2aq2uwneq4e5hlyzqu3qecviwcqoujbk7emeprprudlclc4ge" },
+        { name: "挂号信编码", url: "https://ipfs.io/ipfs/bafybeib57xurh2qwuosf4bpq44vqv7mbb223356b3cq4wlunvoroytyvwe" },
+        { name: "邮寄凭证", url: "https://ipfs.io/ipfs/bafybeiaf6szedvwqhss7sbqfw7rq6v4u37p5dxiu6aooaukzkuc4hkaf2y" },
+        { name: "邮路信息", url: "https://ipfs.io/ipfs/bafybeibb2pu5c2wvmgga6zfg7amk6rheyw2ebzjgndwdgwztyfrx37go5i" }
+    ];
+    
+    // CID 列表
+    const cidItems = [
+        { name: "GPS 轨迹", cid: "bafkreiaksqwedp2whp6me74swxbpxztah4tjidzpz7cesaeslcknm5drby" },
+        { name: "发行公报", cid: "bafkreih33trksr6oc7ddcrx26iywfjpcipsafb2l76tplcd4x6f4543c2m" },
+        { name: "央视新闻录屏", cid: "bafybeic23tn5f2nyuxodc5rf462sfstkrqqquwblqlpounkqyvkeb7bxya" },
+        { name: "气象数据录屏", cid: "bafybeignwaucy3wxfrxcnyilq3ditq4q4hq6ptianh4ln2zjd5ltyjglee" }
+    ];
+    
+    // 合约配置
+    const CONTRACT_ADDRESS = "0x2934ca1D3F3b8EfCDAf4735bD36A36E8bfa3a6A4";
+    const TOKEN_ID = 0;
+    const CITATION_FEE = "0.0001";
+    
+    // GPS 轨迹点 (南油邮局附近)
+    const trackPoints = [
+        [22.5175, 113.9245],
+        [22.5178, 113.9248],
+        [22.5182, 113.9252],
+        [22.5185, 113.9256],
+        [22.5183, 113.9260],
+        [22.5179, 113.9263],
+        [22.5174, 113.9261]
+    ];
+    
+    // ============================================================
+    // 2. 渲染页面
+    // ============================================================
+    
+    // 渲染照片网格
+    const photoGrid = document.getElementById('photoGrid');
+    photoAssets.forEach(asset => {
+        const div = document.createElement('div');
+        div.className = 'evidence-item';
+        const img = document.createElement('img');
+        img.src = asset.url;
+        img.alt = asset.name;
+        img.loading = 'lazy';
+        img.onclick = () => openModal(asset.url);
+        div.appendChild(img);
+        const label = document.createElement('div');
+        label.className = 'label';
+        label.textContent = asset.name;
+        div.appendChild(label);
+        photoGrid.appendChild(div);
     });
-
-    function showLanguage(showEn) {
-        if (showEn) {
-            zhContent.style.display = 'none';
-            enContent.style.display = 'block';
-            document.querySelectorAll('.zh-link').forEach(el => el.style.display = 'none');
-            document.querySelectorAll('.en-link').forEach(el => el.style.display = 'inline');
-            langSwitchBtn.textContent = 'EN / 中';
-        } else {
-            enContent.style.display = 'none';
-            zhContent.style.display = 'block';
-            document.querySelectorAll('.en-link').forEach(el => el.style.display = 'none');
-            document.querySelectorAll('.zh-link').forEach(el => el.style.display = 'inline');
-            langSwitchBtn.textContent = '中 / EN';
+    
+    // 渲染 CID 列表
+    const cidList = document.getElementById('cidList');
+    cidItems.forEach(item => {
+        const row = document.createElement('div');
+        row.className = 'cid-row';
+        row.innerHTML = `
+            <div class="cid-name">${item.name}</div>
+            <div class="cid-value"><a href="https://ipfs.io/ipfs/${item.cid}" target="_blank">${item.cid}</a></div>
+        `;
+        cidList.appendChild(row);
+    });
+    
+    // 初始化地图
+    const map = L.map('eventMap').setView([22.5175, 113.9250], 17);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'
+    }).addTo(map);
+    const polyline = L.polyline(trackPoints, { color: '#e63946', weight: 4, opacity: 0.8 }).addTo(map);
+    map.fitBounds(polyline.getBounds());
+    
+    // ============================================================
+    // 3. 区块链交互
+    // ============================================================
+    
+    const citeBtn = document.getElementById('citeButton');
+    const citeStatus = document.getElementById('citeStatus');
+    const abi = ["function cite(uint256 tokenId) external payable returns (uint256)"];
+    
+    citeBtn.addEventListener('click', async () => {
+        if (!window.ethereum) {
+            citeStatus.innerHTML = "❌ 请安装 MetaMask 钱包";
+            return;
         }
+        citeBtn.disabled = true;
+        citeBtn.textContent = "⏳ 等待确认...";
+        citeStatus.innerHTML = "📡 正在连接钱包...";
+        try {
+            const provider = new ethers.BrowserProvider(window.ethereum);
+            await provider.send("eth_requestAccounts", []);
+            const signer = await provider.getSigner();
+            const contract = new ethers.Contract(CONTRACT_ADDRESS, abi, signer);
+            const fee = ethers.parseEther(CITATION_FEE);
+            citeStatus.innerHTML = "📝 请确认交易...";
+            const tx = await contract.cite(TOKEN_ID, { value: fee });
+            citeStatus.innerHTML = `🔄 交易已发送: ${tx.hash.slice(0,10)}... 等待确认`;
+            await tx.wait();
+            citeStatus.innerHTML = `✅ 引用成功！交易哈希: <a href="https://sepolia.etherscan.io/tx/${tx.hash}" target="_blank">查看 ↗</a>`;
+            citeBtn.textContent = "✓ 已引用";
+        } catch (err) {
+            console.error(err);
+            citeStatus.innerHTML = `❌ 引用失败: ${err.message}`;
+            citeBtn.disabled = false;
+            citeBtn.textContent = "🔗 重试引用";
+        }
+    });
+    
+    // 图片放大
+    function openModal(url) {
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        modal.style.display = 'flex';
+        modalImg.src = url;
     }
-
-    navItems.forEach(item => {
-        item.addEventListener('click', () => {
-            navItems.forEach(el => el.classList.remove('active'));
-            item.classList.add('active');
-            const targetId = item.getAttribute('data-target');
-            const targetSection = document.getElementById(targetId);
-            if (targetSection) {
-                window.scrollTo({ top: targetSection.offsetTop - 80, behavior: 'smooth' });
+    function closeModal() {
+        document.getElementById('imageModal').style.display = 'none';
+    }
+    
+    // 平滑滚动导航
+    document.querySelectorAll('.nav-item').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const targetId = link.getAttribute('data-target');
+            if (targetId) {
+                e.preventDefault();
+                const target = document.getElementById(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
             }
         });
     });
