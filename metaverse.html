@@ -14,7 +14,9 @@
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         .btn { display: inline-block; padding: 12px 28px; border-radius: 8px; font-weight: 600; transition: all 0.3s; cursor: pointer; border: none; background: #165DFF; color: white; }
         .btn:hover { transform: translateY(-2px); background: #0E42C1; }
-        .header { background: #0b2b3b; color: white; padding: 20px 0; text-align: center; }
+        .lang-switch { position: absolute; top: 20px; right: 20px; padding: 6px 12px; border: 1px solid #165DFF; border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: 600; color: #165DFF; background: white; z-index: 100; }
+        .lang-switch:hover { background: #E8F3FF; }
+        .header { background: #0b2b3b; color: white; padding: 20px 0; text-align: center; position: relative; }
         .header h1 { font-size: 1.8rem; margin-bottom: 8px; }
         .back-link { display: inline-block; margin-top: 12px; color: #ccc; text-decoration: underline; }
         .card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin: 30px 0; }
@@ -44,15 +46,26 @@
 
 <div class="header">
     <div class="container">
-        <h1>🌐 事实元宇宙 · 园博会邮票首日实寄事件</h1>
-        <p>第十五届中国国际园林博览会纪念邮票 · 首日实寄 NFT #001</p>
-        <a href="/" class="back-link">← 返回首页</a>
+        <!-- 中文标题 -->
+        <div id="zhHeader">
+            <h1>🌐 事实元宇宙 · 园博会邮票首日实寄事件</h1>
+            <p>第十五届中国国际园林博览会纪念邮票 · 首日实寄 NFT #001</p>
+            <a href="/" class="back-link">← 返回首页</a>
+        </div>
+        <!-- 英文标题 -->
+        <div id="enHeader" style="display:none;">
+            <h1>🌐 Fact Metaverse · Garden Expo Stamp First-Day Cover Event</h1>
+            <p>15th China International Garden Expo Commemorative Stamp · First-Day Cover NFT #001</p>
+            <a href="/" class="back-link">← Back to Home</a>
+        </div>
     </div>
+    <div class="lang-switch" id="langSwitch">EN / 中</div>
 </div>
 
 <div class="container">
     <div class="card">
-        <div class="card-header">
+        <!-- 中文卡片头 -->
+        <div id="zhCardHeader" class="card-header">
             <h2>📮 第十五届中国国际园林博览会纪念邮票</h2>
             <p>深圳南油邮局 · 首日实寄事件</p>
             <div style="margin-top: 12px;">
@@ -61,40 +74,66 @@
                 <span style="background:rgba(255,255,255,0.2); padding:4px 12px; border-radius:20px; font-size:12px;">✅ 完整证据链</span>
             </div>
         </div>
+        <!-- 英文卡片头 -->
+        <div id="enCardHeader" class="card-header" style="display:none;">
+            <h2>📮 15th China International Garden Expo Commemorative Stamp</h2>
+            <p>Shenzhen Nanyou Post Office · First-Day Cover Event</p>
+            <div style="margin-top: 12px;">
+                <span style="background:rgba(255,255,255,0.2); padding:4px 12px; border-radius:20px; font-size:12px;">📅 2026-04-15</span>
+                <span style="background:rgba(255,255,255,0.2); padding:4px 12px; border-radius:20px; font-size:12px;">📍 Shenzhen Nanyou Post Office</span>
+                <span style="background:rgba(255,255,255,0.2); padding:4px 12px; border-radius:20px; font-size:12px;">✅ Complete Evidence Chain</span>
+            </div>
+        </div>
         <div class="card-body">
-            <!-- 事件摘要 -->
-            <div class="event-summary">
+            <!-- 中文摘要 -->
+            <div id="zhSummary" class="event-summary">
                 <div class="summary-item"><div class="label">邮票主题</div><div class="value">第十五届中国国际园林博览会</div></div>
                 <div class="summary-item"><div class="label">核心日期</div><div class="value">2026-04-15</div></div>
                 <div class="summary-item"><div class="label">核心地点</div><div class="value">深圳南油邮局</div></div>
                 <div class="summary-item"><div class="label">序列编号</div><div class="value">STP-20260415-001</div></div>
             </div>
+            <!-- 英文摘要 -->
+            <div id="enSummary" class="event-summary" style="display:none;">
+                <div class="summary-item"><div class="label">Stamp Theme</div><div class="value">15th China International Garden Expo</div></div>
+                <div class="summary-item"><div class="label">Core Date</div><div class="value">2026-04-15</div></div>
+                <div class="summary-item"><div class="label">Core Location</div><div class="value">Shenzhen Nanyou Post Office</div></div>
+                <div class="summary-item"><div class="label">Serial Number</div><div class="value">STP-20260415-001</div></div>
+            </div>
 
             <!-- GPS 地图 -->
             <div class="map-container" id="eventMap"></div>
 
-            <!-- 公开证据照片 -->
-            <h4 style="margin: 20px 0 12px;"><i class="fas fa-images"></i> 现场影像记录</h4>
+            <!-- 中文照片标题 -->
+            <h4 id="zhPhotoTitle" style="margin: 20px 0 12px;"><i class="fas fa-images"></i> 现场影像记录</h4>
+            <h4 id="enPhotoTitle" style="margin: 20px 0 12px; display:none;"><i class="fas fa-images"></i> On-Site Evidence</h4>
             <div class="evidence-grid" id="photoGrid"></div>
 
-            <!-- CID 证据清单 -->
+            <!-- 中文 CID 标题 -->
             <div class="cid-list">
-                <h4 style="margin-bottom: 12px;"><i class="fas fa-link"></i> IPFS 证据锚定 (CID)</h4>
+                <h4 id="zhCidTitle" style="margin-bottom: 12px;"><i class="fas fa-link"></i> IPFS 证据锚定 (CID)</h4>
+                <h4 id="enCidTitle" style="margin-bottom: 12px; display:none;"><i class="fas fa-link"></i> IPFS Evidence Anchoring (CID)</h4>
                 <div id="cidList"></div>
             </div>
 
-            <!-- 引用交互 -->
-            <div style="text-align: center; padding-top: 20px; border-top: 1px solid #e2e8f0;">
+            <!-- 中文引用区 -->
+            <div id="zhCite" style="text-align: center; padding-top: 20px; border-top: 1px solid #e2e8f0;">
                 <button id="citeButton" class="btn">🔗 引用此事件 · 支持事实 (0.0001 ETH)</button>
                 <div id="citeStatus" class="cite-status"></div>
                 <p style="font-size:12px; color:#6c86a3; margin-top:12px;">引用税: 70% 归事件发起人 · 30% 支持协议金库</p>
+            </div>
+            <!-- 英文引用区 -->
+            <div id="enCite" style="text-align: center; padding-top: 20px; border-top: 1px solid #e2e8f0; display:none;">
+                <button id="citeButtonEn" class="btn">🔗 Cite This Event · Support Truth (0.0001 ETH)</button>
+                <div id="citeStatusEn" class="cite-status"></div>
+                <p style="font-size:12px; color:#6c86a3; margin-top:12px;">Citation Tax: 70% to Event Creator · 30% to Protocol Treasury</p>
             </div>
         </div>
     </div>
 </div>
 
 <footer>
-    <p>STProof Protocol | 凡发生，皆可存；凡存证，皆可信</p>
+    <div id="zhFooter">STProof Protocol | 凡发生，皆可存；凡存证，皆可信</div>
+    <div id="enFooter" style="display:none;">STProof Protocol | What Happens, Exists; What's Proven, Trusted</div>
 </footer>
 
 <div id="imageModal" class="modal" onclick="closeModal()">
@@ -104,20 +143,19 @@
 <script>
     // 照片列表
     const photoAssets = [
-        { name: "发行公告", url: "https://ipfs.io/ipfs/bafkreih33trksr6oc7ddcrx26iywfjpcipsafb2l76tplcd4x6f4543c2m" },
-        { name: "到达邮局", url: "https://ipfs.io/ipfs/bafybeidy5gmci3sswltf63jrqr2lcsjhxpa7t4wly2mo6ainrtflsve6fi" },
-        { name: "首日封正面", url: "https://ipfs.io/ipfs/bafybeiamzq2aq2uwneq4e5hlyzqu3qecviwcqoujbk7emeprprudlclc4ge" },
-        { name: "挂号信编码", url: "https://ipfs.io/ipfs/bafybeib57xurh2qwuosf4bpq44vqv7mbb223356b3cq4wlunvoroytyvwe" },
-        { name: "邮寄凭证", url: "https://ipfs.io/ipfs/bafybeiaf6szedvwqhss7sbqfw7rq6v4u37p5dxiu6aooaukzkuc4hkaf2y" },
-        { name: "邮路信息", url: "https://ipfs.io/ipfs/bafybeibb2pu5c2wvmgga6zfg7amk6rheyw2ebzjgndwdgwztyfrx37go5i" }
+        { name: "发行公告", nameEn: "Issue Announcement", url: "https://ipfs.io/ipfs/bafkreih33trksr6oc7ddcrx26iywfjpcipsafb2l76tplcd4x6f4543c2m" },
+        { name: "到达邮局", nameEn: "Arriving at Post Office", url: "https://ipfs.io/ipfs/bafybeidy5gmci3sswltf63jrqr2lcsjhxpa7t4wly2mo6ainrtflsve6fi" },
+        { name: "首日封正面", nameEn: "First-Day Cover (Front)", url: "https://ipfs.io/ipfs/bafybeiamzq2aq2uwneq4e5hlyzqu3qecviwcqoujbk7emeprprudlclc4ge" },
+        { name: "挂号信编码", nameEn: "Registered Mail Code", url: "https://ipfs.io/ipfs/bafybeib57xurh2qwuosf4bpq44vqv7mbb223356b3cq4wlunvoroytyvwe" },
+        { name: "邮寄凭证", nameEn: "Mailing Receipt", url: "https://ipfs.io/ipfs/bafybeiaf6szedvwqhss7sbqfw7rq6v4u37p5dxiu6aooaukzkuc4hkaf2y" },
+        { name: "邮路信息", nameEn: "Postal Tracking", url: "https://ipfs.io/ipfs/bafybeibb2pu5c2wvmgga6zfg7amk6rheyw2ebzjgndwdgwztyfrx37go5i" }
     ];
 
-    // CID 列表
     const cidItems = [
-        { name: "GPS 轨迹", cid: "bafkreiaksqwedp2whp6me74swxbpxztah4tjidzpz7cesaeslcknm5drby" },
-        { name: "发行公报", cid: "bafkreih33trksr6oc7ddcrx26iywfjpcipsafb2l76tplcd4x6f4543c2m" },
-        { name: "央视新闻录屏", cid: "bafybeic23tn5f2nyuxodc5rf462sfstkrqqquwblqlpounkqyvkeb7bxya" },
-        { name: "气象数据录屏", cid: "bafybeignwaucy3wxfrxcnyilq3ditq4q4hq6ptianh4ln2zjd5ltyjglee" }
+        { name: "GPS 轨迹", nameEn: "GPS Track", cid: "bafkreiaksqwedp2whp6me74swxbpxztah4tjidzpz7cesaeslcknm5drby" },
+        { name: "发行公报", nameEn: "Issue Announcement", cid: "bafkreih33trksr6oc7ddcrx26iywfjpcipsafb2l76tplcd4x6f4543c2m" },
+        { name: "央视新闻录屏", nameEn: "CCTV News Recording", cid: "bafybeic23tn5f2nyuxodc5rf462sfstkrqqquwblqlpounkqyvkeb7bxya" },
+        { name: "气象数据录屏", nameEn: "Weather Data Recording", cid: "bafybeignwaucy3wxfrxcnyilq3ditq4q4hq6ptianh4ln2zjd5ltyjglee" }
     ];
 
     const CONTRACT_ADDRESS = "0x2934ca1D3F3b8EfCDAf4735bD36A36E8bfa3a6A4";
@@ -126,32 +164,41 @@
 
     const trackPoints = [[22.5175,113.9245],[22.5178,113.9248],[22.5182,113.9252],[22.5185,113.9256],[22.5183,113.9260],[22.5179,113.9263],[22.5174,113.9261]];
 
+    let isEnglish = false;
+    let photoGrid, cidList;
+
     // 渲染照片
-    const photoGrid = document.getElementById('photoGrid');
-    photoAssets.forEach(asset => {
-        const div = document.createElement('div');
-        div.className = 'evidence-item';
-        const img = document.createElement('img');
-        img.src = asset.url;
-        img.alt = asset.name;
-        img.loading = 'lazy';
-        img.onclick = () => openModal(asset.url);
-        div.appendChild(img);
-        const label = document.createElement('div');
-        label.className = 'label';
-        label.textContent = asset.name;
-        div.appendChild(label);
-        photoGrid.appendChild(div);
-    });
+    function renderPhotos() {
+        photoGrid = document.getElementById('photoGrid');
+        photoGrid.innerHTML = '';
+        photoAssets.forEach(asset => {
+            const div = document.createElement('div');
+            div.className = 'evidence-item';
+            const img = document.createElement('img');
+            img.src = asset.url;
+            img.alt = isEnglish ? asset.nameEn : asset.name;
+            img.loading = 'lazy';
+            img.onclick = () => openModal(asset.url);
+            div.appendChild(img);
+            const label = document.createElement('div');
+            label.className = 'label';
+            label.textContent = isEnglish ? asset.nameEn : asset.name;
+            div.appendChild(label);
+            photoGrid.appendChild(div);
+        });
+    }
 
     // 渲染 CID
-    const cidList = document.getElementById('cidList');
-    cidItems.forEach(item => {
-        const row = document.createElement('div');
-        row.className = 'cid-row';
-        row.innerHTML = `<div class="cid-name">${item.name}</div><div class="cid-value"><a href="https://ipfs.io/ipfs/${item.cid}" target="_blank">${item.cid}</a></div>`;
-        cidList.appendChild(row);
-    });
+    function renderCids() {
+        cidList = document.getElementById('cidList');
+        cidList.innerHTML = '';
+        cidItems.forEach(item => {
+            const row = document.createElement('div');
+            row.className = 'cid-row';
+            row.innerHTML = `<div class="cid-name">${isEnglish ? item.nameEn : item.name}</div><div class="cid-value"><a href="https://ipfs.io/ipfs/${item.cid}" target="_blank">${item.cid}</a></div>`;
+            cidList.appendChild(row);
+        });
+    }
 
     // 地图
     const map = L.map('eventMap').setView([22.5175, 113.9250], 17);
@@ -159,7 +206,7 @@
     L.polyline(trackPoints, { color: '#e63946', weight: 4 }).addTo(map);
     map.fitBounds(L.polyline(trackPoints).getBounds());
 
-    // 引用功能
+    // 引用功能（中文）
     const citeBtn = document.getElementById('citeButton');
     const citeStatus = document.getElementById('citeStatus');
     citeBtn.addEventListener('click', async () => {
@@ -185,8 +232,81 @@
         }
     });
 
+    // 引用功能（英文）
+    const citeBtnEn = document.getElementById('citeButtonEn');
+    const citeStatusEn = document.getElementById('citeStatusEn');
+    if (citeBtnEn) {
+        citeBtnEn.addEventListener('click', async () => {
+            if (!window.ethereum) { citeStatusEn.innerHTML = "❌ Please install MetaMask"; return; }
+            citeBtnEn.disabled = true;
+            citeBtnEn.textContent = "⏳ Waiting...";
+            citeStatusEn.innerHTML = "📡 Connecting wallet...";
+            try {
+                const provider = new ethers.BrowserProvider(window.ethereum);
+                await provider.send("eth_requestAccounts", []);
+                const signer = await provider.getSigner();
+                const contract = new ethers.Contract(CONTRACT_ADDRESS, abi, signer);
+                const fee = ethers.parseEther("0.0001");
+                const tx = await contract.cite(TOKEN_ID, { value: fee });
+                citeStatusEn.innerHTML = `🔄 Tx sent: ${tx.hash.slice(0,10)}...`;
+                await tx.wait();
+                citeStatusEn.innerHTML = `✅ Citation success! <a href="https://sepolia.etherscan.io/tx/${tx.hash}" target="_blank">View ↗</a>`;
+                citeBtnEn.textContent = "✓ Cited";
+            } catch (err) {
+                citeStatusEn.innerHTML = `❌ Failed: ${err.message}`;
+                citeBtnEn.disabled = false;
+                citeBtnEn.textContent = "🔗 Retry";
+            }
+        });
+    }
+
     function openModal(url) { document.getElementById('imageModal').style.display = 'flex'; document.getElementById('modalImage').src = url; }
     function closeModal() { document.getElementById('imageModal').style.display = 'none'; }
+
+    // 语言切换
+    const langSwitch = document.getElementById('langSwitch');
+    function updateLanguage() {
+        isEnglish = !isEnglish;
+        
+        // 头部
+        document.getElementById('zhHeader').style.display = isEnglish ? 'none' : 'block';
+        document.getElementById('enHeader').style.display = isEnglish ? 'block' : 'none';
+        
+        // 卡片头
+        document.getElementById('zhCardHeader').style.display = isEnglish ? 'none' : 'block';
+        document.getElementById('enCardHeader').style.display = isEnglish ? 'block' : 'none';
+        
+        // 摘要
+        document.getElementById('zhSummary').style.display = isEnglish ? 'none' : 'grid';
+        document.getElementById('enSummary').style.display = isEnglish ? 'grid' : 'none';
+        
+        // 标题
+        document.getElementById('zhPhotoTitle').style.display = isEnglish ? 'none' : 'block';
+        document.getElementById('enPhotoTitle').style.display = isEnglish ? 'block' : 'none';
+        document.getElementById('zhCidTitle').style.display = isEnglish ? 'none' : 'block';
+        document.getElementById('enCidTitle').style.display = isEnglish ? 'block' : 'none';
+        
+        // 引用区
+        document.getElementById('zhCite').style.display = isEnglish ? 'none' : 'block';
+        document.getElementById('enCite').style.display = isEnglish ? 'block' : 'none';
+        
+        // 页脚
+        document.getElementById('zhFooter').style.display = isEnglish ? 'none' : 'block';
+        document.getElementById('enFooter').style.display = isEnglish ? 'block' : 'none';
+        
+        // 重新渲染照片和 CID
+        renderPhotos();
+        renderCids();
+        
+        langSwitch.textContent = isEnglish ? '中 / EN' : 'EN / 中';
+        document.title = isEnglish ? 'Fact Metaverse · Garden Expo Stamp FDC | STProof' : '事实元宇宙 · 园博会邮票首日实寄事件 | STProof';
+    }
+
+    langSwitch.addEventListener('click', updateLanguage);
+    
+    // 初始渲染
+    renderPhotos();
+    renderCids();
 </script>
 </body>
 </html>
