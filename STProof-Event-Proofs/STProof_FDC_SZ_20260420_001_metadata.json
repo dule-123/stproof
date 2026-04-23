@@ -1,0 +1,262 @@
+{
+  "name": "《篆刻（三）》特种邮票 - 深圳首日实寄NFT #001",
+  "name_en": "Chinese Seal Engraving III - Shenzhen First Day Cover NFT #001",
+  "description": "此NFT是2026年4月20日于深圳南油邮局发生的《篆刻（三）》特种邮票首日实寄事件的确权证明。它通过照片、视频、GPS轨迹及区块链时间戳，构建了完整的时空证据链，证明该物理事件真实发生。本NFT仅记录物理邮寄事件与现场证据，不主张邮票图案本身的任何知识产权；中国邮政集团有限公司拥有《篆刻（三）》特种邮票的全部著作权、商标权及相关知识产权。部分涉及版权的原始素材未公开存储，其完整性可通过链上哈希验证。",
+  "description_en": "This NFT certifies the first-day mailing event of the \"Chinese Seal Engraving III\" special stamps at Shenzhen Nanyou Post Office on April 20, 2026. A complete spatiotemporal evidence chain is built with photos, videos, GPS tracks, and blockchain timestamps to prove the event occurred. This NFT only records the physical mailing event and on-site evidence; it does not claim any intellectual property rights in the stamp designs themselves. China Post Group Corporation owns all copyrights, trademarks, and related intellectual property rights of the \"Chinese Seal Engraving III\" special stamps. Some copyrighted original materials are not publicly stored; their integrity can be verified via on-chain hash values.",
+  "image": "ipfs://bafybeifnrr7gbl5cq6vyvllt47bd2ylc22ktlg35jaaannwyehlstt5zii",
+  "external_url": "https://white-tired-rat-661.mypinata.cloud/ipfs/bafybeifnrr7gbl5cq6vyvllt47bd2ylc22ktlg35jaaannwyehlstt5zii",
+  "attributes": [
+    {
+      "trait_type": "事件类型",
+      "value": "邮票首日实寄"
+    },
+    {
+      "trait_type": "Event Type",
+      "value": "Stamp First-Day Mailing"
+    },
+    {
+      "trait_type": "邮票主题",
+      "value": "篆刻（三）特种邮票"
+    },
+    {
+      "trait_type": "Stamp Theme",
+      "value": "Chinese Seal Engraving III"
+    },
+    {
+      "trait_type": "核心日期",
+      "value": "2026-04-20"
+    },
+    {
+      "trait_type": "Core Date",
+      "value": "2026-04-20"
+    },
+    {
+      "trait_type": "核心地点",
+      "value": "深圳南油邮局"
+    },
+    {
+      "trait_type": "Core Location",
+      "value": "Shenzhen Nanyou Post Office"
+    },
+    {
+      "trait_type": "证据完整性",
+      "value": "完整证据链（公开影像+私密哈希验证）"
+    },
+    {
+      "trait_type": "Evidence Integrity",
+      "value": "Full Evidence Chain (Public Media + Private Hash Verification)"
+    },
+    {
+      "trait_type": "时间戳证明",
+      "value": "Opentimestamp（比特币区块链）"
+    },
+    {
+      "trait_type": "Timestamp Proof",
+      "value": "Opentimestamp (Bitcoin Blockchain)"
+    },
+    {
+      "trait_type": "序列编号",
+      "value": "001"
+    }
+  ],
+  "copyright_statement": {
+    "cn": "本NFT为「事件存证类NFT」，仅用于记录真实发生的邮票首日实寄物理事件，不包含邮票图案的任何知识产权授权，亦不用于商业复制、发行或传播邮票本体。中国邮政集团有限公司拥有《篆刻（三）》特种邮票的全部著作权及相关知识产权。",
+    "en": "This NFT is an \"event proof NFT\" only for recording the real physical event of stamp first-day mailing. It does not include any intellectual property license for stamp designs, nor is it used for commercial reproduction, distribution, or communication of stamps themselves. China Post Group Corporation owns all copyrights and related intellectual property rights of the \"Chinese Seal Engraving III\" special stamps."
+  },
+  "properties": {
+    "public_assets": [
+      {
+        "name": "STProof_FDC_20260420_003.jpg",
+        "description": "现场环境记录",
+        "description_en": "On-site Environment Record",
+        "type": "image/jpeg",
+        "cid": "bafybeihhs5pakwq5flk7aup4uvszy5fqisbhvy7tkcrwmfx66b7rxdwrpu",
+        "timestamp_proof_cid": "bafkreifwfvtkahp5uawwwrosp7kprrwayblq3rux3nidcjp5phsne3iba"
+      },
+      {
+        "name": "STProof_FDC_20260420_001.png",
+        "description": "邮票发行官方资料",
+        "description_en": "Official Stamp Release Info",
+        "type": "image/png",
+        "cid": "bafkreig77ytb4mc2zsjd35gyn34ins3l4nzxol5t32n44dzx7k4lqkqrmi",
+        "timestamp_proof_cid": "bafkreigly4assp2siczngzkidqkijvqucdof3awnpwvrs7qlayg3evaapa"
+      },
+      {
+        "name": "STProof_FDC_20260420_002.jpg",
+        "description": "邮局现场记录",
+        "description_en": "Post Office On-site Record",
+        "type": "image/jpeg",
+        "cid": "bafybeiajxtmnq4k2we44htwnvvu2eokebeitqigspqldjrvrutpnhqzqty",
+        "timestamp_proof_cid": "bafkreiggsif4woi4tmqvrebvxogtwvueybwjb2oynxbcl5mx3bw3whybgm"
+      },
+      {
+        "name": "STProof_FDC_20260420_081603.jpg",
+        "description": "现场拍摄记录",
+        "description_en": "On-site Photo Record",
+        "type": "image/jpeg",
+        "cid": "bafybeiep53pjcahlrowqjxrtrfypvfbzfydape7o7okqt7fski7buaixoq",
+        "timestamp_proof_cid": "bafkreiezkp325k7g7owdqlicuhbuz2r3qrpf6cxkhc77rvbkdlyqyjatga"
+      },
+      {
+        "name": "STProof_FDC_20260420_081641.jpg",
+        "description": "现场拍摄记录",
+        "description_en": "On-site Photo Record",
+        "type": "image/jpeg",
+        "cid": "bafybeicxn4desxqoavhs7i4y2zcufegksp3vluai2xu4j4mecqihvyotxu",
+        "timestamp_proof_cid": "bafkreiepahzxs76edsoslvf3xh4beflnsayelxz446dvn3whs6dz7mtfsi"
+      },
+      {
+        "name": "STProof_FDC_20260420_081647.jpg",
+        "description": "现场拍摄记录",
+        "description_en": "On-site Photo Record",
+        "type": "image/jpeg",
+        "cid": "bafybeieasevv36fautg3ryn4n4utcpoy7tpy2dqynidyl5pzhktzpkweru",
+        "timestamp_proof_cid": "bafkreicbakjjpxncom2wpvlm2kulxveavi5whffqxewxizcjrboggev52y"
+      },
+      {
+        "name": "STProof_FDC_20260420_081711.jpg",
+        "description": "现场拍摄记录",
+        "description_en": "On-site Photo Record",
+        "type": "image/jpeg",
+        "cid": "bafybeiayokenlu7aemlkjlziz6hp3gvvyw43obchbgdbpuigi3mbhgpc2m",
+        "timestamp_proof_cid": "bafkreiafm6pwpiw2ikrl7bapclfdamp25jxbjo7jh4nadizslhsqyigsdu"
+      },
+      {
+        "name": "VID_STP_FDC_20260420_081740.mp4",
+        "description": "现场视频记录",
+        "description_en": "On-site Video Record",
+        "type": "video/mp4",
+        "cid": "bafybeidkbn5huaaijqjhvj7ygbfzz4uezef57gptecochpenk5nr5h273y",
+        "timestamp_proof_cid": "bafkreieslp4nq7kuv2fayrao4xrvjqfp2fto6pvagtkxu5jlsgpmqoaxzi"
+      },
+      {
+        "name": "STProof_FDC_20260420_081837427.mp4",
+        "description": "现场视频记录",
+        "description_en": "On-site Video Record",
+        "type": "video/mp4",
+        "cid": "bafybeicrquigzoihffu5kjokc4t7oypnnhngckcieovordnua3kkkxhtz4",
+        "timestamp_proof_cid": "bafkreiefdlqi2m6r3vhnkecqggt2ietrlvuhgjaq4snwypoqvb6biyvzpi"
+      },
+      {
+        "name": "STProof_FDC_20260420_085942.jpg",
+        "description": "现场拍摄记录",
+        "description_en": "On-site Photo Record",
+        "type": "image/jpeg",
+        "cid": "bafybeigrmlcrloyj4p43kipadpbxksk7bctejr2iqvaoshjg626c7bksna",
+        "timestamp_proof_cid": "bafkreifnoz6mtmdhpqhyq2zxjp3ecdt5evhpatv3ow44oewn3iswj4ixqq"
+      },
+      {
+        "name": "STProof_FDC_20260420_091745.jpg",
+        "description": "现场拍摄记录",
+        "description_en": "On-site Photo Record",
+        "type": "image/jpeg",
+        "cid": "bafybeiebmlrpqhqubph65qjc3movv5movmybv2hepxqca6xjdoke5bskay",
+        "timestamp_proof_cid": "bafkreiffyeycc3lskr7agbxiyotjcmt6y5r7oogorsidwrjuawrndg6lci"
+      },
+      {
+        "name": "STProof_FDC_20260420_091838.jpg",
+        "description": "现场拍摄记录",
+        "description_en": "On-site Photo Record",
+        "type": "image/jpeg",
+        "cid": "bafybeigm2vvjhthzbcjkzzbwotkas5ocukewrj65mvk7lbiifd5w3qeroe",
+        "timestamp_proof_cid": "bafkreiefjmbeivgbv3mgx27uqtojjrmexjv3rtgr4oyt3bx5k3gs3bv6iq"
+      },
+      {
+        "name": "STProof_FDC_20260420_093238.jpg",
+        "description": "现场拍摄记录",
+        "description_en": "On-site Photo Record",
+        "type": "image/jpeg",
+        "cid": "bafybeibkxkhbt6iitefjxoza6pv2alworm6r2bn6qlyaseultduusdr5dm",
+        "timestamp_proof_cid": "bafkreicpiho5tvb6f5mlri7e6zvjpiqm4yw3yikqpb6orpnj6mhap4voea"
+      },
+      {
+        "name": "IMG_20260420_101447_信封编号.jpg",
+        "description": "信封编号记录",
+        "description_en": "Envelope Number Record",
+        "type": "image/jpeg",
+        "cid": "bafybeihztrantah5n3tfxqzqojufuw6hzujuw4kxgvqkwlekn7vzw5jmu",
+        "timestamp_proof_cid": "bafkreiffzlhpq45fb5wfh7jlw7ezamym3uotu7i2qq7fydt5mdvojuuim4"
+      },
+      {
+        "name": "IMG_20260420_102818_手写编号.jpg",
+        "description": "手写编号确认",
+        "description_en": "Handwritten Number Confirmation",
+        "type": "image/jpeg",
+        "cid": "bafybeigmbw57mgwd4fp6jjhactar5eq4rtgmog7le64fyqn2q65gjklz24",
+        "timestamp_proof_cid": "bafkreignfg4vk7vi6fhhrobcn7mtxtafebqtyxktdmbypydcqtitcwh55q"
+      },
+      {
+        "name": "IMG_20260420_142505_挂号编码.jpg",
+        "description": "挂号信编码记录",
+        "description_en": "Registered Mail Code Record",
+        "type": "image/jpeg",
+        "cid": "bafybeiceo54lnfycz7c2733hl6ssxjja4k5s4a72ui7hwj5vgj52mgu6bq",
+        "timestamp_proof_cid": "bafkreib7t5bc5we7jqdkaqkgiqf6fes2p7g2rofhr4fcuyrwh2cci54kx4"
+      },
+      {
+        "name": "IMG_20260420_142527_编号编码.jpg",
+        "description": "编号编码确认",
+        "description_en": "Number Code Confirmation",
+        "type": "image/jpeg",
+        "cid": "bafybeibzvz2p77f2kqf24ufnk5kyz6s3pxgpzcqgxts6l7fvonbkenqiq",
+        "timestamp_proof_cid": "bafkreid3xurfyw27ylbxqkbul2sj4lk257vbamvgbz6af4cjmcwyxjhcna"
+      }
+    ],
+    "restricted_asset_declarations": [
+      {
+        "name": "IMG_20260420_092815_贴票设计.jpg",
+        "description": "贴票设计（含敏感信息）",
+        "description_en": "Stamp Design (Contains Sensitive Info)",
+        "declaration_txt_cid": "bafkreieh7yxoe6g6bq3wwm7utiw3nulg37f6jcpzusgujstb3ch7nkioni",
+        "verification_note": "此文件哈希已由Opentimestamp锚定。持有者可联系创作者获取原始文件进行哈希比对验证。",
+        "verification_note_en": "The hash of this file is anchored by Opentimestamp. The holder may contact the creator to obtain the original file for hash verification."
+      },
+      {
+        "name": "IMG_20260420_095446_贴票完成.jpg",
+        "description": "贴票完成（含敏感信息）",
+        "description_en": "Stamp Completed (Contains Sensitive Info)",
+        "declaration_txt_cid": "bafkreieh7yxoe6g6bq3wwm7utiw3nulg37f6jcpzusgujstb3ch7nkioni",
+        "verification_note": "此文件哈希已由Opentimestamp锚定。持有者可联系创作者获取原始文件进行哈希比对验证。",
+        "verification_note_en": "The hash of this file is anchored by Opentimestamp. The holder may contact the creator to obtain the original file for hash verification."
+      },
+      {
+        "name": "IMG_20260420_101437_书写填写.jpg",
+        "description": "信封书写填写",
+        "description_en": "Envelope Writing & Filling",
+        "declaration_txt_cid": "bafkreieh7yxoe6g6bq3wwm7utiw3nulg37f6jcpzusgujstb3ch7nkioni",
+        "verification_note": "此文件哈希已由Opentimestamp锚定。持有者可联系创作者获取原始文件进行哈希比对验证。",
+        "verification_note_en": "The hash of this file is anchored by Opentimestamp. The holder may contact the creator to obtain the original file for hash verification."
+      },
+      {
+        "name": "IMG_20260420_103448_信封合集.jpg",
+        "description": "信封合集记录",
+        "description_en": "Envelope Collection Record",
+        "declaration_txt_cid": "bafkreieh7yxoe6g6bq3wwm7utiw3nulg37f6jcpzusgujstb3ch7nkioni",
+        "verification_note": "此文件哈希已由Opentimestamp锚定。持有者可联系创作者获取原始文件进行哈希比对验证。",
+        "verification_note_en": "The hash of this file is anchored by Opentimestamp. The holder may contact the creator to obtain the original file for hash verification."
+      },
+      {
+        "name": "IMG_20260420_133310_称重过机.jpg",
+        "description": "称重过机记录",
+        "description_en": "Weighing & Machine Processing Record",
+        "declaration_txt_cid": "bafkreieh7yxoe6g6bq3wwm7utiw3nulg37f6jcpzusgujstb3ch7nkioni",
+        "verification_note": "此文件哈希已由Opentimestamp锚定。持有者可联系创作者获取原始文件进行哈希比对验证。",
+        "verification_note_en": "The hash of this file is anchored by Opentimestamp. The holder may contact the creator to obtain the original file for hash verification."
+      },
+      {
+        "name": "IMG_20260420_142514_交寄完成.jpg",
+        "description": "交寄完成凭证",
+        "description_en": "Mailing Completion Certificate",
+        "declaration_txt_cid": "bafkreieh7yxoe6g6bq3wwm7utiw3nulg37f6jcpzusgujstb3ch7nkioni",
+        "verification_note": "此文件哈希已由Opentimestamp锚定。持有者可联系创作者获取原始文件进行哈希比对验证。",
+        "verification_note_en": "The hash of this file is anchored by Opentimestamp. The holder may contact the creator to obtain the original file for hash verification."
+      }
+    ],
+    "schema": "STProof v6 Event NFT",
+    "version": "1.0"
+  },
+  "stproof_anchor": {
+    "opentimestamp": "已验证 (比特币区块链) | Verified (Bitcoin Blockchain)",
+    "note": "所有公开证据的 OTS 证明 CID 已在 public_assets 的 timestamp_proof_cid 字段中列出。| All OTS proof CIDs for public assets are listed in the timestamp_proof_cid field of public_assets."
+  }
+}
