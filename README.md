@@ -15,8 +15,8 @@ STProof is a universal on-chain event attestation and value capture protocol, fo
 - Technical Support: OTS timestamp + IPFS dual-chain anchoring to achieve zero-knowledge ideological certification and permanent storage.
 
 ## Smart Contract (Sepolia Testnet)
-- Contract Address: `0x037eb54EF9dae9A2Ae33bFB9ba170F1067B925CB`
-- Etherscan: https://sepolia.etherscan.io/address/0x037eb54EF9dae9A2Ae33bFB9ba170F1067B925CB
+- Contract Address: `0x0253f6771De9089f9dF50Ef1ed124Dd815A4a07F`
+- Etherscan: https://sepolia.etherscan.io/address/0x0253f6771De9089f9dF50Ef1ed124Dd815A4a07F
 
 ## Genesis NFT (Polygon Chain)
 - Contract Address: `0x3d36ef7fdec04e2d53822052f5271b27d7b472b0`
