@@ -15,8 +15,16 @@ STProof（时空确权）是一套面向「事件」的通用链上确权与价�
 - 技术支撑：OTS时间戳 + IPFS双链锚定，实现零知识思想确权与永久存证。
 
 ## 智能合约（Sepolia 测试网）
-- 合约地址：`0x0253f6771De9089f9dF50Ef1ed124Dd815A4a07F`
-- 浏览器：https://sepolia.etherscan.io/address/0x0253f6771De9089f9dF50Ef1ed124Dd815A4a07F
+
+### 当前版本（v6.1）
+- **合约地址**：`0x0253f6771De9089f9dF50Ef1ed124Dd815A4a07F`
+- **浏览器**：[https://sepolia.etherscan.io/address/0x0253f6771De9089f9dF50Ef1ed124Dd815A4a07F](https://sepolia.etherscan.io/address/0x0253f6771De9089f9dF50Ef1ed124Dd815A4a07F)
+- **功能**：动态证据链、引用税（70/28/2）、EIP-2981 版税
+
+### 历史版本（v5.2）
+- **合约地址**：`0x037eb54EF9dae9A2Ae33bFB9ba170F1067B925CB`
+- **浏览器**：[https://sepolia.etherscan.io/address/0x037eb54EF9dae9A2Ae33bFB9ba170F1067B925CB](https://sepolia.etherscan.io/address/0x037eb54EF9dae9A2Ae33bFB9ba170F1067B925CB)
+- **说明**：已归档，新项目请使用 v6.1 版本。
 
 ## 创世 NFT（Polygon 链）
 - 合约地址：`0x3d36ef7fdec04e2d53822052f5271b27d7b472b0`
