@@ -1,0 +1,106 @@
+```markdown
+# STProof v6.1 Release Notes
+
+**发布日期**：2026-04-23  
+**协议版本**：v6.1  
+**兼容性**：向后兼容 v6.0，无需迁移现有 NFT
+
+---
+
+## 🚀 新增功能
+
+### 1. 动态证据追加 (`addEvidence`)
+
+允许事件发起人在 NFT 铸造后，追加新的证据 CID。适用于事件生命周期长、证据分阶段采集的场景（如实寄封的寄出 → 运输 → 落地 → 退回）。
+
+```solidity
+function addEvidence(uint256 tokenId, string memory newCID) external onlyEventCreator(tokenId)
+```
+
+- 仅事件发起人可调用
+- 每次追加会触发 `EvidenceAdded` 事件
+- 追加的证据会永久记录在链上
+
+### 2. 证据历史查询 (`getEvidenceHistory`)
+
+返回某个 NFT 的所有证据 CID（按追加时间顺序排列）。
+
+```solidity
+function getEvidenceHistory(uint256 tokenId) external view returns (string[] memory)
+```
+
+### 3. 证据数量查询 (`getEvidenceCount`)
+
+返回某个 NFT 已追加的证据数量。
+
+```solidity
+function getEvidenceCount(uint256 tokenId) external view returns (uint256)
+```
+
+### 4. 元数据 URI 更新 (`setTokenURI`)
+
+允许合约 owner 更新 NFT 的 `tokenURI`（用于链下元数据演进）。
+
+```solidity
+function setTokenURI(uint256 tokenId, string memory newURI) external onlyOwner
+```
+
+### 5. 新增事件 (`EvidenceAdded`)
+
+```solidity
+event EvidenceAdded(uint256 indexed tokenId, string newCID, uint256 timestamp, uint256 version)
+```
+
+第三方应用可监听此事件，实时获知某个 NFT 的证据链更新。
+
+---
+
+## 🔧 功能改进
+
+- `mintWithSchema` 在铸造时**自动将初始 CID 加入 `evidenceHistory`**，确保完整证据链从铸造第一刻开始记录。
+- 优化 `tokenURI` 返回逻辑：优先返回自定义 URI（`setTokenURI`），否则返回默认的链上 JSON。
+
+---
+
+## 📦 部署地址
+
+| 网络 | 合约地址 |
+|------|----------|
+| Sepolia 测试网 | `0x0253f6771De9089f9dF50Ef1ed124Dd815A4a07F` |
+| Polygon 主网 | `0x0f785C4269e9c5b5aDB6eb550B6c019FC6659dCF` |
+
+> 注：主网合约因 EVM 大小限制，已进行适度精简（保留全部核心功能）。
+
+---
+
+## ⚠️ 迁移指南
+
+- **v6.0 及之前版本铸造的 NFT**：无需迁移，原有功能不受影响。
+- **v6.0 合约部署者**：如需使用 v6.1 新功能，请部署新版合约。新旧合约可并存。
+
+---
+
+## 📄 完整合约代码
+
+- [STProofV61.sol](https://github.com/你的项目/blob/main/contracts/STProofV61.sol)
+
+---
+
+## 🎯 升级意义
+
+| 之前（v6.0） | 之后（v6.1） |
+|--------------|--------------|
+| NFT 铸造后无法追加新证据 | 可无限次追加证据 CID |
+| 消费者需多次购买才能获得完整证据链 | 一次购买，证据链动态成长 |
+| 无法追溯证据演进历史 | 链上完整记录每次追加的时间线 |
+
+---
+
+## 🙏 致谢
+
+感谢 STProof 社区的持续反馈与贡献。
+
+---
+
+**相关问题请提交 [Issues](https://github.com/你的项目/issues) 或联系核心开发团队。**
+```
