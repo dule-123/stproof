@@ -102,5 +102,5 @@ event EvidenceAdded(uint256 indexed tokenId, string newCID, uint256 timestamp, u
 
 ---
 
-**相关问题请提交 [Issues](https://github.com/你的项目/issues) 或联系核心开发团队。**
+**相关问题请提交 [Issues](https://github.com/dule-123/stproof/issues) 或联系核心开发团队。**
 ```
