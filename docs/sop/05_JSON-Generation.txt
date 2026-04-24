@@ -1,0 +1,30 @@
+# JSON Structure Template
+
+{
+  "name": "Stamp Theme - Location First Day Cover NFT #number",
+  "name_en": "English Name - Location First Day Cover NFT #number",
+  "description": "Detailed description...",
+  "image": "ipfs://main_image_CID",
+  "attributes": [
+    { "trait_type": "Event Type", "value": "Stamp First-Day Mailing" },
+    { "trait_type": "Serial Number", "value": "XXX" }
+  ],
+  "copyright_statement": { ... },
+  "properties": {
+    "public_assets": [...],
+    "restricted_asset_declarations": [...]
+  }
+}
+
+# public_assets Field Specification
+
+Each public asset contains:
+
+{
+  "name": "filename.jpg",
+  "description": "Description",
+  "type": "image/jpeg",
+  "cid": "bafyxxx（CID of the file itself）",
+  "timestamp_proof_cid": "bafyxxx（CID of the .ots file）"
+}
+
