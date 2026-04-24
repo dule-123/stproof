@@ -40,11 +40,18 @@ Event Design → Official Bulletin → Field Execution → Data Collection → H
 ## Core Principles
 
 > **Public files = OTS + IPFS**
+> 
 > **Private files = SHA256 only (not uploaded)**
+> 
 > **L1 Public Common = Shared across all covers**
+> 
 > **L2 Independent Public = Unique per cover**
+> 
 > **L3 Private = Unique per cover, no original images**
+> 
 > **cid = CID of the file itself**
+> 
 > **timestamp_proof_cid = CID of the corresponding .ots file**
+> 
 > **Not the same, cannot be empty**
 > 
