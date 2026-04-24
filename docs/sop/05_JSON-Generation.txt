@@ -1,4 +1,4 @@
-# JSON Structure Template
+#5.1 JSON Structure Template
 
 {
   "name": "Stamp Theme - Location First Day Cover NFT #number",
@@ -16,7 +16,7 @@
   }
 }
 
-# public_assets Field Specification
+#5.2 public_assets Field Specification
 
 Each public asset contains:
 
@@ -28,3 +28,18 @@ Each public asset contains:
   "timestamp_proof_cid": "bafyxxx（CID of the .ots file）"
 }
 
+#5.3 restricted_asset_declarations Field Specification
+
+{
+  "name": "private_filename.jpg",
+  "description": "Description (Contains Sensitive Info)",
+  "declaration_txt_cid": "bafyxxx（CID of PRIVATE_XXX.txt）",
+  "verification_note": "This file's hash is anchored by Opentimestamp..."
+}
+
+# 5.4 Three-Layer Structure in JSON
+Layer	                        File                   JSON Location
+L1 Public Common        PUBLIC_COMMON.txt + .ots    public_assets first item
+L2 Independent Public   PUBLIC_XXX.txt + .ots       public_assets second item
+L3 Private              PRIVATE_XXX.txt + .ots      public_assets third item
+Private Reference       PRIVATE_XXX.txt             restricted_asset_declarations[].declaration_txt_cid
