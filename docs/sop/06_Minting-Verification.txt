@@ -1,0 +1,88 @@
+# 6.1 Pre-minting Final Checklist
+All public evidence has been redacted
+
+SHA256 calculated for each public file
+
+OTS generated and upgraded for each public file
+
+All files uploaded to IPFS with CIDs recorded
+
+L1/L2/L3 txt files all uploaded + OTS
+
+All CIDs correct in JSON
+
+cid ≠ timestamp_proof_cid
+
+Serial number matches handwritten code
+
+Chinese and English descriptions correspond
+
+6.2 Minting Options
+OpenSea: Upload JSON to IPFS, mint with ipfs:// link
+
+Rarible: Supports direct JSON upload
+
+STProof Contract: Mint with your STProofV61.sol
+
+6.3 Deliverables
+On-chain (verifiable by anyone):
+
+NFT main image
+
+JSON metadata
+
+IPFS links to all public evidence
+
+OTS timestamp proofs
+
+Off-chain (buyer only):
+
+Original high-res photos (with complete stamp images)
+
+Original video files
+
+Complete receipts / tracking numbers
+
+6.4 Verification Method
+Buyer verification process:
+
+Download public evidence from IPFS
+
+Verify timestamp with ots verify
+
+Calculate SHA256 and compare with on-chain hash
+
+After delivery, obtain private originals and repeat verification
+
+Core Principles Summary
+Public files = OTS + IPFS
+Private files = SHA256 only (not uploaded)
+
+L1 Public Common = Shared across all covers
+L2 Independent Public = Unique per cover
+L3 Private = Unique per cover, no original images
+
+cid = CID of the file itself
+timestamp_proof_cid = CID of the corresponding .ots file
+Not the same, cannot be empty
+
+Appendix: Quick Reference
+Common Commands
+
+# Calculate SHA256
+shasum -a 256 filename
+
+# Generate OTS proof
+ots stamp filename
+ots upgrade filename.ots
+ots verify filename.ots
+
+# Batch hash calculation (macOS/Linux)
+for f in *.jpg; do echo "$f: $(shasum -a 256 "$f")"; done
+
+Useful Tools
+Tool	Purpose	 Link
+Pinata	IPFS upload	https://pinata.cloud
+OpenTimestamps	Timestamp proof	https://opentimestamps.org
+GPX Logger	GPS track recording	App Store / Google Play
+End of SOP
