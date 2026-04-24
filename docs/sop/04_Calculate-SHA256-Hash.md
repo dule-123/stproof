@@ -16,7 +16,7 @@ ots upgrade filename.jpg.ots
 # Verify
 ots verify filename.jpg.ots
 
-4.3 Which Files Need OTS?
+# Which Files Need OTS?
 
 File Type  
 
