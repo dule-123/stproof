@@ -18,34 +18,18 @@ ots verify filename.jpg.ots
 
 # Which Files Need OTS?
 
-File Type  
+File Type                   OTS Required        Reason
 
-OTS Required  
+Public photos (redacted)       ✅ Yes      Prove tamper-proof  
 
-Reason
+Public videos (redacted)       ✅ Yes        Same as above
 
-Public photos (redacted)  ✅ Yes
+GPS track files                ✅ Yes      Prove spatiotemporal track
 
-Prove tamper-proof  
+Public hash manifest (.txt)    ✅ Yes      Prove manifest integrity
 
-Public videos (redacted)  ✅ Yes
+Private hash manifest (.txt)   ✅ Yes      Prove existence
 
-Same as above
-
-GPS track files   ✅ Yes
-
-Prove spatiotemporal track
-
-Public hash manifest (.txt)   ✅ Yes
-
-Prove manifest integrity
-
-Private hash manifest (.txt)   ✅ Yes
-
-Prove existence
-
-Private original images   ❌ No
-
-Not on-chain
+Private original images        ❌ No       Not on-chain
 
 Only files uploaded to IPFS need OTS
