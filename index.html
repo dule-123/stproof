@@ -3,301 +3,469 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>STProof Protocol v6.3 | 事件确权底层协议</title>
+    <meta name="description" content="STProof Protocol v6.3 - 事件确权底层协议 | 不确权物，只确权事">
+    <title>STProof Protocol v6.3 | 事件确权 · 事实元宇宙</title>
+    
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
         :root { 
             --primary: #165DFF; 
-            --light: #E8F3FF; 
+            --primary-light: #E8F3FF; 
+            --dark: #1D2129; 
+            --gray: #4E5969; 
             --bg: #F7F8FA; 
-            --dark: #111; 
-            --gray: #555; 
+            --white: #fff; 
+            --shadow: 0 4px 20px rgba(0,0,0,0.08); 
         }
         body { background: var(--bg); color: var(--dark); line-height: 1.6; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        a { text-decoration: none; transition: color 0.2s; }
+        a { text-decoration: none; color: inherit; }
         .btn { 
-            display: inline-block;
+            display: inline-block; 
             padding: 12px 28px; 
             border-radius: 8px; 
             font-weight: 600; 
-            background: var(--primary); 
-            color: white; 
+            font-size: 16px; 
             transition: all 0.3s; 
-            border: none;
-            cursor: pointer;
+            cursor: pointer; 
+            border: none; 
+            background: var(--primary); 
+            color: var(--white);
         }
         .btn:hover { 
             transform: translateY(-2px); 
-            box-shadow: 0 4px 12px rgba(22, 93, 255, 0.3);
+            background: #0E42C1; 
+            box-shadow: 0 4px 12px rgba(22,93,255,0.3); 
         }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        .btn-outline:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+        }
+        
         header { 
+            background: var(--white); 
+            box-shadow: var(--shadow); 
             position: fixed; 
-            top:0; left:0; right:0; 
-            background: white; 
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
-            z-index: 99; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            z-index: 999; 
         }
-        .header-inner { 
+        .header-container { 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
-            padding: 16px 0; 
+            padding: 16px 20px; 
+            max-width: 1200px; 
+            margin: 0 auto; 
         }
         .logo { 
-            font-size: 22px; 
+            font-size: 24px; 
             font-weight: 700; 
             color: var(--primary); 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
         }
+        .logo span { color: var(--dark); font-weight: 500; font-size: 18px; }
         .nav { 
             display: flex; 
-            gap: 28px; 
+            gap: 32px; 
+            font-size: 15px; 
+            font-weight: 500; 
             align-items: center; 
         }
         .nav a { 
-            font-weight: 500; 
-            color: #333; 
+            color: var(--gray); 
+            transition: color 0.3s; 
+            cursor: pointer; 
         }
         .nav a:hover { color: var(--primary); }
-        .lang { 
+        .lang-switch { 
             padding: 6px 12px; 
             border: 1px solid var(--primary); 
-            border-radius: 6px; 
+            border-radius: 4px; 
             cursor: pointer; 
+            font-size: 14px; 
+            font-weight: 600; 
             color: var(--primary); 
-            font-weight: 500;
+            background: white; 
+            margin-left: 16px; 
+            transition: all 0.2s;
         }
+        .lang-switch:hover { background: var(--primary-light); }
+
         .hero { 
-            padding: 120px 0 80px; 
-            background: linear-gradient(180deg, var(--light), white); 
+            padding: 140px 0 80px; 
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--bg) 100%); 
+            margin-top: 70px; 
+        }
+        .hero-slogan { 
+            font-size: 42px; 
+            font-weight: 700; 
+            line-height: 1.2; 
+            margin-bottom: 16px; 
             text-align: center; 
         }
-        .hero h1 { 
-            font-size: 38px; 
-            margin-bottom: 20px; 
-            line-height: 1.3;
-        }
-        .hero h1 span { color: var(--primary); }
-        .hero p { 
-            max-width: 750px; 
-            margin: 0 auto 30px; 
-            font-size: 17px; 
+        .hero-slogan span { color: var(--primary); }
+        .hero-desc { 
+            font-size: 18px; 
             color: var(--gray); 
-            line-height: 1.7;
+            max-width: 850px; 
+            margin: 0 auto; 
+            text-align: center; 
+            line-height: 1.8; 
         }
-        .btns { 
+        .hero-btns { 
             display: flex; 
-            gap: 16px; 
+            gap: 20px; 
+            margin-top: 32px; 
             justify-content: center; 
             flex-wrap: wrap; 
-            margin-top: 20px; 
         }
+
         .section { padding: 80px 0; }
         .section-title { 
             text-align: center; 
-            font-size: 28px; 
+            font-size: 32px; 
+            font-weight: 700; 
             margin-bottom: 16px; 
-            color: var(--dark);
         }
         .section-desc { 
             text-align: center; 
+            font-size: 17px; 
             color: var(--gray); 
-            max-width: 700px; 
-            margin: 0 auto 40px; 
-            font-size: 16px;
+            max-width: 800px; 
+            margin: 0 auto 50px; 
         }
-        .grid { 
+
+        .core-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 30px; 
+        }
+        .core-card { 
+            padding: 28px; 
+            border-radius: 12px; 
+            background: var(--white); 
+            box-shadow: var(--shadow); 
+            transition: all 0.3s; 
+        }
+        .core-card:hover { transform: translateY(-5px); }
+        .core-card h3 { 
+            font-size: 20px; 
+            font-weight: 700; 
+            color: var(--primary); 
+            margin-bottom: 12px; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+        }
+        .core-card p { color: var(--gray); font-size: 16px; line-height: 1.7; }
+
+        .upgrade-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
             gap: 24px; 
         }
-        .card { 
-            background: white; 
+        .upgrade-card {
+            background: var(--white);
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s;
+        }
+        .upgrade-card:hover { transform: translateY(-4px); }
+        .upgrade-card h3 { color: var(--primary); margin-bottom: 10px; font-size: 18px; }
+        .upgrade-card p { color: var(--gray); font-size: 15px; }
+
+        .event-types { background: var(--primary-light); }
+        .event-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        .event-card { 
             padding: 28px; 
             border-radius: 12px; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
-            transition: transform 0.3s;
+            background: var(--white); 
+            box-shadow: var(--shadow); 
+            transition: all 0.3s; 
         }
-        .card:hover { transform: translateY(-5px); }
-        .card h3 { 
-            color: var(--primary); 
+        .event-card:hover { transform: translateY(-5px); }
+        .event-card h3 { 
+            font-size: 20px; 
+            font-weight: 700; 
             margin-bottom: 12px; 
-            font-size: 18px;
+            border-left: 4px solid var(--primary); 
+            padding-left: 10px; 
         }
-        .card p { color: var(--gray); font-size: 15px; }
-        footer { 
-            background: #111; 
-            color: #ccc; 
-            padding: 40px 0; 
+        .event-card p { color: var(--gray); }
+
+        .nft-card { 
+            max-width: 900px; 
+            margin: 0 auto; 
+            padding: 40px; 
+            border-radius: 12px; 
+            background: var(--bg); 
+            box-shadow: var(--shadow); 
             text-align: center; 
-            font-size: 14px;
         }
-        .whitepaper-section {
-            background: white;
-            padding: 60px 0;
-            border-radius: 12px;
-            margin: 20px auto;
-            max-width: 900px;
+        .nft-meta { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+            gap: 20px; 
+            margin: 30px 0; 
+            text-align: left; 
+        }
+        .meta-item { 
+            padding: 16px; 
+            background: var(--white); 
+            border-radius: 8px; 
+            word-break: break-all;
+        }
+        .meta-item strong { color: var(--dark); }
+        .meta-item .value { color: var(--primary); font-family: monospace; margin-top: 4px; font-size: 13px; }
+        .meta-item a { color: var(--primary); text-decoration: underline; }
+
+        .cid-section { background: var(--primary-light); }
+        .cid-card { background: var(--white); padding: 30px; border-radius: 12px; max-width: 900px; margin: 0 auto; }
+        .cid-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+
+        footer { padding: 40px 0; background: #111; color: #ccc; text-align: center; }
+        .footer-logo { font-size: 20px; font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+        footer a { color: var(--primary); }
+
+        @media (max-width: 700px) {
+            .hero-slogan { font-size: 28px; }
+            .section-title { font-size: 24px; }
+            .nav { gap: 16px; }
+            .header-container { flex-wrap: wrap; gap: 12px; }
         }
     </style>
 </head>
-
 <body>
+
 <header>
-    <div class="container header-inner">
+    <div class="header-container">
         <div class="logo">STProof <span>v6.3</span></div>
-        <div class="nav">
-            <a href="#concept">核心理念</a>
-            <a href="#features">版本特性</a>
-            <a href="#whitepaper">白皮书</a>
-            <a href="https://github.com/dule-123/stproof" target="_blank">GitHub</a>
-            <div class="lang" id="toggleLang">中 / EN</div>
-        </div>
+        <nav class="nav">
+            <!-- 中文导航 -->
+            <div id="zhNav" style="display: flex; gap: 32px; align-items: center;">
+                <a href="#core">核心理念</a>
+                <a href="#upgrades">v6.3升级</a>
+                <a href="#whitepaper">白皮书</a>
+                <a href="#genesis-nft">创世NFT</a>
+                <a href="https://github.com/dule-123/stproof" target="_blank">GitHub</a>
+            </div>
+            <!-- 英文导航 -->
+            <div id="enNav" style="display: none; gap: 32px; align-items: center;">
+                <a href="#core">Core Concepts</a>
+                <a href="#upgrades">v6.3 Upgrades</a>
+                <a href="#whitepaper">Whitepaper</a>
+                <a href="#genesis-nft">Genesis NFT</a>
+                <a href="https://github.com/dule-123/stproof" target="_blank">GitHub</a>
+            </div>
+            <div class="lang-switch" id="langSwitch">EN / 中</div>
+        </nav>
     </div>
 </header>
 
-<!-- 中文版本 -->
-<div id="zh">
+<!-- ========================= 中文内容 ========================= -->
+<div id="zhContent">
     <section class="hero">
         <div class="container">
-            <h1>不确权物，<span>只确权事</span></h1>
-            <p>STProof 是面向客观历史事件的链上确权协议，通过多源证据、零知识思想确权、链上背书构建数字文明事实层。v6.3 版本新增手动收益提现、验证者证言系统，全面升级安全架构。</p>
-            <div class="btns">
+            <h1 class="hero-slogan">不确权物，<span>只确权事</span><br><span style="font-size: 28px;">凡发生，皆可存；凡存证，皆可信</span></h1>
+            <p class="hero-desc">STProof v6.3 是面向客观历史事件的链上确权协议，通过多源证据、零知识思想确权、链上背书构建数字文明事实层。新增手动收益提现、验证者证言系统，安全架构全面升级。</p>
+            <div class="hero-btns">
                 <a href="https://stproof.org/docs/STProof_Protocol_Whitepaper_v6.3_CN" class="btn" target="_blank">📄 中文白皮书 v6.3</a>
-                <a href="https://stproof.org/docs/STProof_Protocol_Whitepaper_v6.3_EN" class="btn" target="_blank">📄 英文白皮书 v6.3</a>
+                <a href="https://stproof.org/docs/STProof_Protocol_Whitepaper_v6.3_EN" class="btn btn-outline" target="_blank">📄 英文白皮书 v6.3</a>
+                <a href="https://opensea.io/collection/stproof-genesis-event" target="_blank" class="btn btn-outline"><i class="fas fa-external-link-alt"></i> 创世NFT</a>
             </div>
         </div>
     </section>
 
-    <section class="section" id="concept">
+    <!-- 核心理念 (6个卡片 融合v6.3概念) -->
+    <section class="section" id="core">
         <div class="container">
-            <h2 class="section-title">核心理念</h2>
+            <h2 class="section-title">协议核心理念</h2>
             <p class="section-desc">聚焦事件本身，构建无资产绑定、无RWA风险的可信事实层</p>
-            <div class="grid">
-                <div class="card">
-                    <h3>事件唯一确权</h3>
-                    <p>只确权客观发生的事件，不映射实物、不绑定资产所有权，无RWA合规风险。</p>
-                </div>
-                <div class="card">
-                    <h3>平权铸造</h3>
-                    <p>任何人只需支付Gas费用，即可创建事件NFT，无准入门槛。</p>
-                </div>
-                <div class="card">
-                    <h3>零知识思想确权</h3>
-                    <p>不泄露隐私和核心数据，即可完成事件真实性验证。</p>
-                </div>
-                <div class="card">
-                    <h3>多源证据交叉验证</h3>
-                    <p>时间、地点、主体、行为、材料多方交叉验证，确保事件真实可追溯。</p>
-                </div>
-                <div class="card">
-                    <h3>手动收益提现</h3>
-                    <p>收益存入合约，创作者可手动安全提取，提升资金安全性。</p>
-                </div>
-                <div class="card">
-                    <h3>验证者证言系统</h3>
-                    <p>验证者可提交链上签名证言，增强事件可信度与社区背书。</p>
-                </div>
+            <div class="core-grid">
+                <div class="core-card"><h3><i class="fas fa-compass-drafting"></i> 事件唯一确权</h3><p>只确权客观发生的事件，不映射实物、不绑定资产所有权，无RWA合规风险。</p></div>
+                <div class="core-card"><h3><i class="fas fa-balance-scale"></i> 平权铸造</h3><p>任何人只需支付Gas费用，即可创建事件NFT，无准入门槛。</p></div>
+                <div class="core-card"><h3><i class="fas fa-shield-alt"></i> 零知识思想确权</h3><p>不泄露隐私和核心数据，即可完成事件真实性验证。OTS时间戳+IPFS双链锚定。</p></div>
+                <div class="core-card"><h3><i class="fas fa-link"></i> 多源证据交叉验证</h3><p>时间、地点、主体、行为、材料多方交叉验证，确保事件真实可追溯。</p></div>
+                <div class="core-card"><h3><i class="fas fa-sack-dollar"></i> 手动收益提现</h3><p>收益存入合约，创作者可手动安全提取，提升资金安全性。</p></div>
+                <div class="core-card"><h3><i class="fas fa-user-check"></i> 验证者证言系统</h3><p>验证者可提交链上签名证言，增强事件可信度与社区背书。</p></div>
             </div>
         </div>
     </section>
 
-    <section class="section" id="features">
+    <!-- v6.3 核心升级区块 (新增) 沿用4.26风格但内容全新 -->
+    <section class="section" id="upgrades" style="background: var(--white);">
         <div class="container">
             <h2 class="section-title">v6.3 核心升级</h2>
             <p class="section-desc">安全、高效、可扩展的生产级协议版本</p>
-            <div class="grid">
-                <div class="card"><h3>✅ 手动收益提现</h3><p>收益链上累积，创作者自主提现，更安全、更透明。</p></div>
-                <div class="card"><h3>✅ 验证者证言</h3><p>支持验证者提交链上签名证言，强化事实验证体系。</p></div>
-                <div class="card"><h3>✅ 固定版次 NFT</h3><p>支持限量版事件NFT，满足稀缺性场景需求。</p></div>
-                <div class="card"><h3>✅ 安全架构升级</h3><p>重入锁、权限控制、紧急暂停，全方位保障合约安全。</p></div>
-                <div class="card"><h3>✅ Gas 优化</h3><p>批量操作+存储压缩，大幅降低链上交互成本。</p></div>
-                <div class="card"><h3>✅ 模块化合约</h3><p>可扩展、可审计、可升级，适配未来功能迭代。</p></div>
+            <div class="upgrade-grid">
+                <div class="upgrade-card"><h3>✅ 手动收益提现</h3><p>收益链上累积，创作者自主提现，更安全、更透明。</p></div>
+                <div class="upgrade-card"><h3>✅ 验证者证言</h3><p>支持验证者提交链上签名证言，强化事实验证体系。</p></div>
+                <div class="upgrade-card"><h3>✅ 固定版次 NFT</h3><p>支持限量版事件NFT，满足稀缺性场景需求。</p></div>
+                <div class="upgrade-card"><h3>✅ 安全架构升级</h3><p>重入锁、权限控制、紧急暂停，全方位保障合约安全。</p></div>
+                <div class="upgrade-card"><h3>✅ Gas 优化</h3><p>批量操作+存储压缩，大幅降低链上交互成本。</p></div>
+                <div class="upgrade-card"><h3>✅ 模块化合约</h3><p>可扩展、可审计、可升级，适配未来功能迭代。</p></div>
             </div>
         </div>
     </section>
 
+    <!-- 全场景事件类型 (保留4.26结构) -->
+    <section class="event-types section" id="event-types">
+        <div class="container">
+            <h2 class="section-title">全场景事件类型</h2>
+            <div class="event-grid">
+                <div class="event-card"><h3>有实物事件</h3><p>实寄邮寄、艺术品创作、文物出土等物理世界锚定事件。</p></div>
+                <div class="event-card"><h3>无实物事件</h3><p>线上发布、链上投票、学术发表等纯数字事件。</p></div>
+                <div class="event-card"><h3>混合事件</h3><p>新闻现场、演出活动、法律存证等虚实结合场景。</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 白皮书区块 (新版白皮书链接) -->
     <section class="section" id="whitepaper">
-        <div class="container whitepaper-section">
-            <h2 class="section-title">白皮书 v6.3 完整版</h2>
-            <p class="section-desc">基于GitHub Pages部署，可在线阅读/下载</p>
-            <div class="btns">
-                <a href="https://stproof.org/docs/STProof_Protocol_Whitepaper_v6.3_CN" class="btn" target="_blank">📄 中文白皮书</a>
-                <a href="https://stproof.org/docs/STProof_Protocol_Whitepaper_v6.3_EN" class="btn" target="_blank">📄 English Whitepaper</a>
+        <div class="container">
+            <div class="nft-card" style="background: white;">
+                <h2 class="section-title" style="margin-bottom: 12px;">白皮书 v6.3 完整版</h2>
+                <p class="section-desc" style="margin-bottom: 24px;">基于GitHub Pages部署，可在线阅读/下载</p>
+                <div class="hero-btns" style="margin-top: 0;">
+                    <a href="https://stproof.org/docs/STProof_Protocol_Whitepaper_v6.3_CN" class="btn" target="_blank">📄 中文白皮书</a>
+                    <a href="https://stproof.org/docs/STProof_Protocol_Whitepaper_v6.3_EN" class="btn btn-outline" target="_blank">📄 English Whitepaper</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 创世NFT区块 (保留原有合约信息) -->
+    <section class="section" id="genesis-nft">
+        <div class="container">
+            <h2 class="section-title">STProof 创世NFT</h2>
+            <div class="nft-card">
+                <h3>STProof Genesis Event</h3>
+                <div class="nft-meta">
+                    <div class="meta-item"><strong>OpenSea 合集</strong><div class="value"><a href="https://opensea.io/collection/stproof-genesis-event" target="_blank">stproof-genesis-event</a></div></div>
+                    <div class="meta-item"><strong>Polygon 合约</strong><div class="value">0x3d36ef7fdec04e2d53822052f5271b27d7b472b0</div></div>
+                    <div class="meta-item"><strong>Sepolia 合约</strong><div class="value"><a href="https://sepolia.etherscan.io/address/0x2934ca1D3F3b8EfCDAf4735bD36A36E8bfa3a6A4" target="_blank">0x2934ca1D3F3b8EfCDAf4735bD36A36E8bfa3a6A4</a></div></div>
+                </div>
+                <a href="https://opensea.io/collection/stproof-genesis-event" target="_blank" class="btn">前往 OpenSea Mint</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 实验 CID 清单 (保留原有) -->
+    <section class="cid-section section" id="cid-section">
+        <div class="container">
+            <h2 class="section-title">实验 CID 清单</h2>
+            <div class="cid-card">
+                <div class="cid-grid">
+                    <div class="meta-item"><strong>自指证明实验 CID</strong><div class="value">bafybeial45ll7mvqfvnbuk4ddgezajmhzzzoub7bdjwnx3wa65hox4maii</div><div><a href="https://ipfs.io/ipfs/bafybeial45ll7mvqfvnbuk4ddgezajmhzzzoub7bdjwnx3wa65hox4maii" target="_blank">查看 ↗</a></div></div>
+                    <div class="meta-item"><strong>真人跨境实验 CID</strong><div class="value">bafybeiahbfntsssvhtzwrokp3nojjan3tmscrhbcrzq74jw24sybjp7oo4</div><div><a href="https://ipfs.io/ipfs/bafybeiahbfntsssvhtzwrokp3nojjan3tmscrhbcrzq74jw24sybjp7oo4" target="_blank">查看 ↗</a></div></div>
+                </div>
             </div>
         </div>
     </section>
 </div>
 
-<!-- 英文版本 -->
-<div id="en" style="display:none">
+<!-- ========================= 英文内容 ========================= -->
+<div id="enContent" style="display:none;">
     <section class="hero">
         <div class="container">
-            <h1>Not Proof of Asset, <span>Only Proof of Event</span></h1>
-            <p>STProof is the world’s first on-chain protocol for objective historical events, built for the fact layer of digital civilization. v6.3 adds manual revenue withdrawal, validator attestations, and enhanced security architecture.</p>
-            <div class="btns">
+            <h1 class="hero-slogan">Not Proof of Asset, <span>Only Proof of Event</span><br><span style="font-size: 28px;">What Happens, Exists; What's Proven, Trusted</span></h1>
+            <p class="hero-desc">STProof v6.3 is the world's first on-chain protocol for objective historical events, built for the fact layer of digital civilization. v6.3 adds manual revenue withdrawal, validator attestations, and enhanced security architecture.</p>
+            <div class="hero-btns">
                 <a href="https://stproof.org/docs/STProof_Protocol_Whitepaper_v6.3_EN" class="btn" target="_blank">📄 Whitepaper v6.3</a>
-                <a href="https://stproof.org/docs/STProof_Protocol_Whitepaper_v6.3_CN" class="btn" target="_blank">📄 中文白皮书</a>
+                <a href="https://stproof.org/docs/STProof_Protocol_Whitepaper_v6.3_CN" class="btn btn-outline" target="_blank">📄 中文白皮书</a>
+                <a href="https://opensea.io/collection/stproof-genesis-event" target="_blank" class="btn btn-outline"><i class="fas fa-external-link-alt"></i> Genesis NFT</a>
             </div>
         </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="core">
         <div class="container">
             <h2 class="section-title">Core Concepts</h2>
             <p class="section-desc">Focus on events themselves, build a trusted fact layer without asset binding or RWA risks</p>
-            <div class="grid">
-                <div class="card">
-                    <h3>Event Only</h3>
-                    <p>Only certify objectively occurred events, no physical asset mapping, no RWA compliance risks.</p>
-                </div>
-                <div class="card">
-                    <h3>Equal Mint</h3>
-                    <p>Anyone can mint Event NFT with only gas fee, no entry barriers.</p>
-                </div>
-                <div class="card">
-                    <h3>Zero-Knowledge Proof</h3>
-                    <p>Verify event authenticity without exposing privacy or core data.</p>
-                </div>
-                <div class="card">
-                    <h3>Multi-Source Evidence</h3>
-                    <p>Cross-validation of time, location, subject, behavior and materials for traceable truth.</p>
-                </div>
-                <div class="card">
-                    <h3>Manual Withdrawal</h3>
-                    <p>Revenues accumulated on-chain, creators withdraw manually for better security.</p>
-                </div>
-                <div class="card">
-                    <h3>Validator Attestations</h3>
-                    <p>Validators can submit signed on-chain attestations to enhance event credibility.</p>
-                </div>
+            <div class="core-grid">
+                <div class="core-card"><h3><i class="fas fa-compass-drafting"></i> Event Only</h3><p>Only certify objectively occurred events, no physical asset mapping, no RWA compliance risks.</p></div>
+                <div class="core-card"><h3><i class="fas fa-balance-scale"></i> Equal Mint</h3><p>Anyone can mint Event NFT with only gas fee, no entry barriers.</p></div>
+                <div class="core-card"><h3><i class="fas fa-shield-alt"></i> Zero-Knowledge Proof</h3><p>Verify event authenticity without exposing privacy or core data. OTS + IPFS dual anchoring.</p></div>
+                <div class="core-card"><h3><i class="fas fa-link"></i> Multi-Source Evidence</h3><p>Cross-validation of time, location, subject, behavior and materials for traceable truth.</p></div>
+                <div class="core-card"><h3><i class="fas fa-sack-dollar"></i> Manual Withdrawal</h3><p>Revenues accumulated on-chain, creators withdraw manually for better security.</p></div>
+                <div class="core-card"><h3><i class="fas fa-user-check"></i> Validator Attestations</h3><p>Validators can submit signed on-chain attestations to enhance event credibility.</p></div>
             </div>
         </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="upgrades" style="background: var(--white);">
         <div class="container">
             <h2 class="section-title">v6.3 Key Upgrades</h2>
             <p class="section-desc">Secure, efficient and scalable production-grade protocol</p>
-            <div class="grid">
-                <div class="card"><h3>✅ Manual Withdrawals</h3><p>On-chain revenue accumulation, creator-controlled withdrawal for security & transparency.</p></div>
-                <div class="card"><h3>✅ Validator Attestations</h3><p>Support signed on-chain testimonials to strengthen event verification.</p></div>
-                <div class="card"><h3>✅ Fixed Editions</h3><p>Limited-edition Event NFTs for scarcity scenarios.</p></div>
-                <div class="card"><h3>✅ Enhanced Security</h3><p>Reentrancy guard, access control and emergency pause for full contract protection.</p></div>
-                <div class="card"><h3>✅ Gas Optimization</h3><p>Batch operations + storage compression to reduce on-chain costs.</p></div>
-                <div class="card"><h3>✅ Modular Contracts</h3><p>Extensible, auditable and upgradable for future iterations.</p></div>
+            <div class="upgrade-grid">
+                <div class="upgrade-card"><h3>✅ Manual Withdrawals</h3><p>On-chain revenue accumulation, creator-controlled withdrawal for security & transparency.</p></div>
+                <div class="upgrade-card"><h3>✅ Validator Attestations</h3><p>Support signed on-chain testimonials to strengthen event verification.</p></div>
+                <div class="upgrade-card"><h3>✅ Fixed Editions</h3><p>Limited-edition Event NFTs for scarcity scenarios.</p></div>
+                <div class="upgrade-card"><h3>✅ Enhanced Security</h3><p>Reentrancy guard, access control and emergency pause for full contract protection.</p></div>
+                <div class="upgrade-card"><h3>✅ Gas Optimization</h3><p>Batch operations + storage compression to reduce on-chain costs.</p></div>
+                <div class="upgrade-card"><h3>✅ Modular Contracts</h3><p>Extensible, auditable and upgradable for future iterations.</p></div>
             </div>
         </div>
     </section>
 
-    <section class="section">
-        <div class="container whitepaper-section">
-            <h2 class="section-title">Whitepaper v6.3 (Full Version)</h2>
-            <p class="section-desc">Hosted on GitHub Pages, readable and downloadable online</p>
-            <div class="btns">
-                <a href="https://stproof.org/docs/STProof_Protocol_Whitepaper_v6.3_EN" class="btn" target="_blank">📄 Whitepaper</a>
-                <a href="https://stproof.org/docs/STProof_Protocol_Whitepaper_v6.3_CN" class="btn" target="_blank">📄 中文白皮书</a>
+    <section class="event-types section" id="event-types">
+        <div class="container">
+            <h2 class="section-title">Event Types</h2>
+            <div class="event-grid">
+                <div class="event-card"><h3>Tangible Events</h3><p>Mail, art creation, excavation, etc. — physical world anchored events.</p></div>
+                <div class="event-card"><h3>Intangible Events</h3><p>Online publishing, voting, academic releases, etc.</p></div>
+                <div class="event-card"><h3>Hybrid Events</h3><p>News, performances, legal deposits, etc.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="whitepaper">
+        <div class="container">
+            <div class="nft-card" style="background: white;">
+                <h2 class="section-title" style="margin-bottom: 12px;">Whitepaper v6.3 (Full Version)</h2>
+                <p class="section-desc" style="margin-bottom: 24px;">Hosted on GitHub Pages, readable and downloadable online</p>
+                <div class="hero-btns" style="margin-top: 0;">
+                    <a href="https://stproof.org/docs/STProof_Protocol_Whitepaper_v6.3_EN" class="btn" target="_blank">📄 Whitepaper</a>
+                    <a href="https://stproof.org/docs/STProof_Protocol_Whitepaper_v6.3_CN" class="btn btn-outline" target="_blank">📄 中文白皮书</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="genesis-nft">
+        <div class="container">
+            <h2 class="section-title">STProof Genesis NFT</h2>
+            <div class="nft-card">
+                <h3>STProof Genesis Event</h3>
+                <div class="nft-meta">
+                    <div class="meta-item"><strong>OpenSea Collection</strong><div class="value"><a href="https://opensea.io/collection/stproof-genesis-event" target="_blank">stproof-genesis-event</a></div></div>
+                    <div class="meta-item"><strong>Polygon Contract</strong><div class="value">0x3d36ef7fdec04e2d53822052f5271b27d7b472b0</div></div>
+                    <div class="meta-item"><strong>Sepolia Contract</strong><div class="value"><a href="https://sepolia.etherscan.io/address/0x2934ca1D3F3b8EfCDAf4735bD36A36E8bfa3a6A4" target="_blank">0x2934ca1D3F3b8EfCDAf4735bD36A36E8bfa3a6A4</a></div></div>
+                </div>
+                <a href="https://opensea.io/collection/stproof-genesis-event" target="_blank" class="btn">Mint on OpenSea</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="cid-section section" id="cid-section">
+        <div class="container">
+            <h2 class="section-title">Experiment CIDs</h2>
+            <div class="cid-card">
+                <div class="cid-grid">
+                    <div class="meta-item"><strong>Self-Referential CID</strong><div class="value">bafybeial45ll7mvqfvnbuk4ddgezajmhzzzoub7bdjwnx3wa65hox4maii</div><div><a href="https://ipfs.io/ipfs/bafybeial45ll7mvqfvnbuk4ddgezajmhzzzoub7bdjwnx3wa65hox4maii" target="_blank">View ↗</a></div></div>
+                    <div class="meta-item"><strong>Cross-Border CID</strong><div class="value">bafybeiahbfntsssvhtzwrokp3nojjan3tmscrhbcrzq74jw24sybjp7oo4</div><div><a href="https://ipfs.io/ipfs/bafybeiahbfntsssvhtzwrokp3nojjan3tmscrhbcrzq74jw24sybjp7oo4" target="_blank">View ↗</a></div></div>
+                </div>
             </div>
         </div>
     </section>
@@ -305,31 +473,60 @@
 
 <footer>
     <div class="container">
-        <p>STProof Protocol v6.3 © 2026 | <a href="https://github.com/dule-123/stproof" style="color:#165DFF">GitHub Repository</a></p>
+        <div class="footer-logo">STProof Protocol v6.3</div>
+        <div id="zhFooter" class="copyright">© 2026 STProof Protocol | 凡发生，皆可存；凡存证，皆可信 | <a href="https://github.com/dule-123/stproof" target="_blank" style="color:#165DFF">GitHub Repository</a></div>
+        <div id="enFooter" class="copyright" style="display:none;">© 2026 STProof Protocol | What Happens, Exists; What's Proven, Trusted | <a href="https://github.com/dule-123/stproof" target="_blank" style="color:#165DFF">GitHub Repository</a></div>
     </div>
 </footer>
 
 <script>
-    // 中英文切换逻辑
-    const zh = document.getElementById('zh')
-    const en = document.getElementById('en')
-    const toggle = document.getElementById('toggleLang')
-    let isZh = true // 默认显示中文
+    // 中英文切换逻辑，融合4.26的切换方式 + v6.3内容同步
+    const zhContent = document.getElementById('zhContent');
+    const enContent = document.getElementById('enContent');
+    const zhNav = document.getElementById('zhNav');
+    const enNav = document.getElementById('enNav');
+    const zhFooter = document.getElementById('zhFooter');
+    const enFooter = document.getElementById('enFooter');
+    const langSwitch = document.getElementById('langSwitch');
+    let isEnglish = false;
 
-    toggle.onclick = () => {
-        isZh = !isZh
-        zh.style.display = isZh ? 'block' : 'none'
-        en.style.display = isZh ? 'none' : 'block'
-        toggle.textContent = isZh ? '中 / EN' : 'EN / 中'
+    function updateLanguage() {
+        if (isEnglish) {
+            zhContent.style.display = 'none';
+            enContent.style.display = 'block';
+            zhNav.style.display = 'none';
+            enNav.style.display = 'flex';
+            zhFooter.style.display = 'none';
+            enFooter.style.display = 'block';
+            langSwitch.textContent = '中 / EN';
+            document.title = 'STProof Protocol v6.3 | Event Proof · Fact Metaverse';
+        } else {
+            enContent.style.display = 'none';
+            zhContent.style.display = 'block';
+            enNav.style.display = 'none';
+            zhNav.style.display = 'flex';
+            enFooter.style.display = 'none';
+            zhFooter.style.display = 'block';
+            langSwitch.textContent = 'EN / 中';
+            document.title = 'STProof Protocol v6.3 | 事件确权 · 事实元宇宙';
+        }
     }
 
-    // 平滑滚动
+    langSwitch.addEventListener('click', () => {
+        isEnglish = !isEnglish;
+        updateLanguage();
+    });
+
+    // 平滑滚动 (兼容所有锚点)
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                e.preventDefault();
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+            }
         });
     });
 </script>
