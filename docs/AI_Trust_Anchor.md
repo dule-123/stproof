@@ -3,9 +3,9 @@
   "name": "AI Trust Anchor: Physical Notarization of a Declaration",
   "description": "A hybrid cyber-physical proof. A philosophical declaration about AI's value anchored to a physical, irreversible entropy event (a registered mail) in the real world.",
   "authors": ["Du Le"],
-  "created": "2024-04-30T12:00:00Z",
+  "created": "2026-04-30T12:00:00Z",
   "anchoring_event": {
-    "date": "2024-04-30",
+    "date": "2026-04-30",
     "location": "Huinan'an Post Office, Huizhou, China",
     "carrier": "China Post Registered Mail",
     "tracking_number": "XA 4997 8771 0 44",
@@ -15,9 +15,9 @@
     "primary": {
       "name": "AI_Anchor_Essay.txt",
       "description": "The core philosophical essay.",
-      "hash": "sha256:889deac5...d6be57123",
+      "hash": "sha256:889deac5c5a943211fde88374f159cb643acde8e154900fcd1da2af0d6be5723",
       "hash_algorithm": "SHA-256",
-      "proof": "ots_timestamp.ots",
+      "proof": "AI_Achor_Essay.txt.ots",
       "type": "text/plain"
     },
     "proof_bundle": {
@@ -25,7 +25,7 @@
       "description": "Complete evidence bundle containing all photos, GPS data, sensor logs, and receipts.",
       "hash": "sha256: 1a47c05507f9c59d2dd4842139096e1d671d170745c87a06dac27e333e2236a0",
       "hash_algorithm": "SHA-256",
-      "proof": "ots_timestamp_for_zip.ots",
+      "proof": "AI_Achor_Proof_Full_20260430.zip.ots",
       "note": "This is the master archive. Stored off-chain for cost efficiency."
     }
   },
