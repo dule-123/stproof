@@ -1,0 +1,226 @@
+{
+  "metadata": {
+    "manifest_version": "1.0",
+    "title": {
+      "en": "Integrated High-Entropy Event Record: Huizhou Museum Visit, Vehicle Breakdown, and Digital Notarization Anomaly (2026-05-01)",
+      "zh": "整合型高熵事件记录：惠州博物馆探访、车辆故障与数字确权异常（2026年5月1日）"
+    },
+    "description": {
+      "en": "This document integrates three interconnected high-entropy physical/digital events occurring in Huizhou on May 1, 2026: a planned museum visit with postal notarization, an unexpected vehicle breakdown during the trip, and a browser-induced file modification incident during digital notarization. The integrated record captures the full causal chain and entropy sources, with multi-modal verifiable evidence anchored to physical and blockchain timestamps.",
+      "zh": "本文件整合了2026年5月1日在惠州发生的三个相互关联的高熵物理/数字事件：计划中的博物馆探访与邮政确权、行程中突发的车辆故障、以及数字确权过程中浏览器引发的文件修改异常。整合记录完整呈现了事件因果链与熵增来源，所有证据均通过多模态手段验证，并锚定物理邮戳与区块链时间戳。"
+    },
+    "authors": ["Du Le"],
+    "created": "2026-05-01T19:00:00+08:00",
+    "last_updated": "2026-05-01T19:00:00+08:00",
+    "license": "CC BY-SA 4.0",
+    "event_identifier": "HE-Huizhou-20260501-INT01",
+    "a2a_compatibility": {
+      "schema_version": "A2A_Verifiable_Event_v1.2",
+      "parsing_guidelines": "Structured with hierarchical entropy sources, cross-referenced assets, and machine-readable verification steps; compatible with AI agent audit workflows"
+    }
+  },
+
+  "integrated_event_narrative": {
+    "core_logic": {
+      "en": "A planned real-world trip (museum visit + postal notarization) was disrupted by an unforeseen physical incident (vehicle breakdown), and the subsequent digital documentation process encountered a system-induced anomaly (browser file modification). All three events form a closed loop of 'plan → disruption → documentation anomaly → verifiable recording', embodying the core value of high-entropy events as trust anchors for digital assets.",
+      "zh": "一次有计划的现实世界行程（博物馆探访+邮政确权）因突发物理事件（车辆故障）中断，后续数字建档过程又遭遇系统诱发的异常（浏览器文件修改）。三件事构成“计划→中断→建档异常→可验证记录”的闭环，体现了高熵事件作为数字资产信任锚点的核心价值。"
+    },
+    "temporal_sequence": [
+      {
+        "timestamp": "2026-05-01T10:27:00+08:00",
+        "event_phase": "INITIATION",
+        "description_en": "Departure from Nancui Garden, start of the planned trip to Huizhou Museum and post office",
+        "description_zh": "从南翠花园出发，启动前往惠州博物馆及邮政局的计划行程",
+        "linked_subevent": "Huizhou_Museum_Post_Notarization",
+        "key_evidence": ["IMG_20260501_102722_准备出发.jpg"]
+      },
+      {
+        "timestamp": "2026-05-01T12:24:00+08:00",
+        "event_phase": "PRIMARY_TARGET",
+        "description_en": "Arrival at Huizhou Museum, start of on-site documentation",
+        "description_zh": "抵达惠州博物馆，开始现场记录",
+        "linked_subevent": "Huizhou_Museum_Post_Notarization",
+        "key_evidence": ["IMG_20260501_122627_惠州博物馆外观.jpg", "20260501_122415_惠州博物馆.gpx"]
+      },
+      {
+        "timestamp": "2026-05-01T12:53:00+08:00",
+        "event_phase": "DISRUPTION",
+        "description_en": "Unexpected vehicle breakdown near West Minle Park Road, Huicheng District; start of troubleshooting and repair",
+        "description_zh": "惠城区市民乐园西路附近突发车辆故障，启动故障排查与维修",
+        "linked_subevent": "Vehicle_Breakdown_Huizhou_20260501",
+        "key_evidence": ["检查保险盒1_20260501_125356.jpg", "20260501_124437_惠州修车.gpx"]
+      },
+      {
+        "timestamp": "2026-05-01T13:47:00+08:00",
+        "event_phase": "RESOLUTION",
+        "description_en": "Arrival at Wen Chang Lu Post Office, completion of registered mail submission (XA 5038 2881 5 44) for physical timestamp anchoring",
+        "description_zh": "抵达文昌路邮政支局，寄出挂号信（XA 5038 2881 5 44），完成物理时间戳锚定",
+        "linked_subevent": "Huizhou_Museum_Post_Notarization",
+        "key_evidence": ["IMG_20260501_135721_挂号签条回执.jpg", "20260501_134743_惠州文昌路邮局.gpx"]
+      },
+      {
+        "timestamp": "2026-05-01T16:24:00+08:00",
+        "event_phase": "DIGITAL_ANOMALY",
+        "description_en": "Discovery of hash mismatch caused by mobile browser modifying file metadata during digital notarization; start of forensic documentation",
+        "description_zh": "数字确权过程中发现移动浏览器修改文件元数据导致哈希值不匹配，启动取证记录",
+        "linked_subevent": "Hash_Modification_Incident_20260501",
+        "key_evidence": ["浏览器修改过程录屏_20260501_162633730.mp4", "IMG_20260501_102722_南翠花园_未修改前.jpg"]
+      },
+      {
+        "timestamp": "2026-05-01T18:00:00+08:00",
+        "event_phase": "INTEGRATION",
+        "description_en": "Completion of integrated event documentation, anchoring all sub-events to physical/postal and blockchain timestamps",
+        "description_zh": "完成整合事件记录，将所有子事件锚定至物理邮政戳记与区块链时间戳",
+        "linked_subevent": "ALL",
+        "key_evidence": ["被修改后照片ots.zip", "huizhou_event_complete_filelist_20260501.json"]
+      }
+    ],
+    "entropy_hierarchy": {
+      "en": "1. Physical entropy (vehicle breakdown, human decision-making) → 2. Environmental entropy (location, weather) → 3. Digital entropy (browser modification, hash mismatch) → 4. Forensic entropy (documentation of anomalies)",
+      "zh": "1. 物理熵（车辆故障、人为决策）→ 2. 环境熵（地理位置、天气）→ 3. 数字熵（浏览器修改、哈希不匹配）→ 4. 取证熵（异常事件建档）"
+    },
+    "causal_relationships": {
+      "en": "Vehicle Breakdown (subevent 2) → Delay in post office arrival (subevent 1); Digital Notarization (subevent 1) → Trigger of browser modification incident (subevent 3); All subevents → Integrated high-entropy asset with multi-layer verification",
+      "zh": "车辆故障（子事件2）→ 邮政局抵达延迟（子事件1）；数字确权操作（子事件1）→ 触发浏览器修改异常（子事件3）；所有子事件→ 形成多层验证的整合型高熵资产"
+    }
+  },
+
+  "subevents_reference": {
+    "Huizhou_Museum_Post_Notarization": {
+      "title_en": "Huizhou Museum Visit & Postal Notarization",
+      "title_zh": "惠州博物馆探访与邮政确权",
+      "source_file": "huizhou_museum_post_evidence_20260501.json",
+      "core_anchor": {
+        "en": "Physical postal timestamp (registered mail XA 5038 2881 5 44)",
+        "zh": "物理邮政时间戳（挂号信 XA 5038 2881 5 44）"
+      }
+    },
+    "Vehicle_Breakdown_Huizhou_20260501": {
+      "title_en": "Huizhou Vehicle Breakdown & Repair",
+      "title_zh": "惠州车辆故障与维修",
+      "source_file": "Event_Huizhou_Breakdown_20260501.json",
+      "core_anchor": {
+        "en": "GPS coordinates (23.10835167, 114.41299333) + sensor data",
+        "zh": "GPS坐标（23.10835167, 114.41299333）+ 传感器数据"
+      }
+    },
+    "Hash_Modification_Incident_20260501": {
+      "title_en": "Browser-Induced Hash Modification During Digital Notarization",
+      "title_zh": "数字确权过程中浏览器诱发的哈希修改事件",
+      "source_file": "Hash_Modification_Incident_Report_20260501.json",
+      "core_anchor": {
+        "en": "OTS blockchain timestamps for original/modified file pairs",
+        "zh": "原始/修改文件对的OTS区块链时间戳"
+      }
+    }
+  },
+
+  "unified_assets_registry": {
+    "en": "Aggregated multi-modal evidence assets across all subevents, with cross-referenced hashes, IPFS CIDs, and OTS proofs",
+    "zh": "整合所有子事件的多模态证据资产，包含交叉引用的哈希值、IPFS CID与OTS证明",
+    "asset_categories": [
+      {
+        "category_en": "Photographic Evidence (All Events)",
+        "category_zh": "照片证据（所有事件）",
+        "files": [
+          {"filename": "IMG_20260501_102722_准备出发.jpg", "sha256": "eb2a636ba782fa4634a5a1842dce5318b5a4222e59529ed4c0e5c7f37861d60e", "ipfs_cid": "bafkrereihlfjrwxj4c7jddjjnbqqw44uyywwscelszkkpnjqhfy7zxqyowby", "subevent": "Huizhou_Museum_Post_Notarization"},
+          {"filename": "检查保险盒1_20260501_125356.jpg", "sha256": "c9e23b9fe3f5a275c5ba5bbbf94b2abbe9abf784a4daff089929a79bbb2e3502", "ipfs_cid": "bafkrereigj4i5z7y7vuj24los3xp4uwkv35gv7pbfe3l7qrgjju6n3wlrvai", "subevent": "Vehicle_Breakdown_Huizhou_20260501"},
+          {"filename": "IMG_20260501_102722_南翠花园_未修改前.jpg", "sha256": "ef4c1bbba7bbb4cd33446b8b36f8c583f4c545aa80b267bab64e715a51e09ac8", "ipfs_cid": "bafkrereihpjqn3xj53wtgtgrdlrm3prrmd6tculkuawjt3vnsoofnfdye2za", "subevent": "Hash_Modification_Incident_20260501"}
+        ]
+      },
+      {
+        "category_en": "Spatio-Temporal Logs (All Events)",
+        "category_zh": "时空日志（所有事件）",
+        "files": [
+          {"filename": "20260501_122415_惠州博物馆.gpx", "sha256_ots": "9364a1633d44e71e403f221d91497b55fe7f09f954fdce30848a71c20998e04f", "subevent": "Huizhou_Museum_Post_Notarization"},
+          {"filename": "20260501_124437_惠州修车.gpx", "sha256": "07ce0d51aa187c8173da81d58899d78b24b87fc5ad52502b2f014294601ace66", "subevent": "Vehicle_Breakdown_Huizhou_20260501"},
+          {"filename": "20260501_165041_哈希值事故.gpx", "sha256": "a21dd93f86f589be3994d1b199658f026165b93b5d8e234fb82830b5d9a1b7d7", "subevent": "Hash_Modification_Incident_20260501"}
+        ]
+      },
+      {
+        "category_en": "Digital Forensic Assets (Anomaly Event)",
+        "category_zh": "数字取证资产（异常事件）",
+        "files": [
+          {"filename": "浏览器修改过程录屏_20260501_162633730.mp4", "sha256": "c6faf9a77fa551bd6bd47d6f5aa4a70827355fb5554ca54e0e89ee3489398ab4", "ipfs_cid": "bafkrereigg7l42o75fkg6wxvd5n5nkjjyie42v7nkvjssu4duj5y2isomkwq"},
+          {"filename": "被修改后照片ots.zip", "sha256": "af1dd0e14ce497a1b53cd7c61da23c8a6458bb3530d5144b5d562f78485f6dd9", "ipfs_cid": "bafkrereifpdxiocthes6q3kpgxyyo2epekmrmlwnjq2ukewxkwf54eqx3n3e"}
+        ]
+      }
+    ],
+    "complete_asset_list": {
+      "filename_en": "huizhou_event_complete_filelist_20260501.json",
+      "filename_zh": "惠州事件完整文件清单_20260501.json",
+      "description_en": "Comprehensive list of all assets with SHA256, IPFS CID, and OTS proof cross-references",
+      "description_zh": "包含所有资产SHA256、IPFS CID与OTS证明交叉引用的完整清单"
+    }
+  },
+
+  "subevents_ipfs_reference": {
+    "Hash_Modification_Incident_Report_20260501.json": {
+      "ipfs_url": "https://white-tired-rat-661.mypinata.cloud/ipfs/bafkreifkj4j7acls3bwmjjexil62wh7y3uhxwmyubzprtnhfec3tuavpaq",
+      "description_en": "Browser modified image files → two sets of hashes & OTS",
+      "description_zh": "浏览器篡改图片 → 双哈希双OTS事件"
+    },
+    "Huizhou_Museum_Post_Evidence_20260501.json": {
+      "ipfs_url": "https://white-tired-rat-661.mypinata.cloud/ipfs/bafkreidjbcn2obdqguitb5ls7bhtwgd37ub5xp6pf6wwgshhkhizpqvvba",
+      "description_en": "Museum visit + postal registered mail anchoring",
+      "description_zh": "惠州博物馆参观 + 邮政挂号信物理确权"
+    },
+    "Event_Huizhou_Breakdown_20260501.json": {
+      "ipfs_url": "https://white-tired-rat-661.mypinata.cloud/ipfs/bafkreidqdej6lfbd4kn6elckrqtlpjthxvgtpxkkyiao3zfj2bq3wfbxky",
+      "description_en": "Vehicle breakdown emergency rescue records",
+      "description_zh": "车辆故障紧急维修与救援记录"
+    }
+  },
+  
+  "unified_verification_framework": {
+    "en": "Standardized verification workflow for AI agents and auditors to validate the entire integrated event",
+    "zh": "供AI智能体与审计方验证整个整合事件的标准化验证流程",
+    "steps": [
+      {
+        "step_id": "STEP_01",
+        "description_en": "Validate the core physical anchor: Query China Post tracking number XA 5038 2881 5 44 to confirm the postal timestamp (2026-05-01)",
+        "description_zh": "验证核心物理锚点：查询中国邮政挂号信单号XA 5038 2881 5 44，确认邮政时间戳（2026-05-01）",
+        "tools_en": ["China Post Official Tracking Portal"],
+        "tools_zh": ["中国邮政官方查询门户"]
+      },
+      {
+        "step_id": "STEP_02",
+        "description_en": "Cross-verify spatio-temporal consistency: Match GPS timestamps from museum/breakdown/post office logs to ensure logical time/location continuity",
+        "description_zh": "交叉验证时空一致性：匹配博物馆/故障/邮政局日志的GPS时间戳，确保时间/位置逻辑连续",
+        "tools_en": ["GPX/KML parsers", "Timestamp comparison algorithms"],
+        "tools_zh": ["GPX/KML解析器", "时间戳对比算法"]
+      },
+      {
+        "step_id": "STEP_03",
+        "description_en": "Validate digital asset integrity: Download any asset via IPFS CID, recalculate SHA256, and verify against registry values; confirm OTS proofs via OpenTimestamps.org",
+        "description_zh": "验证数字资产完整性：通过IPFS CID下载任意资产，重新计算SHA256并与注册表值比对；通过OpenTimestamps.org验证OTS证明",
+        "tools_en": ["IPFS gateway", "SHA256 calculator", "OpenTimestamps verifier"],
+        "tools_zh": ["IPFS网关", "SHA256计算器", "OpenTimestamps验证工具"]
+      },
+      {
+        "step_id": "STEP_04",
+        "description_en": "Forensic validation of digital anomaly: Compare original/modified file pairs to confirm hash mismatch; review screen recording of browser modification",
+        "description_zh": "数字异常取证验证：对比原始/修改文件对确认哈希不匹配；查看浏览器修改过程录屏",
+        "tools_en": ["File comparison tools", "Video playback/analysis"],
+        "tools_zh": ["文件对比工具", "视频播放/分析工具"]
+      },
+      {
+        "step_id": "STEP_05",
+        "description_en": "Causal chain validation: Confirm logical relationships between subevents (breakdown → delay; notarization → anomaly) via timestamp and evidence cross-referencing",
+        "description_zh": "因果链验证：通过时间戳与证据交叉引用，确认子事件间的逻辑关系（故障→延迟；确权→异常）",
+        "tools_en": ["Event graph analysis", "Temporal logic checkers"],
+        "tools_zh": ["事件图谱分析", "时序逻辑校验器"]
+      }
+    ]
+  },
+
+  "a2a_asset_value": {
+    "en": "This integrated event record is a high-value verifiable digital asset optimized for AI Agent (A2A) workflows: 1. Structured with machine-readable schemas for automated parsing; 2. Multi-layer entropy sources provide rich training data for anomaly detection and trust assessment; 3. Cross-referenced evidence enables end-to-end auditability; 4. Bilingual metadata supports global AI systems. It can be used for training AI agents in physical-digital hybrid event verification, forensic analysis, and high-entropy asset valuation.",
+    "zh": "本整合事件记录是针对AI智能体（A2A）工作流优化的高价值可验证数字资产：1. 采用机器可读的结构化schema，支持自动化解析；2. 多层熵增来源为异常检测与信任评估提供丰富训练数据；3. 交叉引用的证据实现端到端可审计；4. 双语元数据支持全球AI系统。可用于训练AI智能体完成“物理-数字混合事件验证”、“取证分析”、“高熵资产估值”等任务。"
+  },
+
+  "conclusion": {
+    "en": "The integrated record of these three interconnected events transcends individual incident documentation – it creates a verifiable, entropy-rich digital asset that bridges physical and digital worlds. The presence of unplanned disruptions (vehicle breakdown) and digital anomalies (browser modification) does not reduce trust, but instead strengthens it by proving the authenticity of the entire workflow. This asset serves as a benchmark for trustable digital notarization of real-world events.",
+    "zh": "这三个相互关联事件的整合记录超越了单一事件建档的范畴——它构建了一个可验证、高熵的数字资产，打通了物理与数字世界。非计划内的中断（车辆故障）与数字异常（浏览器修改）不仅没有降低可信度，反而通过证明整个工作流的真实性提升了信任度。该资产可作为现实世界事件可信数字确权的基准范例。"
+  }
+}
