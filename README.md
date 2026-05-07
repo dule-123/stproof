@@ -1,66 +1,94 @@
-# STProof Protocol
-Universal On-Chain Event Proof & Value Capture Protocol
+# STProof Protocol v6.5
+![Version](https://img.shields.io/badge/version-v6.5-blue)
+![Solidity](https://img.shields.io/badge/solidity-%5E0.8.20-important)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Status](https://img.shields.io/badge/status-production_ready-success)
 
-## Overview
-STProof is a universal on-chain event attestation and value capture protocol, focusing on **Proof of Event, not Proof of Asset**. It is committed to breaking the limitation of traditional on-chain authentication centered on "assets" and returning to the "facts" themselves, enabling every objectively occurring event to achieve low-cost, tamper-proof, and cross-verifiable on-chain certification, and becoming the "Heavy Fact Layer" infrastructure in the Web3 world.
+**Event-Based On-Chain Proof Protocol | Fact Layer of Digital Civilization**
 
-## Core Concepts
-1.  Proof Object: Event Only — Focus on objectively occurring historical events as the core of certification, rather than traditional assets/tokens, returning to the intrinsic value of facts themselves.
-2.  Core Philosophy: Equitable Proof — No financial barriers for fact recording. Anyone can mint Event NFTs by paying only gas fees, making everyone a witness of facts.
-3.  Value Mechanism: Citation Royalty — Event value does not rely on speculation, but on the number of times it is trusted and used — the more citations, the higher the value.
-4.  Ecosystem Position: Heavy Fact Layer — Focus on anchoring high-value heavy facts requiring multi-source evidence and physical verification, becoming the "fact infrastructure" of the Web3 world.
+> Not Proof of Asset. Only Proof of Event.
 
-### Supplementary Notes
-- Core Slogan: Not Proof of Asset, But Proof of Event; What Happens, Exists; What's Proven, Trusted.
-- Technical Support: OTS timestamp + IPFS dual-chain anchoring to achieve zero-knowledge ideological certification and permanent storage.
-
-## Smart Contract (Sepolia Testnet)
-
-### Current Version (v6.1)
-- **Contract Address**: `0x0253f6771De9089f9dF50Ef1ed124Dd815A4a07F`
-- **Etherscan**: [View on Sepolia Etherscan](https://sepolia.etherscan.io/address/0x0253f6771De9089f9dF50Ef1ed124Dd815A4a07F)
-- **Features**: Dynamic evidence chain, citation tax (70/28/2), EIP-2981 royalty
-
-### Previous Version (v5.2)
-- **Contract Address**: `0x037eb54EF9dae9A2Ae33bFB9ba170F1067B925CB`
-- **Etherscan**: [View on Sepolia Etherscan](https://sepolia.etherscan.io/address/0x037eb54EF9dae9A2Ae33bFB9ba170F1067B925CB)
-- **Note**: Archived. Please use v6.1 for new deployments.
-
-## Genesis NFT (Polygon Chain)
-- Contract Address: `0x3d36ef7fdec04e2d53822052f5271b27d7b472b0`
-- OpenSea Collection: https://opensea.io/collection/stproof-genesis-event
-- Standard: ERC721
-- Total Supply: 100
-- Minted: 2
-- Description: This is the genesis NFT collection of the STProof ecosystem. Each piece is a digital artifact forged with cyberpunk aesthetics and blockchain-level integrity, representing the user's early rights and interests in the STProof universe.
-
-## Experiments & CIDs
-All experimental evidence has been anchored on IPFS for permanent verification and immutability. The complete list of CIDs can be found in the project directory `/genesis-nft/cids.json`. Core experiments include:
-1.  Self-Referential Proof (Core Experiment of STProof v5.2)
-2.  Real Person Cross-Border Experiment
-
-## Project Structure
-- `/` — Official Website & Main Page (including Genesis NFT Section)
-- `/genesis-nft/` — Genesis NFT Contract Information, Metadata, Experimental CID Storage
-- `/cases/` — Details of Various Experimental Cases (Tangible, Intangible, Hybrid Events)
-- `/docs/` — Whitepaper v5.2 (English Version)
-
-## Official Links
-- Website: https://stproof.org
-- GitHub: https://github.com/dule-123/stproof
-- Whitepaper v5.2 (English): See `/docs/` Directory
-- OpenSea Genesis NFT Collection: https://opensea.io/collection/stproof-genesis-event
-
-## License
-MIT License (See `LICENSE` File in the Root Directory of the Project)
-
-## Contributing
-We welcome contributions from developers, researchers, and community members. For specific contribution methods and rules, please refer to the `CONTRIBUTING.md` file in the root directory of the project.
-
-## Important Notice (Patent & Compliance)
-All technical designs, whitepapers, code, and documents of this project are fully public.
-Any technical solution based on STProof is no longer novel and cannot be patented.
-The inventor voluntarily waives all related patent rights.
-This project is permanently open for the community to use, modify, and distribute freely.
+STProof is a decentralized, compliant, and sustainable protocol for certifying objectively occurred events on-chain.
+It turns real-world facts into immutable, verifiable, and collectible digital assets.
 
 ---
+
+## 🚀 What’s New in v6.5
+
+### Core Updates
+- **Security Hardened** – Reentrancy protection, zero-address validation, access control, audit-ready
+- **Economic Model Rebuilt** – Removed unrealistic citation fees; adopted sustainable collectible economy
+- **Limited Edition Events** – Fixed-edition minting, CID anti-duplication, stamp-style collectibles
+- **Dynamic Evidence System** – Append evidence, version history, full on-chain traceability
+- **Validator Attestation** – Permissionless validators, multi-sign verification (≥2 validators)
+- **Storyline Module** – Curate events into collections, series, narratives
+- **Game-Ready Design** – Supports event collection gameplay like postcards / stamps
+- **Full Standard Compatibility** – ERC-721, EIP-2981, ERC-165
+
+### 💰 Sustainable Economic Model
+- Limited-edition mint fees (core revenue)
+- Verified event services
+- 5% secondary royalty (EIP-2981)
+- Collection & curation engagement
+
+**Revenue Split**
+- 70% Event Creator
+- 28% Treasury
+- 2% Protocol Development
+
+---
+
+## 🧩 Protocol Architecture
+1. **Event Layer** – Event templates & standards
+2. **Evidence Layer** – IPFS + trusted timestamp
+3. **Validation Layer** – Validator multi-sign attestation
+4. **NFT Layer** – ERC-721 limited-edition event assets
+5. **Economic Layer** – Mint fees, royalties, collection incentives
+6. **Storyline Layer** – Curation, collection, showcase
+7. **Security Layer** – Safety, compliance, audit
+
+---
+
+## 🎮 Event Collection Game (Stamp / Postcard Style)
+Each event = one collectible digital stamp
+Each series = a complete set
+Users mint, collect, complete sets, showcase, and trade.
+
+Natural, sustainable, compliant, and fun.
+
+---
+
+## 📌 Use Cases
+- Fact-checking & journalism
+- Art creation certification
+- Academic & publication proof
+- Legal evidence archiving
+- Cross-border behavior verification
+- Historical event curation
+- Event stamp collecting
+
+---
+
+## 📄 Documents
+- [English Whitepaper v6.5](./docs/STProof_v6.5_EN.md)
+- [中文白皮书 v6.5](./docs/STProof_v6.5_CN.md)
+
+---
+
+## ⚖️ Compliance
+STProof is a **fact-certification & collectible system**.
+It is **NOT** a security, financial product, investment vehicle, or RWA platform.
+
+---
+
+## Version History
+- **v6.5** – Security, economic rebuild, limited editions, storyline, game-ready
+- v6.3 – Manual withdrawal, validator attestations
+- v5.2 – Economic model finalized
+- v5.1 – Zero-knowledge ideology + self-referential experiment
+- v1.3 – Initial framework
+
+---
+
+## License
+MIT
