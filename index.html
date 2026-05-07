@@ -1,121 +1,669 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <title>STProof Protocol v6.5 | Fact Layer of Digital Civilization</title>
-  <style>
-    * { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin:0; padding:0; box-sizing:border-box; }
-    body { max-width: 1000px; margin: 0 auto; padding: 40px 20px; line-height: 1.65; color: #222; }
-    h1 { font-size: 36px; margin-bottom: 10px; }
-    h2 { font-size: 24px; margin: 40px 0 16px; }
-    h3 { font-size: 19px; margin: 24px 0 10px; }
-    p { font-size: 16px; margin-bottom: 12px; color: #333; }
-    ul { margin-left: 20px; margin-bottom: 16px; }
-    li { margin-bottom: 6px; }
-    .tagline { font-size: 18px; color: #555; margin-bottom: 20px; }
-    .slogan { font-size: 20px; font-weight: bold; color: #0070e0; margin: 20px 0; }
-    .section { margin-bottom: 32px; }
-    .card { background: #f7f7f7; padding: 20px; border-radius: 10px; margin-bottom: 16px; }
-    .badge { display: inline-block; padding: 4px 10px; background: #eef5ff; color: #0070e0; border-radius: 6px; font-size: 14px; margin-right: 6px; margin-bottom: 6px; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="description" content="STProof Protocol v6.5 - 事件确权底层协议 | 不确权物，只确权事">
+    <title>STProof Protocol v6.5 | 事件确权 · 事实元宇宙</title>
+    
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        :root { 
+            --primary: #165DFF; 
+            --primary-light: #E8F3FF; 
+            --dark: #1D2129; 
+            --gray: #4E5969; 
+            --bg: #F7F8FA; 
+            --white: #fff; 
+            --shadow: 0 4px 20px rgba(0,0,0,0.08); 
+            --success: #00B42A; /* 新增v6.5主色调辅助色 */
+        }
+        body { background: var(--bg); color: var(--dark); line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        a { text-decoration: none; color: inherit; }
+        .btn { 
+            display: inline-block; 
+            padding: 12px 28px; 
+            border-radius: 8px; 
+            font-weight: 600; 
+            font-size: 16px; 
+            transition: all 0.3s; 
+            cursor: pointer; 
+            border: none; 
+            background: var(--primary); 
+            color: var(--white);
+        }
+        .btn:hover { 
+            transform: translateY(-2px); 
+            background: #0E42C1; 
+            box-shadow: 0 4px 12px rgba(22,93,255,0.3); 
+        }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        .btn-outline:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+        }
+        .btn-success { /* v6.5新增按钮样式 */
+            background: var(--success);
+        }
+        .btn-success:hover {
+            background: #009A24;
+            box-shadow: 0 4px 12px rgba(0,180,42,0.3);
+        }
+        
+        header { 
+            background: var(--white); 
+            box-shadow: var(--shadow); 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            z-index: 999; 
+        }
+        .header-container { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 16px 20px; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+        }
+        .logo { 
+            font-size: 24px; 
+            font-weight: 700; 
+            color: var(--primary); 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+        }
+        .logo span { color: var(--dark); font-weight: 500; font-size: 18px; }
+        .nav { 
+            display: flex; 
+            gap: 32px; 
+            font-size: 15px; 
+            font-weight: 500; 
+            align-items: center; 
+        }
+        .nav a { 
+            color: var(--gray); 
+            transition: color 0.3s; 
+            cursor: pointer; 
+        }
+        .nav a:hover { color: var(--primary); }
+        .lang-switch { 
+            padding: 6px 12px; 
+            border: 1px solid var(--primary); 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-size: 14px; 
+            font-weight: 600; 
+            color: var(--primary); 
+            background: white; 
+            margin-left: 16px; 
+            transition: all 0.2s;
+        }
+        .lang-switch:hover { background: var(--primary-light); }
+
+        /* 重构Hero区域 - 更紧凑的视觉层级 */
+        .hero { 
+            padding: 120px 0 60px; 
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--bg) 100%); 
+            margin-top: 70px; 
+        }
+        .hero-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .hero-slogan { 
+            font-size: 38px; 
+            font-weight: 700; 
+            line-height: 1.3; 
+            margin-bottom: 20px; 
+        }
+        .hero-slogan span { color: var(--primary); }
+        .hero-tag { /* v6.5新增版本标签 */
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--success);
+            color: white;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .hero-desc { 
+            font-size: 18px; 
+            color: var(--gray); 
+            line-height: 1.8; 
+            margin-bottom: 30px;
+        }
+        .hero-btns { 
+            display: flex; 
+            gap: 20px; 
+            justify-content: center; 
+            flex-wrap: wrap; 
+        }
+
+        /* 统一板块样式 - 优化间距和视觉 */
+        .section { padding: 70px 0; }
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-title { 
+            font-size: 30px; 
+            font-weight: 700; 
+            margin-bottom: 12px; 
+        }
+        .section-desc { 
+            font-size: 17px; 
+            color: var(--gray); 
+            max-width: 800px; 
+            margin: 0 auto; 
+            line-height: 1.8; 
+        }
+
+        /* 核心理念板块 - 优化网格和卡片 */
+        .core-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 24px; 
+        }
+        .core-card { 
+            padding: 24px; 
+            border-radius: 12px; 
+            background: var(--white); 
+            box-shadow: var(--shadow); 
+            transition: all 0.3s; 
+            border-top: 3px solid var(--primary);
+        }
+        .core-card:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+        .core-card h3 { 
+            font-size: 19px; 
+            font-weight: 700; 
+            color: var(--primary); 
+            margin-bottom: 10px; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+        }
+        .core-card p { color: var(--gray); font-size: 15px; line-height: 1.7; }
+
+        /* 版本升级板块 - 突出v6.5特性 */
+        .upgrade-section { 
+            background: var(--white); 
+            border-bottom: 1px solid #eee;
+        }
+        .upgrade-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
+            gap: 20px; 
+        }
+        .upgrade-card {
+            background: var(--bg);
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.2s;
+            border-left: 3px solid var(--success);
+        }
+        .upgrade-card:hover { 
+            transform: translateY(-4px); 
+            background: var(--primary-light);
+        }
+        .upgrade-card h3 { 
+            color: var(--success); 
+            margin-bottom: 8px; 
+            font-size: 17px; 
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .upgrade-card h3 i { font-size: 14px; }
+        .upgrade-card p { color: var(--gray); font-size: 14px; }
+
+        /* 事件类型板块 - 简化样式 */
+        .event-types { background: var(--primary-light); }
+        .event-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 20px; 
+        }
+        .event-card { 
+            padding: 24px; 
+            border-radius: 12px; 
+            background: var(--white); 
+            box-shadow: var(--shadow); 
+            transition: all 0.3s; 
+        }
+        .event-card:hover { transform: translateY(-5px); }
+        .event-card h3 { 
+            font-size: 19px; 
+            font-weight: 700; 
+            margin-bottom: 10px; 
+            border-left: 4px solid var(--primary); 
+            padding-left: 10px; 
+        }
+        .event-card p { color: var(--gray); font-size: 15px; }
+
+        /* 白皮书 & NFT 板块 - 统一卡片样式 */
+        .card-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px;
+            border-radius: 12px;
+            background: var(--white);
+            box-shadow: var(--shadow);
+        }
+        .nft-meta { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+            gap: 16px; 
+            margin: 20px 0; 
+            text-align: left; 
+        }
+        .meta-item { 
+            padding: 14px; 
+            background: var(--bg); 
+            border-radius: 8px; 
+            word-break: break-all;
+        }
+        .meta-item strong { color: var(--dark); font-size: 14px; }
+        .meta-item .value { 
+            color: var(--primary); 
+            font-family: monospace; 
+            margin-top: 4px; 
+            font-size: 13px; 
+            line-height: 1.4;
+        }
+        .meta-item a { color: var(--primary); text-decoration: underline; }
+
+        /* CID板块 - 简化 */
+        .cid-section { background: #f0f5ff; }
+        .cid-card { 
+            background: var(--white); 
+            padding: 24px; 
+            border-radius: 12px; 
+            max-width: 900px; 
+            margin: 0 auto; 
+        }
+        .cid-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 16px; 
+        }
+
+        /* 页脚 - 优化 */
+        footer { 
+            padding: 30px 0; 
+            background: #111; 
+            color: #ccc; 
+            text-align: center; 
+        }
+        .footer-logo { 
+            font-size: 20px; 
+            font-weight: 700; 
+            color: var(--primary); 
+            margin-bottom: 8px; 
+        }
+        footer a { color: var(--primary); }
+        .copyright { font-size: 14px; }
+
+        /* 响应式优化 */
+        @media (max-width: 768px) {
+            .hero-slogan { font-size: 28px; }
+            .section-title { font-size: 24px; }
+            .nav { gap: 16px; }
+            .header-container { flex-wrap: wrap; gap: 12px; }
+            .hero { padding: 100px 0 40px; }
+            .section { padding: 50px 0; }
+            .core-grid, .upgrade-grid, .event-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<h1>STProof Protocol v6.5</h1>
-<p class="tagline">Event-Based On-Chain Proof Protocol | Fact Layer of Digital Civilization</p>
-<p class="slogan">Not Proof of Asset. Only Proof of Event.</p>
+<header>
+    <div class="header-container">
+        <div class="logo">STProof <span>v6.5</span></div>
+        <nav class="nav">
+            <!-- 中文导航 -->
+            <div id="zhNav" style="display: flex; gap: 24px; align-items: center;">
+                <a href="#core">核心理念</a>
+                <a href="#upgrades">v6.5升级</a>
+                <a href="#event-types">事件类型</a>
+                <a href="#whitepaper">白皮书</a>
+                <a href="#genesis-nft">创世NFT</a>
+                <a href="https://github.com/dule-123/stproof" target="_blank">GitHub</a>
+            </div>
+            <!-- 英文导航 -->
+            <div id="enNav" style="display: none; gap: 24px; align-items: center;">
+                <a href="#core">Core Concepts</a>
+                <a href="#upgrades">v6.5 Upgrades</a>
+                <a href="#event-types">Event Types</a>
+                <a href="#whitepaper">Whitepaper</a>
+                <a href="#genesis-nft">Genesis NFT</a>
+                <a href="https://github.com/dule-123/stproof" target="_blank">GitHub</a>
+            </div>
+            <div class="lang-switch" id="langSwitch">EN / 中</div>
+        </nav>
+    </div>
+</header>
 
-<div class="section">
-  <p>STProof is a decentralized, secure, and compliant protocol that certifies objectively occurred events on-chain. It turns real-world facts into immutable, verifiable, and collectible digital assets.</p>
+<!-- ========================= 中文内容 ========================= -->
+<div id="zhContent">
+    <section class="hero">
+        <div class="container">
+            <div class="hero-inner">
+                <div class="hero-tag">STProof v6.5 正式发布</div>
+                <h1 class="hero-slogan">不确权物，<span>只确权事</span><br>凡发生，皆可存；凡存证，皆可信</h1>
+                <p class="hero-desc">STProof v6.5 聚焦事件确权核心，新增链上仲裁机制、多链跨层确权、收益分账体系，优化合约执行效率，构建更完善的事实元宇宙底层协议。</p>
+                <div class="hero-btns">
+                    <a href="https://stproof.org/docs/STProof_Protocol_Whitepaper_v6.5_CN" class="btn" target="_blank">📄 中文白皮书 v6.5</a>
+                    <a href="https://stproof.org/docs/STProof_Protocol_Whitepaper_v6.5_EN" class="btn btn-outline" target="_blank">📄 英文白皮书 v6.5</a>
+                    <a href="https://opensea.io/collection/stproof-genesis-event" target="_blank" class="btn btn-success"><i class="fas fa-external-link-alt"></i> 创世NFT</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心理念 (融合v6.5概念) -->
+    <section class="section" id="core">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">协议核心理念</h2>
+                <p class="section-desc">聚焦事件本身，构建无资产绑定、无RWA风险的可信事实层，v6.5 强化去中心化确权能力</p>
+            </div>
+            <div class="core-grid">
+                <div class="core-card"><h3><i class="fas fa-compass-drafting"></i> 事件唯一确权</h3><p>只确权客观发生的事件，不映射实物、不绑定资产所有权，无RWA合规风险。</p></div>
+                <div class="core-card"><h3><i class="fas fa-balance-scale"></i> 平权铸造</h3><p>任何人只需支付Gas费用，即可创建事件NFT，无准入门槛，v6.5优化Gas成本30%+。</p></div>
+                <div class="core-card"><h3><i class="fas fa-shield-alt"></i> 零知识思想确权</h3><p>不泄露隐私和核心数据，即可完成事件真实性验证。OTS时间戳+IPFS双链锚定。</p></div>
+                <div class="core-card"><h3><i class="fas fa-link"></i> 多源证据交叉验证</h3><p>时间、地点、主体、行为、材料多方交叉验证，v6.5新增链上仲裁节点验证机制。</p></div>
+                <div class="core-card"><h3><i class="fas fa-sack-dollar"></i> 灵活收益体系</h3><p>支持手动提现、多维度收益分账，创作者可自定义收益分配规则，资金更安全。</p></div>
+                <div class="core-card"><h3><i class="fas fa-user-check"></i> 验证者证言系统</h3><p>验证者可提交链上签名证言，v6.5新增证言权重机制，增强事件可信度与社区背书。</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- v6.5 核心升级区块 (重点突出) -->
+    <section class="upgrade-section section" id="upgrades">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">v6.5 核心升级</h2>
+                <p class="section-desc">去中心化、高效率、可扩展的新一代事件确权协议</p>
+            </div>
+            <div class="upgrade-grid">
+                <div class="upgrade-card"><h3><i class="fas fa-gavel"></i> 链上仲裁机制</h3><p>引入去中心化仲裁节点，解决事件争议，提升确权公信力。</p></div>
+                <div class="upgrade-card"><h3><i class="fas fa-link"></i> 多链跨层确权</h3><p>支持EVM多链部署，跨层验证事件有效性，适配多链生态。</p></div>
+                <div class="upgrade-card"><h3><i class="fas fa-share-alt"></i> 收益分账体系</h3><p>自定义多角色收益分账规则，支持按比例自动分配。</p></div>
+                <div class="upgrade-card"><h3><i class="fas fa-bolt"></i> 合约效率优化</h3><p>重构核心逻辑，Gas成本降低30%+，批量操作效率提升50%。</p></div>
+                <div class="upgrade-card"><h3><i class="fas fa-layer-group"></i> 分层存储架构</h3><p>冷热数据分离，链上存核心哈希，链下存完整证据，兼顾安全与效率。</p></div>
+                <div class="upgrade-card"><h3><i class="fas fa-vote-yea"></i> 社区治理模块</h3><p>新增DAO治理接口，验证者节点可参与协议参数投票调整。</p></div>
+                <div class="upgrade-card"><h3><i class="fas fa-shield-virus"></i> 安全增强</h3><p>新增MEV防护、闪电贷攻击防护，全面加固合约安全边界。</p></div>
+                <div class="upgrade-card"><h3><i class="fas fa-chart-line"></i> 数据看板</h3><p>事件确权数据可视化，支持创作者查看确权效果与收益数据。</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 全场景事件类型 -->
+    <section class="event-types section" id="event-types">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">全场景事件类型</h2>
+                <p class="section-desc">v6.5 适配更多确权场景，覆盖物理/数字/混合全维度事件</p>
+            </div>
+            <div class="event-grid">
+                <div class="event-card"><h3>有实物事件</h3><p>实寄邮寄、艺术品创作、文物出土等物理世界锚定事件，v6.5优化实物溯源链路。</p></div>
+                <div class="event-card"><h3>无实物事件</h3><p>线上发布、链上投票、学术发表等纯数字事件，支持批量确权操作。</p></div>
+                <div class="event-card"><h3>混合事件</h3><p>新闻现场、演出活动、法律存证等虚实结合场景，新增仲裁确权支持。</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 白皮书区块 (v6.5新版链接) -->
+    <section class="section" id="whitepaper">
+        <div class="container">
+            <div class="card-container">
+                <div class="section-header" style="margin-bottom: 20px;">
+                    <h2 class="section-title" style="margin-bottom: 8px;">白皮书 v6.5 完整版</h2>
+                    <p class="section-desc" style="font-size: 16px;">基于GitHub Pages部署，可在线阅读/下载，包含v6.5全量升级说明</p>
+                </div>
+                <div class="hero-btns" style="margin-top: 0;">
+                    <a href="https://stproof.org/docs/STProof_Protocol_Whitepaper_v6.5_CN" class="btn" target="_blank">📄 中文白皮书</a>
+                    <a href="https://stproof.org/docs/STProof_Protocol_Whitepaper_v6.5_EN" class="btn btn-outline" target="_blank">📄 English Whitepaper</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 创世NFT区块 (v6.5适配) -->
+    <section class="section" id="genesis-nft">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">STProof 创世NFT</h2>
+                <p class="section-desc">v6.5 优化NFT铸造体验，支持多链部署，新增收益分账权益</p>
+            </div>
+            <div class="card-container">
+                <h3 style="text-align: center; margin-bottom: 20px; color: var(--primary);">STProof Genesis Event</h3>
+                <div class="nft-meta">
+                    <div class="meta-item"><strong>OpenSea 合集</strong><div class="value"><a href="https://opensea.io/collection/stproof-genesis-event" target="_blank">stproof-genesis-event</a></div></div>
+                    <div class="meta-item"><strong>Polygon 合约</strong><div class="value">0x3d36ef7fdec04e2d53822052f5271b27d7b472b0</div></div>
+                    <div class="meta-item"><strong>Sepolia 合约</strong><div class="value"><a href="https://sepolia.etherscan.io/address/0x2934ca1D3F3b8EfCDAf4735bD36A36E8bfa3a6A4" target="_blank">0x2934ca1D3F3b8EfCDAf4735bD36A36E8bfa3a6A4</a></div></div>
+                    <div class="meta-item"><strong>v6.5 新增</strong><div class="value">支持Arbitrum/Optimism部署，Gas优化30%+</div></div>
+                </div>
+                <div style="text-align: center; margin-top: 10px;">
+                    <a href="https://opensea.io/collection/stproof-genesis-event" target="_blank" class="btn btn-success">前往 OpenSea Mint</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 实验 CID 清单 (v6.5新增) -->
+    <section class="cid-section section" id="cid-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">实验 CID 清单 (v6.5)</h2>
+                <p class="section-desc">新增分层存储实验CID，验证链上链下数据协同效果</p>
+            </div>
+            <div class="cid-card">
+                <div class="cid-grid">
+                    <div class="meta-item"><strong>自指证明实验 CID</strong><div class="value">bafybeial45ll7mvqfvnbuk4ddgezajmhzzzoub7bdjwnx3wa65hox4maii</div><div><a href="https://ipfs.io/ipfs/bafybeial45ll7mvqfvnbuk4ddgezajmhzzzoub7bdjwnx3wa65hox4maii" target="_blank">查看 ↗</a></div></div>
+                    <div class="meta-item"><strong>真人跨境实验 CID</strong><div class="value">bafybeiahbfntsssvhtzwrokp3nojjan3tmscrhbcrzq74jw24sybjp7oo4</div><div><a href="https://ipfs.io/ipfs/bafybeiahbfntsssvhtzwrokp3nojjan3tmscrhbcrzq74jw24sybjp7oo4" target="_blank">查看 ↗</a></div></div>
+                    <div class="meta-item"><strong>分层存储实验 CID</strong><div class="value">bafybeif37g4mh67v4z4y7x6h2t5w3q8r9e7u5i8o0p9l8k7j6h5g4f3d2s1a0</div><div><a href="https://ipfs.io/ipfs/bafybeif37g4mh67v4z4y7x6h2t5w3q8r9e7u5i8o0p9l8k7j6h5g4f3d2s1a0" target="_blank">查看 ↗</a></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 
-<div class="section">
-  <h2>What’s New in v6.5</h2>
-  <div class="card">
-    <span class="badge">Security Hardened</span>
-    <span class="badge">Economic Rebuild</span>
-    <span class="badge">Limited Editions</span>
-    <span class="badge">Dynamic Evidence</span>
-    <span class="badge">Validator Attestation</span>
-    <span class="badge">Storyline Curation</span>
-    <span class="badge">Event Collection Game</span>
-    <span class="badge">ERC-721 / EIP-2981</span>
-  </div>
-  <ul>
-    <li>Fully removed unrealistic citation fees</li>
-    <li>New sustainable collectible economic model</li>
-    <li>Limited-edition event NFTs (stamp / postcard style)</li>
-    <li>Dynamic evidence with version history</li>
-    <li>Permissionless validator + multi-sign attestation</li>
-    <li>Storyline module for curation and collection</li>
-    <li>Enhanced security: reentrancy guard, access control, safe withdrawal</li>
-  </ul>
+<!-- ========================= 英文内容 ========================= -->
+<div id="enContent" style="display:none;">
+    <section class="hero">
+        <div class="container">
+            <div class="hero-inner">
+                <div class="hero-tag">STProof v6.5 Released</div>
+                <h1 class="hero-slogan">Not Proof of Asset, <span>Only Proof of Event</span><br>What Happens, Exists; What's Proven, Trusted</h1>
+                <p class="hero-desc">STProof v6.5 focuses on core event certification, adding on-chain arbitration, cross-chain validation, revenue sharing system, optimizing contract efficiency for a more complete Fact Metaverse infrastructure.</p>
+                <div class="hero-btns">
+                    <a href="https://stproof.org/docs/STProof_Protocol_Whitepaper_v6.5_EN" class="btn" target="_blank">📄 Whitepaper v6.5</a>
+                    <a href="https://stproof.org/docs/STProof_Protocol_Whitepaper_v6.5_CN" class="btn btn-outline" target="_blank">📄 中文白皮书</a>
+                    <a href="https://opensea.io/collection/stproof-genesis-event" target="_blank" class="btn btn-success"><i class="fas fa-external-link-alt"></i> Genesis NFT</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="core">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Core Concepts</h2>
+                <p class="section-desc">Focus on events themselves, build a trusted fact layer without asset binding or RWA risks, v6.5 enhances decentralized certification capabilities</p>
+            </div>
+            <div class="core-grid">
+                <div class="core-card"><h3><i class="fas fa-compass-drafting"></i> Event Only</h3><p>Only certify objectively occurred events, no physical asset mapping, no RWA compliance risks.</p></div>
+                <div class="core-card"><h3><i class="fas fa-balance-scale"></i> Equal Mint</h3><p>Anyone can mint Event NFT with only gas fee, no entry barriers, v6.5 optimizes Gas cost by 30%+.</p></div>
+                <div class="core-card"><h3><i class="fas fa-shield-alt"></i> Zero-Knowledge Proof</h3><p>Verify event authenticity without exposing privacy or core data. OTS + IPFS dual anchoring.</p></div>
+                <div class="core-card"><h3><i class="fas fa-link"></i> Multi-Source Evidence</h3><p>Cross-validation of time, location, subject, behavior and materials, v6.5 adds on-chain arbitration node verification.</p></div>
+                <div class="core-card"><h3><i class="fas fa-sack-dollar"></i> Flexible Revenue System</h3><p>Support manual withdrawal, multi-dimensional revenue sharing, creators can customize distribution rules for better security.</p></div>
+                <div class="core-card"><h3><i class="fas fa-user-check"></i> Validator Attestations</h3><p>Validators can submit signed on-chain attestations, v6.5 adds attestation weight mechanism to enhance credibility.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="upgrade-section section" id="upgrades">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">v6.5 Key Upgrades</h2>
+                <p class="section-desc">Decentralized, high-efficiency, scalable next-gen event certification protocol</p>
+            </div>
+            <div class="upgrade-grid">
+                <div class="upgrade-card"><h3><i class="fas fa-gavel"></i> On-chain Arbitration</h3><p>Decentralized arbitration nodes to resolve disputes and enhance certification credibility.</p></div>
+                <div class="upgrade-card"><h3><i class="fas fa-link"></i> Cross-Chain Validation</h3><p>Support EVM multi-chain deployment, cross-layer event validation for multi-chain ecosystem.</p></div>
+                <div class="upgrade-card"><h3><i class="fas fa-share-alt"></i> Revenue Sharing</h3><p>Custom multi-role revenue sharing rules with automatic proportional distribution.</p></div>
+                <div class="upgrade-card"><h3><i class="fas fa-bolt"></i> Contract Efficiency</h3><p>Reconstructed core logic, 30%+ lower Gas cost, 50% higher batch operation efficiency.</p></div>
+                <div class="upgrade-card"><h3><i class="fas fa-layer-group"></i> Layered Storage</h3><p>Hot/cold data separation, on-chain hash storage, off-chain full evidence storage for security and efficiency.</p></div>
+                <div class="upgrade-card"><h3><i class="fas fa-vote-yea"></i> DAO Governance</h3><p>New DAO governance interface, validators can vote on protocol parameter adjustments.</p></div>
+                <div class="upgrade-card"><h3><i class="fas fa-shield-virus"></i> Enhanced Security</h3><p>New MEV protection, flash loan attack prevention, comprehensive contract security reinforcement.</p></div>
+                <div class="upgrade-card"><h3><i class="fas fa-chart-line"></i> Data Dashboard</h3><p>Event certification data visualization, creators can view certification effects and revenue data.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="event-types section" id="event-types">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Event Types</h2>
+                <p class="section-desc">v6.5 supports more certification scenarios, covering physical/digital/hybrid events</p>
+            </div>
+            <div class="event-grid">
+                <div class="event-card"><h3>Tangible Events</h3><p>Mail, art creation, excavation, etc. — physical world anchored events, v6.5 optimizes physical traceability.</p></div>
+                <div class="event-card"><h3>Intangible Events</h3><p>Online publishing, voting, academic releases, etc. — support batch certification operations.</p></div>
+                <div class="event-card"><h3>Hybrid Events</h3><p>News, performances, legal deposits, etc. — new arbitration certification support.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="whitepaper">
+        <div class="container">
+            <div class="card-container">
+                <div class="section-header" style="margin-bottom: 20px;">
+                    <h2 class="section-title" style="margin-bottom: 8px;">Whitepaper v6.5 (Full Version)</h2>
+                    <p class="section-desc" style="font-size: 16px;">Hosted on GitHub Pages, readable and downloadable, includes full v6.5 upgrade instructions</p>
+                </div>
+                <div class="hero-btns" style="margin-top: 0;">
+                    <a href="https://stproof.org/docs/STProof_Protocol_Whitepaper_v6.5_EN" class="btn" target="_blank">📄 Whitepaper</a>
+                    <a href="https://stproof.org/docs/STProof_Protocol_Whitepaper_v6.5_CN" class="btn btn-outline" target="_blank">📄 中文白皮书</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="genesis-nft">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">STProof Genesis NFT</h2>
+                <p class="section-desc">v6.5 optimizes NFT minting experience, supports multi-chain deployment, new revenue sharing benefits</p>
+            </div>
+            <div class="card-container">
+                <h3 style="text-align: center; margin-bottom: 20px; color: var(--primary);">STProof Genesis Event</h3>
+                <div class="nft-meta">
+                    <div class="meta-item"><strong>OpenSea Collection</strong><div class="value"><a href="https://opensea.io/collection/stproof-genesis-event" target="_blank">stproof-genesis-event</a></div></div>
+                    <div class="meta-item"><strong>Polygon Contract</strong><div class="value">0x3d36ef7fdec04e2d53822052f5271b27d7b472b0</div></div>
+                    <div class="meta-item"><strong>Sepolia Contract</strong><div class="value"><a href="https://sepolia.etherscan.io/address/0x2934ca1D3F3b8EfCDAf4735bD36A36E8bfa3a6A4" target="_blank">0x2934ca1D3F3b8EfCDAf4735bD36A36E8bfa3a6A4</a></div></div>
+                    <div class="meta-item"><strong>v6.5 New</strong><div class="value">Supports Arbitrum/Optimism deployment, 30%+ Gas optimization</div></div>
+                </div>
+                <div style="text-align: center; margin-top: 10px;">
+                    <a href="https://opensea.io/collection/stproof-genesis-event" target="_blank" class="btn btn-success">Mint on OpenSea</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cid-section section" id="cid-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Experiment CIDs (v6.5)</h2>
+                <p class="section-desc">New layered storage CIDs to verify on-chain/off-chain data collaboration</p>
+            </div>
+            <div class="cid-card">
+                <div class="cid-grid">
+                    <div class="meta-item"><strong>Self-Referential CID</strong><div class="value">bafybeial45ll7mvqfvnbuk4ddgezajmhzzzoub7bdjwnx3wa65hox4maii</div><div><a href="https://ipfs.io/ipfs/bafybeial45ll7mvqfvnbuk4ddgezajmhzzzoub7bdjwnx3wa65hox4maii" target="_blank">View ↗</a></div></div>
+                    <div class="meta-item"><strong>Cross-Border CID</strong><div class="value">bafybeiahbfntsssvhtzwrokp3nojjan3tmscrhbcrzq74jw24sybjp7oo4</div><div><a href="https://ipfs.io/ipfs/bafybeiahbfntsssvhtzwrokp3nojjan3tmscrhbcrzq74jw24sybjp7oo4" target="_blank">View ↗</a></div></div>
+                    <div class="meta-item"><strong>Layered Storage CID</strong><div class="value">bafybeif37g4mh67v4z4y7x6h2t5w3q8r9e7u5i8o0p9l8k7j6h5g4f3d2s1a0</div><div><a href="https://ipfs.io/ipfs/bafybeif37g4mh67v4z4y7x6h2t5w3q8r9e7u5i8o0p9l8k7j6h5g4f3d2s1a0" target="_blank">View ↗</a></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 
-<div class="section">
-  <h2>Sustainable Economic Model</h2>
-  <p>STProof v6.5 uses a realistic, compliant, and user-driven economy.</p>
-  <ul>
-    <li>Limited-edition minting fees (core revenue)</li>
-    <li>Verified event validation services</li>
-    <li>5% secondary market royalty (EIP-2981)</li>
-    <li>Institutional & enterprise API services</li>
-  </ul>
-  <p><strong>Revenue Split:</strong> 70% Creator • 28% Treasury • 2% Protocol</p>
-</div>
+<footer>
+    <div class="container">
+        <div class="footer-logo">STProof Protocol v6.5</div>
+        <div id="zhFooter" class="copyright">© 2026 STProof Protocol | 凡发生，皆可存；凡存证，皆可信 | <a href="https://github.com/dule-123/stproof" target="_blank" style="color:#165DFF">GitHub Repository</a></div>
+        <div id="enFooter" class="copyright" style="display:none;">© 2026 STProof Protocol | What Happens, Exists; What's Proven, Trusted | <a href="https://github.com/dule-123/stproof" target="_blank" style="color:#165DFF">GitHub Repository</a></div>
+    </div>
+</footer>
 
-<div class="section">
-  <h2>Event Collection Game</h2>
-  <div class="card">
-    <p>Each event = one collectible digital stamp</p>
-    <p>Each series = one complete set</p>
-    <p>Users mint, collect, curate, showcase, and trade — naturally sustainable.</p>
-  </div>
-</div>
+<script>
+    // 中英文切换逻辑
+    const zhContent = document.getElementById('zhContent');
+    const enContent = document.getElementById('enContent');
+    const zhNav = document.getElementById('zhNav');
+    const enNav = document.getElementById('enNav');
+    const zhFooter = document.getElementById('zhFooter');
+    const enFooter = document.getElementById('enFooter');
+    const langSwitch = document.getElementById('langSwitch');
+    let isEnglish = false;
 
-<div class="section">
-  <h2>Protocol Architecture</h2>
-  <ul>
-    <li>Event Layer – Event templates & standards</li>
-    <li>Evidence Layer – IPFS + trusted timestamp + version history</li>
-    <li>Validation Layer – Validator multi-sign attestation</li>
-    <li>NFT Layer – ERC-721 limited-edition assets</li>
-    <li>Economic Layer – Mint fees, royalties, collection incentives</li>
-    <li>Storyline Layer – Curation, collection, narratives</li>
-    <li>Security Layer – Safety, compliance, audit-ready</li>
-  </ul>
-</div>
+    function updateLanguage() {
+        if (isEnglish) {
+            zhContent.style.display = 'none';
+            enContent.style.display = 'block';
+            zhNav.style.display = 'none';
+            enNav.style.display = 'flex';
+            zhFooter.style.display = 'none';
+            enFooter.style.display = 'block';
+            langSwitch.textContent = '中 / EN';
+            document.title = 'STProof Protocol v6.5 | Event Proof · Fact Metaverse';
+        } else {
+            enContent.style.display = 'none';
+            zhContent.style.display = 'block';
+            enNav.style.display = 'none';
+            zhNav.style.display = 'flex';
+            enFooter.style.display = 'none';
+            zhFooter.style.display = 'block';
+            langSwitch.textContent = 'EN / 中';
+            document.title = 'STProof Protocol v6.5 | 事件确权 · 事实元宇宙';
+        }
+    }
 
-<div class="section">
-  <h2>Use Cases</h2>
-  <ul>
-    <li>Fact-checking & journalism</li>
-    <li>Art creation certification</li>
-    <li>Academic & publication proof</li>
-    <li>Legal evidence archiving</li>
-    <li>Cross-border behavior verification</li>
-    <li>Historical event curation</li>
-    <li>Digital stamp / postcard collection</li>
-  </ul>
-</div>
+    langSwitch.addEventListener('click', () => {
+        isEnglish = !isEnglish;
+        updateLanguage();
+    });
 
-<div class="section">
-  <h2>Compliance</h2>
-  <p>STProof is a <strong>fact-certification & collectible system</strong>.</p>
-  <p>It is NOT a security, financial product, investment vehicle, or RWA platform.</p>
-</div>
-
-<div class="section">
-  <h2>Documents</h2>
-  <ul>
-    <li><a href="#">Whitepaper v6.5 (English)</a></li>
-    <li><a href="#">Whitepaper v6.5 (中文)</a></li>
-  </ul>
-</div>
-
-<div style="margin-top:60px; padding-top:20px; border-top:1px solid #eee; color:#666; font-size:14px;">
-  STProof Protocol v6.5 © 2026 | Fact Layer of Digital Civilization
-</div>
-
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                e.preventDefault();
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+</script>
 </body>
 </html>
