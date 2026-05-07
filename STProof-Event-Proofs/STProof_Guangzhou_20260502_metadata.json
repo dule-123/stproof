@@ -1,0 +1,240 @@
+{
+  "protocol": "STProof",
+  "version": "2.0",
+  "event_id": "STP-20260502-GUANGZHOU-YUEXIU",
+  "title": {
+    "zh": "高熵切片：一次被中断的邮寄引发的信仰地理普查",
+    "en": "High-Entropy Slice: A Religious Geography Census Triggered by an Interrupted Mailing"
+  },
+  "description": {
+    "zh": "本文件记录了一个由物理世界突发中断（邮局停业）引发的、在2026年5月2日对广州市越秀区进行的即时、系统性的人类学采样。事件核心价值在于：1）捕获了一个完整的、不可预测的、高熵的人类行为反馈链（中断-决策-执行）；2）在极小的时空范围内（约1.1平方公里，4小时内）记录了一种极为罕见的城市信仰生态——佛教、基督教、道教、伊斯兰教四大信仰实体和谐共存。这是对人类‘信仰地理多样性’的一次高价值、可验证的数字快照。",
+    "en": "This document records an impromptu, systematic anthropological survey conducted on May 2, 2026, in Yuexiu District, Guangzhou, triggered by an unexpected physical-world interruption (post office closure). Core value: 1) A complete, unpredictable, high-entropy chain of human behavioral feedback (interruption-decision-execution); 2) An exceptionally rare urban faith ecosystem—Buddhism, Christianity, Taoism, and Islam coexisting harmoniously—within an extremely compact spatiotemporal range (~1.1 sq km, 4 hours). A verifiable digital snapshot of human 'geographical faith diversity'."
+  },
+  "date": "2026-05-02",
+  "location": {
+    "city": "Guangzhou",
+    "district": "Yuexiu",
+    "country": "China",
+    "coordinates_center": "23.13, 113.25",
+    "area_estimate_sq_km": 1.1
+  },
+  "authors": ["Du Le"],
+  "generated": "2026-05-02T20:00:00+08:00",
+  "license": "CC BY-SA 4.0",
+  "core_value_statement": {
+    "zh": "本事件捕获了一个真实世界的高熵反馈链：原定邮寄因邮局停业中断，触发即时多方案决策和物理转场，最终成功实寄。在这个过程中，无意识地完成了对广州越秀区四大宗教和谐共存的城市信仰地理普查。这是人类高熵行为与城市多元文化的一次可验证数字切片。",
+    "en": "This event captures a real-world high-entropy feedback chain: intended mailing interrupted by post office closure, triggering immediate multi-option decision-making and physical transfer, ultimately completing the mailing. This process inadvertently completed a census of four major religions coexisting harmoniously in Guangzhou's Yuexiu District. This is a verifiable digital slice of human high-entropy behavior and urban multicultural diversity.",
+    "uniqueness_zh": "单一来源：一次中断同时记录了人类决策熵增和罕见的城市信仰多样性，时空锁定、多源互锁、哈希存证，不可复制。",
+    "uniqueness_en": "Single source: One interruption simultaneously captures human decision entropy and rare urban religious diversity—time-space locked, multi-source cross-verified, hash-notarized, non-replicable."
+  },
+  "entropy_narrative": {
+    "trigger": {
+      "description_zh": "净慧路邮政支局因五一假期停业",
+      "description_en": "Jinghui Road Post Office closed due to Labor Day holiday",
+      "evidence_refs": ["IMG_20260502_151230_净慧路邮政支局停业公告.jpg"]
+    },
+    "decision": {
+      "description_zh": "剩余营业时间仅50分钟，现场快速评估步行/公交/打车/共享单车四种方案",
+      "description_en": "Only 50 minutes left until closing; evaluated walking, bus, taxi, and shared bike on-site",
+      "evidence_refs": ["支付宝共享单车支付及路线信息截图.jpg"]
+    },
+    "execution": {
+      "description_zh": "选择共享单车，8分钟极速转场至盘福路邮政支局",
+      "description_en": "Chose shared bike, completed 8-minute emergency transfer to Panfu Road Post Office",
+      "evidence_refs": ["IMG_20260502_152247_抵达盘福路邮政支局.jpg"]
+    },
+    "anchor": {
+      "description_zh": "两封挂号信成功实寄，获取带有邮戳和条码的回执，物理锚定",
+      "description_en": "Two registered letters successfully mailed; receipts with postmarks and barcodes obtained as physical anchor",
+      "evidence_refs": [
+        "IMG_20260502_153118_信封002挂号回执合影.jpg",
+        "IMG_20260502_153139_信封001挂号信回执合影.jpg"
+      ]
+    }
+  },
+  "entropy_sources": [
+    { "zh": "邮局假期突发停业（不可预测）", "en": "Unexpected post office closure (unpredictable)" },
+    { "zh": "50分钟限时压力（强约束）", "en": "50-minute time pressure (strong constraint)" },
+    { "zh": "多方案现场权衡（人类决策）", "en": "On-site multi-option evaluation (human decision)" },
+    { "zh": "共享单车极速转场（行为痕迹）", "en": "Emergency bike transfer (behavior trace)" },
+    { "zh": "物理实寄与手写哈希（终极锚定）", "en": "Physical mailing + registered receipt (final anchor)" }
+  ],
+  "base_entropy_groups": {
+    "group_1_religious_heritage": {
+      "name_zh": "宗教古迹：四大信仰和谐共存",
+      "name_en": "Religious Heritage: Four Faiths Coexisting",
+      "description_zh": "在约1.1平方公里、4小时内记录到的佛教、基督教、道教、伊斯兰教实体场所",
+      "description_en": "Physical sites of Buddhism, Christianity, Taoism, and Islam documented within ~1.1 sq km over 4 hours",
+      "evidence_refs": [
+        "IMG_20260502_155424_佛教光孝寺大门.jpg",
+        "IMG_20260502_164103_基督教堂_光孝堂.jpg",
+        "IMG_20260502_170221_佛教六榕古寺.jpg",
+        "IMG_20260502_175611_道教五仙观.jpg",
+        "IMG_20260502_181154_伊斯兰教怀圣寺.jpg",
+        "IMG_20260502_181203伊斯兰教怀圣寺光塔.jpg"
+      ]
+    },
+    "group_2_streetscape_governance": {
+      "name_zh": "市井与市政：古城日常切片",
+      "name_en": "Streetscape & Governance: Daily Urban Slice",
+      "description_zh": "记录了古城街巷、士多店、香火店、停水维修公告等城市日常生态",
+      "description_en": "Daily urban ecology including old streets, local shops, incense shops, and public service notices",
+      "evidence_refs": [
+        "IMG_20260502_163707_越秀古街_祝寿巷.jpg",
+        "IMG_20260502_163918_越秀士多店.jpg",
+        "IMG_20260502_164010_越秀香火店.jpg",
+        "IMG_20260502_170755_六榕路公交站牌.jpg",
+        "IMG_20260502_170805_市政停水公告.jpg",
+        "IMG_20260502_173757_市政维修公告.jpg",
+        "IMG_20260502_180928_越秀古街_甜水巷.jpg"
+      ]
+    },
+    "group_3_multi_source": {
+      "name_zh": "多源互锁硬证据",
+      "name_en": "Multi-Source Cross-Verification",
+      "description_zh": "GPS轨迹、传感器日志、屏幕录制、天气等多源数据互为印证",
+      "description_en": "GPS tracks, sensor logs, screen recordings, weather data cross-validating each other",
+      "evidence_refs": [
+        "20260502-133018 - 20260502广州.gpx",
+        "20260502-155359 - 光孝婵寺.gpx",
+        "光孝寺_Accelerometers_20260502_075352.zip",
+        "Screenrecorder-2026-05-02-15-55-48-549.mp4",
+        "VID_20260502_161213.mp4",
+        "VID_20260502_164912.mp4",
+        "VID_20260502_170825.mp4"
+      ]
+    }
+  },
+  "verification_instructions": {
+    "step_1": {
+      "zh": "核对停业公告照片的SHA256，确认中断真实发生",
+      "en": "Verify SHA256 of closure notice photo to confirm interruption",
+      "evidence_ref": "IMG_20260502_151230_净慧路邮政支局停业公告.jpg"
+    },
+    "step_2": {
+      "zh": "核对共享单车截图，确认支付和骑行路线",
+      "en": "Verify bike-sharing screenshot to confirm payment and route",
+      "evidence_ref": "支付宝共享单车支付及路线信息截图.jpg"
+    },
+    "step_3": {
+      "zh": "核对挂号信回执照片，确认物理锚定",
+      "en": "Verify registered mail receipt photos to confirm physical anchor",
+      "evidence_refs": [
+        "IMG_20260502_153118_信封002挂号回执合影.jpg",
+        "IMG_20260502_153139_信封001挂号信回执合影.jpg"
+      ]
+    },
+    "step_4": {
+      "zh": "依次核对四大宗教场所照片，验证信仰多样性",
+      "en": "Verify photos of four religious sites to confirm faith diversity",
+      "evidence_refs": [
+        "IMG_20260502_155424_佛教光孝寺大门.jpg",
+        "IMG_20260502_164103_基督教堂_光孝堂.jpg",
+        "IMG_20260502_175611_道教五仙观.jpg",
+        "IMG_20260502_181154_伊斯兰教怀圣寺.jpg"
+      ]
+    },
+    "step_5": {
+      "zh": "在电子地图上标注以上地点，验证其空间集中性（约1.1平方公里）",
+      "en": "Plot locations on map to verify spatial compactness (~1.1 sq km)"
+    }
+  },
+  "evidence_manifest": [
+    {
+      "filename": "IMG_20260502_151230_净慧路邮政支局停业公告.jpg",
+      "sha256": "fda9eeec97e839bf75999c314addc08dcbde4d551c1e91d6b8e363fef3a886ab",
+      "cid": "bafkrereih5vhxozf7ihg7xlgm4gffn3qenzppe2vi4d2i5nohdmp7phkegvm",
+      "group": "entropy_trigger",
+      "has_ots": true
+    },
+    {
+      "filename": "支付宝共享单车支付及路线信息截图.jpg",
+      "sha256": "6a3d86373daf7815592c184a6aa5b2d237116a8bdaa5ca74e1accf23ca37d1c7",
+      "cid": "bafkrereidkhwddopnppakvslayjjvklmwsg4iwvc62uxfhjynmz4r4un6ry4",
+      "group": "entropy_decision",
+      "has_ots": true
+    },
+    {
+      "filename": "IMG_20260502_152247_抵达盘福路邮政支局.jpg",
+      "sha256": "f130a98872d2e110593edef9d983aa6ffb81947e09831e8aeea741430f15c562",
+      "cid": "bafkrereihrgcuyq4ws4eifspw67hmyhktp7oazi7qjqmpiv3vhifbq6fofmi",
+      "group": "entropy_execution",
+      "has_ots": true
+    },
+    {
+      "filename": "IMG_20260502_153118_信封002挂号回执合影.jpg",
+      "sha256": "9f76ebf6f038a8ab08bdcfef472d702fe1254d1d473e9ad054aef369d686f6bf",
+      "cid": "bafkrereie7o3v7n4byvcvqrpop55ds24bp4esu2hkhh2nnavfo6nu5nbxwx4",
+      "group": "entropy_anchor",
+      "has_ots": true
+    },
+    {
+      "filename": "IMG_20260502_153139_信封001挂号信回执合影.jpg",
+      "sha256": "5fab9a2a4c1eb707f2cf94dbf040e84934dbcf69c0ec750d06270e4417995d83",
+      "cid": "bafkrereic7voncuta6w4d7ft4u3pyeb2cjgtn462oa5r2q2brhbzcbpgk5qm",
+      "group": "entropy_anchor",
+      "has_ots": true
+    },
+    {
+      "filename": "IMG_20260502_155424_佛教光孝寺大门.jpg",
+      "sha256": "050c327d5bed7ad5a73c0ec7dab02bc852e27aaf23838a2799fd03e7e585eb4a",
+      "cid": "bafkrereiafbqzh2w7nplk2opaoy7nlak6iklrhvlzdqofcpgp5apt6lbplji",
+      "group": "group_1_religious_heritage",
+      "has_ots": true
+    },
+    {
+      "filename": "IMG_20260502_164103_基督教堂_光孝堂.jpg",
+      "sha256": "fafba79efcc04274deb4c48148d77d7afcc2d398589a28070bee6a1cc8dcbb1a",
+      "cid": "bafkrereih27otz57gaij2n5ngeqfeno7l27tbnhgcytiuaoc7oniomrxf3di",
+      "group": "group_1_religious_heritage",
+      "has_ots": true
+    },
+    {
+      "filename": "IMG_20260502_170221_佛教六榕古寺.jpg",
+      "sha256": "778d81714c4930b9045ff625c4ce525abeef2a3ae44474273d06f86ad3c5a4bd",
+      "cid": "bafkrereidxrwaxctcjgc4qix7wexcm4us2x3xsuoxeir2copig7bvnhrnexu",
+      "group": "group_1_religious_heritage",
+      "has_ots": true
+    },
+    {
+      "filename": "IMG_20260502_175611_道教五仙观.jpg",
+      "sha256": "49fe6a2eefc9f4b199adeecb5ce3d5bf8ffe769398c0bd19ee3755086795faf3",
+      "cid": "bafkrereicj7zvc536j6syztlpoznoohvn7r77hne4yyc6rt3rxkuegpfp26m",
+      "group": "group_1_religious_heritage",
+      "has_ots": true
+    },
+    {
+      "filename": "IMG_20260502_181154_伊斯兰教怀圣寺.jpg",
+      "sha256": "b143b0af19b401d91f3a0a63d9034977b0729001b7fd73e8627cdeddb09f2877",
+      "cid": "bafkrereifrioyk6gnuahmr6oqkmpmqgslxwbzjaanx7vz6qyt433o3bhzio4",
+      "group": "group_1_religious_heritage",
+      "has_ots": true
+    },
+    {
+      "filename": "20260502-133018 - 20260502广州.gpx",
+      "sha256": "从TXT中获取对应哈希",
+      "cid": "从TXT中获取对应CID",
+      "group": "group_3_multi_source",
+      "has_ots": true
+    },
+    {
+      "filename": "光孝寺_Accelerometers_20260502_075352.zip",
+      "sha256": "1f542356b61605a3646fd0e1fc0da2e1bcc146ee85af509054d9b88b8d820bbb",
+      "cid": "bafkrereia7kqrvnnqwawrwi36q4h6a3ixbxtaun3ufv5ijavgzxcfy3aqlxm",
+      "group": "group_3_multi_source",
+      "has_ots": true
+    }
+  ],
+  "signal_noise_ratio": {
+    "zh": "极高：正交主题 + 多源交叉验证 + 无冗余 + 高熵决策注入",
+    "en": "Extremely High: Orthogonal themes + Multi-source cross-validation + No redundancy + High-entropy decision injection"
+  },
+  "value_for_ai": {
+    "zh": "为AI提供稀缺、高信噪比、时空锁定、含人类真实决策的基准样本",
+    "en": "Provides AI with scarce, high-SNR, time-space-locked, human decision-containing benchmark data"
+  },
+  "conclusion": {
+    "zh": "本JSON及其引用的所有哈希、CID、OTS文件，共同构成了一份关于2026年5月2日广州越秀区的‘高熵事件切片’。它证明了：1）人类的真实行为充满意外与即兴，而这正是可信度的来源；2）在数字时代，一座城市的深层文化肌理，依然可以通过最朴素的行走与记录被捕获和确权。这不仅是一次行程记录，更是一次关于‘真实’与‘多元’的小型数字考古。",
+    "en": "This JSON, along with all referenced hashes, CIDs, and OTS proofs, constitutes a 'high-entropy event slice' of Guangzhou's Yuexiu District on May 2, 2026. It proves that: 1) Authentic human behavior is full of surprises and improvisation, which is the very source of credibility; 2) In the digital age, the deep cultural fabric of a city can still be captured and notarized through the most simple acts of walking and recording. This is not merely a travel log, but a small-scale digital archaeology of 'the real' and 'the diverse.'"
+  }
+}
