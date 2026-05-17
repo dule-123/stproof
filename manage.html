@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>STProof 存证管理后台</title>
     <style>
-        *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui, sans-serif;}
+        *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,sans-serif;}
         body{background:#f7f8fa;padding:20px;}
         .login{max-width:400px;margin:50px auto;background:white;padding:30px;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,0.06);}
         .login h2{color:#165DFF;margin-bottom:20px;text-align:center;}
@@ -17,7 +17,6 @@
         .form input{padding:10px;flex:1;border:1px solid #ddd;border-radius:6px;min-width:120px;}
         .form button{padding:10px 20px;background:#165DFF;color:white;border:none;border-radius:6px;}
         .item{display:flex;justify-content:space-between;padding:12px;border-bottom:1px solid #eee;align-items:center;}
-        .del{color:red;font-size:12px;cursor:pointer;}
     </style>
 </head>
 <body>
@@ -38,62 +37,59 @@
             <button onclick="save()">添加/更新</button>
         </div>
         <div id="list"></div>
+        <div style="margin-top:20px;color:red;font-size:14px;">保存后请提交到 GitHub 生效</div>
     </div>
 
     <script>
-        const DB_KEY = "stproof_db";
         const USER = "admin";
         const PWD = "stproof123";
+        let data = {};
 
         function login() {
             const u = document.getElementById("user").value;
             const p = document.getElementById("pwd").value;
-            if (u === USER && p === PWD) {
-                document.getElementById("loginBox").style.display = "none";
-                document.getElementById("adminBox").style.display = "block";
-                renderList();
-            } else alert("账号密码错误");
+            if(u===USER&&p===PWD){
+                document.getElementById("loginBox").style.display="none";
+                document.getElementById("adminBox").style.display="block";
+                loadData();
+            }else alert("账号密码错误");
         }
 
-        function getDB() {
-            return JSON.parse(localStorage.getItem(DB_KEY) || '{}');
-        }
-        function setDB(db) {
-            localStorage.setItem(DB_KEY, JSON.stringify(db));
+        function loadData() {
+            fetch("https://raw.githubusercontent.com/dule-123/stproof/main/data.json")
+                .then(res=>res.json())
+                .then(d=>{data=d;render();});
         }
 
         function save() {
-            const id = document.getElementById("id").value.trim();
-            const date = document.getElementById("date").value.trim();
-            const route = document.getElementById("route").value.trim();
-            const hash = document.getElementById("hash").value.trim();
-            if (!id) { alert("请输入编号"); return; }
-            const db = getDB();
-            db[id] = { date, route, hash };
-            setDB(db);
-            renderList();
+            const id=document.getElementById("id").value.trim();
+            const date=document.getElementById("date").value.trim();
+            const route=document.getElementById("route").value.trim();
+            const hash=document.getElementById("hash").value.trim();
+            if(!id){alert("请输入编号");return;}
+            data[id]={date,route,hash};
+            render();
+            exportData();
         }
 
-        function del(id) {
-            const db = getDB();
-            delete db[id];
-            setDB(db);
-            renderList();
-        }
-
-        function renderList() {
-            const db = getDB();
-            const list = document.getElementById("list");
-            list.innerHTML = "";
-            for (let id in db) {
-                const div = document.createElement("div");
-                div.className = "item";
-                div.innerHTML = `
-                    <div>${id}</div>
-                    <div class="del" onclick="del('${id}')">删除</div>
-                `;
+        function render() {
+            const list=document.getElementById("list");
+            list.innerHTML="";
+            for(let id in data){
+                const div=document.createElement("div");
+                div.className="item";
+                div.innerHTML=`<div>${id}</div>`;
                 list.appendChild(div);
             }
+        }
+
+        function exportData() {
+            const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+            const url=URL.createObjectURL(blob);
+            const a=document.createElement("a");
+            a.href=url;
+            a.download="data.json";
+            a.click();
         }
     </script>
 </body>
