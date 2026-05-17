@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STProof 存证管理后台</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui, sans-serif;}
+        body{background:#f7f8fa;padding:20px;}
+        .login{max-width:400px;margin:50px auto;background:white;padding:30px;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,0.06);}
+        .login h2{color:#165DFF;margin-bottom:20px;text-align:center;}
+        .login input{width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:8px;}
+        .login button{width:100%;padding:14px;background:#165DFF;color:white;border:none;border-radius:8px;font-weight:600;margin-top:10px;}
+        .admin{display:none;max-width:700px;margin:0 auto;background:white;padding:30px;border-radius:16px;}
+        .admin h2{color:#165DFF;margin-bottom:20px;}
+        .form{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
+        .form input{padding:10px;flex:1;border:1px solid #ddd;border-radius:6px;min-width:120px;}
+        .form button{padding:10px 20px;background:#165DFF;color:white;border:none;border-radius:6px;}
+        .item{display:flex;justify-content:space-between;padding:12px;border-bottom:1px solid #eee;align-items:center;}
+        .del{color:red;font-size:12px;cursor:pointer;}
+    </style>
+</head>
+<body>
+    <div class="login" id="loginBox">
+        <h2>管理员登录</h2>
+        <input id="user" placeholder="账号">
+        <input id="pwd" type="password" placeholder="密码">
+        <button onclick="login()">登录</button>
+    </div>
+
+    <div class="admin" id="adminBox">
+        <h2>存证数据管理</h2>
+        <div class="form">
+            <input id="id" placeholder="编号 (如 WB20260518-001)">
+            <input id="date" placeholder="日期">
+            <input id="route" placeholder="邮路">
+            <input id="hash" placeholder="照片哈希">
+            <button onclick="save()">添加/更新</button>
+        </div>
+        <div id="list"></div>
+    </div>
+
+    <script>
+        const DB_KEY = "stproof_db";
+        const USER = "admin";
+        const PWD = "stproof123";
+
+        function login() {
+            const u = document.getElementById("user").value;
+            const p = document.getElementById("pwd").value;
+            if (u === USER && p === PWD) {
+                document.getElementById("loginBox").style.display = "none";
+                document.getElementById("adminBox").style.display = "block";
+                renderList();
+            } else alert("账号密码错误");
+        }
+
+        function getDB() {
+            return JSON.parse(localStorage.getItem(DB_KEY) || '{}');
+        }
+        function setDB(db) {
+            localStorage.setItem(DB_KEY, JSON.stringify(db));
+        }
+
+        function save() {
+            const id = document.getElementById("id").value.trim();
+            const date = document.getElementById("date").value.trim();
+            const route = document.getElementById("route").value.trim();
+            const hash = document.getElementById("hash").value.trim();
+            if (!id) { alert("请输入编号"); return; }
+            const db = getDB();
+            db[id] = { date, route, hash };
+            setDB(db);
+            renderList();
+        }
+
+        function del(id) {
+            const db = getDB();
+            delete db[id];
+            setDB(db);
+            renderList();
+        }
+
+        function renderList() {
+            const db = getDB();
+            const list = document.getElementById("list");
+            list.innerHTML = "";
+            for (let id in db) {
+                const div = document.createElement("div");
+                div.className = "item";
+                div.innerHTML = `
+                    <div>${id}</div>
+                    <div class="del" onclick="del('${id}')">删除</div>
+                `;
+                list.appendChild(div);
+            }
+        }
+    </script>
+</body>
+</html>
