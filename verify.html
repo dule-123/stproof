@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STProof 标准化存证核验</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+        :root {
+            --primary: #165DFF;
+            --bg: #F7F8FA;
+            --card: #ffffff;
+            --text: #1D2129;
+            --gray: #666;
+        }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            background: var(--card);
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            padding: 40px 30px;
+            width: 100%;
+            max-width: 460px;
+            text-align: center;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        .title {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+        .desc {
+            font-size: 14px;
+            color: var(--gray);
+            margin-bottom: 30px;
+        }
+        .input-box {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 12px;
+            outline: none;
+        }
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 24px;
+            text-align: left;
+            display: none;
+        }
+        .item {
+            margin: 10px 0;
+            font-size: 14px;
+        }
+        .label {
+            font-weight: 600;
+            color: var(--primary);
+            width: 80px;
+            display: inline-block;
+        }
+        .hash {
+            background: #f4f4f5;
+            padding: 12px;
+            border-radius: 8px;
+            font-family: monospace;
+            word-break: break-all;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">STProof</div>
+        <div class="title">标准化存证核验系统</div>
+        <div class="desc">输入信封唯一编号，查询照片哈希值</div>
+
+        <input class="input-box" id="code" placeholder="请输入编号（如 WB20260518-001）">
+        <button class="btn" onclick="query()">查询存证信息</button>
+
+        <div class="result" id="result">
+            <div class="item"><span class="label">编号：</span><span id="r_id"></span></div>
+            <div class="item"><span class="label">日期：</span><span id="r_date"></span></div>
+            <div class="item"><span class="label">邮路：</span><span id="r_route"></span></div>
+            <div class="item"><span class="label">照片哈希：</span></div>
+            <div class="hash" id="r_hash"></div>
+        </div>
+    </div>
+
+    <script>
+        const DB_KEY = "stproof_db";
+        function getDB() {
+            return JSON.parse(localStorage.getItem(DB_KEY) || '{}');
+        }
+        function query() {
+            const code = document.getElementById("code").value.trim();
+            const db = getDB();
+            if (db[code]) {
+                document.getElementById("r_id").innerText = code;
+                document.getElementById("r_date").innerText = db[code].date;
+                document.getElementById("r_route").innerText = db[code].route;
+                document.getElementById("r_hash").innerText = db[code].hash;
+                document.getElementById("result").style.display = "block";
+            } else {
+                alert("未找到该编号存证信息");
+            }
+        }
+    </script>
+</body>
+</html>
