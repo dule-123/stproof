@@ -95,7 +95,7 @@
         <div class="title">标准化存证核验系统</div>
         <div class="desc">输入信封唯一编号，查询照片哈希值</div>
 
-        <input id="code" placeholder="请输入编号（如 WB20260518-001）">
+        <input id="code" placeholder="请输入编号（如 STP-20260518-001）">
         <button onclick="query()">查询存证信息</button>
 
         <div class="result" id="result">
@@ -109,12 +109,20 @@
 
     <script>
         let DB = {};
-        fetch("https://raw.githubusercontent.com/dule-123/stproof/main/data.json")
+
+        // 最新防缓存 + 正确读取你域名下的 data.json
+        fetch(`https://stproof.org/data.json?v=${Date.now()}`)
             .then(res => res.json())
-            .then(data => { DB = data; });
+            .then(data => {
+                DB = data;
+            })
+            .catch(err => {
+                console.error("加载数据失败", err);
+            });
 
         function query() {
             const code = document.getElementById("code").value.trim();
+
             if (DB[code]) {
                 document.getElementById("r_id").innerText = code;
                 document.getElementById("r_date").innerText = DB[code].date;
