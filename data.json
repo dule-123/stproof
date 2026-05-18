@@ -2,11 +2,51 @@
   "STP260518-001": {
     "date": "2026-05-18",
     "route": "深圳博物馆 → 深南中路支局",
-    "hash": "0x1234567890abcdef"
-  },
+    "hash": "390bc24c74f8d34fbc6c2eccbd9df9a2a04ffa84830a8306d3bf947ed2eb0e38"
+  }
   "STP260518-002": {
     "date": "2026-05-18",
-    "route": "深圳 → 广州",
-    "hash": "0xabcdef1234567890"
+    "route": "深圳博物馆 → 深南中路支局",
+    "hash": "ce2eda76c9e35e50a6b0a3cc0d67bdc96b8ac463c1f499d93ec7d3bee5174957"
   }
+  "STP260518-003": {
+    "date": "2026-05-18",
+    "route": "深圳博物馆→ 深南中路支局",
+    "hash": "2d478b2474413ce465fa6a6b155d2d88484b433e3f7d64175de7318ac853a098"
+  }
+  "STP260518-004": {
+    "date": "2026-05-18",
+    "route": "深圳南山博物馆→南头支局",
+    "hash": "179b4a121cee59db3ad005bf408b7a49680d7f1e08afff0647db103a96e110f8"
+  }
+  "STP260518-005": {
+    "date": "2026-05-18",
+    "route": "深圳南山博物馆→南头支局",
+    "hash": "5132af89a1c6b50d8c6bb37a7eeea0f076aea3de37907412a5b824188ac89845"
+  }
+  "STP260518-006": {
+    "date": "2026-05-18",
+    "route": "深圳博物馆 → 深南中路支局",
+    "hash": "65a796da3f6b5c3b2026a0cd9dccfbfb6c529e3c83a88c98a2fff6050eb96fa2"
+  }
+  "STP260518-007": {
+    "date": "2026-05-18",
+    "route": "深圳博物馆→ 岗厦支局",
+    "hash": "339611ba6dd1373089f63ccc4ccfeba5bf43b18a3faf88d0839ef12d9d5122f9"
+  }
+  "STP260518-008": {
+    "date": "2026-05-18",
+    "route": "深圳博物馆→ 岗厦支局",
+    "hash":      "982d5c2fcb6aefdf6d56f23f0d00bbcd7e3c2776e3a5413041c0791eb1bdcf49"
+  }
+  "STP260518-009": {
+    "date": "2026-05-18",
+    "route": "深圳博物馆→ 岗厦支局",
+    "hash": "0a2fed9934e6c8d28da4ecefee603da662f0b1dd0abca174d43e6f436ac92ebf"
+  }
+  "STP260518-010": {
+    "date": "2026-05-18",
+    "route": "深圳博物馆→ 岗厦支局",
+    "hash": "e9bdff57d1aaa15500bb69fadd21bfb72858dd1266b1395081c7004e6413439a"
+  },
 }
