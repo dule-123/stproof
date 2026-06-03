@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CloudPost 存证验证工具</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <style>
+        * { box-sizing: border-box; font-family: -apple-system, sans-serif; }
+        body { max-width: 800px; margin: 40px auto; padding: 20px; background: #f9f9f9; }
+        .container { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        h1 { color: #333; border-bottom: 2px solid #4CAF50; padding-bottom: 10px; }
+        .step { margin: 25px 0; }
+        label { display: block; font-weight: 600; margin-bottom: 8px; color: #555; }
+        textarea, input[type="password"], input[type="file"] { 
+            width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 8px; 
+            font-size: 15px; transition: border 0.3s; 
+        }
+        textarea:focus, input:focus { border-color: #4CAF50; outline: none; }
+        button { 
+            background: #4CAF50; color: white; border: none; padding: 14px 24px; 
+            border-radius: 8px; font-size: 16px; cursor: pointer; transition: background 0.3s;
+            margin-top: 10px;
+        }
+        button:hover { background: #388E3C; }
+        .result { 
+            margin-top: 25px; padding: 20px; border-radius: 8px; 
+            background: #f0f9ff; border-left: 5px solid #2196F3;
+            white-space: pre-wrap; font-family: monospace; font-size: 14px;
+        }
+        .error { background: #ffebee; border-left-color: #f44336; }
+        .success { background: #e8f5e9; border-left-color: #4CAF50; }
+        .info { background: #fff3e0; border-left-color: #ff9800; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 CloudPost 数字存证验证工具</h1>
+        
+        <div class="step">
+            <label>1. 上传加密的 JSON 文件 (.enc)</label>
+            <input type="file" id="encFile" accept=".enc,.json">
+        </div>
+
+        <div class="step">
+            <label>2. 输入解密密钥（卖家提供）</label>
+            <input type="password" id="decryptionKey" placeholder="例如: MySecretKey123">
+        </div>
+
+        <div class="step">
+            <label>3. 上传 OTS 时间戳文件（可选，用于验证时间）</label>
+            <input type="file" id="otsFile" accept=".ots">
+        </div>
+
+        <button onclick="verify()">开始验证</button>
+
+        <div id="resultContainer" class="hidden">
+            <h3>验证结果</h3>
+            <div id="result" class="result"></div>
+        </div>
+    </div>
+
+    <script>
+        async function verify() {
+            const encFile = document.getElementById('encFile').files[0];
+            const otsFile = document.getElementById('otsFile').files[0];
+            const key = document.getElementById('decryptionKey').value;
+            
+            const resultDiv = document.getElementById('result');
+            const container = document.getElementById('resultContainer');
+            container.classList.remove('hidden');
+
+            if (!encFile || !key) {
+                resultDiv.innerHTML = "❌ 请提供加密文件和密钥";
+                resultDiv.className = 'result error';
+                return;
+            }
+
+            try {
+                // 1. 读取加密文件
+                const encData = await readFile(encFile);
+                
+                // 2. 使用 AES 解密
+                const decrypted = decryptAES(encData, key);
+                
+                // 3. 解析 JSON
+                const json = JSON.parse(decrypted);
+                
+                // 4. 计算哈希验证
+                const hash = CryptoJS.SHA256(decrypted).toString();
+                
+                // 5. 构建结果
+                let html = `
+✅ <strong>文件解密成功！</strong>
+------------------------------------
+📦 <strong>物理对象：</strong>${json.physical_object?.theme || '未知'}
+📅 <strong>发行日期：</strong>${json.physical_object?.issue_date || '未知'}
+📫 <strong>挂号信条码：</strong>${json.physical_object?.tracking_number || '未知'}
+⏰ <strong>存证时间：</strong>${json.evidence_chain?.[0]?.timestamp || '未知'}
+📍 <strong>拍摄位置：</strong>${json.evidence_chain?.[0]?.location || '未知'}
+🔐 <strong>文件哈希：</strong><code>${hash}</code>
+------------------------------------
+📁 <strong>证据链：</strong>
+`;
+
+                json.evidence_chain?.forEach(evidence => {
+                    html += `  • ${evidence.type}: ${evidence.timestamp}\n`;
+                });
+
+                // 6. 如果有 OTS 文件，提示验证方法
+                if (otsFile) {
+                    html += `
+------------------------------------
+⏳ <strong>OTS 时间戳验证：</strong>
+请使用 OpenTimestamps 客户端验证：
+<code>ots verify ${otsFile.name}</code>
+或访问 <a href="https://opentimestamps.org" target="_blank">opentimestamps.org</a>
+`;
+                }
+
+                html += `
+------------------------------------
+⚠️ <strong>验证说明：</strong>
+1. 核对物理信封的条码是否与上方一致
+2. 使用 OTS 工具验证时间戳真实性
+3. 照片/视频文件哈希可在证据链中核对
+`;
+
+                resultDiv.innerHTML = html.replace(/\n/g, '<br>');
+                resultDiv.className = 'result success';
+
+            } catch (error) {
+                resultDiv.innerHTML = `❌ 验证失败：${error.message || '密钥错误或文件损坏'}`;
+                resultDiv.className = 'result error';
+            }
+        }
+
+        function readFile(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = e => resolve(e.target.result);
+                reader.onerror = reject;
+                reader.readAsText(file);
+            });
+        }
+
+        function decryptAES(encryptedBase64, password) {
+            try {
+                // 假设你使用 AES-256-CBC，IV 包含在数据中
+                const encrypted = CryptoJS.enc.Base64.parse(encryptedBase64);
+                const key = CryptoJS.PBKDF2(password, CryptoJS.enc.Hex.parse('00000000'), {
+                    keySize: 256/32,
+                    iterations: 1000
+                });
+                
+                const decrypted = CryptoJS.AES.decrypt(
+                    { ciphertext: encrypted },
+                    key,
+                    { mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7 }
+                );
+                
+                return decrypted.toString(CryptoJS.enc.Utf8);
+            } catch (e) {
+                throw new Error('解密失败，请检查密钥');
+            }
+        }
+    </script>
+</body>
+</html>
