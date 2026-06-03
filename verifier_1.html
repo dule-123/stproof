@@ -3,873 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CloudPost 数字存证验证器</title>
-    <!-- CryptoJS 库 -->
+    <title>CloudPost 数字存证验证器（适配 batch_encrypt.py）</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <style>
-        * {
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-            overflow: hidden;
-        }
-        
-        .header {
-            background: linear-gradient(to right, #4CAF50, #45a049);
-            color: white;
-            padding: 30px 40px;
-        }
-        
-        .header h1 {
-            margin: 0 0 10px 0;
-            font-size: 28px;
-        }
-        
-        .header p {
-            margin: 0;
-            opacity: 0.9;
-            font-size: 15px;
-        }
-        
-        .content {
-            padding: 40px;
-        }
-        
-        .step {
-            margin-bottom: 30px;
-            padding-bottom: 30px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .step:last-child {
-            border-bottom: none;
-        }
-        
-        .step-title {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        
-        .step-number {
-            background: #4CAF50;
-            color: white;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            margin-right: 12px;
-        }
-        
-        .step-title h3 {
-            margin: 0;
-            color: #333;
-        }
-        
-        .step-description {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
-        
-        .input-group {
-            margin-bottom: 20px;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #444;
-        }
-        
-        input[type="password"], input[type="text"] {
-            width: 100%;
-            padding: 14px 16px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 15px;
-            transition: all 0.3s;
-        }
-        
-        input[type="password"]:focus, input[type="text"]:focus {
-            border-color: #4CAF50;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
-        }
-        
-        .file-input-container {
-            border: 2px dashed #c3cfe2;
-            border-radius: 10px;
-            padding: 30px;
-            text-align: center;
-            transition: all 0.3s;
-        }
-        
-        .file-input-container.dragover {
-            border-color: #4CAF50;
-            background: rgba(76, 175, 80, 0.05);
-        }
-        
-        .file-input-container label {
-            display: block;
-            cursor: pointer;
-            color: #666;
-        }
-        
-        .file-input-container i {
-            font-size: 48px;
-            color: #4CAF50;
-            margin-bottom: 15px;
-        }
-        
-        input[type="file"] {
-            display: none;
-        }
-        
-        .selected-files {
-            margin-top: 15px;
-        }
-        
-        .file-item {
-            background: #f8f9fa;
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin-bottom: 8px;
-            font-size: 14px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .file-item .size {
-            color: #888;
-            font-size: 12px;
-        }
-        
-        .verify-btn {
-            background: linear-gradient(to right, #4CAF50, #45a049);
-            color: white;
-            border: none;
-            width: 100%;
-            padding: 18px;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .verify-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
-        }
-        
-        .verify-btn:active {
-            transform: translateY(0);
-        }
-        
-        .verify-btn i {
-            margin-right: 10px;
-        }
-        
-        .verify-btn:disabled {
-            background: #cccccc;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        .result-container {
-            display: none;
-            margin-top: 30px;
-        }
-        
-        .result-container.show {
-            display: block;
-            animation: fadeIn 0.5s;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .result-box {
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        
-        .result-header {
-            background: #f8f9fa;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        
-        .result-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-        }
-        
-        .success-icon {
-            background: #4CAF50;
-            color: white;
-        }
-        
-        .error-icon {
-            background: #f44336;
-            color: white;
-        }
-        
-        .result-title {
-            flex: 1;
-            margin-left: 20px;
-        }
-        
-        .result-title h3 {
-            margin: 0 0 5px 0;
-        }
-        
-        .result-title p {
-            margin: 0;
-            color: #666;
-            font-size: 14px;
-        }
-        
-        .result-content {
-            padding: 20px;
-        }
-        
-        .result-tabs {
-            display: flex;
-            border-bottom: 1px solid #eee;
-            margin-bottom: 20px;
-        }
-        
-        .result-tab {
-            padding: 12px 20px;
-            cursor: pointer;
-            border-bottom: 3px solid transparent;
-            color: #666;
-        }
-        
-        .result-tab.active {
-            color: #4CAF50;
-            border-bottom-color: #4CAF50;
-            font-weight: 600;
-        }
-        
-        .tab-content {
-            display: none;
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
-        
-        .json-viewer {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-            font-family: 'Courier New', monospace;
-            font-size: 13px;
-            line-height: 1.6;
-            max-height: 400px;
-            overflow-y: auto;
-        }
-        
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        
-        .info-item {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-        }
-        
-        .info-label {
-            font-size: 12px;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
-        }
-        
-        .info-value {
-            font-size: 15px;
-            color: #333;
-            font-weight: 500;
-        }
-        
-        .debug-info {
-            background: #fff3e0;
-            border-left: 4px solid #ff9800;
-            padding: 15px;
-            border-radius: 4px;
-            margin-top: 20px;
-            font-size: 13px;
-        }
-        
-        .debug-info h4 {
-            margin: 0 0 10px 0;
-            color: #e65100;
-        }
-        
-        pre {
-            background: #f8f9fa;
-            padding: 10px;
-            border-radius: 5px;
-            overflow-x: auto;
-            font-size: 12px;
-        }
-        
-        .footer {
-            text-align: center;
-            padding: 20px;
-            color: #666;
-            font-size: 13px;
-            border-top: 1px solid #eee;
-        }
-        
-        .spinner {
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-top: 3px solid white;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-right: 10px;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+        * { box-sizing: border-box; font-family: -apple-system, sans-serif; }
+        body { max-width: 800px; margin: 40px auto; padding: 20px; background: #f9f9f9; }
+        .container { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        h1 { color: #2c3e50; margin-top: 0; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; }
+        input[type="file"] { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; }
+        button { background: #27ae60; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #219653; }
+        .result { margin-top: 20px; padding: 15px; border-radius: 6px; }
+        .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .debug { margin-top: 20px; padding: 15px; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 6px; font-family: monospace; white-space: pre-wrap; }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>🔍 CloudPost 数字存证验证器</h1>
-            <p>验证首日封、实寄封的数字存证文件真实性</p>
+        <h1>🔐 CloudPost 数字存证验证器</h1>
+        本工具专为 <code>batch_encrypt.py</code> 生成的加密文件设计
+
+        <div class="form-group">
+            <label for="encFile">1. 上传加密的 JSON 文件 (.enc)</label>
+            <input type="file" id="encFile" accept=".enc">
         </div>
-        
-        <div class="content">
-            <!-- 步骤1：上传加密文件 -->
-            <div class="step">
-                <div class="step-title">
-                    <div class="step-number">1</div>
-                    <h3>上传加密文件 (.enc)</h3>
-                </div>
-                <div class="step-description">
-                    请上传卖家提供的加密存证文件，通常以 <code>.enc</code> 或 <code>.json.enc</code> 结尾
-                </div>
-                <div class="input-group">
-                    <div class="file-input-container" id="encFileContainer">
-                        <input type="file" id="encFile" accept=".enc,.json,.json.enc">
-                        <i>📁</i>
-                        <label for="encFile">
-                            <strong>点击选择文件</strong><br>
-                            或拖放文件到这里
-                        </label>
-                        <div class="selected-files" id="encFileInfo"></div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- 步骤2：输入解密密钥 -->
-            <div class="step">
-                <div class="step-title">
-                    <div class="step-number">2</div>
-                    <h3>输入解密密钥</h3>
-                </div>
-                <div class="step-description">
-                    请输入卖家提供的解密密钥，用于解密存证数据
-                </div>
-                <div class="input-group">
-                    <label for="password">解密密钥</label>
-                    <input type="password" id="password" placeholder="请输入解密密钥..." autocomplete="off">
-                </div>
-                <div class="input-group">
-                    <label for="encryptionMethod">加密算法（可选）</label>
-                    <select id="encryptionMethod" style="width:100%;padding:12px;border-radius:8px;border:2px solid #e0e0e0;">
-                        <option value="AES-CBC">AES-CBC (默认)</option>
-                        <option value="AES-GCM">AES-GCM</option>
-                        <option value="AES-ECB">AES-ECB (不推荐)</option>
-                    </select>
-                </div>
-            </div>
-            
-            <!-- 步骤3：上传时间戳文件（可选） -->
-            <div class="step">
-                <div class="step-title">
-                    <div class="step-number">3</div>
-                    <h3>上传时间戳文件 (.ots) - 可选</h3>
-                </div>
-                <div class="step-description">
-                    用于验证存证时间的真实性，如果卖家提供了 OTS 文件，可以上传验证
-                </div>
-                <div class="input-group">
-                    <div class="file-input-container" id="otsFileContainer">
-                        <input type="file" id="otsFile" accept=".ots">
-                        <i>⏰</i>
-                        <label for="otsFile">
-                            <strong>点击选择 OTS 文件</strong><br>
-                            或拖放文件到这里
-                        </label>
-                        <div class="selected-files" id="otsFileInfo"></div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- 验证按钮 -->
-            <button id="verifyBtn" class="verify-btn" onclick="verify()">
-                <div class="spinner" id="spinner" style="display:none;"></div>
-                <span id="btnText">🔐 开始验证</span>
-            </button>
-            
-            <!-- 验证结果 -->
-            <div class="result-container" id="resultContainer">
-                <div class="result-box" id="resultBox">
-                    <div class="result-header" id="resultHeader">
-                        <div class="result-icon" id="resultIcon">✅</div>
-                        <div class="result-title">
-                            <h3 id="resultTitle">验证成功</h3>
-                            <p id="resultSubtitle">存证文件验证通过</p>
-                        </div>
-                    </div>
-                    
-                    <div class="result-content">
-                        <div class="result-tabs">
-                            <div class="result-tab active" onclick="showTab('summary')">摘要</div>
-                            <div class="result-tab" onclick="showTab('details')">详细信息</div>
-                            <div class="result-tab" onclick="showTab('debug')">调试信息</div>
-                        </div>
-                        
-                        <div id="summaryTab" class="tab-content active">
-                            <div class="info-grid" id="summaryInfo">
-                                <!-- 动态填充摘要信息 -->
-                            </div>
-                        </div>
-                        
-                        <div id="detailsTab" class="tab-content">
-                            <div class="json-viewer" id="jsonViewer">
-                                <!-- 显示完整的 JSON 数据 -->
-                            </div>
-                        </div>
-                        
-                        <div id="debugTab" class="tab-content">
-                            <div class="debug-info">
-                                <h4>解密过程调试信息</h4>
-                                <div id="debugInfo"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+        <div class="form-group">
+            <label for="keyFile">2. 上传对应的密钥文件 (.key.txt)</label>
+            <input type="file" id="keyFile" accept=".key.txt">
         </div>
-        
-        <div class="footer">
-            <p>© 2026 CloudPost 数字存证验证工具 | 开源版本 1.0</p>
+
+        <div class="form-group">
+            <label for="otsFile">3. 上传 OTS 时间戳文件（可选，用于验证时间）</label>
+            <input type="file" id="otsFile" accept=".ots">
         </div>
+
+        <button onclick="verify()">开始验证</button>
+
+        <div id="result" class="result" style="display:none;"></div>
+        <div id="debug" class="debug" style="display:none;"></div>
     </div>
 
     <script>
-        // 全局变量
-        let encryptedData = null;
-        let encryptionMethod = "AES-CBC";
-        
-        // 初始化事件监听
-        document.addEventListener('DOMContentLoaded', function() {
-            // 文件拖放功能
-            setupFileDragDrop('encFileContainer', 'encFile', 'encFileInfo');
-            setupFileDragDrop('otsFileContainer', 'otsFile', 'otsFileInfo');
-            
-            // 加密算法选择
-            document.getElementById('encryptionMethod').addEventListener('change', function(e) {
-                encryptionMethod = e.target.value;
-            });
-            
-            // 输入框自动验证
-            document.getElementById('password').addEventListener('input', validateInputs);
-        });
-        
-        // 设置文件拖放
-        function setupFileDragDrop(containerId, fileInputId, infoId) {
-            const container = document.getElementById(containerId);
-            const fileInput = document.getElementById(fileInputId);
-            const infoDiv = document.getElementById(infoId);
-            
-            container.addEventListener('dragover', function(e) {
-                e.preventDefault();
-                container.classList.add('dragover');
-            });
-            
-            container.addEventListener('dragleave', function() {
-                container.classList.remove('dragover');
-            });
-            
-            container.addEventListener('drop', function(e) {
-                e.preventDefault();
-                container.classList.remove('dragover');
-                fileInput.files = e.dataTransfer.files;
-                updateFileInfo(fileInput, infoDiv);
-            });
-            
-            fileInput.addEventListener('change', function() {
-                updateFileInfo(fileInput, infoDiv);
-            });
-        }
-        
-        // 更新文件信息显示
-        function updateFileInfo(fileInput, infoDiv) {
-            infoDiv.innerHTML = '';
-            if (fileInput.files.length > 0) {
-                const file = fileInput.files[0];
-                const size = (file.size / 1024).toFixed(2);
-                infoDiv.innerHTML = `
-                    <div class="file-item">
-                        <span>${file.name}</span>
-                        <span class="size">${size} KB</span>
-                    </div>
-                `;
-            }
-        }
-        
-        // 验证输入是否完整
-        function validateInputs() {
-            const encFile = document.getElementById('encFile').files[0];
-            const password = document.getElementById('password').value;
-            const btn = document.getElementById('verifyBtn');
-            
-            if (encFile && password.trim().length > 0) {
-                btn.disabled = false;
-            } else {
-                btn.disabled = true;
-            }
-        }
-        
-        // 主验证函数
         async function verify() {
             const encFile = document.getElementById('encFile').files[0];
-            const password = document.getElementById('password').value;
+            const keyFile = document.getElementById('keyFile').files[0];
             const otsFile = document.getElementById('otsFile').files[0];
-            
-            // 显示加载状态
-            const btn = document.getElementById('verifyBtn');
-            const btnText = document.getElementById('btnText');
-            const spinner = document.getElementById('spinner');
-            btn.disabled = true;
-            btnText.textContent = '正在验证...';
-            spinner.style.display = 'block';
-            
-            // 隐藏之前的验证结果
-            document.getElementById('resultContainer').classList.remove('show');
-            
+            const resultDiv = document.getElementById('result');
+            const debugDiv = document.getElementById('debug');
+
+            resultDiv.style.display = 'block';
+            debugDiv.style.display = 'block';
+            resultDiv.className = 'result';
+            debugDiv.innerHTML = '';
+
+            if (!encFile || !keyFile) {
+                resultDiv.innerHTML = '❌ 请上传 .enc 和 .key.txt 文件';
+                resultDiv.classList.add('error');
+                return;
+            }
+
             try {
-                // 读取加密文件
-                encryptedData = await readFile(encFile);
-                console.log("加密数据长度:", encryptedData.length);
-                console.log("加密数据前100字符:", encryptedData.substring(0, 100));
+                // 读取 .enc 文件
+                const encBuffer = await readFileAsArrayBuffer(encFile);
+                const encBytes = new Uint8Array(encBuffer);
                 
-                // 调试信息
-                let debugHtml = `
-                    <p><strong>文件信息：</strong></p>
-                    <p>文件名: ${encFile.name}</p>
-                    <p>文件大小: ${encFile.size} 字节</p>
-                    <p>加密方法: ${encryptionMethod}</p>
-                    <p>密钥长度: ${password.length} 字符</p>
-                `;
-                
-                // 尝试不同的解密方法
-                let decryptedText = null;
-                let decryptionError = null;
-                
+                // 前 16 字节是 IV
+                const iv = encBytes.slice(0, 16);
+                const ciphertext = encBytes.slice(16);
+
+                // 读取 .key.txt 文件
+                const keyText = await readFileAsText(keyFile);
+                const keyHex = keyText.trim();
+                if (keyHex.length !== 64) {
+                    throw new Error(`密钥长度错误，应为64字符（32字节），当前为${keyHex.length}字符`);
+                }
+                const key = CryptoJS.enc.Hex.parse(keyHex);
+
+                // 解密
+                const decrypted = CryptoJS.AES.decrypt(
+                    { ciphertext: CryptoJS.lib.WordArray.create(ciphertext) },
+                    key,
+                    { iv: CryptoJS.lib.WordArray.create(iv), mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7 }
+                );
+
+                const plaintext = decrypted.toString(CryptoJS.enc.Utf8);
+                if (!plaintext) {
+                    throw new Error('解密成功但内容为空，可能是密钥错误或文件损坏');
+                }
+
+                // 显示解密结果
+                resultDiv.innerHTML = '✅ 解密成功！';
+                resultDiv.classList.add('success');
+
+                // 尝试解析 JSON
                 try {
-                    // 方法1: 标准 AES 解密
-                    decryptedText = decryptAESStandard(encryptedData, password, encryptionMethod);
-                } catch (err1) {
-                    decryptionError = err1.message;
-                    console.log("标准解密失败:", err1);
-                    
-                    // 方法2: 尝试使用不同的参数
+                    const json = JSON.parse(plaintext);
+                    resultDiv.innerHTML += 'JSON 格式有效，内容如下：';
+                    resultDiv.innerHTML += '<pre>' + JSON.stringify(json, null, 2) + '</pre>';
+                } catch (e) {
+                    resultDiv.innerHTML += '警告：解密成功，但内容不是有效的 JSON 格式';
+                    resultDiv.innerHTML += '<pre>' + plaintext + '</pre>';
+                }
+
+                // 如果有 OTS 文件，验证时间戳
+                if (otsFile) {
                     try {
-                        decryptedText = decryptAESAlternative(encryptedData, password, encryptionMethod);
-                    } catch (err2) {
-                        console.log("备用解密失败:", err2);
-                        decryptionError += `<br>备用方法失败: ${err2.message}`;
+                        const otsText = await readFileAsText(otsFile);
+                        // 这里可以添加 OTS 验证逻辑（简化版）
+                        resultDiv.innerHTML += '✅ 已上传 OTS 文件，时间戳验证需额外实现';
+                    } catch (e) {
+                        resultDiv.innerHTML += '⚠️ OTS 文件读取失败';
                     }
                 }
-                
-                if (!decryptedText) {
-                    throw new Error(`解密失败: ${decryptionError || '未知错误'}`);
-                }
-                
-                debugHtml += `
-                    <p><strong>解密成功！</strong></p>
-                    <p>解密后长度: ${decryptedText.length} 字符</p>
-                    <p>解密结果前200字符:</p>
-                    <pre>${escapeHtml(decryptedText.substring(0, 200))}</pre>
-                `;
-                
-                // 解析 JSON
-                let jsonData;
-                try {
-                    jsonData = JSON.parse(decryptedText);
-                } catch (jsonErr) {
-                    debugHtml += `<p><strong>JSON解析失败:</strong> ${jsonErr.message}</p>`;
-                    debugHtml += `<p>尝试清理数据...</p>`;
-                    
-                    // 尝试清理无效字符
-                    const cleaned = decryptedText.replace(/[\x00-\x1F\x7F-\x9F]/g, '');
-                    try {
-                        jsonData = JSON.parse(cleaned);
-                        debugHtml += `<p>清理后解析成功！</p>`;
-                    } catch (cleanErr) {
-                        throw new Error(`JSON解析失败: ${cleanErr.message}`);
-                    }
-                }
-                
-                debugHtml += `<p><strong>JSON解析成功！</strong></p>`;
-                
-                // 更新调试信息
-                document.getElementById('debugInfo').innerHTML = debugHtml;
-                
-                // 计算哈希
-                const hash = CryptoJS.SHA256(decryptedText).toString();
-                
-                // 显示验证结果
-                showResult(jsonData, hash, true);
-                
-            } catch (error) {
-                console.error("验证失败:", error);
-                
-                // 显示错误信息
-                document.getElementById('resultIcon').className = 'result-icon error-icon';
-                document.getElementById('resultIcon').innerHTML = '❌';
-                document.getElementById('resultTitle').textContent = '验证失败';
-                document.getElementById('resultSubtitle').textContent = error.message || '未知错误';
-                
-                // 更新调试信息
-                document.getElementById('debugInfo').innerHTML += `
-                    <p><strong>错误详情：</strong></p>
-                    <pre>${error.stack || error.message}</pre>
-                `;
-                
-                // 显示结果区域
-                document.getElementById('resultContainer').classList.add('show');
-                showTab('debug');
-            } finally {
-                // 恢复按钮状态
-                btn.disabled = false;
-                btnText.textContent = '🔐 开始验证';
-                spinner.style.display = 'none';
+
+            } catch (err) {
+                resultDiv.innerHTML = '❌ 验证失败：' + err.message;
+                resultDiv.classList.add('error');
+                debugDiv.innerHTML = '错误详情：\n' + err.stack;
             }
         }
-        
-        // 读取文件
-        function readFile(file) {
+
+        function readFileAsArrayBuffer(file) {
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
-                reader.onload = e => resolve(e.target.result);
+                reader.onload = () => resolve(reader.result);
                 reader.onerror = reject;
-                
-                // 根据文件类型选择读取方式
-                if (file.name.includes('.enc') || file.name.includes('.json')) {
-                    reader.readAsText(file);
-                } else {
-                    reader.readAsArrayBuffer(file);
-                }
+                reader.readAsArrayBuffer(file);
             });
         }
-        
-        // 标准 AES 解密方法
-        function decryptAESStandard(ciphertext, password, method) {
-            console.log("尝试标准解密，方法:", method);
-            
-            // 处理不同的加密模式
-            let mode, padding, iv = null;
-            
-            switch(method) {
-                case 'AES-CBC':
-                    mode = CryptoJS.mode.CBC;
-                    padding = CryptoJS.pad.Pkcs7;
-                    // 尝试从密文中提取 IV
-                    if (ciphertext.length > 32) {
-                        iv = CryptoJS.enc.Hex.parse(ciphertext.substring(0, 32));
-                        ciphertext = ciphertext.substring(32);
-                    } else {
-                        iv = CryptoJS.enc.Hex.parse('00000000000000000000000000000000');
-                    }
-                    break;
-                case 'AES-GCM':
-                    mode = CryptoJS.mode.GCM;
-                    padding = CryptoJS.pad.NoPadding;
-                    break;
-                default:
-                    mode = CryptoJS.mode.ECB;
-                    padding = CryptoJS.pad.Pkcs7;
-            }
-            
-            // 将密码转换为密钥
-            const key = CryptoJS.PBKDF2(password, CryptoJS.enc.Hex.parse('0000000000000000'), {
-                keySize: 256 / 32,
-                iterations: 1000
+
+        function readFileAsText(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsText(file);
             });
-            
-            // 解析密文
-            const encrypted = CryptoJS.lib.CipherParams.create({
-                ciphertext: CryptoJS.enc.Base64.parse(ciphertext)
-            });
-            
-            // 解密
-            const decrypted = CryptoJS.AES.decrypt(encrypted, key, {
-                mode: mode,
-                padding: padding,
-                iv: iv
-            });
-            
-            return decrypted.toString(CryptoJS.enc.Utf8);
-        }
-        
-        // 备用解密方法
-        function decryptAESAlternative(ciphertext, password, method) {
-            console.log("尝试备用解密方法");
-            
-            // 尝试不同的密钥派生方式
-            const salt = CryptoJS.lib.WordArray.random(128/8);
-            const key = CryptoJS.PBKDF2(password, salt, {
-                keySize: 256 / 32,
-                iterations: 1000
-            });
-            
-            // 尝试自动检测 Base64
-            let encrypted;
-            try {
-                encrypted = CryptoJS.enc.Base64.parse(ciphertext);
-            } catch (e) {
-                // 如果不是 Base64，当作 Hex
-                encrypted = CryptoJS.enc.Hex.parse(ciphertext);
-            }
-            
-            const decrypted = CryptoJS.AES.decrypt(
-                { ciphertext: encrypted },
-                key,
-                { 
-                    mode: CryptoJS.mode.CBC,
-                    padding: CryptoJS.pad.Pkcs7,
-                    iv: CryptoJS.enc.Hex.parse('00000000000000000000000000000000')
-                }
-            );
-            
-            return decrypted.toString(CryptoJS.enc.Utf8);
-        }
-        
-        // 显示验证结果
-        function showResult(jsonData, hash, success) {
-            // 更新结果头部
-            const icon = document.getElementById('resultIcon');
-            const title = document.getElementById('resultTitle');
-            const subtitle = document.getElementById('resultSubtitle');
-            
-            if (success) {
-                icon.className = 'result-icon success-icon';
-                icon.innerHTML = '✅';
-                title.textContent = '验证成功';
-                subtitle.textContent = '存证文件验证通过，数据完整有效';
-            } else {
-                icon.className = 'result-icon error-icon';
-                icon.innerHTML = '❌';
-                title.textContent = '验证失败';
-            }
-            
-            // 更新摘要信息
-            const summaryDiv = document.getElementById('summaryInfo');
-            summaryDiv.innerHTML = `
-                <div class="info-item">
-                    <div class="info-label">邮票主题</div>
-                    <div class="info-value">${jsonData.physical_object?.theme || '未知'}</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">发行日期</div>
-                    <div class="info-value">${jsonData.physical_object?.issue_date || '未知'}</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">收件人</div>
-                    <div class="info-value">${jsonData.physical_object?.recipient_info?.name || '未知'}</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">存证时间</div>
-                    <div class="info-value">${jsonData.evidence_chain?.[0]?.timestamp || '未知'}</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">挂号信号码</div>
-                    <div class="info-value">${jsonData.physical_object?.tracking_number || '未知'}</div>
-                </div>
-                <div class="info-item">
-                    <div class="info-label">文件哈希</div>
-                    <div class="info-value" style="font-family:monospace;font-size:12px;">${hash.substring(0, 16)}...</div>
-                </div>
-            `;
-            
-            // 更新详细信息
-            document.getElementById('jsonViewer').innerHTML = 
-                `<pre>${JSON.stringify(jsonData, null, 2)}</pre>`;
-            
-            // 显示结果区域
-            document.getElementById('resultContainer').classList.add('show');
-            showTab('summary');
-        }
-        
-        // 切换标签页
-        function showTab(tabName) {
-            // 更新标签状态
-            document.querySelectorAll('.result-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            
-            // 激活选中的标签
-            document.getElementById(tabName + 'Tab').classList.add('active');
-            event.currentTarget.classList.add('active');
-        }
-        
-        // HTML 转义
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
         }
     </script>
 </body>
