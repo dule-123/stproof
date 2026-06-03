@@ -1,1 +1,7 @@
-
+cloudpost-verifier/
+├── verifier.html          # 网页版验证工具
+├── cli-verifier.js        # 命令行验证工具（Node.js）
+├── README.md              # 使用说明
+└── example/               # 示例文件
+    ├── encrypted.json.enc
+    └── timestamp.json.ots
