@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>CloudPost 数字存证加密工具</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</head>
+<body>
+    <h1>🔐 首日封数字存证加密工具</h1>
+    
+    <!-- 模式选择 -->
+    <div>
+        <label><input type="radio" name="mode" value="json" checked> 上传JSON文件</label>
+        <label><input type="radio" name="mode" value="form"> 填写表单生成</label>
+    </div>
+    
+    <!-- JSON上传模式 -->
+    <div id="jsonMode">
+        <input type="file" id="jsonFile" accept=".json">
+        <button onclick="encryptFromFile()">加密JSON文件</button>
+    </div>
+    
+    <!-- 表单模式 -->
+    <div id="formMode" style="display:none;">
+        <input type="text" placeholder="邮票主题" id="theme">
+        <input type="date" id="issueDate">
+        <input type="text" placeholder="挂号信号码" id="trackingNumber">
+        <input type="file" id="photoFile" accept="image/*" capture="environment">
+        <button onclick="encryptFromForm()">生成加密存证</button>
+    </div>
+    
+    <!-- 结果展示 -->
+    <div id="result" style="display:none;">
+        <p>✅ 加密完成！</p>
+        <p>请保存以下文件：</p>
+        <button onclick="downloadEncFile()">下载加密文件 (.enc)</button>
+        <button onclick="downloadKeyFile()">下载密钥文件 (.key.txt)</button>
+        <p><strong>重要提示：</strong>请妥善保存密钥文件，丢失后将无法解密！</p>
+    </div>
+
+    <script>
+        // 随机生成32字节密钥（64位十六进制）
+        function generateKey() {
+            const array = new Uint8Array(32);
+            window.crypto.getRandomValues(array);
+            return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
+        }
+        
+        // 随机生成16字节IV
+        function generateIV() {
+            const array = new Uint8Array(16);
+            window.crypto.getRandomValues(array);
+            return array;
+        }
+        
+        // 从JSON文件加密
+        async function encryptFromFile() {
+            const file = document.getElementById('jsonFile').files[0];
+            if (!file) {
+                alert('请先选择JSON文件');
+                return;
+            }
+            
+            const jsonText = await file.text();
+            const key = generateKey();
+            const iv = generateIV();
+            
+            // 加密逻辑（与 batch_encrypt.py 保持一致）
+            const encrypted = await encryptJSON(jsonText, key, iv);
+            
+            // 保存结果
+            window.encryptionResult = {
+                encData: encrypted,
+                key: key,
+                iv: iv,
+                fileName: file.name.replace('.json', '')
+            };
+            
+            document.getElementById('result').style.display = 'block';
+        }
+        
+        // 从表单生成并加密
+        async function encryptFromForm() {
+            const jsonData = {
+                physical_object: {
+                    theme: document.getElementById('theme').value,
+                    issue_date: document.getElementById('issueDate').value,
+                    tracking_number: document.getElementById('trackingNumber').value
+                }
+            };
+            
+            const jsonText = JSON.stringify(jsonData, null, 2);
+            const key = generateKey();
+            const iv = generateIV();
+            
+            const encrypted = await encryptJSON(jsonText, key, iv);
+            
+            window.encryptionResult = {
+                encData: encrypted,
+                key: key,
+                iv: iv,
+                fileName: `首日封_${new Date().toISOString().slice(0,10)}`
+            };
+            
+            document.getElementById('result').style.display = 'block';
+        }
+        
+        // 加密函数（模拟 batch_encrypt.py 的AES-256-CBC）
+        async function encryptJSON(plainText, keyHex, ivArray) {
+            const key = CryptoJS.enc.Hex.parse(keyHex);
+            const iv = CryptoJS.lib.WordArray.create(ivArray);
+            
+            // 加密
+            const encrypted = CryptoJS.AES.encrypt(plainText, key, {
+                iv: iv,
+                mode: CryptoJS.mode.CBC,
+                padding: CryptoJS.pad.Pkcs7
+            });
+            
+            // 转换为Uint8Array：IV + 密文
+            const ivBytes = new Uint8Array(ivArray);
+            const ciphertextBytes = CryptoJS.enc.Base64.parse(encrypted.toString()).words;
+            
+            // 合并IV和密文
+            const result = new Uint8Array(ivBytes.length + ciphertextBytes.length * 4);
+            result.set(ivBytes, 0);
+            
+            // 转换WordArray为Uint8Array
+            for (let i = 0; i < ciphertextBytes.length; i++) {
+                const word = ciphertextBytes[i];
+                result[ivBytes.length + i*4] = (word >> 24) & 0xFF;
+                result[ivBytes.length + i*4 + 1] = (word >> 16) & 0xFF;
+                result[ivBytes.length + i*4 + 2] = (word >> 8) & 0xFF;
+                result[ivBytes.length + i*4 + 3] = word & 0xFF;
+            }
+            
+            return result;
+        }
+        
+        // 下载加密文件
+        function downloadEncFile() {
+            const blob = new Blob([window.encryptionResult.encData], {type: 'application/octet-stream'});
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `${window.encryptionResult.fileName}.enc`;
+            link.click();
+        }
+        
+        // 下载密钥文件
+        function downloadKeyFile() {
+            const blob = new Blob([window.encryptionResult.key], {type: 'text/plain'});
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `${window.encryptionResult.fileName}.key.txt`;
+            link.click();
+        }
+    </script>
+</body>
+</html>
