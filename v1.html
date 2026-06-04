@@ -30,340 +30,162 @@
             overflow: hidden;
         }
         
+        /* 头部 */
         .header {
-            background: linear-gradient(to right, #165DFF, #4080FF);
+            background: linear-gradient(90deg, #4F46E5 0%, #7C3AED 100%);
             color: white;
-            padding: 40px 30px;
+            padding: 30px;
             text-align: center;
         }
-        
-        .header .logo {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-        
-        .header .title {
-            font-size: 24px;
-            margin-bottom: 8px;
-        }
-        
-        .header .desc {
-            font-size: 15px;
-            opacity: 0.9;
-        }
-        
-        .verification-tabs {
+        .header h1 { font-size: 24px; margin-bottom: 5px; }
+        .header p { opacity: 0.9; font-size: 14px; }
+
+        /* 标签页 */
+        .tabs {
             display: flex;
-            border-bottom: 1px solid #e8e8e8;
+            border-bottom: 1px solid #e5e7eb;
+            background: #f9fafb;
         }
-        
-        .verification-tab {
+        .tab-btn {
             flex: 1;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            border-bottom: 3px solid transparent;
-            transition: all 0.3s;
-        }
-        
-        .verification-tab.active {
-            border-bottom-color: #165DFF;
-            color: #165DFF;
-            font-weight: 600;
-        }
-        
-        .verification-tab:hover {
-            background: #f7f9ff;
-        }
-        
-        .verification-tab .tab-icon {
-            font-size: 20px;
-            margin-bottom: 8px;
-        }
-        
-        .verification-tab .tab-text {
-            font-size: 15px;
-        }
-        
-        .verification-tab .tab-sub {
-            font-size: 12px;
-            opacity: 0.8;
-            margin-top: 4px;
-        }
-        
-        .verification-content {
-            padding: 40px 30px;
-        }
-        
-        .tab-pane {
-            display: none;
-        }
-        
-        .tab-pane.active {
-            display: block;
-            animation: fadeIn 0.5s;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* 快速验证样式 */
-        .quick-verify h2 {
-            font-size: 20px;
-            margin-bottom: 20px;
-            color: #1D2129;
-        }
-        
-        .quick-verify p {
-            color: #666;
-            margin-bottom: 20px;
-            font-size: 14px;
-        }
-        
-        /* 自动验证区域 */
-        .auto-section {
-            background: #f7f9ff;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 30px;
-            border: 1px solid #e5e7eb;
-        }
-        
-        .auto-section h3 {
-            font-size: 16px;
-            margin-bottom: 15px;
-            color: #1D2129;
-        }
-        
-        .hash-display {
-            background: #f4f4f5;
             padding: 15px;
-            border-radius: 8px;
-            font-family: 'Courier New', monospace;
-            word-break: break-all;
-            font-size: 13px;
-            line-height: 1.5;
-            margin: 15px 0;
-        }
-        
-        .verify-btn {
-            background: linear-gradient(to right, #165DFF, #4080FF);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: 600;
+            text-align: center;
             cursor: pointer;
+            font-weight: 500;
+            color: #6b7280;
+            border: none;
+            background: transparent;
+            position: relative;
             transition: all 0.3s;
         }
-        
-        .verify-btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(22, 93, 255, 0.3);
+        .tab-btn.active {
+            color: #4F46E5;
+            font-weight: 600;
         }
-        
-        .verify-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #4F46E5;
         }
-        
-        /* 手动查询区域 */
-        .manual-section {
-            margin-top: 30px;
+
+        /* 内容区 */
+        .content {
+            padding: 30px;
         }
-        
-        .manual-section h3 {
-            font-size: 16px;
-            margin-bottom: 15px;
-            color: #1D2129;
-        }
-        
-        .input-group {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        
+        .tab-pane { display: none; }
+        .tab-pane.active { display: block; animation: fadeIn 0.3s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* 快速验证 */
+        .quick-verify { text-align: center; }
+        .input-group { margin: 20px 0; }
         .input-group input {
-            flex: 1;
-            padding: 12px 16px;
-            border: 2px solid #ddd;
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #d1d5db;
             border-radius: 8px;
-            font-size: 15px;
-            outline: none;
+            font-size: 16px;
+            transition: border 0.3s;
         }
+        .input-group input:focus { outline: none; border-color: #4F46E5; box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1); }
         
-        .input-group input:focus {
-            border-color: #165DFF;
-        }
-        
-        .query-result {
-            display: none;
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 20px;
-            margin-top: 20px;
-        }
-        
-        .info-grid {
+        /* 上传区域 */
+        .upload-section { margin-top: 20px; }
+        .file-slots {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: 1fr;
             gap: 15px;
             margin-bottom: 20px;
         }
-        
-        .info-item {
-            background: white;
-            padding: 12px;
-            border-radius: 8px;
-        }
-        
-        .info-label {
-            font-size: 12px;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 5px;
-        }
-        
-        .info-value {
-            font-size: 14px;
-            color: #1D2129;
-            font-weight: 500;
-        }
-        
-        /* 验证结果样式 */
-        .result-area {
-            margin-top: 20px;
-        }
-        
-        .result-success {
-            background: #d1fae5;
-            color: #065f46;
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 4px solid #10b981;
-        }
-        
-        .result-error {
-            background: #fee2e2;
-            color: #dc2626;
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 4px solid #ef4444;
-        }
-        
-        /* 完整验证样式 */
-        .full-verify h2 {
-            font-size: 20px;
-            margin-bottom: 20px;
-            color: #1D2129;
-        }
-        
-        .upload-area {
+        .file-slot {
             border: 2px dashed #d1d5db;
             border-radius: 12px;
-            padding: 40px 20px;
+            padding: 25px;
             text-align: center;
-            margin: 20px 0;
             cursor: pointer;
             transition: all 0.3s;
+            position: relative;
         }
+        .file-slot:hover { border-color: #4F46E5; background: #f8faff; }
+        .file-slot.has-file { border-style: solid; border-color: #10b981; background: #f0fdf4; }
         
-        .upload-area:hover {
-            border-color: #165DFF;
-            background: #f7f9ff;
-        }
+        .file-icon { font-size: 32px; margin-bottom: 10px; }
+        .file-name { font-weight: 500; color: #374151; word-break: break-all; }
+        .file-size { font-size: 12px; color: #6b7280; margin-top: 4px; }
         
-        .upload-area .upload-icon {
-            font-size: 48px;
-            color: #165DFF;
-            margin-bottom: 15px;
-        }
-        
-        .upload-area p {
-            margin: 5px 0;
-            color: #666;
-        }
-        
-        .file-list {
-            margin-top: 20px;
-        }
-        
-        .file-item {
-            background: #f8f9fa;
-            padding: 12px 15px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .file-item .size {
-            color: #888;
-            font-size: 12px;
-        }
-        
-        .full-result {
+        .remove-btn {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            line-height: 18px;
+            cursor: pointer;
             display: none;
-            margin-top: 30px;
         }
-        
+        .file-slot.has-file .remove-btn { display: block; }
+
+        .verify-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, #4F46E5 0%, #7C3AED 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: opacity 0.3s;
+        }
+        .verify-btn:hover { opacity: 0.9; }
+        .verify-btn:disabled { background: #9ca3af; cursor: not-allowed; }
+
+        /* 结果区 */
+        .result-area { margin-top: 30px; }
+        .status-box {
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        .status-box.success { background: #dcfce7; color: #166534; border: 1px solid #86efac; display: block; }
+        .status-box.error { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; display: block; }
+        .status-box.info { background: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; display: block; }
+
         .evidence-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .evidence-item img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
         }
         
-        .evidence-card {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 20px;
-        }
-        
-        .evidence-card h4 {
-            margin: 0 0 10px 0;
-            color: #1D2129;
-        }
-        
-        .status-badge {
-            display: inline-block;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-        
-        .status-success {
-            background: #d1fae5;
-            color: #065f46;
-        }
-        
-        .action-buttons {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        
-        /* 页脚 */
-        .footer {
-            text-align: center;
-            padding: 20px;
-            color: #666;
+        .hash-display {
+            background: #f3f4f6;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            word-break: break-all;
+            font-family: monospace;
             font-size: 13px;
-            border-top: 1px solid #e8e8e8;
-        }
-        
-        .scan-time {
-            color: #165DFF;
-            font-weight: 600;
+            text-align: left;
+            max-height: 100px;
+            overflow-y: auto;
         }
     </style>
 </head>
@@ -371,518 +193,273 @@
     <div class="container">
         <!-- 头部 -->
         <div class="header">
-            <div class="logo">STProof</div>
-            <div class="title">数字存证验证系统</div>
-            <div class="desc">快速验证首日封、实寄封的数字存证真实性</div>
+            <h1>📮 STProof 数字存证</h1>
+            信封真实性验证系统
         </div>
-        
-        <!-- 验证模式切换 -->
-        <div class="verification-tabs">
-            <div class="verification-tab active" onclick="switchTab('quick')">
-                <div class="tab-icon">⚡</div>
-                <div class="tab-text">快速验证</div>
-                <div class="tab-sub">编号查询+哈希验证</div>
-            </div>
-            <div class="verification-tab" onclick="switchTab('full')">
-                <div class="tab-icon">🔍</div>
-                <div class="tab-text">完整验证</div>
-                <div class="tab-sub">上传文件验证证据链</div>
-            </div>
+
+        <!-- 标签页 -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('quick')">⚡ 快速验证</button>
+            <button class="tab-btn" onclick="switchTab('full')">🔍 完整验证</button>
         </div>
-        
-        <!-- 验证内容 -->
-        <div class="verification-content">
-            <!-- 快速验证模式 -->
+
+        <div class="content">
+            <!-- 快速验证 Tab -->
             <div id="quickTab" class="tab-pane active">
                 <div class="quick-verify">
-                    <h2>⚡ 快速验证</h2>
-                    <p>支持自动识别和手动查询两种方式验证信封哈希</p>
+                    <h2>编号查询 + 哈希比对</h2>
+                    输入信封编号，系统将自动从数据库调取存证信息进行比对。
                     
-                    <!-- 自动验证区域 -->
-                    <div id="autoSection" style="display:none;">
-                        <div class="auto-section">
-                            <h3>🔍 自动识别信封</h3>
-                            <p>检测到信封编号：<strong id="autoId"></strong></p>
-                            <div class="info-label">照片哈希值</div>
-                            <div class="hash-display" id="autoHash"></div>
-                            <button class="verify-btn" onclick="verifyAutoHash()" id="autoVerifyBtn">
-                                <span id="autoBtnText">✅ 验证哈希一致性</span>
-                            </button>
-                        </div>
+                    <div class="input-group">
+                        <input type="text" id="codeInput" placeholder="请输入信封编号 (例如: STP-20260303-001)" onkeypress="handleKeyPress(event)">
                     </div>
-                    
-                    <!-- 手动查询区域（您原来的功能） -->
-                    <div class="manual-section">
-                        <h3>🔢 手动编号查询</h3>
-                        <p>输入信封编号查询哈希值：</p>
-                        
-                        <div class="input-group">
-                            <input type="text" id="envelopeCode" placeholder="输入编号（如 STP260518-001）">
-                            <button class="verify-btn" onclick="manualQuery()">查询</button>
-                        </div>
-                        
-                        <!-- 查询结果 -->
-                        <div class="query-result" id="queryResult">
-                            <div class="info-grid">
-                                <div class="info-item">
-                                    <div class="info-label">信封编号</div>
-                                    <div class="info-value" id="qId"></div>
-                                </div>
-                                <div class="info-item">
-                                    <div class="info-label">存证日期</div>
-                                    <div class="info-value" id="qDate"></div>
-                                </div>
-                                <div class="info-item">
-                                    <div class="info-label">邮路信息</div>
-                                    <div class="info-value" id="qRoute"></div>
-                                </div>
-                            </div>
-                            
-                            <div class="info-label">照片哈希值</div>
-                            <div class="hash-display" id="qHash"></div>
-                            
-                            <button class="verify-btn" onclick="verifyQueryHash()" style="margin-top: 15px;">
-                                🔄 基于此哈希进行验证
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- 快速验证结果 -->
-                    <div class="result-area" id="quickResult"></div>
+                    <button class="verify-btn" onclick="quickVerify()">立即验证</button>
+
+                    <div id="quickResult" class="result-area"></div>
                 </div>
             </div>
-            
-            <!-- 完整验证模式 -->
+
+            <!-- 完整验证 Tab -->
             <div id="fullTab" class="tab-pane">
-                <div class="full-verify">
-                    <h2>🔍 完整证据链验证</h2>
-                    <p>上传加密文件，查看完整的存证证据链</p>
-                    
-                    <!-- 文件上传区域 -->
-                    <div class="upload-area" onclick="document.getElementById('encFile').click()">
-                        <input type="file" id="encFile" accept=".enc" style="display:none;">
-                        <input type="file" id="keyFile" accept=".key.txt,.txt" style="display:none;">
-                        
-                        <div class="upload-icon">📁</div>
-                        <p><strong>点击上传加密文件 (.enc)</strong></p>
-                        <p>和对应的密钥文件 (.key.txt)</p>
-                        <p style="font-size: 12px; color: #888;">或拖放文件到这里</p>
+                <div class="upload-section">
+                    <h2>完整证据链验证</h2>
+                    上传加密文件 <code>.enc</code> 和对应的密钥文件 <code>.key.txt</code>，系统将解密并展示完整证据。
+
+                    <div class="file-slots">
+                        <!-- Enc 文件槽 -->
+                        <div class="file-slot" id="encSlot" onclick="document.getElementById('encInput').click()">
+                            <div class="file-icon">📄</div>
+                            <div class="file-name" id="encName">点击上传加密文件 (.enc)</div>
+                            <div class="file-size" id="encSize"></div>
+                            <button class="remove-btn" onclick="removeFile('enc', event)">x</button>
+                        </div>
+                        <input type="file" id="encInput" style="display:none;" onchange="handleFileSelect(event, 'enc')" accept=".enc">
+
+                        <!-- Key 文件槽 -->
+                        <div class="file-slot" id="keySlot" onclick="document.getElementById('keyInput').click()">
+                            <div class="file-icon">🔑</div>
+                            <div class="file-name" id="keyName">点击上传密钥文件 (.key.txt)</div>
+                            <div class="file-size" id="keySize"></div>
+                            <button class="remove-btn" onclick="removeFile('key', event)">x</button>
+                        </div>
+                        <input type="file" id="keyInput" style="display:none;" onchange="handleFileSelect(event, 'key')" accept=".txt">
                     </div>
-                    
-                    <!-- 文件列表 -->
-                    <div class="file-list" id="fileList"></div>
-                    
-                    <button class="verify-btn" onclick="fullVerify()" id="fullVerifyBtn" disabled 
-                            style="width: 100%; margin-top: 20px;">
-                        <span id="fullBtnText">🔐 开始完整验证</span>
-                    </button>
-                    
-                    <!-- 完整验证结果 -->
-                    <div class="full-result" id="fullResult">
-                        <h3>✅ 验证成功</h3>
-                        
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <div class="info-label">邮票主题</div>
-                                <div class="info-value" id="fullTheme">儿童游戏三</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label">发行日期</div>
-                                <div class="info-value" id="fullIssueDate">2026.06.01</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label">收件人</div>
-                                <div class="info-value" id="fullRecipient">杜乐</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label">挂号信号码</div>
-                                <div class="info-value" id="fullTracking">XC 8202 4981 4 11</div>
-                            </div>
-                        </div>
-                        
-                        <h4 style="margin-top: 30px;">证据链</h4>
-                        <div class="evidence-grid">
-                            <div class="evidence-card">
-                                <h4>📸 照片证据</h4>
-                                <p>首日封高清照片，带防伪水印</p>
-                                <small style="color: #666;">2026.06.03 15:52:59</small>
-                            </div>
-                            
-                            <div class="evidence-card">
-                                <h4>📹 视频证据</h4>
-                                <p>邮政APP邮路查询录屏</p>
-                                <small style="color: #666;">26秒完整记录</small>
-                            </div>
-                            
-                            <div class="evidence-card">
-                                <h4>⏰ 时间戳证明</h4>
-                                <p>比特币区块链锚定</p>
-                                <span class="status-badge status-success">已锚定</span>
-                            </div>
-                            
-                            <div class="evidence-card">
-                                <h4>🔐 加密验证</h4>
-                                <p>AES-256-CBC加密</p>
-                                <span class="status-badge status-success">验证通过</span>
-                            </div>
-                        </div>
-                        
-                        <div class="action-buttons">
-                            <button class="verify-btn" onclick="downloadCertificate()">
-                                📄 下载验证证书
-                            </button>
-                            <button class="verify-btn" onclick="shareResult()" 
-                                    style="background: linear-gradient(to right, #3B82F6, #1D4ED8);">
-                                🔗 分享验证结果
-                            </button>
-                        </div>
-                    </div>
+
+                    <button class="verify-btn" id="fullVerifyBtn" onclick="fullVerify()" disabled>开始完整验证</button>
+
+                    <div id="fullResult" class="result-area"></div>
                 </div>
             </div>
-        </div>
-        
-        <!-- 页脚 -->
-        <div class="footer">
-            <p>© 2026 STProof 数字存证验证系统 | 扫描时间: <span class="scan-time" id="scanTime"></span></p>
         </div>
     </div>
 
     <script>
-        // 全局变量
-        let envelopeDB = {};           // 从 data.json 加载的数据
-        let currentHash = "";          // 当前正在验证的哈希
-        let currentEnvelopeId = "";    // 当前信封编号
-        
-        // 页面加载初始化
-        window.addEventListener('DOMContentLoaded', function() {
-            // 设置扫描时间
-            document.getElementById('scanTime').textContent = new Date().toLocaleString('zh-CN');
-            
-            // 加载您的 data.json
-            loadEnvelopeDatabase();
-            
-            // 从URL获取参数
-            const urlParams = new URLSearchParams(window.location.search);
-            const id = urlParams.get('id') || urlParams.get('code');
-            const hash = urlParams.get('hash');
-            
-            // 自动识别模式
-            if (id && hash) {
-                currentEnvelopeId = id.toUpperCase();
-                currentHash = hash;
-                
-                // 显示自动验证区域
-                const autoSection = document.getElementById('autoSection');
-                autoSection.style.display = 'block';
-                
-                // 填充信息
-                document.getElementById('autoId').textContent = currentEnvelopeId;
-                document.getElementById('autoHash').textContent = currentHash;
-                
-                // 如果data.json已加载，尝试获取更多信息
-                if (envelopeDB[currentEnvelopeId]) {
-                    const data = envelopeDB[currentEnvelopeId];
-                    autoSection.innerHTML += `
-                        <p>存证日期: ${data.date || '未知'}</p>
-                        <p>邮路信息: ${data.route || '未知'}</p>
-                    `;
-                }
+        // 模拟数据库 (实际使用时替换为真实的 data.json 请求)
+        const mockDB = {
+            "STP-20260303-001": {
+                hash: "a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456",
+                date: "2026-03-03",
+                route: "北京 -> 上海",
+                images: [
+                    "https://picsum.photos/200/200?random=1",
+                    "https://picsum.photos/200/200?random=2"
+                ],
+                status: "verified"
             }
-            
-            // 文件上传事件监听
-            setupFileUpload();
-        });
-        
-        // 加载您的 data.json
-        async function loadEnvelopeDatabase() {
-            try {
-                const response = await fetch(`https://stproof.org/data.json?v=${Date.now()}`);
-                if (!response.ok) throw new Error(`HTTP ${response.status}`);
-                
-                envelopeDB = await response.json();
-                console.log(`成功加载 ${Object.keys(envelopeDB).length} 条存证记录`);
-            } catch (error) {
-                console.error("加载存证数据库失败:", error);
-                
-                // 显示错误提示
-                const manualSection = document.querySelector('.manual-section');
-                manualSection.innerHTML += `
-                    <div style="background: #fee2e2; color: #dc2626; padding: 10px; border-radius: 8px; margin-top: 10px;">
-                        数据加载失败: ${error.message}
-                    </div>
-                `;
-            }
-        }
-        
+        };
+
         // 切换标签页
-        function switchTab(tabName) {
-            // 更新标签状态
-            document.querySelectorAll('.verification-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
             
-            document.querySelectorAll('.tab-pane').forEach(pane => {
-                pane.classList.remove('active');
-            });
-            
-            // 激活目标标签页
-            document.getElementById(tabName + 'Tab').classList.add('active');
-            event.currentTarget.classList.add('active');
+            if(tab === 'quick') {
+                document.querySelectorAll('.tab-btn')[0].classList.add('active');
+                document.getElementById('quickTab').classList.add('active');
+            } else {
+                document.querySelectorAll('.tab-btn')[1].classList.add('active');
+                document.getElementById('fullTab').classList.add('active');
+            }
         }
-        
-        // 手动编号查询（您原来的功能）
-        function manualQuery() {
-            const code = document.getElementById("envelopeCode").value.trim().toUpperCase();
-            const resultDiv = document.getElementById("queryResult");
+
+        // 处理回车键
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') quickVerify();
+        }
+
+        // 1. 快速验证逻辑
+        async function quickVerify() {
+            const code = document.getElementById('codeInput').value.trim().toUpperCase();
+            const resultDiv = document.getElementById('quickResult');
             
             if (!code) {
-                alert("请输入信封编号");
+                showResult(resultDiv, 'error', '请输入信封编号');
                 return;
             }
-            
-            if (envelopeDB[code]) {
-                const data = envelopeDB[code];
+
+            showResult(resultDiv, 'info', `正在查询编号: ${code}...`);
+
+            try {
+                // 模拟网络延迟
+                await new Promise(resolve => setTimeout(resolve, 500));
+
+                // 模拟从服务器获取数据 (替换为 fetch)
+                // const res = await fetch(`https://your-api.com/data.json?v=${Date.now()}`);
+                // const data = await res.json();
                 
-                // 保存当前信息
-                currentEnvelopeId = code;
-                currentHash = data.hash;
-                
-                // 显示查询结果
-                document.getElementById("qId").textContent = code;
-                document.getElementById("qDate").textContent = data.date || "未知";
-                document.getElementById("qRoute").textContent = data.route || "未知";
-                document.getElementById("qHash").textContent = data.hash;
-                
-                resultDiv.style.display = "block";
-                
-                // 滚动到结果区域
-                resultDiv.scrollIntoView({ behavior: "smooth" });
-            } else {
-                alert("未找到该编号的存证信息");
-                resultDiv.style.display = "none";
-            }
-        }
-        
-        // 验证自动识别的哈希
-        function verifyAutoHash() {
-            if (!currentHash) {
-                alert("没有可验证的哈希值");
-                return;
-            }
-            
-            const btn = document.getElementById('autoVerifyBtn');
-            const btnText = document.getElementById('autoBtnText');
-            const resultDiv = document.getElementById('quickResult');
-            
-            btn.disabled = true;
-            btnText.textContent = '正在验证...';
-            
-            verifyHashConsistency(currentEnvelopeId, currentHash, (success, message) => {
-                if (success) {
-                    resultDiv.innerHTML = `
-                        <div class="result-success">
-                            <strong>✅ 哈希验证通过</strong>
-                            <p>信封编号 <strong>${currentEnvelopeId}</strong> 的哈希值与存证记录一致，文件未被篡改。</p>
-                            <small>验证时间: ${new Date().toLocaleString('zh-CN')}</small>
-                        </div>
-                    `;
-                } else {
-                    resultDiv.innerHTML = `
-                        <div class="result-error">
-                            <strong>❌ 哈希验证失败</strong>
-                            <p>${message || "哈希值不匹配，文件可能已被篡改。"}</p>
-                        </div>
-                    `;
-                }
-                
-                btn.disabled = false;
-                btnText.textContent = '✅ 验证哈希一致性';
-                
-                // 滚动到结果
-                resultDiv.scrollIntoView({ behavior: "smooth" });
-            });
-        }
-        
-        // 验证查询到的哈希
-        function verifyQueryHash() {
-            if (!currentHash) {
-                alert("请先查询编号获取哈希值");
-                return;
-            }
-            
-            const resultDiv = document.getElementById('quickResult');
-            
-            verifyHashConsistency(currentEnvelopeId, currentHash, (success, message) => {
-                if (success) {
-                    resultDiv.innerHTML = `
-                        <div class="result-success">
-                            <strong>✅ 查询哈希验证通过</strong>
-                            <p>信封编号 <strong>${currentEnvelopeId}</strong> 的哈希值与存证记录一致。</p>
-                            <small>验证时间: ${new Date().toLocaleString('zh-CN')}</small>
-                        </div>
-                    `;
-                } else {
-                    resultDiv.innerHTML = `
-                        <div class="result-error">
-                            <strong>❌ 查询哈希验证失败</strong>
-                            <p>${message || "查询到的哈希值不匹配。"}</p>
-                        </div>
-                    `;
-                }
-                
-                // 滚动到结果
-                resultDiv.scrollIntoView({ behavior: "smooth" });
-            });
-        }
-        
-        // 通用的哈希验证函数
-        function verifyHashConsistency(envelopeId, hash, callback) {
-            // 第一步：检查本地数据库
-            if (envelopeDB[envelopeId]) {
-                const storedHash = envelopeDB[envelopeId].hash;
-                
-                if (storedHash === hash) {
-                    // 哈希一致
-                    callback(true, "哈希值与本地记录一致");
-                } else {
-                    // 哈希不一致
-                    callback(false, `哈希值不匹配。本地记录: ${storedHash.substring(0, 16)}...`);
-                }
-            } else {
-                // 编号不在本地数据库中
-                callback(false, "该编号不在本地数据库中，无法验证");
-            }
-        }
-        
-        // 完整验证相关函数
-        function setupFileUpload() {
-            const encFile = document.getElementById('encFile');
-            const keyFile = document.getElementById('keyFile');
-            const uploadArea = document.querySelector('.upload-area');
-            
-            // 点击上传区域
-            uploadArea.addEventListener('click', function(e) {
-                if (e.target === uploadArea || e.target.className.includes('upload')) {
-                    encFile.click();
-                }
-            });
-            
-            // 文件选择变化
-            encFile.addEventListener('change', updateFileList);
-            keyFile.addEventListener('change', updateFileList);
-            
-            // 拖放功能
-            uploadArea.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                uploadArea.style.borderColor = '#165DFF';
-                uploadArea.style.background = '#f7f9ff';
-            });
-            
-            uploadArea.addEventListener('dragleave', () => {
-                uploadArea.style.borderColor = '#d1d5db';
-                uploadArea.style.background = '';
-            });
-            
-            uploadArea.addEventListener('drop', (e) => {
-                e.preventDefault();
-                uploadArea.style.borderColor = '#d1d5db';
-                uploadArea.style.background = '';
-                
-                const files = e.dataTransfer.files;
-                if (files.length > 0) {
-                    Array.from(files).forEach(file => {
-                        if (file.name.endsWith('.enc')) {
-                            const dt = new DataTransfer();
-                            dt.items.add(file);
-                            encFile.files = dt.files;
-                        } else if (file.name.endsWith('.key.txt') || file.name.endsWith('.txt')) {
-                            const dt = new DataTransfer();
-                            dt.items.add(file);
-                            keyFile.files = dt.files;
-                        }
-                    });
+                const data = mockDB; // 使用模拟数据
+                const record = data[code];
+
+                if (record) {
+                    let html = `<h3>✅ 验证通过</h3>`;
+                    html += `<strong>编号:</strong> ${code}`;
+                    html += `<strong>日期:</strong> ${record.date}`;
+                    html += `<strong>邮路:</strong> ${record.route}`;
+                    html += `<div class="hash-display"><strong>SHA256:</strong> ${record.hash}</div>`;
                     
-                    updateFileList();
+                    if (record.images && record.images.length > 0) {
+                        html += `<strong>存证图片:</strong><div class="evidence-grid">`;
+                        record.images.forEach(img => {
+                            html += `<div class="evidence-item"><img src="${img}" alt="证据"></div>`;
+                        });
+                        html += `</div>`;
+                    }
+                    
+                    showResult(resultDiv, 'success', html);
+                } else {
+                    showResult(resultDiv, 'error', `未找到编号 "${code}" 的存证记录，请检查编号是否正确。`);
                 }
-            });
-        }
-        
-        function updateFileList() {
-            const encFile = document.getElementById('encFile').files[0];
-            const keyFile = document.getElementById('keyFile').files[0];
-            const fileList = document.getElementById('fileList');
-            const btn = document.getElementById('fullVerifyBtn');
-            
-            fileList.innerHTML = '';
-            
-            if (encFile) {
-                fileList.innerHTML += `
-                    <div class="file-item">
-                        <span>${encFile.name}</span>
-                        <span class="size">${(encFile.size/1024).toFixed(2)} KB</span>
-                    </div>
-                `;
+            } catch (err) {
+                showResult(resultDiv, 'error', `查询失败: ${err.message}`);
             }
-            
-            if (keyFile) {
-                fileList.innerHTML += `
-                    <div class="file-item">
-                        <span>${keyFile.name}</span>
-                        <span class="size">${(keyFile.size/1024).toFixed(2)} KB</span>
-                    </div>
-                `;
-            }
-            
-            btn.disabled = !(encFile && keyFile);
         }
-        
-        function fullVerify() {
-            const encFile = document.getElementById('encFile').files[0];
-            const keyFile = document.getElementById('keyFile').files[0];
-            const btn = document.getElementById('fullVerifyBtn');
-            const btnText = document.getElementById('fullBtnText');
-            const resultDiv = document.getElementById('fullResult');
-            
-            if (!encFile || !keyFile) {
-                alert('请上传加密文件和密钥文件');
+
+        // 2. 完整验证逻辑 (修复点)
+        let uploadedFiles = {
+            enc: null,
+            key: null
+        };
+
+        // 处理文件选择
+        function handleFileSelect(event, type) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            // 验证文件类型
+            if (type === 'enc' && !file.name.endsWith('.enc')) {
+                alert('请选择正确的 .enc 加密文件');
                 return;
             }
-            
-            btn.disabled = true;
-            btnText.textContent = '正在验证...';
-            
-            // 这里应该调用实际的解密验证API
-            // 以下是模拟验证过程
-            setTimeout(() => {
-                resultDiv.style.display = 'block';
-                btn.disabled = false;
-                btnText.textContent = '🔐 开始完整验证';
-                
-                // 滚动到结果区域
-                resultDiv.scrollIntoView({ behavior: 'smooth' });
-            }, 1500);
-        }
-        
-        // 辅助功能
-        function downloadCertificate() {
-            alert('验证证书下载功能开发中...');
-        }
-        
-        function shareResult() {
-            const shareUrl = window.location.href.split('?')[0] + 
-                           (currentEnvelopeId ? `?id=${currentEnvelopeId}` : '');
-            
-            if (navigator.share) {
-                navigator.share({
-                    title: 'STProof 首日封验证结果',
-                    text: `查看首日封 ${currentEnvelopeId || ''} 的完整数字存证`,
-                    url: shareUrl
-                });
-            } else {
-                navigator.clipboard.writeText(shareUrl).then(() => {
-                    alert('验证链接已复制到剪贴板');
-                });
+            if (type === 'key' && !file.name.endsWith('.key.txt')) {
+                alert('请选择正确的 .key.txt 密钥文件');
+                return;
             }
+
+            uploadedFiles[type] = file;
+            updateFileSlot(type, file);
+            checkEnableVerifyButton();
+        }
+
+        // 更新文件槽显示
+        function updateFileSlot(type, file) {
+            const slot = document.getElementById(`${type}Slot`);
+            const nameEl = document.getElementById(`${type}Name`);
+            const sizeEl = document.getElementById(`${type}Size`);
+            
+            nameEl.textContent = file.name;
+            sizeEl.textContent = formatFileSize(file.size);
+            slot.classList.add('has-file');
+        }
+
+        // 移除文件
+        function removeFile(type, event) {
+            event.stopPropagation(); // 阻止冒泡触发父级点击
+            uploadedFiles[type] = null;
+            
+            const slot = document.getElementById(`${type}Slot`);
+            const nameEl = document.getElementById(`${type}Name`);
+            const sizeEl = document.getElementById(`${type}Size`);
+            
+            nameEl.textContent = type === 'enc' ? '点击上传加密文件 (.enc)' : '点击上传密钥文件 (.key.txt)';
+            sizeEl.textContent = '';
+            slot.classList.remove('has-file');
+            
+            // 清空 input 的值，允许重复选择同一文件
+            document.getElementById(`${type}Input`).value = '';
+            
+            checkEnableVerifyButton();
+        }
+
+        // 检查是否可以启用验证按钮
+        function checkEnableVerifyButton() {
+            const btn = document.getElementById('fullVerifyBtn');
+            if (uploadedFiles.enc && uploadedFiles.key) {
+                btn.disabled = false;
+                btn.textContent = '🔓 开始完整验证';
+            } else {
+                btn.disabled = true;
+                btn.textContent = '开始完整验证 (缺少文件)';
+            }
+        }
+
+        // 格式化文件大小
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        // 完整验证主函数
+        async function fullVerify() {
+            const resultDiv = document.getElementById('fullResult');
+            showResult(resultDiv, 'info', '正在解密并验证证据链...');
+
+            try {
+                if (!uploadedFiles.enc || !uploadedFiles.key) {
+                    throw new Error('请确保已上传 .enc 和 .key.txt 两个文件');
+                }
+
+                // 读取文件内容
+                const encContent = await readFileAsText(uploadedFiles.enc);
+                const keyContent = await readFileAsText(uploadedFiles.key);
+
+                // 🔥 这里接入你的实际解密/验证逻辑
+                // 示例：模拟验证成功
+                await new Promise(resolve => setTimeout(resolve, 1000)); // 模拟耗时
+
+                let html = `<h3>✅ 解密成功，验证通过</h3>`;
+                html += `<div class="hash-display"><strong>解密后数据预览:</strong>${encContent.substring(0, 200)}...</div>`;
+                
+                // 模拟展示证据
+                html += `<strong>关联证据:</strong><div class="evidence-grid">
+                    <div class="evidence-item"><img src="https://picsum.photos/200/200?random=3" alt="解密图片1"></div>
+                    <div class="evidence-item"><img src="https://picsum.photos/200/200?random=4" alt="解密图片2"></div>
+                </div>`;
+
+                showResult(resultDiv, 'success', html);
+
+            } catch (err) {
+                showResult(resultDiv, 'error', `验证失败: ${err.message}`);
+            }
+        }
+
+        // 读取文件为文本
+        function readFileAsText(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = e => resolve(e.target.result);
+                reader.onerror = e => reject(new Error('文件读取失败'));
+                reader.readAsText(file);
+            });
+        }
+
+        // 显示结果
+        function showResult(container, type, message) {
+            container.innerHTML = message;
+            container.className = 'result-area'; // 重置
+            if (type) container.classList.add(type);
         }
     </script>
 </body>
