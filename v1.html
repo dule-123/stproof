@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STProof 数字存证验证系统 - 解密修复版</title>
+    <title>STProof 数字存证验证系统 - 双文件上传修复版</title>
     <!-- CryptoJS 库 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <style>
@@ -26,7 +26,7 @@
         .container {
             background: white;
             width: 100%;
-            max-width: 800px;
+            max-width: 900px;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             overflow: hidden;
@@ -83,34 +83,106 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        /* 上传区域 */
-        .upload-area {
+        /* 上传区域样式 - 双栏布局 */
+        .dual-upload-section {
+            display: flex;
+            gap: 24px;
+            margin: 20px 0 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .upload-card {
+            flex: 1;
+            min-width: 200px;
             border: 2px dashed #c3cfe2;
-            border-radius: 12px;
-            padding: 40px 20px;
-            text-align: center;
+            border-radius: 16px;
+            background: #fafbff;
+            transition: all 0.2s ease;
             cursor: pointer;
-            transition: all 0.3s;
-            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
         }
         
-        .upload-area:hover {
+        .upload-card:hover {
             border-color: #4F46E5;
-            background: rgba(79, 70, 229, 0.05);
+            background: rgba(79, 70, 229, 0.03);
+            transform: translateY(-2px);
         }
         
-        .file-list {
-            margin: 20px 0;
+        .upload-card.drag-over {
+            border-color: #4F46E5;
+            background: rgba(79, 70, 229, 0.1);
+            border-style: solid;
         }
         
-        .file-item {
-            background: #f8f9fa;
-            padding: 12px 15px;
-            border-radius: 8px;
+        .upload-card-inner {
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .upload-icon {
+            font-size: 44px;
+            margin-bottom: 12px;
+        }
+        
+        .upload-title {
+            font-weight: 700;
+            font-size: 18px;
             margin-bottom: 8px;
+            color: #1f2937;
+        }
+        
+        .upload-hint {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 8px;
+        }
+        
+        .file-status {
+            margin-top: 12px;
+            padding: 8px 12px;
+            background: #eef2ff;
+            border-radius: 40px;
+            font-size: 12px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #4F46E5;
+        }
+        
+        .remove-file {
+            margin-left: 6px;
+            cursor: pointer;
+            background: #cbd5e1;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: white;
+            transition: 0.2s;
+        }
+        
+        .remove-file:hover {
+            background: #ef4444;
+        }
+        
+        .file-list-compact {
+            margin: 16px 0 10px 0;
+        }
+        
+        .file-badge {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background: #f3f4f6;
+            border-radius: 12px;
+            padding: 10px 14px;
+            margin-top: 8px;
+            font-size: 13px;
         }
         
         .btn {
@@ -118,15 +190,19 @@
             color: white;
             border: none;
             padding: 16px 40px;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
             width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
         
-        .btn:hover {
+        .btn:hover:not(:disabled) {
             transform: translateY(-2px);
             box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
         }
@@ -137,7 +213,6 @@
             transform: none;
         }
         
-        /* 结果区域 */
         .result-area {
             margin-top: 30px;
         }
@@ -169,7 +244,8 @@
         .info-item {
             background: white;
             padding: 15px;
-            border-radius: 8px;
+            border-radius: 12px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
         }
         
         .warning-box {
@@ -195,392 +271,294 @@
             border-top: 3px solid white;
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin-right: 10px;
         }
         
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        
+        .error-card {
+            background: #fee2e2;
+            color: #b91c1c;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        
+        .success-badge {
+            background: #10b981;
+            color: white;
+            border-radius: 30px;
+            padding: 4px 12px;
+            font-size: 12px;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+        
+        @media (max-width: 640px) {
+            .dual-upload-section {
+                flex-direction: column;
+                gap: 16px;
+            }
+            .content {
+                padding: 24px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- 头部 -->
         <div class="header">
             <h1>🔍 STProof 数字存证验证</h1>
-            <p>快速验证首日封、实寄封的数字存证</p>
+            <p>安全解密 · 双文件独立上传 | 快速验证首日封、实寄封的数字存证</p>
         </div>
         
-        <!-- 内容 -->
         <div class="content">
-            <!-- 标签页 -->
             <div class="tabs">
                 <div class="tab active" onclick="switchTab('quick')">⚡ 快速验证</div>
-                <div class="tab" onclick="switchTab('full')">🔍 完整验证</div>
+                <div class="tab" onclick="switchTab('full')">🔐 完整验证 (加密+密钥)</div>
             </div>
             
-            <!-- 快速验证 -->
+            <!-- 快速验证区块 (不变) -->
             <div id="quickTab" class="tab-content active">
-                <h2>编号查询 + 哈希验证</h2>
+                <h2>📋 编号查询 + 哈希验证</h2>
                 <p>输入信封编号，系统将从数据库查询并验证哈希值</p>
                 
                 <div style="display: flex; gap: 10px; margin: 20px 0;">
                     <input type="text" id="codeInput" placeholder="输入编号（如 STP260518-001）" 
-                           style="flex: 1; padding: 12px; border: 2px solid #e5e7eb; border-radius: 8px;">
-                    <button class="btn" onclick="quickVerify()" style="width: auto; padding: 12px 24px;">查询</button>
+                           style="flex: 1; padding: 14px; border: 2px solid #e5e7eb; border-radius: 12px; font-size: 14px;">
+                    <button class="btn" onclick="quickVerify()" style="width: auto; padding: 12px 28px;">🔍 查询</button>
                 </div>
                 
                 <div id="quickResult" class="result-area"></div>
             </div>
             
-            <!-- 完整验证 -->
+            <!-- 完整验证区块 - 全新独立双文件上传栏 -->
             <div id="fullTab" class="tab-content">
-                <h2>完整证据链验证</h2>
-                <p>上传加密文件和对应的密钥文件进行解密验证</p>
+                <h2>📦 完整证据链验证</h2>
+                <p>请分别上传 <strong>加密文件 (.enc)</strong> 和 <strong>密钥文件 (.key.txt)</strong>，系统将进行 AES-256-CBC 解密并展示存证内容</p>
                 
-                <!-- 上传区域 -->
-                <div class="upload-area" onclick="document.getElementById('encFile').click()">
-                    <div style="font-size: 48px; color: #4F46E5; margin-bottom: 15px;">📁</div>
-                    <p><strong>点击选择文件</strong></p>
-                    <p>请上传加密文件 (.enc) 和密钥文件 (.key.txt)</p>
-                </div>
-                
-                <input type="file" id="encFile" accept=".enc" style="display:none;">
-                <input type="file" id="keyFile" accept=".txt,.key.txt" style="display:none;">
-                
-                <!-- 文件列表 -->
-                <div class="file-list" id="fileList"></div>
-                
-                <button class="btn" onclick="fullVerify()" id="verifyBtn" disabled>
-                    <div class="spinner" id="spinner" style="display:none;"></div>
-                    <span id="btnText">🔐 开始解密验证</span>
-                </button>
-                
-                <!-- 解密结果 -->
-                <div class="result-area" id="fullResult" style="display:none;">
-                    <div class="result-box">
-                        <h3>✅ 解密成功！</h3>
-                        <p>以下是解密后的存证信息：</p>
-                        
-                        <div class="info-grid" id="infoGrid">
-                            <!-- 信息动态填充 -->
-                        </div>
-                        
-                        <div class="warning-box">
-                            <p><strong>⚠️ 重要提示：</strong>此信息已通过数字签名验证，请核对与实物信封是否一致。</p>
+                <!-- 双卡片上传区域 -->
+                <div class="dual-upload-section">
+                    <!-- 加密文件上传卡片 -->
+                    <div class="upload-card" id="encCard" data-type="enc">
+                        <div class="upload-card-inner">
+                            <div class="upload-icon">🔐</div>
+                            <div class="upload-title">加密文件 (.enc)</div>
+                            <div class="upload-hint">点击或拖拽至此区域</div>
+                            <div id="encStatus" class="file-status" style="display: none;">
+                                ✅ 已选择
+                            </div>
                         </div>
                     </div>
+                    
+                    <!-- 密钥文件上传卡片 -->
+                    <div class="upload-card" id="keyCard" data-type="key">
+                        <div class="upload-card-inner">
+                            <div class="upload-icon">🗝️</div>
+                            <div class="upload-title">密钥文件 (.key.txt)</div>
+                            <div class="upload-hint">点击或拖拽至此区域</div>
+                            <div id="keyStatus" class="file-status" style="display: none;">
+                                ✅ 已选择
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 独立文件列表展示 (详细) -->
+                <div id="fileDetails" class="file-list-compact"></div>
+                
+                <!-- 全局验证按钮 -->
+                <button class="btn" onclick="fullVerify()" id="verifyBtn" disabled>
+                    <span>🔓 开始解密验证</span>
+                </button>
+                
+                <!-- 解密结果区域 -->
+                <div class="result-area" id="fullResult" style="display:none;">
+                    <!-- 动态内容填充 -->
                 </div>
             </div>
         </div>
         
         <div class="footer">
-            <p>© 2026 STProof 数字存证验证系统 | 版本 3.0</p>
+            <p>© 2026 STProof 数字存证验证系统 | 双文件独立验证引擎 v3.2</p>
         </div>
     </div>
 
     <script>
-        // 全局变量
-        let uploadedFiles = {
-            enc: null,
-            key: null
-        };
+        // ---------- 存储上传的文件 (独立管理) ----------
+        let uploadedEncFile = null;   // 加密文件
+        let uploadedKeyFile = null;   // 密钥文件
         
-        // 标签页切换
-        function switchTab(tabName) {
-            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+        // DOM 元素
+        const encCard = document.getElementById('encCard');
+        const keyCard = document.getElementById('keyCard');
+        const encStatusDiv = document.getElementById('encStatus');
+        const keyStatusDiv = document.getElementById('keyStatus');
+        const fileDetailsDiv = document.getElementById('fileDetails');
+        const verifyBtn = document.getElementById('verifyBtn');
+        
+        // ---------- 辅助函数: 更新UI 和 按钮状态 ----------
+        function updateFileUI() {
+            // 更新加密卡片状态样式
+            if (uploadedEncFile) {
+                encStatusDiv.style.display = 'inline-flex';
+                encStatusDiv.innerHTML = `✅ ${uploadedEncFile.name} <span class="remove-file" data-remove="enc">✕</span>`;
+                encCard.style.borderColor = '#4F46E5';
+                encCard.style.background = 'rgba(79, 70, 229, 0.04)';
+            } else {
+                encStatusDiv.style.display = 'none';
+                encCard.style.borderColor = '#c3cfe2';
+                encCard.style.background = '';
+            }
             
-            event.currentTarget.classList.add('active');
-            document.getElementById(tabName + 'Tab').classList.add('active');
+            // 更新密钥卡片状态
+            if (uploadedKeyFile) {
+                keyStatusDiv.style.display = 'inline-flex';
+                keyStatusDiv.innerHTML = `✅ ${uploadedKeyFile.name} <span class="remove-file" data-remove="key">✕</span>`;
+                keyCard.style.borderColor = '#4F46E5';
+                keyCard.style.background = 'rgba(79, 70, 229, 0.04)';
+            } else {
+                keyStatusDiv.style.display = 'none';
+                keyCard.style.borderColor = '#c3cfe2';
+                keyCard.style.background = '';
+            }
+            
+            // 更新详细列表区域
+            let detailsHtml = '';
+            if (uploadedEncFile) {
+                const size = (uploadedEncFile.size / 1024).toFixed(2);
+                detailsHtml += `<div class="file-badge"><span>🔐 加密文件: ${uploadedEncFile.name}</span><span>${size} KB</span></div>`;
+            } else {
+                detailsHtml += `<div class="file-badge" style="opacity:0.6;"><span>🔐 加密文件: 未上传</span><span>—</span></div>`;
+            }
+            if (uploadedKeyFile) {
+                const size = (uploadedKeyFile.size / 1024).toFixed(2);
+                detailsHtml += `<div class="file-badge"><span>🗝️ 密钥文件: ${uploadedKeyFile.name}</span><span>${size} KB</span></div>`;
+            } else {
+                detailsHtml += `<div class="file-badge" style="opacity:0.6;"><span>🗝️ 密钥文件: 未上传</span><span>—</span></div>`;
+            }
+            fileDetailsDiv.innerHTML = detailsHtml;
+            
+            // 更新按钮启用状态: 必须两个文件都存在
+            const bothReady = (uploadedEncFile !== null && uploadedKeyFile !== null);
+            verifyBtn.disabled = !bothReady;
+            if (bothReady) {
+                verifyBtn.style.opacity = '1';
+            } else {
+                verifyBtn.style.opacity = '0.6';
+            }
+            
+            // 绑定移除文件事件 (动态元素)
+            document.querySelectorAll('.remove-file').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const type = btn.getAttribute('data-remove');
+                    if (type === 'enc') {
+                        uploadedEncFile = null;
+                        // 清空对应的input值
+                        if (encFileInput) encFileInput.value = '';
+                    } else if (type === 'key') {
+                        uploadedKeyFile = null;
+                        if (keyFileInput) keyFileInput.value = '';
+                    }
+                    updateFileUI();
+                });
+            });
         }
         
-        // 文件上传处理
-        document.addEventListener('DOMContentLoaded', function() {
-            // 加密文件
-            document.getElementById('encFile').addEventListener('change', function(e) {
-                if (e.target.files.length > 0) {
-                    uploadedFiles.enc = e.target.files[0];
-                    updateFileList();
-                }
-            });
-            
-            // 密钥文件
-            document.getElementById('keyFile').addEventListener('change', function(e) {
-                if (e.target.files.length > 0) {
-                    uploadedFiles.key = e.target.files[0];
-                    updateFileList();
-                }
-            });
-            
-            // 拖放功能
-            const uploadArea = document.querySelector('.upload-area');
-            uploadArea.addEventListener('click', function() {
-                document.getElementById('encFile').click();
-            });
-            
-            uploadArea.addEventListener('dragover', function(e) {
-                e.preventDefault();
-                uploadArea.style.borderColor = '#4F46E5';
-                uploadArea.style.background = 'rgba(79, 70, 229, 0.1)';
-            });
-            
-            uploadArea.addEventListener('dragleave', function() {
-                uploadArea.style.borderColor = '#c3cfe2';
-                uploadArea.style.background = '';
-            });
-            
-            uploadArea.addEventListener('drop', function(e) {
-                e.preventDefault();
-                uploadArea.style.borderColor = '#c3cfe2';
-                uploadArea.style.background = '';
-                
-                Array.from(e.dataTransfer.files).forEach(file => {
-                    if (file.name.endsWith('.enc')) {
-                        uploadedFiles.enc = file;
-                    } else if (file.name.endsWith('.key.txt') || file.name.endsWith('.txt')) {
-                        uploadedFiles.key = file;
-                    }
-                });
-                
-                updateFileList();
-            });
+        // ---------- 创建隐藏 input 用于独立文件选择 ----------
+        const encFileInput = document.createElement('input');
+        encFileInput.type = 'file';
+        encFileInput.accept = '.enc';
+        encFileInput.style.display = 'none';
+        const keyFileInput = document.createElement('input');
+        keyFileInput.type = 'file';
+        keyFileInput.accept = '.txt,.key.txt';
+        keyFileInput.style.display = 'none';
+        document.body.appendChild(encFileInput);
+        document.body.appendChild(keyFileInput);
+        
+        // 加密卡片点击触发加密文件选择
+        encCard.addEventListener('click', (e) => {
+            if (e.target.classList.contains('remove-file')) return;
+            encFileInput.click();
+        });
+        // 密钥卡片点击触发密钥文件选择
+        keyCard.addEventListener('click', (e) => {
+            if (e.target.classList.contains('remove-file')) return;
+            keyFileInput.click();
         });
         
-        // 更新文件列表
-        function updateFileList() {
-            const fileList = document.getElementById('fileList');
-            const verifyBtn = document.getElementById('verifyBtn');
-            
-            fileList.innerHTML = '';
-            
-            if (uploadedFiles.enc) {
-                const size = (uploadedFiles.enc.size / 1024).toFixed(2);
-                fileList.innerHTML += `
-                    <div class="file-item">
-                        <span>🔐 ${uploadedFiles.enc.name}</span>
-                        <span style="color: #888;">${size} KB</span>
-                    </div>
-                `;
-            }
-            
-            if (uploadedFiles.key) {
-                const size = (uploadedFiles.key.size / 1024).toFixed(2);
-                fileList.innerHTML += `
-                    <div class="file-item">
-                        <span>🔑 ${uploadedFiles.key.name}</span>
-                        <span style="color: #888;">${size} KB</span>
-                    </div>
-                `;
-            }
-            
-            // 更新按钮状态
-            verifyBtn.disabled = !(uploadedFiles.enc && uploadedFiles.key);
-        }
-        
-        // 🔥 核心解密函数 - 已修复！
-        async function fullVerify() {
-            const btn = document.getElementById('verifyBtn');
-            const btnText = document.getElementById('btnText');
-            const spinner = document.getElementById('spinner');
-            const resultArea = document.getElementById('fullResult');
-            
-            if (!uploadedFiles.enc || !uploadedFiles.key) {
-                alert('请上传加密文件和密钥文件');
-                return;
-            }
-            
-            // 显示加载状态
-            btn.disabled = true;
-            btnText.textContent = '正在解密...';
-            spinner.style.display = 'inline-block';
-            resultArea.style.display = 'none';
-            
-            try {
-                console.log('开始解密过程...');
-                
-                // 1. 读取密钥文件
-                const keyText = await readFileAsText(uploadedFiles.key);
-                const keyHex = keyText.trim().replace(/\s/g, '');
-                
-                console.log('密钥内容:', keyHex);
-                console.log('密钥长度:', keyHex.length, '字符');
-                
-                // 验证密钥格式 (应该是 64 位十六进制)
-                if (keyHex.length !== 64 || !/^[0-9a-fA-F]{64}$/.test(keyHex)) {
-                    throw new Error(`密钥格式错误。应为 64 位十六进制字符，当前: ${keyHex.length} 字符`);
-                }
-                
-                // 转换为 CryptoJS 格式
-                const key = CryptoJS.enc.Hex.parse(keyHex);
-                console.log('密钥转换成功');
-                
-                // 2. 读取加密文件
-                const encArrayBuffer = await readFileAsArrayBuffer(uploadedFiles.enc);
-                const encBytes = new Uint8Array(encArrayBuffer);
-                
-                console.log('加密文件大小:', encBytes.length, '字节');
-                
-                // 3. 提取 IV (前 16 字节)
-                if (encBytes.length < 16) {
-                    throw new Error('加密文件太小，无法提取 IV');
-                }
-                
-                const ivBytes = encBytes.slice(0, 16);
-                const iv = CryptoJS.lib.WordArray.create(ivBytes);
-                
-                console.log('IV 提取成功:', 
-                    Array.from(ivBytes).map(b => b.toString(16).padStart(2, '0')).join(''));
-                
-                // 4. 提取密文 (剩余部分)
-                const ciphertextBytes = encBytes.slice(16);
-                const ciphertext = CryptoJS.lib.WordArray.create(ciphertextBytes);
-                
-                console.log('密文大小:', ciphertextBytes.length, '字节');
-                
-                // 5. 使用 AES-256-CBC 解密
-                console.log('开始 AES-256-CBC 解密...');
-                
-                const decrypted = CryptoJS.AES.decrypt(
-                    { ciphertext: ciphertext },
-                    key,
-                    { 
-                        iv: iv,
-                        mode: CryptoJS.mode.CBC,
-                        padding: CryptoJS.pad.Pkcs7
-                    }
-                );
-                
-                // 6. 转换为文本
-                const decryptedText = decrypted.toString(CryptoJS.enc.Utf8);
-                
-                if (!decryptedText) {
-                    throw new Error('解密成功但内容为空。可能是密钥错误或文件损坏');
-                }
-                
-                console.log('解密成功，内容长度:', decryptedText.length, '字符');
-                console.log('解密内容前 200 字符:', decryptedText.substring(0, 200));
-                
-                // 7. 解析 JSON
-                let jsonData;
-                try {
-                    jsonData = JSON.parse(decryptedText);
-                } catch (jsonErr) {
-                    // 尝试清理无效字符
-                    const cleaned = decryptedText.replace(/[\x00-\x1F\x7F-\x9F]/g, '');
-                    jsonData = JSON.parse(cleaned);
-                }
-                
-                console.log('JSON 解析成功:', jsonData);
-                
-                // 8. 显示结果
-                displayResult(jsonData);
-                resultArea.style.display = 'block';
-                
-                // 滚动到结果
-                resultArea.scrollIntoView({ behavior: 'smooth' });
-                
-            } catch (error) {
-                console.error('解密失败:', error);
-                
-                // 显示错误信息
-                const resultArea = document.getElementById('fullResult');
-                resultArea.style.display = 'block';
-                resultArea.innerHTML = `
-                    <div style="background: #fee2e2; color: #dc2626; padding: 20px; border-radius: 8px;">
-                        <h3>❌ 解密失败</h3>
-                        <p><strong>错误信息:</strong> ${error.message}</p>
-                        <p><strong>可能原因:</strong></p>
-                        <ul style="margin-left: 20px; margin-top: 10px;">
-                            <li>密钥不正确</li>
-                            <li>加密文件格式错误</li>
-                            <li>加密算法不匹配</li>
-                            <li>文件在传输过程中损坏</li>
-                        </ul>
-                        <p style="margin-top: 15px; font-size: 12px;">请检查您的密钥文件内容是否为 64 位十六进制字符串</p>
-                    </div>
-                `;
-                
-            } finally {
-                // 恢复按钮状态
-                btn.disabled = false;
-                btnText.textContent = '🔐 开始解密验证';
-                spinner.style.display = 'none';
-            }
-        }
-        
-        // 显示解密结果
-        function displayResult(jsonData) {
-            const infoGrid = document.getElementById('infoGrid');
-            
-            // 提取关键信息
-            const theme = jsonData.physical_object?.theme || jsonData.theme || '未知';
-            const issueDate = jsonData.physical_object?.issue_date || jsonData.date || '未知';
-            const recipient = jsonData.physical_object?.recipient_info?.name || jsonData.recipient || '未知';
-            const timestamp = jsonData.evidence_chain?.[0]?.timestamp || jsonData.timestamp || '未知';
-            const trackingNumber = jsonData.physical_object?.tracking_number || jsonData.tracking || '未知';
-            
-            infoGrid.innerHTML = `
-                <div class="info-item">
-                    <div style="font-size: 12px; color: #666; margin-bottom: 5px;">邮票主题</div>
-                    <div style="font-size: 16px; font-weight: 600;">${theme}</div>
-                </div>
-                <div class="info-item">
-                    <div style="font-size: 12px; color: #666; margin-bottom: 5px;">发行日期</div>
-                    <div style="font-size: 16px; font-weight: 600;">${issueDate}</div>
-                </div>
-                <div class="info-item">
-                    <div style="font-size: 12px; color: #666; margin-bottom: 5px;">收件人</div>
-                    <div style="font-size: 16px; font-weight: 600;">${recipient}</div>
-                </div>
-                <div class="info-item">
-                    <div style="font-size: 12px; color: #666; margin-bottom: 5px;">存证时间</div>
-                    <div style="font-size: 16px; font-weight: 600;">${timestamp}</div>
-                </div>
-                <div class="info-item">
-                    <div style="font-size: 12px; color: #666; margin-bottom: 5px;">挂号信号码</div>
-                    <div style="font-size: 16px; font-weight: 600; font-family: monospace;">${trackingNumber}</div>
-                </div>
-            `;
-        }
-        
-        // 快速验证（简化版）
-        async function quickVerify() {
-            const code = document.getElementById('codeInput').value.trim().toUpperCase();
-            const resultDiv = document.getElementById('quickResult');
-            
-            if (!code) {
-                resultDiv.innerHTML = '<div style="color: #dc2626;">请输入编号</div>';
-                return;
-            }
-            
-            resultDiv.innerHTML = '<div>正在查询...</div>';
-            
-            try {
-                const response = await fetch('data.json?v=' + Date.now());
-                const data = await response.json();
-                
-                if (data[code]) {
-                    const record = data[code];
-                    resultDiv.innerHTML = `
-                        <div style="background: #d1fae5; color: #065f46; padding: 20px; border-radius: 8px;">
-                            <h3>✅ 找到记录</h3>
-                            <p><strong>编号:</strong> ${code}</p>
-                            <p><strong>日期:</strong> ${record.date || '未知'}</p>
-                            <p><strong>邮路:</strong> ${record.route || '未知'}</p>
-                            <div class="hash-display">${record.hash}</div>
-                        </div>
-                    `;
+        // 加密文件选择事件
+        encFileInput.addEventListener('change', (e) => {
+            if (e.target.files && e.target.files.length > 0) {
+                const file = e.target.files[0];
+                if (file.name.toLowerCase().endsWith('.enc')) {
+                    uploadedEncFile = file;
                 } else {
-                    resultDiv.innerHTML = `<div style="color: #dc2626;">未找到编号 ${code} 的记录</div>`;
+                    alert('请上传正确的加密文件 (.enc)');
+                    uploadedEncFile = null;
                 }
-            } catch (error) {
-                resultDiv.innerHTML = `<div style="color: #dc2626;">查询失败: ${error.message}</div>`;
+                updateFileUI();
             }
+        });
+        
+        // 密钥文件选择事件
+        keyFileInput.addEventListener('change', (e) => {
+            if (e.target.files && e.target.files.length > 0) {
+                const file = e.target.files[0];
+                // 允许 .key.txt 或者 .txt 结尾的密钥文件
+                if (file.name.endsWith('.key.txt') || file.name.endsWith('.txt')) {
+                    uploadedKeyFile = file;
+                } else {
+                    alert('请上传正确的密钥文件 (建议 .key.txt 或 .txt)');
+                    uploadedKeyFile = null;
+                }
+                updateFileUI();
+            }
+        });
+        
+        // ---------- 拖拽支持 (独立卡片) ----------
+        function setupDragAndDrop(cardElement, type) {
+            cardElement.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                cardElement.classList.add('drag-over');
+            });
+            cardElement.addEventListener('dragleave', () => {
+                cardElement.classList.remove('drag-over');
+            });
+            cardElement.addEventListener('drop', (e) => {
+                e.preventDefault();
+                cardElement.classList.remove('drag-over');
+                const files = e.dataTransfer.files;
+                if (files.length === 0) return;
+                const file = files[0];
+                if (type === 'enc') {
+                    if (file.name.toLowerCase().endsWith('.enc')) {
+                        uploadedEncFile = file;
+                        if (encFileInput) encFileInput.value = '';
+                    } else {
+                        alert('拖拽文件必须是 .enc 加密文件');
+                        return;
+                    }
+                } else if (type === 'key') {
+                    if (file.name.endsWith('.key.txt') || file.name.endsWith('.txt')) {
+                        uploadedKeyFile = file;
+                        if (keyFileInput) keyFileInput.value = '';
+                    } else {
+                        alert('拖拽文件必须是密钥文件 (.key.txt 或 .txt)');
+                        return;
+                    }
+                }
+                updateFileUI();
+            });
         }
         
-        // 工具函数
+        setupDragAndDrop(encCard, 'enc');
+        setupDragAndDrop(keyCard, 'key');
+        
+        // ---------- 工具函数: 读取文件 ----------
         function readFileAsArrayBuffer(file) {
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
@@ -598,6 +576,247 @@
                 reader.readAsText(file);
             });
         }
+        
+        // ---------- 完整验证核心解密 (增强修复) ----------
+        async function fullVerify() {
+            const resultArea = document.getElementById('fullResult');
+            const originalBtnText = verifyBtn.querySelector('span')?.innerText || '开始解密验证';
+            
+            if (!uploadedEncFile || !uploadedKeyFile) {
+                alert('请同时上传加密文件 (.enc) 和密钥文件 (.key.txt)');
+                return;
+            }
+            
+            // 按钮加载状态
+            verifyBtn.disabled = true;
+            verifyBtn.innerHTML = '<div class="spinner"></div><span>正在解密验证...</span>';
+            
+            try {
+                console.log('=== 开始完整解密流程 ===');
+                
+                // 1. 读取密钥文本
+                const keyRawText = await readFileAsText(uploadedKeyFile);
+                let keyHex = keyRawText.trim().replace(/\s/g, '');
+                // 兼容一些可能包含0x前缀或换行符
+                if (keyHex.startsWith('0x') || keyHex.startsWith('0X')) {
+                    keyHex = keyHex.slice(2);
+                }
+                console.log('密钥原始长度(hex):', keyHex.length);
+                
+                // 严格校验64位十六进制
+                if (!/^[0-9a-fA-F]{64}$/.test(keyHex)) {
+                    throw new Error(`密钥格式无效。需要64位十六进制字符，当前长度: ${keyHex.length}，请确保密钥为正确的AES-256密钥。`);
+                }
+                
+                const key = CryptoJS.enc.Hex.parse(keyHex);
+                
+                // 2. 读取加密文件二进制
+                const encArrayBuffer = await readFileAsArrayBuffer(uploadedEncFile);
+                const encBytes = new Uint8Array(encArrayBuffer);
+                if (encBytes.length < 17) {
+                    throw new Error('加密文件过小，至少需要包含16字节IV和密文');
+                }
+                
+                // 3. 提取 IV (前16字节)
+                const ivBytes = encBytes.slice(0, 16);
+                const iv = CryptoJS.lib.WordArray.create(ivBytes);
+                
+                // 4. 提取密文（剩余字节）
+                const ciphertextBytes = encBytes.slice(16);
+                const ciphertextWordArray = CryptoJS.lib.WordArray.create(ciphertextBytes);
+                
+                console.log(`IV(hex): ${Array.from(ivBytes).map(b => b.toString(16).padStart(2,'0')).join('')}`);
+                console.log(`密文长度: ${ciphertextBytes.length} 字节`);
+                
+                // 5. AES-256-CBC 解密
+                const decrypted = CryptoJS.AES.decrypt(
+                    { ciphertext: ciphertextWordArray },
+                    key,
+                    {
+                        iv: iv,
+                        mode: CryptoJS.mode.CBC,
+                        padding: CryptoJS.pad.Pkcs7
+                    }
+                );
+                
+                let decryptedText = decrypted.toString(CryptoJS.enc.Utf8);
+                if (!decryptedText || decryptedText.length === 0) {
+                    throw new Error('解密结果为空，可能密钥错误或数据已损坏/不匹配');
+                }
+                
+                console.log('解密文本前120字符:', decryptedText.substring(0, 120));
+                
+                // 6. 健壮的JSON解析 (处理BOM或不可见字符)
+                let cleanJson = decryptedText.replace(/^\uFEFF/, '').replace(/[\x00-\x1F\x7F-\x9F]/g, '');
+                let jsonData;
+                try {
+                    jsonData = JSON.parse(cleanJson);
+                } catch (firstErr) {
+                    // 尝试提取第一个{到最后一个}之间的内容
+                    const match = cleanJson.match(/\{[\s\S]*\}/);
+                    if (match) {
+                        jsonData = JSON.parse(match[0]);
+                    } else {
+                        throw new Error('解密后的内容不是有效的JSON格式，请检查加密文件是否为此系统生成');
+                    }
+                }
+                
+                // 7. 展示结果
+                displayDecryptedData(jsonData, resultArea);
+                resultArea.style.display = 'block';
+                resultArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                
+            } catch (error) {
+                console.error('解密失败:', error);
+                resultArea.style.display = 'block';
+                resultArea.innerHTML = `
+                    <div class="error-card">
+                        <h3>❌ 解密验证失败</h3>
+                        <p><strong>错误详情：</strong> ${error.message}</p>
+                        <div style="background:#fff3f3; margin-top: 16px; padding: 12px; border-radius: 8px;">
+                            <p style="font-size:13px;"><strong>可能原因：</strong></p>
+                            <ul style="margin-left: 20px; margin-top: 5px; font-size:13px;">
+                                <li>密钥文件内容不正确（非64位十六进制或与加密时不匹配）</li>
+                                <li>加密文件损坏或非本系统生成的格式（IV偏移错误）</li>
+                                <li>加密算法不匹配（请确保使用 AES-256-CBC）</li>
+                                <li>文件上传不完整或传输错误</li>
+                            </ul>
+                            <p style="margin-top: 12px; font-size:12px;">💡 提示：密钥应为64位十六进制字符串（例如32字节）。请联系发行方核实。</p>
+                        </div>
+                    </div>
+                `;
+            } finally {
+                verifyBtn.disabled = false;
+                verifyBtn.innerHTML = `<span>${originalBtnText}</span>`;
+                // 重新检查按钮状态，因为解密后仍然需要保证双文件存在才能再次验证（文件未变）
+                const bothReady = (uploadedEncFile !== null && uploadedKeyFile !== null);
+                verifyBtn.disabled = !bothReady;
+                if(!bothReady) verifyBtn.style.opacity = '0.6';
+                else verifyBtn.style.opacity = '1';
+            }
+        }
+        
+        // 将解密后的JSON数据漂亮显示
+        function displayDecryptedData(jsonData, container) {
+            // 提取字段 兼顾不同数据结构
+            const theme = jsonData.physical_object?.theme || jsonData.theme || jsonData.subject || '未记录';
+            const issueDate = jsonData.physical_object?.issue_date || jsonData.issue_date || jsonData.date || jsonData.timestamp?.split('T')[0] || '未知';
+            const recipient = jsonData.physical_object?.recipient_info?.name || jsonData.recipient || jsonData.recipient_name || '未注明';
+            let timestamp = jsonData.evidence_chain?.[0]?.timestamp || jsonData.evidence_time || jsonData.create_time || jsonData.timestamp || '未记录';
+            const trackingNumber = jsonData.physical_object?.tracking_number || jsonData.tracking_number || jsonData.tracking || 'N/A';
+            const description = jsonData.description || jsonData.desc || '数字存证凭证';
+            const hashValue = jsonData.hash || jsonData.digital_hash || (jsonData.evidence_chain?.[0]?.hash) || '未提供哈希';
+            
+            // 处理日期显示
+            if (timestamp && timestamp.includes('T')) timestamp = timestamp.replace('T', ' ');
+            
+            container.innerHTML = `
+                <div class="result-box">
+                    <div><span class="success-badge">✓ 解密验证通过</span></div>
+                    <h3 style="margin: 8px 0 6px 0;">✅ 存证信息已解密</h3>
+                    <p>以下数据来自数字存证，与实物信封信息对应。</p>
+                    
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div style="font-size: 12px; color: #4F46E5; margin-bottom: 6px;">📮 邮票主题</div>
+                            <div style="font-size: 16px; font-weight: 700;">${escapeHtml(theme)}</div>
+                        </div>
+                        <div class="info-item">
+                            <div style="font-size: 12px; color: #4F46E5; margin-bottom: 6px;">📅 发行/寄出日期</div>
+                            <div style="font-size: 16px; font-weight: 700;">${escapeHtml(issueDate)}</div>
+                        </div>
+                        <div class="info-item">
+                            <div style="font-size: 12px; color: #4F46E5; margin-bottom: 6px;">👤 收件人/权利人</div>
+                            <div style="font-size: 16px; font-weight: 700;">${escapeHtml(recipient)}</div>
+                        </div>
+                        <div class="info-item">
+                            <div style="font-size: 12px; color: #4F46E5; margin-bottom: 6px;">⏱️ 存证时间戳</div>
+                            <div style="font-size: 15px; font-weight: 600;">${escapeHtml(timestamp)}</div>
+                        </div>
+                        <div class="info-item">
+                            <div style="font-size: 12px; color: #4F46E5; margin-bottom: 6px;">📬 挂号信号码</div>
+                            <div style="font-size: 15px; font-family: monospace; font-weight: 600;">${escapeHtml(trackingNumber)}</div>
+                        </div>
+                        <div class="info-item">
+                            <div style="font-size: 12px; color: #4F46E5; margin-bottom: 6px;">📝 描述/备注</div>
+                            <div style="font-size: 14px;">${escapeHtml(description)}</div>
+                        </div>
+                    </div>
+                    
+                    ${hashValue !== '未提供哈希' ? `<div class="hash-display"><strong>🔗 数字指纹 (Hash):</strong><br>${escapeHtml(hashValue)}</div>` : ''}
+                    
+                    <div class="warning-box">
+                        <p><strong>⚠️ 核验提醒：</strong> 此信息已通过加密数字签名验证。请仔细核对上述信息与您持有的实体信封（邮票、邮戳、收件人信息等）是否完全一致。如存证数据与实物不符，请联系发行机构。</p>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // 简单防XSS
+        function escapeHtml(str) {
+            if (!str) return '—';
+            return String(str).replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+                return c;
+            });
+        }
+        
+        // ---------- 标签页切换函数 (保留原有快速验证) ----------
+        window.switchTab = function(tabName) {
+            const tabs = document.querySelectorAll('.tab');
+            const contents = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // 根据点击的tab设置active (event 需要适配)
+            const clickedTab = Array.from(tabs).find(tab => tab.innerText.includes(tabName === 'quick' ? '快速' : '完整'));
+            if (clickedTab) clickedTab.classList.add('active');
+            document.getElementById(tabName + 'Tab').classList.add('active');
+            
+            // 重置上传卡片拖拽样式避免残留
+        };
+        
+        // 快速验证 (使用 data.json 演示)
+        window.quickVerify = async function() {
+            const code = document.getElementById('codeInput').value.trim().toUpperCase();
+            const resultDiv = document.getElementById('quickResult');
+            if (!code) {
+                resultDiv.innerHTML = '<div style="color: #dc2626; padding: 12px;">⚠️ 请输入信封编号</div>';
+                return;
+            }
+            resultDiv.innerHTML = '<div>🔍 正在查询存证库...</div>';
+            try {
+                // 尝试加载 data.json，为避免404，使用模拟回退或动态获取，若无则友好提示
+                const response = await fetch('data.json?v=' + Date.now()).catch(() => null);
+                if (!response || !response.ok) {
+                    throw new Error('暂无法连接到存证数据库，请稍后重试或使用完整验证功能');
+                }
+                const data = await response.json();
+                if (data[code]) {
+                    const record = data[code];
+                    resultDiv.innerHTML = `
+                        <div style="background: #d1fae5; color: #065f46; padding: 20px; border-radius: 12px;">
+                            <h3>✅ 存证记录有效</h3>
+                            <p><strong>编号:</strong> ${code}</p>
+                            <p><strong>日期:</strong> ${record.date || '未知'}</p>
+                            <p><strong>邮路/说明:</strong> ${record.route || '首日封存证'}</p>
+                            <div class="hash-display"><strong>哈希指纹:</strong><br>${record.hash || '无'}</div>
+                        </div>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `<div style="background:#fff3cd; color:#856404; padding: 20px; border-radius:12px;">🔎 未找到编号 ${code} 的存证记录，请确认编号是否正确或使用完整验证上传文件。</div>`;
+                }
+            } catch (err) {
+                resultDiv.innerHTML = `<div style="background:#fee2e2; color:#b91c1c; padding: 16px; border-radius:12px;">查询失败: ${err.message}<br>您可以使用「完整验证」上传加密文件直接解密。</div>`;
+            }
+        };
+        
+        // 初始化UI状态
+        updateFileUI();
     </script>
 </body>
 </html>
