@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STProof 加密生成工具 - 创建数字存证文件</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            min-height: 100vh;
+            padding: 30px 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #a78bfa, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            color: #94a3b8;
+        }
+
+        .two-columns {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            flex: 1;
+            min-width: 380px;
+            background: #1e293b;
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid #334155;
+        }
+
+        .card h2 {
+            color: #e2e8f0;
+            font-size: 20px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card h2 .badge {
+            background: #3b82f6;
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 20px;
+        }
+
+        .card-sub {
+            color: #94a3b8;
+            font-size: 13px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 12px;
+        }
+
+        /* 表单样式 */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            color: #cbd5e1;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 12px 14px;
+            color: #f1f5f9;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.3);
+        }
+
+        textarea {
+            font-family: 'Courier New', monospace;
+            resize: vertical;
+        }
+
+        .row-2cols {
+            display: flex;
+            gap: 12px;
+        }
+
+        .row-2cols > div {
+            flex: 1;
+        }
+
+        button {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            border: none;
+            padding: 14px 24px;
+            border-radius: 40px;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(79, 70, 229, 0.4);
+        }
+
+        button.secondary {
+            background: #334155;
+        }
+
+        button.secondary:hover {
+            background: #475569;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .json-preview {
+            background: #0f172a;
+            border-radius: 16px;
+            padding: 16px;
+            margin-top: 20px;
+            border: 1px solid #334155;
+        }
+
+        .json-preview pre {
+            color: #a5f3c3;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .result-area {
+            margin-top: 20px;
+            padding: 16px;
+            background: #0f172a;
+            border-radius: 16px;
+            display: none;
+        }
+
+        .result-area.show {
+            display: block;
+        }
+
+        .file-download {
+            background: #0f172a;
+            border-radius: 14px;
+            padding: 16px;
+            margin-top: 12px;
+            border: 1px solid #2d3a5e;
+        }
+
+        .file-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .key-hash {
+            font-family: monospace;
+            font-size: 12px;
+            background: #00000040;
+            padding: 8px;
+            border-radius: 8px;
+            word-break: break-all;
+        }
+
+        .alert {
+            background: #fef9c3;
+            color: #854d0e;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 13px;
+            margin-bottom: 16px;
+        }
+
+        .template-buttons {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .template-btn {
+            background: #2d3a5e;
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #64748b;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>🔐 STProof 加密生成工具</h1>
+        <p>为数字存证(首日封/实寄封)创建 AES-256-CBC 加密文件 (.enc) 及配套密钥文件</p>
+    </div>
+
+    <div class="two-columns">
+        <!-- 左侧：JSON编辑器 -->
+        <div class="card">
+            <h2>📝 1. 编辑存证数据 <span class="badge">JSON</span></h2>
+            <div class="card-sub">填写信封、邮票、邮路等完整信息，支持任意自定义字段</div>
+
+            <div class="template-buttons">
+                <button class="template-btn secondary" onclick="loadTemplate('stamp')">📮 首日封模板</button>
+                <button class="template-btn secondary" onclick="loadTemplate('real')">✉️ 实寄封模板</button>
+                <button class="template-btn secondary" onclick="loadTemplate('full')">⭐ 完整示例(含邮编)</button>
+            </div>
+
+            <div class="form-group">
+                <label>📄 JSON 数据 (支持嵌套结构)</label>
+                <textarea id="jsonInput" rows="18" style="font-family: monospace; font-size: 12px;"></textarea>
+            </div>
+
+            <div class="btn-group">
+                <button onclick="formatJSON()">✨ 格式化 JSON</button>
+                <button onclick="validateJSON()">🔍 验证 JSON</button>
+                <button class="secondary" onclick="resetJSON()">🔄 重置</button>
+            </div>
+            <div id="jsonValidateMsg" style="font-size:12px; margin-top:8px;"></div>
+        </div>
+
+        <!-- 右侧：加密设置 + 生成 -->
+        <div class="card">
+            <h2>⚙️ 2. 加密设置与生成</h2>
+            <div class="card-sub">AES-256-CBC 模式，随机 IV，密钥自动生成</div>
+
+            <div class="form-group">
+                <label>🔑 加密密钥 (64位十六进制 / 自动生成)</label>
+                <div class="row-2cols">
+                    <input type="text" id="keyHex" placeholder="自动生成随机密钥" readonly style="background:#0f172a; font-family:monospace;">
+                    <button class="secondary" onclick="generateNewKey()" style="width:110px;">🔄 重新生成</button>
+                </div>
+                <div style="font-size: 11px; color:#94a3b8; margin-top: 4px;">点击重新生成可更换密钥，请妥善保管密钥文件！</div>
+            </div>
+
+            <div class="form-group">
+                <label>📁 存证标识 (可选，用于文件名)</label>
+                <input type="text" id="fileTag" placeholder="例如: 葫芦兄弟_20260514" value="digital_evidence">
+            </div>
+
+            <div class="alert" style="background: #1e293b; color:#94a3b8; border-left: 4px solid #4f46e5;">
+                💡 系统将自动生成随机 IV（初始化向量），IV 会保存在 .enc 文件头部，解密时无需单独提供。
+            </div>
+
+            <div class="btn-group">
+                <button onclick="generateEncryptedFiles()" style="flex:2;">🚀 生成加密文件 (.enc + .key.txt)</button>
+            </div>
+
+            <!-- 生成结果展示区 -->
+            <div id="genResult" class="result-area">
+                <h3 style="color:#a5f3c3; font-size:16px; margin-bottom:12px;">✅ 生成成功</h3>
+                <div id="downloadLinks"></div>
+                <div class="key-hash" id="keyPreview" style="margin-top:12px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 额外说明：如何与验证工具配合 -->
+    <div class="card" style="margin-top: 24px; background: #0f172a;">
+        <h2>📖 使用说明</h2>
+        <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 12px;">
+            <div style="flex:1; background:#1e293b; padding: 16px; border-radius: 16px;">
+                <div style="font-weight:bold; color:#60a5fa;">1️⃣ 编辑JSON</div>
+                <div style="font-size:13px; color:#cbd5e6; margin-top:8px;">添加邮票主题、发行日期、收件人、收件人邮编、发件人、挂号信号码、备注等任意字段。支持 physical_object 嵌套结构。</div>
+            </div>
+            <div style="flex:1; background:#1e293b; padding: 16px; border-radius: 16px;">
+                <div style="font-weight:bold; color:#60a5fa;">2️⃣ 生成密钥+加密文件</div>
+                <div style="font-size:13px; color:#cbd5e6; margin-top:8px;">系统自动随机生成IV和AES密钥，将JSON数据加密为 .enc 二进制文件，同时生成 .key.txt 密钥文件。</div>
+            </div>
+            <div style="flex:1; background:#1e293b; padding: 16px; border-radius: 16px;">
+                <div style="font-weight:bold; color:#60a5fa;">3️⃣ 验证工具使用</div>
+                <div style="font-size:13px; color:#cbd5e6; margin-top:8px;">将 .enc 和 .key.txt 一起上传至 STProof 数字存证验证系统，即可还原完整存证信息。</div>
+            </div>
+        </div>
+    </div>
+    <footer>© STProof 加密引擎 | 加密算法: AES-256-CBC (PKCS#7) | 密钥长度 256位</footer>
+</div>
+
+<script>
+    // ---------- 模板库 (包含邮编、完整信息) ----------
+    const TEMPLATES = {
+        // 首日封模板
+        stamp: {
+            "theme": "乙巳年·蛇年生肖邮票",
+            "issue_date": "2025-01-05",
+            "stamp_code": "2025-1",
+            "recipient": "李明轩",
+            "recipient_zipcode": "100010",
+            "recipient_address": "北京市东城区王府井大街88号",
+            "sender": "中国集邮有限公司",
+            "sender_zipcode": "100006",
+            "tracking_number": "XA112233445CN",
+            "description": "乙巳年特种邮票首日封，限量发行",
+            "evidence_chain": [{
+                "timestamp": new Date().toISOString(),
+                "operator": "STProof 存证系统"
+            }]
+        },
+        // 实寄封模板
+        real: {
+            "physical_object": {
+                "theme": "苏州园林·留园",
+                "issue_date": "2025-03-20",
+                "stamp_face_value": "1.20元",
+                "recipient_info": {
+                    "name": "王雅茹",
+                    "zipcode": "215000",
+                    "address": "江苏省苏州市姑苏区园林路23号"
+                },
+                "sender_info": {
+                    "name": "周寄远",
+                    "zipcode": "310000",
+                    "address": "杭州市西湖区保俶路18号"
+                },
+                "tracking_number": "RB987654321CN",
+                "postmark_date": "2025-03-21"
+            },
+            "description": "从杭州寄往苏州的实寄封，贴留园邮票一枚",
+            "custom_note": "挂号实寄，邮路完整"
+        },
+        // 完整示例（平铺式带邮编，直观展示）
+        full: {
+            "envelope_id": "STP260518-099",
+            "stamp_theme": "葫芦兄弟特种邮票",
+            "stamp_code": "2026-7",
+            "issue_date": "2026-05-14",
+            "recipient_name": "张建国",
+            "recipient_zipcode": "200041",
+            "recipient_address": "上海市静安区南京西路555号",
+            "sender_name": "上海邮政博物馆",
+            "sender_zipcode": "200001",
+            "tracking_number": "XA159357268CN",
+            "postmark_city": "上海",
+            "remark": "首日实寄，七枚邮票全套贴于信封正面",
+            "timestamp": new Date().toISOString()
+        }
+    };
+
+    // 初始化默认加载完整示例 (含邮编)
+    let currentJsonData = JSON.parse(JSON.stringify(TEMPLATES.full));
+
+    // DOM 元素
+    const jsonTextarea = document.getElementById('jsonInput');
+    const keyHexInput = document.getElementById('keyHex');
+    const fileTagInput = document.getElementById('fileTag');
+    const genResultDiv = document.getElementById('genResult');
+    const downloadLinksDiv = document.getElementById('downloadLinks');
+    const keyPreviewSpan = document.getElementById('keyPreview');
+
+    // 显示JSON
+    function updateTextarea() {
+        jsonTextarea.value = JSON.stringify(currentJsonData, null, 2);
+    }
+
+    // 加载模板
+    window.loadTemplate = function(type) {
+        if (type === 'stamp') currentJsonData = JSON.parse(JSON.stringify(TEMPLATES.stamp));
+        else if (type === 'real') currentJsonData = JSON.parse(JSON.stringify(TEMPLATES.real));
+        else if (type === 'full') currentJsonData = JSON.parse(JSON.stringify(TEMPLATES.full));
+        updateTextarea();
+        document.getElementById('jsonValidateMsg').innerHTML = '';
+    };
+
+    // 格式化JSON
+    window.formatJSON = function() {
+        try {
+            const obj = JSON.parse(jsonTextarea.value);
+            currentJsonData = obj;
+            updateTextarea();
+            document.getElementById('jsonValidateMsg').innerHTML = '<span style="color:#86efac;">✓ JSON 格式正确且已格式化</span>';
+        } catch(e) {
+            document.getElementById('jsonValidateMsg').innerHTML = `<span style="color:#f87171;">❌ JSON 解析错误: ${e.message}</span>`;
+        }
+    };
+
+    window.validateJSON = function() {
+        try {
+            JSON.parse(jsonTextarea.value);
+            document.getElementById('jsonValidateMsg').innerHTML = '<span style="color:#86efac;">✅ 有效的 JSON 格式，可以加密。</span>';
+        } catch(e) {
+            document.getElementById('jsonValidateMsg').innerHTML = `<span style="color:#f87171;">❌ 无效 JSON: ${e.message}</span>`;
+        }
+    };
+
+    window.resetJSON = function() {
+        currentJsonData = JSON.parse(JSON.stringify(TEMPLATES.full));
+        updateTextarea();
+        document.getElementById('jsonValidateMsg').innerHTML = '';
+    };
+
+    // 生成随机密钥 (64位十六进制)
+    function generateRandomKeyHex() {
+        const randomBytes = CryptoJS.lib.WordArray.random(32); // 256位 = 32字节
+        return CryptoJS.enc.Hex.stringify(randomBytes).toLowerCase();
+    }
+
+    window.generateNewKey = function() {
+        const newKey = generateRandomKeyHex();
+        keyHexInput.value = newKey;
+    };
+
+    // 从文本区域获取当前JSON对象
+    function getCurrentJSON() {
+        try {
+            const raw = jsonTextarea.value.trim();
+            if (!raw) throw new Error('JSON数据为空');
+            return JSON.parse(raw);
+        } catch (e) {
+            throw new Error(`JSON解析失败: ${e.message}`);
+        }
+    }
+
+    // 核心加密函数：输入json对象，返回{ encBlob, keyHex, ivHex }
+    function encryptJSONToAES(jsonObject, keyHex) {
+        // 1. 序列化JSON
+        const jsonStr = JSON.stringify(jsonObject);
+        const plaintext = CryptoJS.enc.Utf8.parse(jsonStr);
+        
+        // 2. 随机生成IV (16字节)
+        const iv = CryptoJS.lib.WordArray.random(16);
+        const ivHex = CryptoJS.enc.Hex.stringify(iv);
+        
+        // 3. 准备密钥
+        const key = CryptoJS.enc.Hex.parse(keyHex);
+        
+        // 4. AES-256-CBC 加密
+        const encrypted = CryptoJS.AES.encrypt(plaintext, key, {
+            iv: iv,
+            mode: CryptoJS.mode.CBC,
+            padding: CryptoJS.pad.Pkcs7
+        });
+        
+        // encrypted.ciphertext 是 WordArray 类型的密文
+        const ciphertext = encrypted.ciphertext;
+        
+        // 5. 组合: IV (16字节) + 密文字节
+        const ivBytes = new Uint8Array(16);
+        const ivWords = iv;
+        for (let i = 0; i < 16; i++) {
+            ivBytes[i] = (ivWords.words[Math.floor(i/4)] >>> (24 - (i%4)*8)) & 0xff;
+        }
+        
+        const ciphertextBytes = wordArrayToUint8Array(ciphertext);
+        const combined = new Uint8Array(ivBytes.length + ciphertextBytes.length);
+        combined.set(ivBytes, 0);
+        combined.set(ciphertextBytes, ivBytes.length);
+        
+        // 生成 Blob
+        const encBlob = new Blob([combined], { type: 'application/octet-stream' });
+        return { encBlob, keyHex, ivHex };
+    }
+    
+    // 辅助：WordArray -> Uint8Array
+    function wordArrayToUint8Array(wordArray) {
+        const words = wordArray.words;
+        const sigBytes = wordArray.sigBytes;
+        const result = new Uint8Array(sigBytes);
+        let offset = 0;
+        for (let i = 0; i < sigBytes; i++) {
+            const wordIndex = Math.floor(i / 4);
+            const byteShift = 24 - (i % 4) * 8;
+            result[offset++] = (words[wordIndex] >>> byteShift) & 0xff;
+        }
+        return result;
+    }
+    
+    // 下载文件
+    function downloadBlob(blob, filename) {
+        const link = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        link.href = url;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+    }
+    
+    // 主生成函数
+    window.generateEncryptedFiles = async function() {
+        // 隐藏旧结果
+        genResultDiv.classList.remove('show');
+        downloadLinksDiv.innerHTML = '';
+        keyPreviewSpan.innerHTML = '';
+        
+        // 1. 获取JSON数据
+        let jsonObj;
+        try {
+            jsonObj = getCurrentJSON();
+        } catch (err) {
+            alert(`数据错误: ${err.message}`);
+            document.getElementById('jsonValidateMsg').innerHTML = `<span style="color:#f87171;">❌ ${err.message}</span>`;
+            return;
+        }
+        
+        // 2. 获取或生成密钥
+        let currentKey = keyHexInput.value.trim();
+        if (!currentKey || currentKey.length !== 64) {
+            // 自动生成新密钥
+            currentKey = generateRandomKeyHex();
+            keyHexInput.value = currentKey;
+        }
+        // 确保十六进制格式
+        if (!/^[0-9a-f]{64}$/i.test(currentKey)) {
+            alert('密钥格式无效 (需要64位十六进制)，将重新生成密钥');
+            currentKey = generateRandomKeyHex();
+            keyHexInput.value = currentKey;
+        }
+        
+        // 3. 加密
+        let encBlob, ivHex;
+        try {
+            const result = encryptJSONToAES(jsonObj, currentKey);
+            encBlob = result.encBlob;
+            ivHex = result.ivHex;
+        } catch (err) {
+            alert(`加密失败: ${err.message}`);
+            return;
+        }
+        
+        // 4. 准备文件名
+        let tag = fileTagInput.value.trim();
+        if (!tag) tag = "stproof_evidence";
+        const safeTag = tag.replace(/[^a-zA-Z0-9\u4e00-\u9fa5_-]/g, '_');
+        const encFileName = `${safeTag}.enc`;
+        const keyFileName = `${safeTag}.key.txt`;
+        
+        // 5. 生成密钥文件内容 (纯文本，仅64位hex)
+        const keyFileContent = currentKey;   // 标准64位十六进制小写
+        const keyBlob = new Blob([keyFileContent], { type: 'text/plain' });
+        
+        // 显示下载链接及预览
+        genResultDiv.classList.add('show');
+        
+        // 创建下载按钮区域
+        downloadLinksDiv.innerHTML = `
+            <div class="file-download">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                    <div><span style="font-weight:bold; color:#90e0ff;">📀 加密文件</span><br><span style="font-size:12px;">${encFileName}</span><br><span style="font-size:10px; color:#94a3b8;">大小: ${(encBlob.size/1024).toFixed(2)} KB</span></div>
+                    <button onclick="downloadBlob(encBlob, '${encFileName}')" style="padding:8px 16px;">⬇️ 下载 .enc</button>
+                </div>
+            </div>
+            <div class="file-download">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                    <div><span style="font-weight:bold; color:#facc15;">🔑 密钥文件</span><br><span style="font-size:12px;">${keyFileName}</span><br><span style="font-size:10px; color:#94a3b8;">内含64位十六进制密钥</span></div>
+                    <button onclick="downloadBlob(keyBlob, '${keyFileName}')" style="padding:8px 16px;">⬇️ 下载 .key.txt</button>
+                </div>
+            </div>
+        `;
+        
+        keyPreviewSpan.innerHTML = `📋 密钥(十六进制): ${currentKey}<br>🔐 初始化向量 IV(十六进制): ${ivHex} (已嵌入 .enc 文件头部)`;
+        
+        // 额外给一个一次性整体打包提示
+        const downloadBoth = document.createElement('div');
+        downloadBoth.style.marginTop = '10px';
+        downloadBoth.innerHTML = `<button class="secondary" style="width:100%;" onclick="downloadBothFiles()">📦 同时下载加密文件+密钥文件 (zip风格提示)</button>
+        <div style="font-size:11px; margin-top:6px;">※ 若无自动打包，请分别点击上方按钮下载两个文件，它们需配对使用</div>`;
+        if (!document.getElementById('extraBothBtn')) {
+            downloadBoth.id = 'extraBothBtn';
+            downloadLinksDiv.appendChild(downloadBoth);
+        }
+        
+        // 存储全局变量供同时下载使用
+        window._tempEncBlob = encBlob;
+        window._tempKeyBlob = keyBlob;
+        window._tempEncName = encFileName;
+        window._tempKeyName = keyFileName;
+    };
+    
+    // 同时下载两个文件（分别触发，简单实用）
+    window.downloadBothFiles = function() {
+        if (window._tempEncBlob && window._tempKeyBlob) {
+            downloadBlob(window._tempEncBlob, window._tempEncName);
+            setTimeout(() => {
+                downloadBlob(window._tempKeyBlob, window._tempKeyName);
+            }, 150);
+        } else {
+            alert("请先点击「生成加密文件」后再使用同时下载");
+        }
+    };
+    
+    // 初始化页面
+    function init() {
+        // 加载默认完整示例
+        currentJsonData = JSON.parse(JSON.stringify(TEMPLATES.full));
+        updateTextarea();
+        // 生成随机密钥
+        const initKey = generateRandomKeyHex();
+        keyHexInput.value = initKey;
+        fileTagInput.value = "葫芦兄弟_20260514";
+        genResultDiv.classList.remove('show');
+    }
+    
+    init();
+</script>
+</body>
+</html>
