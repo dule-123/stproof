@@ -9,18 +9,28 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+        :root {
+            --primary: #165DFF;
+            --bg: #F7F8FA;
+            --card: #ffffff;
+            --text: #1D2129;
+            --gray: #666;
+            --success: #00B42A;
+            --warning: #FF7D00;
         }
         body {
-            background: #F7F8FA;
+            background: var(--bg);
+            color: var(--text);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             padding: 20px;
         }
-        .card {
-            background: white;
+        .container {
+            background: var(--card);
             border-radius: 16px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.06);
             padding: 40px 30px;
@@ -31,7 +41,7 @@
         .logo {
             font-size: 24px;
             font-weight: 700;
-            color: #165DFF;
+            color: var(--primary);
             margin-bottom: 8px;
         }
         .title {
@@ -40,10 +50,10 @@
         }
         .desc {
             font-size: 14px;
-            color: #666;
+            color: var(--gray);
             margin-bottom: 30px;
         }
-        input {
+        .input-box {
             width: 100%;
             padding: 14px 16px;
             border: 1px solid #ddd;
@@ -52,22 +62,64 @@
             text-align: center;
             margin-bottom: 12px;
             outline: none;
+            transition: border-color 0.2s;
         }
-        button {
+        .input-box:focus {
+            border-color: var(--primary);
+        }
+        .btn {
             width: 100%;
             padding: 14px;
-            background: #165DFF;
+            background: var(--primary);
             color: #fff;
             border: none;
             border-radius: 8px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .btn:active {
+            opacity: 0.85;
+        }
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .loading {
+            display: none;
+            font-size: 14px;
+            color: var(--gray);
+            margin-top: 12px;
+        }
+        .loading.show {
+            display: block;
         }
         .result {
             margin-top: 24px;
             text-align: left;
             display: none;
+        }
+        .result.show {
+            display: block;
+        }
+        .status-bar {
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            margin-bottom: 16px;
+            display: none;
+        }
+        .status-bar.show {
+            display: block;
+        }
+        .status-bar.online {
+            background: #E8FFEA;
+            color: var(--success);
+        }
+        .status-bar.cached {
+            background: #FFF7E8;
+            color: var(--warning);
         }
         .item {
             margin: 10px 0;
@@ -75,7 +127,7 @@
         }
         .label {
             font-weight: 600;
-            color: #165DFF;
+            color: var(--primary);
             width: 80px;
             display: inline-block;
         }
@@ -87,16 +139,29 @@
             word-break: break-all;
             font-size: 13px;
         }
+        .error-msg {
+            color: #F53F3F;
+            font-size: 14px;
+            margin-top: 12px;
+            display: none;
+        }
+        .error-msg.show {
+            display: block;
+        }
     </style>
 </head>
 <body>
-    <div class="card">
+    <div class="container">
         <div class="logo">STProof</div>
         <div class="title">标准化存证核验系统</div>
         <div class="desc">输入信封唯一编号，查询照片哈希值</div>
 
-        <input id="code" placeholder="请输入编号（如 STP260518-001）">
-        <button onclick="query()">查询存证信息</button>
+        <input class="input-box" id="code" placeholder="请输入编号（如 WB20260518-001）">
+        <button class="btn" id="queryBtn" onclick="query()">查询存证信息</button>
+        <div class="loading" id="loading">正在加载数据，请稍候...</div>
+        <div class="error-msg" id="errorMsg"></div>
+
+        <div class="status-bar" id="statusBar"></div>
 
         <div class="result" id="result">
             <div class="item"><span class="label">编号：</span><span id="r_id"></span></div>
@@ -108,31 +173,134 @@
     </div>
 
     <script>
-        let DB = {};
+        const DB_KEY = "stproof_db";
+        const DATA_URL = "data.json";
+        let dbCache = null;
 
-        // 最新防缓存 + 正确读取你域名下的 data.json
-        fetch(`https://stproof.org/data.json?v=${Date.now()}`)
-            .then(res => res.json())
-            .then(data => {
-                DB = data;
-            })
-            .catch(err => {
-                console.error("加载数据失败", err);
-            });
+        // 从网络加载 data.json
+        async function fetchDB() {
+            const urls = [
+                DATA_URL,
+                DATA_URL + "?v=" + Date.now()  // 防止缓存
+            ];
 
-        function query() {
-            const code = document.getElementById("code").value.trim();
+            for (const url of urls) {
+                try {
+                    const resp = await fetch(url, { cache: 'no-store' });
+                    if (!resp.ok) continue;
+                    const data = await resp.json();
+                    // 存入 localStorage 作为缓存
+                    localStorage.setItem(DB_KEY, JSON.stringify(data));
+                    dbCache = data;
+                    return { data, source: 'online' };
+                } catch (e) {
+                    continue;
+                }
+            }
+            return null;
+        }
 
-            if (DB[code]) {
-                document.getElementById("r_id").innerText = code;
-                document.getElementById("r_date").innerText = DB[code].date;
-                document.getElementById("r_route").innerText = DB[code].route;
-                document.getElementById("r_hash").innerText = DB[code].hash;
-                document.getElementById("result").style.display = "block";
-            } else {
-                alert("未找到该编号存证信息");
+        // 获取数据库（优先网络，降级本地缓存）
+        async function getDB() {
+            // 如果已经有缓存且是刚刚获取的，直接返回
+            if (dbCache) return { data: dbCache, source: 'cache' };
+
+            // 尝试从网络获取
+            const online = await fetchDB();
+            if (online) return online;
+
+            // 网络失败，降级读取 localStorage
+            const local = localStorage.getItem(DB_KEY);
+            if (local) {
+                try {
+                    return { data: JSON.parse(local), source: 'cached' };
+                } catch (e) {}
+            }
+
+            return null;
+        }
+
+        // 自动从 URL 参数读取编号
+        function autoQueryFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            const code = params.get('code') || params.get('id') || params.get('q');
+            if (code) {
+                document.getElementById("code").value = code;
+                // 自动触发查询
+                setTimeout(() => query(), 300);
             }
         }
+
+        async function query() {
+            const code = document.getElementById("code").value.trim();
+            if (!code) {
+                showError("请输入编号");
+                return;
+            }
+
+            const btn = document.getElementById("queryBtn");
+            const loading = document.getElementById("loading");
+            const result = document.getElementById("result");
+            const statusBar = document.getElementById("statusBar");
+            const errorMsg = document.getElementById("errorMsg");
+
+            // UI 状态：加载中
+            btn.disabled = true;
+            loading.classList.add("show");
+            result.classList.remove("show");
+            statusBar.classList.remove("show");
+            errorMsg.classList.remove("show");
+
+            try {
+                const dbResult = await getDB();
+
+                if (!dbResult) {
+                    showError("无法加载数据，请检查网络连接后重试");
+                    return;
+                }
+
+                const { data, source } = dbResult;
+                const record = data[code];
+
+                if (!record) {
+                    showError("未找到该编号存证信息");
+                    return;
+                }
+
+                // 显示数据
+                document.getElementById("r_id").innerText = code;
+                document.getElementById("r_date").innerText = record.date || "—";
+                document.getElementById("r_route").innerText = record.route || "—";
+                document.getElementById("r_hash").innerText = record.hash || "—";
+                result.classList.add("show");
+
+                // 显示数据来源状态
+                if (source === 'online') {
+                    statusBar.innerText = "✅ 数据来源：云端最新数据";
+                    statusBar.className = "status-bar show online";
+                } else if (source === 'cached') {
+                    statusBar.innerText = "⚠️ 数据来源：本地缓存（当前无法连接服务器）";
+                    statusBar.className = "status-bar show cached";
+                }
+            } finally {
+                btn.disabled = false;
+                loading.classList.remove("show");
+            }
+        }
+
+        function showError(msg) {
+            const errorMsg = document.getElementById("errorMsg");
+            errorMsg.innerText = msg;
+            errorMsg.classList.add("show");
+        }
+
+        // 支持回车键查询
+        document.getElementById("code").addEventListener("keydown", function(e) {
+            if (e.key === "Enter") query();
+        });
+
+        // 页面加载时检查 URL 参数
+        window.addEventListener("DOMContentLoaded", autoQueryFromURL);
     </script>
 </body>
 </html>
