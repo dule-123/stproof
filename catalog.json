@@ -1,0 +1,23 @@
+{
+  "project": "新邮实寄封·数字存证档案",
+  "creator": "你的名字或昵称",
+  "license": "CC BY 4.0",
+  "description": "本目录收录所有已完成数字存证的新邮实寄封，每枚封均有独立的 JSON 存证文件、SHA256 指纹及 OTS 时间戳。",
+  "last_updated": "2026-09-19",
+  "total_count": 1,
+  "entries": [
+    {
+      "id": "JMS-2026-001",
+      "title": "景迈山古茶林首日实寄封",
+      "date": "2026-09-17",
+      "post_office": "深圳蛇口支局",
+      "stamp": "2026-14 世界文化遗产—普洱景迈山古茶林文化景观",
+      "quantity": 112,
+      "type": "首日实寄封",
+      "status": "已完成存证",
+      "manifest_file": "manifests/manifest_jingmaishan_2026-09-17.json",
+      "ipfs_cid": "bafkreiexricv4il6qz63doafjyklawtcdese6dssdmqhb4n2r75lppmcfe",
+      "notes": "蛇口支局首日，挂号信函，手工盖戳"
+    }
+  ]
+}
