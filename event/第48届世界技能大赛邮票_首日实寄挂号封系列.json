@@ -1,0 +1,203 @@
+{
+  "manifest_version": "1.0.0",
+  "event_id": "STP20260922_WorldSkills_Shenzhen_FirstDay_Cover_Series",
+  "event_title": "第48届世界技能大赛/鲁班/深职大 首日原地实寄挂号封系列（共9枚）",
+  "event_description": "本事件完整记录了2026年9月22日发行的第48届世界技能大赛纪念邮票及相关主题邮票的首日实寄过程。使用深圳市职业技术大学（深职大）官方公函封，于深职大所在地深圳西丽邮政支局原地寄出，形成‘本校公函封+本校所在地邮局+本地实寄’的完整原地首日实寄闭环。深职大为第48届世界技能大赛参赛单位及深圳市高职院校选手培训基地。",
+  "event_date_range": {
+    "start": "2026-09-22T00:00:00+08:00",
+    "end": "2026-09-23T23:59:59+08:00"
+  },
+  "event_type": "physical_digital_notarization",
+  "event_subtype": "postal_philately_first_day_cover_series",
+  "event_context": {
+    "physical_entity": "第48届世界技能大赛/鲁班/深职大 首日原地实寄挂号封系列（9枚）",
+    "envelope_type": "深圳市职业技术大学官方公函封",
+    "origin_post_office": {
+      "name": "西丽邮政支局",
+      "city": "深圳市",
+      "district": "南山区",
+      "coordinates": {
+        "lat": 22.58,
+        "lon": 113.95
+      }
+    },
+    "destination_address": "深圳市南山区南油路2336号海滨小区",
+    "institution": "深圳市职业技术大学（深职大）",
+    "institution_role": "第48届世界技能大赛参赛单位及深圳市高职院校选手培训基地",
+    "postal_regulation": "中国邮政《邮资票品发行与销售管理办法》",
+    "significance": "记录世赛主题邮票首日原地实寄全过程，为集邮、数字藏品、物理备份等场景提供高熵交叉验证。"
+  },
+  "event_structure": "parallel_series",
+  "timeline": [
+    {
+      "phase": "1.0_邮票发行与准备",
+      "start": "2026-09-20T00:00:00+08:00",
+      "end": "2026-09-21T23:59:59+08:00",
+      "description": "获取邮票发行官方公告及购买凭证。"
+    },
+    {
+      "phase": "2.0_现场制作与寄出（9月22日）",
+      "start": "2026-09-22T00:00:00+08:00",
+      "end": "2026-09-22T23:59:59+08:00",
+      "description": "在西丽邮政支局进行9枚首日封的现场制作、盖戳、称重，并全部寄出。包含邮局门头、现场环境、称重、每封信的正面/背面照片等证据。"
+    },
+    {
+      "phase": "3.0_派送与签收（9月23日）",
+      "start": "2026-09-23T00:00:00+08:00",
+      "end": "2026-09-23T23:59:59+08:00",
+      "description": "9枚挂号信陆续到达南山深大揽投部并派送。包含物流轨迹截图及最终签收状态。"
+    }
+  ],
+  "covers": [
+    {
+      "cover_id": "STP-20260922-01",
+      "title": "第48届世界技能大赛/鲁班/深职大 首日原地实寄挂号封（公函封）",
+      "tracking_number": "XA51289927544",
+      "weight_grams": 8,
+      "postage_yuan": 3.80,
+      "stamps": "鲁班1.20×2 + 世赛1.20 + 保护森林0.10×2",
+      "condition_notes": "右侧120分世赛邮票轻微漏销，背面无传统圆形投递落地戳（有红戳），自然实寄瑕疵，未做任何补盖或修饰",
+      "evidence_files": [
+        "01_门头_西丽邮政支局.jpg",
+        "02_正面_首日戳_称重.jpg",
+        "03_背面_有信_红戳.jpg",
+        "04_物流_XA51289927544.jpg"
+      ]
+    },
+    {
+      "cover_id": "STP-20260922-02",
+      "title": "第48届世界技能大赛/鲁班/深职大 首日原地实寄挂号封（公函封）",
+      "tracking_number": "XA51289926744",
+      "weight_grams": 8,
+      "postage_yuan": 3.80,
+      "stamps": "鲁班1.20×2 + 世赛1.20 + 保护森林0.10×2",
+      "condition_notes": "品相完好，双戳清晰",
+      "evidence_files": [
+        "01_门头_西丽邮政支局.jpg",
+        "02_正面_首日戳_称重.jpg",
+        "03_背面_有信_红戳.jpg",
+        "04_物流_XA51289926744.jpg"
+      ]
+    },
+{
+      "cover_id": "STP-20260922-03",
+      "title": "第48届世界技能大赛/鲁班/深职大 首日原地实寄挂号封（公函封）",
+      "tracking_number": "XA51289930744",
+      "weight_grams": 8,
+      "postage_yuan": 3.80,
+      "stamps": "鲁班1.20×2 + 世赛1.20 + 保护森林0.10×2",
+      "condition_notes": "品相完好，双戳清晰",
+      "evidence_files": [
+        "01_门头_西丽邮政支局.jpg",
+        "02_正面_首日戳_称重.jpg",
+        "03_背面_有信_红戳.jpg",
+        "04_物流_XA51289930744.jpg"
+  ]
+    },
+ {
+      "cover_id": "STP-20260922-04",
+      "title": "第48届世界技能大赛/鲁班/深职大 首日原地实寄挂号封（公函封）",
+      "tracking_number": "XA51289928444",
+      "weight_grams": 8,
+      "postage_yuan": 3.80,
+      "stamps": "鲁班1.20×2 + 世赛1.20 + 保护森林0.10×2",
+      "condition_notes": "品相完好，双戳清晰",
+      "evidence_files": [
+        "01_门头_西丽邮政支局.jpg",
+        "02_正面_首日戳_称重.jpg",
+        "03_背面_有信_红戳.jpg",
+        "04_物流_XA51289928444.jpg"
+      ]
+    },
+{
+      "cover_id": "STP-20260922-05",
+      "title": "第48届世界技能大赛/鲁班/深职大 首日原地实寄挂号封（公函封）",
+      "tracking_number": "XA51289931544",
+      "weight_grams": 8,
+      "postage_yuan": 3.80,
+      "stamps": "鲁班1.20×2 + 世赛1.20 + 保护森林0.10×2",
+      "condition_notes": "品相完好，双戳清晰",
+      "evidence_files": [
+        "01_门头_西丽邮政支局.jpg",
+        "02_正面_首日戳_称重.jpg",
+        "03_背面_有信_红戳.jpg",
+        "04_物流_XA51289931544.jpg"
+      ]
+    },
+{
+      "cover_id": "STP-20260922-06",
+      "title": "第48届世界技能大赛/鲁班/深职大 首日原地实寄挂号封（公函封）",
+      "tracking_number": "7120168009928",
+      "weight_grams": 8,
+      "postage_yuan": 2.40,
+      "stamps": "世赛1.20 ×2",
+      "condition_notes": "品相完好，双戳清晰",
+      "evidence_files": [
+        "01_门头_西丽邮政支局.jpg",
+        "02_正面_首日戳_称重.jpg",
+        "03_背面_有信_红戳.jpg"
+      ]
+    },
+{
+      "cover_id": "STP-20260922-07",
+      "title": "第48届世界技能大赛/鲁班/深职大 首日原地实寄挂号封（公函封）",
+      "tracking_number": "7120168009929",
+      "weight_grams": 8,
+      "postage_yuan": 2.40,
+      "stamps": "世赛1.20 ×2",
+      "condition_notes": "品相完好，双戳清晰",
+      "evidence_files": [
+        "01_门头_西丽邮政支局.jpg",
+        "02_正面_首日戳_称重.jpg",
+        "03_背面_有信_红戳.jpg"
+      ]
+    },
+{
+      "cover_id": "STP-20260922-08",
+      "title": "第48届世界技能大赛/鲁班/深职大 首日原地实寄挂号封（公函封）",
+      "tracking_number": "XA51289929844",
+      "weight_grams": 8,
+      "postage_yuan": 3.80,
+      "stamps": "长江三角洲1.20×2 + 世赛1.20 + 保护森林0.10×2",
+      "condition_notes": "品相完好，双戳清晰",
+      "evidence_files": [
+        "01_门头_西丽邮政支局.jpg",
+        "02_正面_首日戳_称重.jpg",
+        "03_背面_有信_红戳.jpg",
+        "04_物流_XA51289929844.jpg"
+      ]
+    },
+{
+      "cover_id": "STP-20260922-010",
+      "title": "第48届世界技能大赛/鲁班/深职大 首日原地实寄挂号封（公函封）",
+      "tracking_number": "7120168009927",
+      "weight_grams": 8,
+      "postage_yuan": 2.40,
+      "stamps": "世赛1.20 ×2",
+      "condition_notes": "品相完好，双戳清晰",
+      "evidence_files": [
+        "01_门头_西丽邮政支局.jpg",
+        "02_正面_首日戳_称重.jpg",
+        "03_背面_有信_红戳.jpg"
+      ]
+    }
+  ],
+  "data_integrity_verification": {
+    "hash_algorithm": "SHA-256",
+    "timestamping_standard": "OpenTimestamps (OTS)",
+    "integrity_summary": "本事件所引用的全部证据文件均已生成对应的.ots文件，并通过OpenTimestamps完成区块链时间锚定，状态为‘已验证’。"
+  },
+  "relationship": {
+    "pre_event_context": {
+      "previous_event_id": null,
+      "description": "本次事件为世赛主题邮票首日实寄的完整独立事件。"
+    },
+    "post_event_context": {
+      "next_event_id": null,
+      "description": "事件在邮件签收后闭环。后续可基于此事件CID，关联数字藏品铸造等衍生事件。"
+    }
+  },
+  "creator": "[STP-2026]",
+  "created_at": "2026-09-23T12:00:00+08:00",
+  "last_updated": "2026-09-23T12:00:00+08:00"
+}
